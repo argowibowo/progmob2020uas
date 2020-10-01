@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Progmob-2020</string>
+    <string name="text_hello_world">Hello Progmobque</string>
 </resources>
