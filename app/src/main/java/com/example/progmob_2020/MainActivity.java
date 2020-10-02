@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tes_constraint_layout);
+        setContentView(R.layout.tracker_activity);
 
         //variable
         final TextView txtView = (TextView) findViewById(R.id.mainActivityTextView);
