@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Pertemuan2.RecyclerActivity"></activity>
-        <activity android:name=".Pertemuan2.ListActivity"></activity>
+        <activity android:name=".Pertemuan2.CardViewActivity"></activity>
+        <activity android:name=".Pertemuan2.RecyclerActivity" />
+        <activity android:name=".Pertemuan2.ListActivity" />
         <activity android:name=".HelpActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
