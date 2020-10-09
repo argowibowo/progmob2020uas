@@ -41,10 +41,10 @@
         android:text="Help"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button1"
-        app:layout_constraintVertical_bias="0.093" />
+        app:layout_constraintVertical_bias="0.069" />
 
     <Button
         android:id="@+id/button1"
@@ -54,9 +54,45 @@
         android:text="Replace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonListVIew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnHelp"
+        app:layout_constraintVertical_bias="0.088" />
+
+    <Button
+        android:id="@+id/buttonCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toEndOf="@+id/buttonRecycler"
+        app:layout_constraintTop_toBottomOf="@+id/btnHelp"
+        app:layout_constraintVertical_bias="0.088" />
+
+    <Button
+        android:id="@+id/buttonRecycler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recycler"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toEndOf="@+id/buttonListVIew"
+        app:layout_constraintTop_toBottomOf="@+id/btnHelp"
+        app:layout_constraintVertical_bias="0.088" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
