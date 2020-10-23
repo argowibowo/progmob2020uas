@@ -11,7 +11,6 @@ import java.util.List;
 
 import ukdw.com.progmob_2020.Adapter.MahasiswaRecyclerAdapter;
 import ukdw.com.progmob_2020.Model.Mahasiswa;
-import ukdw.com.progmob_2020.Pertemuan2.RecyclerActivity;
 import ukdw.com.progmob_2020.R;
 
 public class DebuggingActivity extends AppCompatActivity {
@@ -21,7 +20,7 @@ public class DebuggingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_debugging);
 
-        RecyclerView rv = (RecyclerView)findViewById(R.id.rvLatihan);
+        RecyclerView rv = (RecyclerView)findViewById(R.id.rvGetmahasiswa);
         MahasiswaRecyclerAdapter mahasiswaRecyclerAdapter;
 
         //data dummy
