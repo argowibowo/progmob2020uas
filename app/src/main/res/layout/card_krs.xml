@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtDosenPengampu"
+            android:layout_width="375dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="16dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtJlhSksKrs" />
+
+        <TextView
+            android:id="@+id/txtHariKrs"
+            android:layout_width="370dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="21dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtKodeMatkulKrs" />
+
+        <TextView
+            android:id="@+id/txtSesiKrs"
+            android:layout_width="375dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="16dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtHariKrs" />
+
+        <TextView
+            android:id="@+id/txtJlhSksKrs"
+            android:layout_width="375dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="16dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtSesiKrs" />
+
+        <TextView
+            android:id="@+id/txtJlhMhsKrs"
+            android:layout_width="375dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="16dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtDosenPengampu" />
+
+        <TextView
+            android:id="@+id/txtKodeMatkulKrs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="TextView"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

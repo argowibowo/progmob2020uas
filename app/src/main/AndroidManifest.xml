@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ukdw.com.progmob_2020">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    package="com.example.uts">
 
     <application
         android:allowBackup="true"
@@ -12,20 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Crud.MainMhsActivity"
-            android:label="Menu CRUD mahasiswa">
+        <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".Pertemuan2.CardViewActivity" />
-        <activity android:name=".Pertemuan2.RecyclerActivity" />
-        <activity android:name=".Pertemuan2.ListActivity" />
-        <activity android:name=".HelpActivity" />
-        <activity android:name=".MainActivity">
-
         </activity>
     </application>
 
