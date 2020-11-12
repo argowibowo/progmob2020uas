@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Pemograman Mobile 2020'),
+      home: MyHomePage(title: 'PROGMOB 2020'),
     );
   }
 }
