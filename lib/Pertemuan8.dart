@@ -1,58 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Pertemuan8.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Pertemuan8(title: 'PROGMOB_2020'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class Pertemuan8 extends StatefulWidget {
+  Pertemuan8({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _Pertemuan8State createState() => _Pertemuan8State();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _Pertemuan8State extends State<Pertemuan8> {
   // int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      // _counter++;
+
     });
   }
 
@@ -90,13 +52,32 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'HELLO WORLD',
+            TextFormField(
+              decoration: new InputDecoration(
+                labelText: "Test Input",
+                hintText: "Text yang akan di input"
+              ),
             ),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headline4,
-            // ),
+            Padding(
+              padding: EdgeInsets.all(16.10),
+            ),
+            TextFormField(
+              decoration: new InputDecoration(
+                  labelText: "Test Input 2",
+                  hintText: "Text yang akan di input",
+                border: OutlineInputBorder(
+                  borderRadius: new BorderRadius.circular(10)
+                )
+              ),
+            ),
+            RaisedButton(
+              focusColor: Colors.green,
+              color: Colors.green,
+              child: Text(
+                "SIMPAN",
+                style: TextStyle(color: Colors.white),
+              ),
+            )
           ],
         ),
       ),
