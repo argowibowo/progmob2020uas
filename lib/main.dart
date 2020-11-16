@@ -1,20 +1,9 @@
+import 'package:fluter_hello_world/Pertemuan1.dart';
+import 'package:fluter_hello_world/Tugaspertemuan8.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-      title: "Aplikasi Flutter",
-      home: Scaffold(
-        appBar: AppBar(title: Text('Aplikasi Flutter'),),
-        body: Material(
-          color: Colors.white,
-          child: Center(
-            child: Text("Hello World !", textDirection: TextDirection.ltr,
-              style: TextStyle(color: Colors.deepPurple, fontSize: 40.0),
-            ),
-          ),
-        ),
-      )
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -39,7 +28,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Tugaspertemuan8(title: 'Flutter Demo Home Page Alfina'),
     );
   }
 }
