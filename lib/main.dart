@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob/tugaspertemuan8.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Tugaspertemuan8(title: 'Tugas Pertemuan 1'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -22,7 +24,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -45,13 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               'Hello World',
-            
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
