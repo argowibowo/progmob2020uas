@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Progmob_2020</string>
+    <string name="text_hello_world">Hello Progmob 2020 Makin Kece</string>
+    <string name="nama">Nama</string>
+    <string name="nim">Nim</string>
+    <string name="alamat">Alamat</string>
+    <string name="email">Email</string>
+</resources>
