@@ -44,7 +44,7 @@ class _Pertemuan8State extends State<Pertemuan8> {
               decoration: new InputDecoration(
                 icon: Icon(Icons.person),
                   labelText: "Nama Lengkap",
-                  hintText: "Contoh: Bhenedicto Adriel",
+                  hintText: "Contoh: Dito Adriel",
                 border: OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(10)
                 )
