@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MyApp());
 }
+const String_title ='Hello world';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -100,18 +102,18 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'Hello world!',
             ),
-            Text(
-              '$_counter',
+        /*Text(
+              //'$_counter',
               style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+            ),*/
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
+    ),
+    /*floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),*/ // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
