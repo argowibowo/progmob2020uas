@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ukdw.com.progmob_2020">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Pertemuan6.LoginActivity"></activity>
+        <activity android:name=".Pertemuan6.MainMenuActivity" />
+        <activity android:name=".Crud_matkul.MainMatkulActivity" />
+        <activity android:name=".Crud_matkul.HapusMatkulActivity" />
+        <activity android:name=".Crud_matkul.MatkulUpdateActivity" />
+        <activity android:name=".Crud_matkul.MatkulGetallActivity" />
+        <activity android:name=".Crud_matkul.MatkulAddActivity" />
+        <activity android:name=".Crud_dosen.HapusDsnActivity" />
+        <activity android:name=".Crud_dosen.DosenAddActivity" />
+        <activity android:name=".Crud_dosen.DosenUpdateActivity" />
+        <activity android:name=".Adapter.DosenCRUDRecyclerAdapter" />
+        <activity android:name=".Crud_dosen.DosenGetAllActivity" />
+        <activity android:name=".Crud_dosen.MainDsnActivity" />
+        <activity android:name=".Pertemuan6.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Pertemuan6.PrefActivity" />
+        <activity android:name=".Crud.MahasiswaUpdateActivity" />
+        <activity android:name=".Crud.MahasiswaGetAllActivity" />
+        <activity android:name=".Crud.MahasiswaAddActivity" />
+        <activity android:name=".Crud.HapusMhsActivity" />
+        <activity
+            android:name=".Crud.MainMhsActivity"
+            android:label="Menu CRUD Mahasiswa" />
+        <activity android:name=".Pertemuan2.CardActivity" />
+        <activity android:name=".Pertemuan2.RecyclerActivity" />
+        <activity android:name=".Pertemuan2.ListActivity" />
+        <activity android:name=".Pertemuan2.DebuggingActivity" />
+        <activity android:name=".TrackerActivity" />
+        <activity android:name=".HelpActivity" />
+        <activity android:name=".MainActivity" />
+    </application>
+
+</manifest>

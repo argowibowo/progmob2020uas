@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Progmob_2020</string>
+    <string name="text_hello_world">Hello Progmob 2020 Makin Kece</string>
+    <string name="nama">Nama</string>
+    <string name="nim">Nim</string>
+    <string name="alamat">Alamat</string>
+    <string name="email">Email</string>
+    <string name="NidnHapus">Nidn Yang Ingin Dihapus</string>
+    <string name="NamaDosen">Masukkan Nama Dosen</string>
+    <string name="NidnDosen">Masukkan Nidn</string>
+    <string name="AlamatDosen">Masukkan Alamat Dosen</string>
+    <string name="EmailDosen">Masukkan Email</string>
+    <string name="GelarDosen">Masukkan Gelar</string>
+    <string name="NidnLama">Masukkan Nidn</string>
+    <string name="NamaDosenBaru">Masukkan Nama Dosen</string>
+    <string name="NidnBaru">Masukkan Nidn Baru</string>
+    <string name="AlamatDsn">Masukkan Alamat</string>
+    <string name="EmailDsn">Masukkan Email Dosen</string>
+    <string name="GelarDsn">Masukkan Gelar</string>
+    <string name="namamk">Masukkan Nama Matakuliah</string>
+    <string name="kodemk">Masukkan Kode Matakuliah</string>
+    <string name="hari">Masukkan Hari</string>
+    <string name="sesimk">Masukkan Sesi</string>
+    <string name="sks">Masukkan Jumlah Sks</string>
+    <string name="mklama">Masukkan Kode Matkul Lama</string>
+    <string name="matkul">Masukkan Nama Matakuliah</string>
+    <string name="kodemkbaru">Masukkan Kode Mk Baru</string>
+    <string name="hapuskode">Masukkan Nidn Yang Mau Dihapus</string>
+    <string name="hapuskodemk">Masukkan Kode yang Mau Dihapus</string>
+    <string name="nimnik">Masukkan Nim Anda</string>
+    <string name="password">Masukkan Pasword Anda</string>
+</resources>
