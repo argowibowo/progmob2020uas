@@ -1,21 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world_flutter/pertemuan1.dart';
+import 'package:hello_world_flutter/tugaspertemuan8.dart';
 
 void main() {
-  runApp(
-      MaterialApp(
-          title: "Aplikasi Flutter",
-          home: Scaffold(
-            appBar: AppBar(title: Text('Aplikasi Flutter'),),
-            body: Material(
-              color: Colors.white,
-              child: Center(
-                child: Text("Hello World !", textDirection: TextDirection.ltr,
-                  style: TextStyle(color: Colors.deepPurple, fontSize: 40.0) ,
-                ),
-              ),
-            ),
-          )
-      )
+  runApp(MyApp()
   );
 }
 
@@ -41,7 +29,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: tugaspertemuan8(title: 'Flutter Demo Home Page'),
     );
   }
 }
