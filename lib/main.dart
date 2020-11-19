@@ -1,48 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_aftuts/Colors/constant.dart';
+import 'package:progmob_aftuts/SplashScreen/spalshscreen.dart';
+import 'package:progmob_aftuts/tugaspertemuan8.dart';
 
 void main() {
   runApp(MyApp());
 }
-class MyApp extends StatelessWidget {
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+// WARNING, NOTE BUAT TEMAN TEMAN HEHE
+// BAKAL KETAUAN KALO COPY CODE PROGRAM
+// KARENA CODINGAN INI BELUM DIAJARKAN DI MATERI PERKULIAHAN
+// COPY BOLEH TAPI JANGAN DIJIPLAK YA :D, HARUS DIPAHAMI ALURNYA
+
+class _MyAppState extends State<MyApp> {
+  static const TextStyle optionStyle = TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+  );
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Pemrograman Mobile',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: kBackgroundColor,
+        fontFamily: "Poppins",
+        textTheme: TextTheme(bodyText2: TextStyle(color: kBodyTextColor)),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: SplashScreenPage.id,
+      routes: {
+        SplashScreenPage.id: (context) => SplashScreenPage(),
+        TugasPertemuan8.id: (context) => TugasPertemuan8(),
+      },
     );
   }
 }
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
 
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Hallo',
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
