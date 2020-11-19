@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progmob_flutter_2020/pertemuan8.dart';
+import 'package:progmob_flutter_2020/tugas8.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Pertemuan8(title: 'Flutter Progmob 2020 Buatan Sendiri'),
+      home: Tugas8(title: 'Flutter Progmob 2020 Buatan Sendiri'),
     );
   }
 }
