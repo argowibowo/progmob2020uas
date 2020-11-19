@@ -1,39 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_progmob_2020/pertemuan1.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Pertemuan1(title: 'Flutter Demo Home Page Buatan Sendiri'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class Pertemuan1 extends StatefulWidget {
+  Pertemuan1({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -47,11 +15,11 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _Pertemuan1State createState() => _Pertemuan1State();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _Pertemuan1State extends State<Pertemuan1> {
+  int _counter = 2;
 
   void _incrementCounter() {
     setState(() {
@@ -98,21 +66,42 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            TextFormField(
+              decoration: new InputDecoration(
+                labelText: "Test Input",
+                hintText: "Teks yang akan diinput formatnya adalah sbb",
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Padding(
+              padding: EdgeInsets.all(5.0),
             ),
+            TextFormField(
+              decoration: new InputDecoration(
+                labelText: "Test Input 2",
+                hintText: "Teks yang akan diinput formatnya adalah sbb",
+                border: OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(5),
+                )
+              ),
+            ),
+            RaisedButton(
+              //focusColor: Colors.blue,
+              color: Colors.blue,
+              child: Text(
+                "Simpan",
+                style: TextStyle(
+                  color: Colors.white
+                ),
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      //floatingActionButton: FloatingActionButton(
+        //onPressed: _incrementCounter,
+        //tooltip: 'Increment',
+        //child: Icon(Icons.add),
+      //), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
