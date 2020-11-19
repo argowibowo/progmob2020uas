@@ -31,8 +31,8 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
           children: <Widget>[
             TextFormField(
               decoration: new InputDecoration(
-                labelText: "Tes input",
-                hintText: "text yang diinput format adalah sbb",
+                labelText: "Input nama lengkap",
+                hintText: "Nikita Semben",
               ),
             ),
             Padding(
@@ -40,8 +40,8 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
             ),
             TextFormField(
               decoration: new InputDecoration(
-                  labelText: "Tes input 2",
-                  hintText: "text yang diinput format adalah sbb",
+                  labelText: "Input Hobi ",
+                  hintText: "Main game",
                   border: OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(5)
                   )
