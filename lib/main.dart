@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter_2020/pertemuan8.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Pertemuan8(title: 'Flutter Progmob 2020 Buatan Sendiri'),
     );
   }
 }
@@ -98,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'Hello World',
             ),
             Text(
               '$_counter',
