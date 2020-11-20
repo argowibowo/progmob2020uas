@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter/pertemuan1.dart';
+import 'package:progmob_flutter/tugaspertemuan8.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Probmob Flutter 2020'),
+      home: Tugaspertemuan8(title: 'Probmob Flutter 2020'),
     );
   }
 }
