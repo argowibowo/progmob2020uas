@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class TugasPertemuan8 extends StatefulWidget {
-  TugasPertemuan8({Key key, this.title}) : super(key: key);
+class Tugas_Pertemuan8 extends StatefulWidget {
+  Tugas_Pertemuan8({Key key, this.title}) : super(key: key);
   final String title;
   @override
-  _TugasPertemuan8State createState() => _TugasPertemuan8State();
+  _Tugas_Pertemuan8State createState() => _Tugas_Pertemuan8State();
 }
 
-class _TugasPertemuan8State extends State<TugasPertemuan8> {
+class _Tugas_Pertemuan8State extends State<Tugas_Pertemuan8> {
   int _counter = 0;
   final _text = TextEditingController();
   bool _validate = false;
