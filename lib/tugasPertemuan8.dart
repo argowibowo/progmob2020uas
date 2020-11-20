@@ -27,37 +27,41 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             TextFormField(
+              validator: (value){
+                if(value.isEmpty){
+                  return "Nama tidak boleh kosong";
+                }else
+                  {
+                    return null;
+                  }
+              },
               decoration: new InputDecoration(
-                labelText: "Input nama lengkap",
-                hintText: "Nikita Semben",
+                icon: Icon(
+                  Icons.people, 
+                  color: Colors.lightBlue,
+                ),
+                labelText: "Nama lengkap",
+                hintText: "Contoh : Nikita Semben",
+                border: OutlineInputBorder(
+                  borderRadius: new BorderRadius.circular(5)
+                )
               ),
             ),
             Padding(
                 padding: EdgeInsets.all(5.0)
             ),
-            TextFormField(
-              decoration: new InputDecoration(
-                  labelText: "Input Hobi ",
-                  hintText: "Main game",
-                  border: OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(5)
-                  )
-              ),
-            ),
-            RaisedButton(
-              focusColor: Colors.lightBlue,
-              color: Colors.lightBlue,
-              child: Text(
-                "Simpan",
-                style: TextStyle(
-                    color: Colors.white
-                ),
-              ),
-            )
 
+            RaisedButton(
+              child: Text(
+                "Submit",
+                style: TextStyle(
+                    color: Colors.white),
+              ),
+              color: Colors.lightBlue,
+            )
           ],
         ),
       ),
