@@ -14,6 +14,9 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
     });
   }
 
+  //declare
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,16 +24,27 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
         //leading: Icon(Icons.home),
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          children: [ Column(
+      body: Container(
+        margin: EdgeInsets.only(left: 15, right: 15),
+        child: Form(
+          key: _formKey,
+          child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Icon(
-                  Icons.supervisor_account_sharp,
+                Padding(
+                    padding: EdgeInsets.all(5.0)
                 ),
+                SizedBox(height: 10),
                 TextFormField(
+                  validator: (String val) {
+                    if (val.isEmpty) {
+                      return " Nama tidak boleh kosong ! ";
+                    }
+                  },
                   decoration: new InputDecoration(
+                    icon: Icon(
+                        Icons.supervisor_account_sharp
+                    ),
                       labelText: "Nama Lengkap",
                       hintText: "contoh : Rico Alex Sandra",
                       border: new OutlineInputBorder(
@@ -38,21 +52,22 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
                       )
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                ),
                 RaisedButton(
-                  color: Colors.cyanAccent,
-                  child: Text(
-                    "Simpan",
+                  color: Colors.indigoAccent,
+                  onPressed:(){
+                    if(!_formKey.currentState.validate()){
+                      return;
+                    }
+                  },
+                  child: Text("Simpan",
                     style: TextStyle(
-                      color:Colors.white,
-                    ),
+                        color:Colors.white,
+                    )
                   ),
+
                 )
               ],
             ),
-          ],
         ),
       ),
 
