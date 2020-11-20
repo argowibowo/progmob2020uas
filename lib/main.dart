@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_72180256/Pertemuan01.dart';
+import 'package:flutter_app_72180256/TugasPertemuan08.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Progmob2020_72180256'),
+      home: TugasPertemuan08(title: 'Progmob2020_72180256'),
     );
   }
 }
