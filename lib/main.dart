@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+//import 'package:progmob2020_flutter/pertemuan8.dart';
+import 'package:progmob2020_flutter/tugaspertemuan8.dart';
 
 void main() {
-  runApp(
-      MaterialApp(
+  runApp((MyApp()));
+      /*MaterialApp(
           title: "Aplikasi Flutter",
           home: Scaffold(
             appBar: AppBar(title: Text('Aplikasi Flutter'),),
@@ -15,8 +17,7 @@ void main() {
               ),
             ),
           )
-      )
-  );
+      )*/
 }
 
 class MyApp extends StatelessWidget {
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: TugasPertemuan8(title: 'Tugas Pertemuan 8'),
     );
   }
 }
