@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pertemuan8.dart';
+import 'package:flutter_app/TugasPertemuan8.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: pertemuan8(title: 'Flutter Demo Home Page Buatan Aimiya'),
+      home: TugasPertemuan8(title: 'Flutter Demo Home Page Buatan Aimiya'),
     );
   }
 }
