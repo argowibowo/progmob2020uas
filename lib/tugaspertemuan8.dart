@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_72180200/main.dart';
 import 'package:flutter_72180200/validation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TugasPertemuan8 extends StatefulWidget{
   TugasPertemuan8({Key key,this.title}) : super(key: key);
@@ -61,6 +63,26 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> with Validation{
                   if (formKey.currentState.validate()){ //JIKA TRUE
                     formKey.currentState.save(); //MAKA FUNGSI SAVE() DIJALANKAN
                   }
+                },
+              ),
+              RaisedButton(
+                color: Colors.blue,
+                disabledColor: Colors.blue,
+                child: Text(
+                  //"Kembali",
+                  "Logout",
+                  style: TextStyle(
+                      color: Colors.white
+                  ),
+                ),
+                onPressed: () async {
+                  //Navigator.pop(context);
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  await pref.setInt("is_login", 0);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyHomePage(title: "Flutter Demo Home Page",)),
+                  );
                 },
               )
             ]
