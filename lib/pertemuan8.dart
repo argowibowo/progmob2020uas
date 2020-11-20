@@ -26,31 +26,37 @@ class _Pertemuan8State extends State<Pertemuan8> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             TextFormField(
+              validator: (value){
+                if(value.isEmpty){
+                  return "Nama tidak boleh kosong";
+                }else
+                {
+                  return null;
+                }
+              },
               decoration: new InputDecoration(
+                icon: Icon(
+                  Icons.people,
+                  color: Colors.lightBlue,
+                ),
                 labelText: "Nama Lengkap",
                 hintText: "Contoh Adrian Yunas Wicaksono",
-              ),
-            ),
-            Padding(
-                padding: EdgeInsets.all(5.0)
-            ),
-            TextFormField(
-              decoration: new InputDecoration(
-                  labelText: "NIM",
-                  hintText: "Contoh 72180183",
                   border: OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(5)
                   )
               ),
             ),
+            Padding(
+                padding: EdgeInsets.all(5.0)
+            ),
             RaisedButton(
               focusColor: Colors.blue,
               color: Colors.blue,
               child: Text(
-                "Simpan",
+                "Submit",
                 style: TextStyle(
                     color: Colors.white
                 ),
