@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class Pertemuan8 extends StatefulWidget {
@@ -10,29 +12,28 @@ class Pertemuan8 extends StatefulWidget {
 }
 
 class _Pertemuan8State extends State<Pertemuan8> {
-  // int _counter = 0;
+  GlobalKey<FormState> key = GlobalKey<FormState>();
 
-  void _incrementCounter() {
-    setState(() {
 
-    });
+  Void Validate(){
+    if (key.currentState.validate()){
+      print("Validate");
+    }
+    else {
+      print("failed");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
 
-        title: Text(widget.title),
+        title: Text("TUGAS PERTEMUAN 8"),
       ),
       body: Center(
-
+        child: Form(
+          key: key,
         child: Column(
 
           mainAxisAlignment: MainAxisAlignment.start,
@@ -41,6 +42,11 @@ class _Pertemuan8State extends State<Pertemuan8> {
               padding: EdgeInsets.all(16.0),
             ),
             TextFormField(
+              validator: (value){
+                if(value.isEmpty){
+                  return "Nama Tidak Boleh Kosong";
+                }
+              },
               decoration: new InputDecoration(
                 icon: Icon(Icons.person),
                   labelText: "Nama Lengkap",
@@ -52,11 +58,12 @@ class _Pertemuan8State extends State<Pertemuan8> {
             ),
             RaisedButton(
               color: Colors.blue,
+              onPressed: Validate,
               child: Text("SIMPAN", style: TextStyle(color: Colors.white),
               ),
-              onPressed: () {},
             )
           ],
+        ),
         ),
       ),
       // floatingActionButton: FloatingActionButton(
