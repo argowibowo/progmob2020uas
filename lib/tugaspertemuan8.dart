@@ -43,28 +43,28 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
                 //   child: new Icon(Icons.person),
                 // ),
                 new Expanded(
-                    child: new Container(
-                      padding: EdgeInsets.all(14.0),
-                      child: new TextFormField(
-                        controller: _text,
-                        decoration: new InputDecoration(
-                            icon: Icon(Icons.people),
-                            labelText: "Nama Lengkap",
-                            hintText: "contoh: Magdalena Evelyn Halim",
-                            border: OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(5),
-                            ),
-                            // labelText: 'Enter the Value',
-                            errorText: _validate ? 'Nama tidak boleh kosong' : null,
+                  child: new Container(
+                    padding: EdgeInsets.all(14.0),
+                    child: new TextFormField(
+                      controller: _text,
+                      decoration: new InputDecoration(
+                        icon: Icon(Icons.people),
+                        labelText: "Nama Lengkap",
+                        hintText: "contoh: Magdalena Evelyn Halim",
+                        border: OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(5),
                         ),
-                        // validator: (value){
-                        //   if(value.isEmpty){
-                        //     return "Nama tidak boleh kosong";
-                        //   }
-                        //   return null;
-                        // },
+                        // labelText: 'Enter the Value',
+                        errorText: _validate ? 'Nama tidak boleh kosong' : null,
                       ),
+                      // validator: (value){
+                      //   if(value.isEmpty){
+                      //     return "Nama tidak boleh kosong";
+                      //   }
+                      //   return null;
+                      // },
                     ),
+                  ),
                 ),
               ],
             ),
@@ -79,8 +79,8 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
                   _text.text.isEmpty ? _validate = true : _validate = false;
                 });
               },
-                color: Colors.blue,
-                // disabledColor: Colors.blue,
+              color: Colors.blue,
+              // disabledColor: Colors.blue,
               child: Text(
                 "Submit",
                 style: TextStyle(
