@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:progmob2020/login.dart';
 import 'package:progmob2020/pertemuan1.dart';
+import 'package:progmob2020/splashscreen.dart';
 import 'package:progmob2020/tugaspertemuan8.dart';
 
 void main() {
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
 
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TugasPertemuan8(title: 'Progmob 2020'),
+      home: SplashScreen(),
     );
   }
 }
@@ -62,10 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'Hello World',
             ),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headline4,
-            // ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
           ],
         ),
       ),
