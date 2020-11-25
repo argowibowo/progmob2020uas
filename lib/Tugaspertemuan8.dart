@@ -1,5 +1,8 @@
+import 'package:fluter_hello_world/Preference.dart';
 import 'package:flutter/material.dart';
 import 'dart:ffi';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Tugaspertemuan8 extends StatefulWidget {
   Tugaspertemuan8({Key key, this.title}) : super(key: key);
@@ -62,9 +65,29 @@ class _Tugaspertemuan8State extends State<Tugaspertemuan8> {
                     child: Text(
                       "SUBMIT",
                       style: TextStyle(
-                          color: Colors.greenAccent
+                          color: Colors.white
                       ),
                     ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(3.0),
+                  ),
+                  RaisedButton(
+                    color: Colors.blue,
+                    child: Text(
+                      "LOGOUT",
+                      style: TextStyle(
+                          color: Colors.white
+                      ),
+                    ),
+                    onPressed:() async{
+                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      await pref.setInt("Is_login", 0);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => Login(title: "PROGMOB 2020",)),
+                      );
+                    },
                   )
                 ],
               ),

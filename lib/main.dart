@@ -1,4 +1,5 @@
 import 'package:fluter_hello_world/Pertemuan1.dart';
+import 'package:fluter_hello_world/Preference.dart';
 import 'package:fluter_hello_world/Tugaspertemuan8.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Tugaspertemuan8(title: 'Flutter Demo Home Page Alfina'),
+      home: Login(title: 'TestLogin'),
     );
   }
 }
@@ -106,6 +107,17 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              child: Text(
+                "Pindah Halaman"
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Pertemuan1(title: "Push",)),
+                );
+              },
+            )
           ],
         ),
       ),

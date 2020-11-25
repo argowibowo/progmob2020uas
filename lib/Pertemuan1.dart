@@ -51,12 +51,22 @@ class _Pertemuan1State extends State<Pertemuan1> {
             RaisedButton(
               focusColor: Colors.blue,
               child: Text(
-                "SIMPAN",
-                style: TextStyle(
-                  color: Colors.white
-                ),
+                "SAVE",
+                style: TextStyle(color: Colors.white),
               ),
-            )
+              color: Colors.blue,
+            ),
+            RaisedButton(
+              focusColor: Colors.blue,
+              child: Text(
+                "BACK",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.blue,
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),
