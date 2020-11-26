@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_setelah_uts_72180190/pertemuan1.dart';
 
 class Tugaspertemuan8 extends StatefulWidget {
   Tugaspertemuan8({Key key, this.title}) : super(key: key);
@@ -11,7 +12,7 @@ class Tugaspertemuan8 extends StatefulWidget {
 class _Tugaspertemuan8State extends State<Tugaspertemuan8> {
   String validateName(String value) {
     if (value.isEmpty) {
-      return 'Nama Tidak Boleh Kosong !!';
+      return 'Nama Tidak Boleh Kosong !!!';
     }
     return null;
   }
@@ -52,8 +53,15 @@ class _Tugaspertemuan8State extends State<Tugaspertemuan8> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
-                  if (formKey.currentState.validate())
+                  if (formKey.currentState.validate()){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Pertemuan1(title: "Home Page", nama: name,)),
+                    );
+                  }
+                  else {
                     formKey.currentState.save();
+                  }
                 },
               ),
             ],

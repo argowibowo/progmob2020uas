@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_setelah_uts_72180190/loginpage.dart';
+import 'package:progmob_setelah_uts_72180190/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Pertemuan1 extends StatefulWidget {
-  Pertemuan1({Key key, this.title}) : super(key: key);
+  Pertemuan1({Key key, this.title, this.nama}) : super(key: key);
   final String title;
+  final String nama;
 
   @override
   _Pertemuan1State createState() => _Pertemuan1State();
@@ -22,37 +26,28 @@ class _Pertemuan1State extends State<Pertemuan1> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.cyan,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextFormField(
-              decoration: new InputDecoration(
-                  labelText: "Tes Input",
-                  hintText: "Teks Yang Akan Di Input Formatnya adalah sbb",
-                  border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5),
-                  )),
-            ),
-            Padding(padding: EdgeInsets.all(5.0)),
-            TextFormField(
-              decoration: new InputDecoration(
-                  labelText: "Tes Input 2",
-                  hintText: "Teks Yang Akan Di Input Formatnya adalah sbb",
-                  border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5),
-                  )),
-            ),
+            Text("Selamat Datang " + widget.nama),
             RaisedButton(
-              color: Colors.blue,
-              child: Text(
-                "Simpan",
-                style: TextStyle(
-                  color: Colors.white
+                color: Colors.cyan,
+                child: Text(
+                  "Logout",
+                  style: TextStyle(color: Colors.white),
                 ),
-              ),
-            ),
+                onPressed: () async {
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  await pref.setInt("is_login", 0);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => Loginpage(title: "Login")),
+                  );
+                }
+                ),
           ],
         ),
       ),
