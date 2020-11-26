@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Pertemuan8 extends StatefulWidget {
   Pertemuan8({Key key, this.title}) : super(key: key);
@@ -35,7 +37,6 @@ class _Pertemuan8State extends State<Pertemuan8> {
         child: Form(
           key: key,
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
@@ -60,6 +61,19 @@ class _Pertemuan8State extends State<Pertemuan8> {
               color: Colors.blue,
               onPressed: Validate,
               child: Text("SIMPAN", style: TextStyle(color: Colors.white),
+              ),
+            ),
+            RaisedButton(
+              color: Colors.blue,
+              onPressed: () async{
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setInt('is_login', 0);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage(title: "HOME",)),
+                );
+              },
+              child: Text("LOGOUT", style: TextStyle(color: Colors.white),
               ),
             )
           ],

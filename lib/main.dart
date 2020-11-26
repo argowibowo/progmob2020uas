@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/tugaspertemuan8.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Pertemuan8(title: 'PROGMOB_2020'),
+      home: MyHomePage(title: 'PROGMOB_2020'),
     );
   }
 }
@@ -54,6 +55,22 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       // _counter++;
     });
+  }
+
+  void navigateLogin() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int isLogin = prefs.getInt("is_login");
+    if(isLogin == 1){
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => Pertemuan8(title: "tugas 9",)),
+      );
+    }
+  }
+
+
+  @override
+  void initState() {
+    navigateLogin();
   }
 
   @override
@@ -93,6 +110,17 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'HELLO WORLD',
             ),
+            RaisedButton(
+              child: Text("LOGIN"),
+                onPressed: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setInt('is_login', 1);
+                Navigator.pushReplacement(
+                    context,
+                  MaterialPageRoute(builder: (context) => Pertemuan8(title: "tugas 9",)),
+                );
+            }
+            )
             // Text(
             //   '$_counter',
             //   style: Theme.of(context).textTheme.headline4,
