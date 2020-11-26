@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Tugaspertemuan8 extends StatefulWidget {
   Tugaspertemuan8({Key key, this.title}) : super(key: key);
@@ -47,6 +49,21 @@ class _Tugaspertemuan8State extends State<Tugaspertemuan8> {
                 color: Colors.blue,
                 onPressed: () {
                   if (_formKey.currentState.validate()) {}
+                },
+              ),
+              RaisedButton(
+                child: Text(
+                  "Logout",
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.blue,
+                onPressed: () async {
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  await pref.setInt("is_login", 0);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyHomePage(title: "Welcome",)),
+                  );
                 },
               ),
             ],
