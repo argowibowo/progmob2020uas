@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wil_app/Login.dart';
 import 'package:wil_app/Tugaspertemuan8.dart';
 // import 'package:wil_app/Tugaspertemuan8.dart';
 import 'package:wil_app/pertemuan1.dart';
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Tugaspertemuan8(title: 'Tugas Pertemuan 1'),
+      home: Login(title: 'Halaman Login '),
     );
   }
 }
@@ -55,6 +57,22 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void navigateLogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if(isLogin == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Tugaspertemuan8(title : "Sistem Akademik",)),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    navigateLogin();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -75,6 +93,17 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              child: Text(
+                'Logout'
+              ),
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Tugaspertemuan8(title : "Sistem Akademik",)),
+                );
+              },
+            )
           ],
         ),
       ),

@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wil_app/Login.dart';
+import 'package:wil_app/Tugaspertemuan8.dart';
 
 
 
-class Tugaspertemuan8 extends StatefulWidget {
-  Tugaspertemuan8({Key key, this.title}) : super(key: key);
+class Login extends StatefulWidget {
+  Login({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _Tugaspertemuan8State createState() => _Tugaspertemuan8State();
+  _LoginState createState() => _LoginState();
 }
 
-class _Tugaspertemuan8State extends State<Tugaspertemuan8> {
+class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
+  // Initially password is obscure
+  bool _obscureText = true;
+
+  String _password;
+
+  // Toggles the password show status
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,49 +44,45 @@ class _Tugaspertemuan8State extends State<Tugaspertemuan8> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     decoration: new InputDecoration(
-                      hintText: "contoh: Wilfridus Bau Mau",
-                      labelText: "Nama Lengkap",
-                      icon: Icon(Icons.people),
-                      border: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(5.0)),
+                      hintText: "Username",
+                      labelText: "Username",
                     ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Nama tidak boleh kosong';
-                      }
-                      return null;
-                    },
+
                   ),
+
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: new InputDecoration(
+                      hintText: "Password",
+                      labelText: "Password",
+                    ),
+
+                  ),
+
+                ),
+
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                 ),
-
                 RaisedButton(
                   child: Text(
-                    "Submit",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Colors.blue,
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {}
-                  },
-                ),
-                RaisedButton(
-                  child: Text(
-                    "Logout",
+                    "Login",
                     style: TextStyle(color: Colors.white),
                   ),
                   color: Colors.blue,
                   onPressed: () async {
                     SharedPreferences pref = await SharedPreferences.getInstance();
-                    await pref.setInt("is_login", 0);
+                    await pref.setInt("is_login", 1);
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Login(title : "Sistem Akademik",)),
+                      MaterialPageRoute(builder: (context) => Tugaspertemuan8(title : "Sistem Akademik",)),
                     );
                   },
                 ),
+
+
               ],
             ),
           ),
