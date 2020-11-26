@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_app/Login.dart';
 class Pertemuan8 extends StatefulWidget {
   Pertemuan8({Key key, this.title}) : super(key: key);
 
@@ -30,6 +31,7 @@ class Pertemuan8 extends StatefulWidget {
           }
 
           return null;
+
         },
         onSaved: (String value) {
           _name = value;
@@ -52,20 +54,30 @@ class Pertemuan8 extends StatefulWidget {
                 SizedBox(height: 100),
                 RaisedButton(
                   child: Text(
-                    'Submit',
-                    style: TextStyle(color: Colors.blue, fontSize: 16),
+                    "Submit",
+                    style: TextStyle(color: Colors.black),
                   ),
+                  color: Colors.blue,
                   onPressed: () {
-                    if (!_formKey.currentState.validate()) {
-                      return;
-                    }
-
-                    _formKey.currentState.save();
-
-                    //print(_name);
+                    if (_formKey.currentState.validate()) {}
                   },
-                )
-              ],
+                ),
+             RaisedButton(child: Text(
+                 "Logout",
+                  style: TextStyle(color: Colors.white),
+                   ),
+                   color: Colors.blue,
+                   onPressed: () async {
+                     SharedPreferences pref = await SharedPreferences
+                         .getInstance();
+                     await pref.setInt("is_login", 0);
+                     Navigator.pushReplacement(
+                       context,
+                       MaterialPageRoute(
+                           builder: (context) => Login(title: "Flutter App",)),
+                     );
+                   }
+             )],
             ),
           ),
         ),
