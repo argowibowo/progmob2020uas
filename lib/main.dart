@@ -1,5 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_app/tugaspertemuan8.dart';
+import 'package:flutter_app/tugaspertemuan9.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'PROGMOB_2020'),
+      home: MyHomePage(title: "Progmob 2020",),
     );
   }
 }
@@ -44,7 +46,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  GlobalKey<FormState> key = GlobalKey<FormState>();
   // int _counter = 0;
+
+  Void Validate(){
+    if (key.currentState.validate()){
+      print("Validate");
+    }
+    else {
+      print("failed");
+    }
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -62,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     int isLogin = prefs.getInt("is_login");
     if(isLogin == 1){
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => Pertemuan8(title: "tugas 9",)),
+          MaterialPageRoute(builder: (context) => Pertemuan9(title: "tugas 9",)),
       );
     }
   }
@@ -88,9 +100,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
+      child: Form(
+      key: key,
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
+
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -105,34 +120,65 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'HELLO WORLD',
+            Padding(
+              padding: EdgeInsets.all(16.0),
+            ),
+            TextFormField(
+              validator: (value){
+                if(value.isEmpty){
+                  return "Nama Tidak Boleh Kosong";
+                }
+              },
+              decoration: new InputDecoration(
+                  icon: Icon(Icons.person),
+                  labelText: "Username",
+                  hintText: "Masukkan Username",
+                  border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(10)
+                  )
+              ),
+            ),
+            TextFormField(
+              validator: (value){
+                if(value.isEmpty){
+                  return "Password Tidak Boleh Kosong";
+                }
+              },
+              decoration: new InputDecoration(
+                  icon: Icon(Icons.lock),
+                  labelText: "Password",
+                  hintText: "Masukkan Password",
+                  border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(10)
+                  )
+              ),
             ),
             RaisedButton(
-              child: Text("LOGIN"),
-                onPressed: () async {
+                color: Colors.blue,
+                child: Text(
+                    'LOGIN',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    )
+                ),
+                onLongPress: Validate,
+                onPressed: ()  async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 await prefs.setInt('is_login', 1);
                 Navigator.pushReplacement(
                     context,
-                  MaterialPageRoute(builder: (context) => Pertemuan8(title: "tugas 9",)),
+                  MaterialPageRoute(builder: (context) => Pertemuan9(title: "tugas 9",)),
                 );
             }
             )
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headline4,
-            // ),
+
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

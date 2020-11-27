@@ -63,19 +63,6 @@ class _Pertemuan8State extends State<Pertemuan8> {
               child: Text("SIMPAN", style: TextStyle(color: Colors.white),
               ),
             ),
-            RaisedButton(
-              color: Colors.blue,
-              onPressed: () async{
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                await prefs.setInt('is_login', 0);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyHomePage(title: "HOME",)),
-                );
-              },
-              child: Text("LOGOUT", style: TextStyle(color: Colors.white),
-              ),
-            )
           ],
         ),
         ),
