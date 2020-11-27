@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class tugas8 extends StatefulWidget {
   tugas8({Key key, this.title}) : super(key: key);
@@ -45,7 +47,7 @@ class _tugas8State extends State<tugas8> {
                   icon: Icon(Icons.account_circle),
                   labelText: "Nama Lengkap",
                   errorText: _validate ? 'Nama tidak boleh kosong' : null,
-                  hintText: "contoh: Elza Miyori",
+                  hintText: "contoh: Ristri Krisnugraheni",
                   border: OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(5)
                   )
@@ -61,7 +63,20 @@ class _tugas8State extends State<tugas8> {
                 });
               },
               color: Colors.blueAccent,
-              child: Text('simpan'),
+              child: Text('Login'),
+              textColor: Colors.white,
+            ),
+            RaisedButton(
+              onPressed: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setInt("is_login", 1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage(title: "Hallo push",)),
+                );
+              },
+              color: Colors.blueAccent,
+              child: Text('Logout'),
               textColor: Colors.white,
             ),
           ],

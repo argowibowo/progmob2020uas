@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +10,7 @@ class pertemuan1 extends StatefulWidget {
   _pertemuan1State createState() => _pertemuan1State();
 }
 
-class _pertemuan1State extends State<pertemuan1> {
+class _pertemuan1State extends State <pertemuan1>{
   int _counter = 2;
 
   void _incrementCounter() {
@@ -20,6 +19,8 @@ class _pertemuan1State extends State<pertemuan1> {
       _counter++;
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,15 +57,27 @@ class _pertemuan1State extends State<pertemuan1> {
                 focusColor: Colors.blue,
                 color: Colors.blue,
                 child: Text(
-                  "Simpan",
+                  "Login",
                   style: TextStyle(
                       color:Colors.white
                   ),
                 )
-            )
+            ),
+            RaisedButton(
+                focusColor: Colors.blue,
+                color: Colors.blue,
+                child: Text(
+                  "Logout",
+                  style: TextStyle(
+                    color:Colors.white,
+
+                  ),
+                )
+            ),
           ],
         ),
       ),
+
     );
   }
 }
