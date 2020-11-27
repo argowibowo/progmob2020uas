@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_govin/pertemuan1.dart';
+import 'package:flutter_app_govin/splashscreen.dart';
 import 'package:flutter_app_govin/tugaspertemuan8.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
 
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TugasPertemuan8 (title: 'Flutter Demo Home Page Govinda'),
+      home: SplashScreen (),
     );
   }
 }
@@ -67,10 +68,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       //floatingActionButton: FloatingActionButton(
-       // onPressed: _incrementCounter,
-       // tooltip: 'Increment',
-       // child: Icon(Icons.add),
-     // ), // This trailing comma makes auto-formatting nicer for build methods.
+      // onPressed: _incrementCounter,
+      // tooltip: 'Increment',
+      // child: Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
