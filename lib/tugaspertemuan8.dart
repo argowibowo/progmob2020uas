@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_app/login.dart';
 class Pertemuan8 extends StatefulWidget {
+
   Pertemuan8({Key key, this.title}) : super(key: key);
 
   final String title;
@@ -18,12 +20,7 @@ class _Pertemuan8State extends State<Pertemuan8> {
 
   Widget _buildName() {
     return TextFormField(
-        decoration: InputDecoration(
-        icon:Icon(
-        Icons.people,
-        color:  Colors.blue,
-    ),
-            labelText: 'Nama Lengkap',
+      decoration: InputDecoration(labelText: 'Nama Lengkap',
           hintText: "Contoh : Brigita Monic",
           border: OutlineInputBorder(
             borderRadius: new BorderRadius.circular(5),
@@ -35,6 +32,7 @@ class _Pertemuan8State extends State<Pertemuan8> {
         }
 
         return null;
+
       },
       onSaved: (String value) {
         _name = value;
@@ -45,7 +43,7 @@ class _Pertemuan8State extends State<Pertemuan8> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Form Tugas Pertemuan 8")),
+      appBar: AppBar(title: Text("Tugas Pertemuan 8")),
       body: Container(
         margin: EdgeInsets.all(24),
         child: Form(
@@ -54,23 +52,33 @@ class _Pertemuan8State extends State<Pertemuan8> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               _buildName(),
-              SizedBox(height: 50),
+              SizedBox(height: 100),
               RaisedButton(
                 child: Text(
-                  'Submit',
-                  style: TextStyle(color: Colors.blue, fontSize: 16),
+                  "Submit",
+                  style: TextStyle(color: Colors.black),
                 ),
+                color: Colors.blue,
                 onPressed: () {
-                  if (!_formKey.currentState.validate()) {
-                    return;
-                  }
-
-                  _formKey.currentState.save();
-
-                  //print(_name);
+                  if (_formKey.currentState.validate()) {}
                 },
-              )
-            ],
+              ),
+              RaisedButton(child: Text(
+                "Logout",
+                style: TextStyle(color: Colors.white),
+              ),
+                  color: Colors.blue,
+                  onPressed: () async {
+                    SharedPreferences pref = await SharedPreferences
+                        .getInstance();
+                    await pref.setInt("is_login", 0);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Login(title: "Flutter App",)),
+                    );
+                  }
+              )],
           ),
         ),
       ),
