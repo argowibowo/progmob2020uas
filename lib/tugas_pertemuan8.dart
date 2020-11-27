@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ronaldo_flutter_progmob_2020/pertemuan1.dart';
 
 class Tugas_Pertemuan8 extends StatefulWidget {
   Tugas_Pertemuan8({Key key, this.title}) : super(key: key);
@@ -63,6 +64,17 @@ class _Tugas_Pertemuan8State extends State<Tugas_Pertemuan8> {
               child: Text('Save'),
               textColor: Colors.pink,
             ),
+            RaisedButton(
+              child: Text(
+                "Pindah Halaman"
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Pertemuan1(title: "Halo Push",)),
+                );
+              },
+            )
           ],
         ),
       ),

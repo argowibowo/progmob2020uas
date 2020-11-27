@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ronaldo_flutter_progmob_2020/pertemuan1.dart';
+import 'package:ronaldo_flutter_progmob_2020/splashscreen.dart';
 import 'package:ronaldo_flutter_progmob_2020/tugas_pertemuan8.dart';
 
 void main() {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Tugas_Pertemuan8(title: 'Flutter Demo Home Page Buatan Ronaldo'),
+      home: SplashScreen (title: 'Flutter Demo Home Page Buatan Ronaldo'),
     );
   }
 }
