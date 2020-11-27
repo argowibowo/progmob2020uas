@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:progmob_flutter/login.dart';
 
 class Tugaspertemuan8 extends StatefulWidget {
 
@@ -14,12 +16,13 @@ class Tugaspertemuan8 extends StatefulWidget {
 
 class Tugaspertemuan8State extends State<Tugaspertemuan8> {
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("Tugas Pertemuan 8"),
+        title: Text("TUGAS PERTEMUAN 8"),
       ),
 
       body: Form(
@@ -53,6 +56,18 @@ class Tugaspertemuan8State extends State<Tugaspertemuan8> {
                 color: Colors.blue,
                 onPressed: () {
                   if (_formKey.currentState.validate()) {}
+                },
+              ),
+              RaisedButton(
+                child: Text(
+                  "Logout",
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.blue,
+                onPressed:() async {
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  await pref.setInt("is_login", 0);
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => LoginPage(title: "HALAMAN LOGIN")));
                 },
               ),
             ],
