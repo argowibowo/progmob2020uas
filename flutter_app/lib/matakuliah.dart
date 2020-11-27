@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class pertemuan1 extends StatefulWidget {
-  pertemuan1({Key key, this.title}) : super(key: key);
+class matakuliah extends StatefulWidget {
+  matakuliah({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _pertemuan1State createState() => _pertemuan1State();
+  _matakuliahState createState() => _matakuliahState();
 }
 
-class _pertemuan1State extends State<pertemuan1> {
+class _matakuliahState extends State<matakuliah> {
   int _counter = 2;
 
   void _incrementCounter() {
@@ -28,32 +28,32 @@ class _pertemuan1State extends State<pertemuan1> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-          TextFormField(
-            decoration: new InputDecoration(
-              labelText: "Tes Input",
-              hintText: "text yang akan diinput formatnya adalah ",
+            TextFormField(
+              decoration: new InputDecoration(
+                labelText: "Tes Input",
+                hintText: "text yang akan diinput formatnya adalah ",
+              ),
             ),
-          ),
             Padding(
               padding: EdgeInsets.all(5.0),
             ),
             TextFormField(
-                decoration: new InputDecoration(
+              decoration: new InputDecoration(
                   labelText: "Tes Input 2",
                   hintText: "text yang akan diinput formatnya adalah ",
                   border: OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(5),
                   )
-                ),
+              ),
             ),
-           RaisedButton(
-             focusColor: Colors.blue ,
-             color: Colors.blue ,
-             child: Text(
-               "Simpan",
-               style: TextStyle(color: Colors.white),
-             ),
-           ),
+            RaisedButton(
+              focusColor: Colors.blue ,
+              color: Colors.blue ,
+              child: Text(
+                "Simpan",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
             RaisedButton(
               child: Text(
                 "Logout",
@@ -61,7 +61,17 @@ class _pertemuan1State extends State<pertemuan1> {
               ),
               color: Colors.blue ,
               onPressed: () {
-               Navigator.pop(context);
+                Navigator.pop(context);
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "Delete",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.blue ,
+              onPressed: () {
+                Navigator.pop(context);
               },
             )
           ],
@@ -71,7 +81,7 @@ class _pertemuan1State extends State<pertemuan1> {
       //   onPressed: _incrementCounter,
       //   tooltip: 'Increment',
       //   child: Icon(Icons.add),
-    //  ), // This trailing comma makes auto-formatting nicer for build methods.
+      //  ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
