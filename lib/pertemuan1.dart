@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class Pertemuan1 extends StatefulWidget {
   Pertemuan1({Key key, this.title}) : super(key: key);
 
-
-
   final String title;
-
   @override
   _Pertemuan1State createState() => _Pertemuan1State();
 }
@@ -16,7 +13,6 @@ class _Pertemuan1State extends State<Pertemuan1> {
 
   void _incrementCounter() {
     setState(() {
-
       _counter++;
     });
   }
