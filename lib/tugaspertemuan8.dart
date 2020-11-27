@@ -1,5 +1,7 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart';
+import 'package:flutter_keren/pertemuan1.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class tugaspertemuan8 extends StatefulWidget {
   tugaspertemuan8({Key key, this.title}) : super(key: key);
@@ -21,7 +23,6 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
       print("failed");
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +68,23 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
                           color: Colors.white
                       ),
                     ),
+                  ),
+                  RaisedButton(
+                    color: Colors.blue,
+                    onPressed: () async {
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      await prefs.setInt("isLogin", 0);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyHomePage(title: 'Login Page')),
+                      );
+                    },
+                    child: Text(
+                      "Logout",
+                      style: TextStyle(
+                          color: Colors.white
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -74,5 +92,21 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
         ),
       ),
     );
+  }
+
+  void checkLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int isLogin = prefs.getInt('isLogin');
+    if(isLogin == 0) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MyHomePage(title: 'Login Page')),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    checkLogin();
   }
 }
