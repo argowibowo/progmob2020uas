@@ -1,5 +1,6 @@
 import 'package:fluter_hello_world/Pertemuan1.dart';
 import 'package:fluter_hello_world/Preference.dart';
+import 'package:fluter_hello_world/Splashscreen.dart';
 import 'package:fluter_hello_world/Tugaspertemuan8.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Login(title: 'TestLogin'),
+      home: Splashscreen(),
     );
   }
 }

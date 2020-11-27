@@ -7,8 +7,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="fluter_hello_world"
-        android:icon="@mipmap/ic_launcher">
+        android:label="PROGMOB WHOSFEENA"
+        android:icon="@mipmap/PROGMOB2020">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
