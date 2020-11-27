@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world_flutter/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class pertemuan1 extends StatefulWidget {
   pertemuan1({Key key, this.title}) : super(key: key);
 
@@ -48,7 +50,7 @@ class _pertemuan1State extends State<pertemuan1> {
             ),
             RaisedButton(
               child: Text(
-                "SIMPAN",
+                "SUBMIT",
                 style: TextStyle(color: Colors.white),
                 ),
                 color: Colors.blue,
@@ -58,12 +60,17 @@ class _pertemuan1State extends State<pertemuan1> {
               ),
             RaisedButton(
               child: Text(
-                "KEMBALI",
+                "LOG OUT",
                 style: TextStyle(color: Colors.white),
                 ),
             color: Colors.blue,
-            onPressed:(){
-            Navigator.pop(context);
+            onPressed:() async {
+              SharedPreferences pref = await SharedPreferences.getInstance();
+              await pref.setInt("is_login", 0);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo Push",)),
+              );;
             },
             ),
           ],

@@ -1,5 +1,8 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart';
+import 'package:hello_world_flutter/main.dart';
+import 'package:hello_world_flutter/preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class tugaspertemuan8 extends StatefulWidget {
   tugaspertemuan8({Key key, this.title}) : super(key: key);
@@ -62,12 +65,27 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
                     color: Colors.blue,
                     onPressed: Validate,
                     child: Text(
-                      "SIMPAN",
+                      "SUBMIT",
                       style: TextStyle(
                           color: Colors.white
                       ),
                     ),
-                  )
+                  ),
+                  RaisedButton(
+                    child: Text(
+                      "LOG OUT",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: Colors.blue,
+                    onPressed:() async {
+                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      await pref.setInt("is_login", 0);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => preferences(title: "Halo Push",)),
+                      );;
+                    },
+                  ),
                 ],
               ),
             )
