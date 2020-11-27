@@ -17,7 +17,6 @@ class _LoginState extends State<Login> with Validation{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE8EAF6),
       appBar: AppBar(
         title: Text(widget.title),
         backgroundColor: Color(0xFF0D47A1),
