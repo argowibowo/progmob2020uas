@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_72180185/splashscreen.dart';
 import 'package:flutter_72180185/tugaspertemuan8.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 //import 'pertemuan1.dart';
 
 void main() {
@@ -23,19 +25,21 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TugasPertemuan8 (title: 'Tugas Pertemuan 8'),
+      // home: MyHomePage(title: '/Flutter Demo Home Page'),
+      home: SplashScreen(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
+
   final String title;
 
   @override
@@ -49,6 +53,22 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
+  }
+
+  void navigateLogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if(isLogin == 1){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Halo Push",)),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    navigateLogin();
   }
 
   @override
@@ -68,6 +88,19 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              child: Text(
+                'Login'
+              ),
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Halo Push",)),
+                );
+              },
+            )
           ],
         ),
       ),
