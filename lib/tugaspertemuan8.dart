@@ -1,6 +1,6 @@
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+
 class tugaspertemuan8 extends StatefulWidget {
   tugaspertemuan8({Key key, this.title}) : super(key: key);
 
@@ -40,29 +40,29 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
                   TextFormField(
                     validator: (value){
                       if(value.isEmpty){
-                        return "Kolom Tidak Boleh Kosong";
+                        return "Nama Tidak Boleh Kosong";
                       }
                       else{
                         return null;
                       }
                     },
                     decoration: new InputDecoration(
-                      icon:Icon (
-                        Icons.people_sharp,
-                        color: Colors.blue,
+                      icon: Icon(
+                          Icons.people_rounded,
+                          color: Colors.blue
                       ),
                       labelText: 'Nama Lengkap',
                       hintText: 'Contoh : Yose Salawangi',
-                      border: OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(10),
-                      ),
+                        border: OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(6),
+                        )
                     ),
                   ),
                   RaisedButton(
                     color: Colors.blue,
                     onPressed: Validate,
                     child: Text(
-                      "SIMPAN",
+                      "Simpan",
                       style: TextStyle(color: Colors.white),
                     ),
                   )

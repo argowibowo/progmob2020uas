@@ -29,7 +29,7 @@ class _pertemuan8State extends State<pertemuan8> {
             TextFormField(
               decoration:  new InputDecoration(
                   labelText: "Test Input Data",
-                  hintText: "Inputkan Teks Anda"
+                  hintText: "Inputkan Teks Anda",
               ),
             ),
             Padding(
@@ -48,7 +48,7 @@ class _pertemuan8State extends State<pertemuan8> {
               color: Colors.blue,
               child: Text(
                   "Simpan",
-                  style: TextStyle(color: Colors.white)
+                  style: TextStyle(color: Colors.white),
               ),
               onPressed: () {},
             )

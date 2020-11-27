@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/NavBar.dart';
+import 'package:flutter_app/Login.dart';
+import 'package:flutter_app/SplashScreen.dart';
 import 'package:flutter_app/tugaspertemuan8.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
 
 void main() {
   runApp(MyApp());
@@ -28,10 +33,11 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: tugaspertemuan8(title: 'ProgMob2020'),
+      home:SplashScreen(),
     );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
