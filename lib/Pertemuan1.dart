@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Pertemuan1 extends StatefulWidget {
   Pertemuan1({Key key, this.title}) : super(key: key);
 
@@ -55,20 +54,27 @@ class _Pertemuan1State extends State<Pertemuan1> {
               focusColor: Colors.blue,
               color: Colors.blue,
               child: Text(
-                "Simpan",
+                "Login",
                 style: TextStyle(
                   color:Colors.white
                 ),
               )
-            )
+            ),
+            RaisedButton(
+                focusColor: Colors.blue,
+                color: Colors.blue,
+                child: Text(
+                  "Logout",
+                  style: TextStyle(
+                      color:Colors.white,
+
+                  ),
+                )
+            ),
           ],
         ),
       ),
-      /*floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.*/
+
     );
   }
 }
