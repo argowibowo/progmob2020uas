@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter_2020/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Tugas8 extends StatefulWidget {
   Tugas8({Key key, this.title}) : super(key: key);
@@ -60,7 +62,25 @@ class _Tugas8State extends State<Tugas8>{
                     color: Colors.white
                 ),
               ),
-            )
+            ),
+                RaisedButton(
+                  //: Colors.blue,
+                  color: Colors.blue,
+                  onPressed: ()async {
+                    SharedPreferences pref = await SharedPreferences.getInstance();
+                    await pref.setInt("is_Login", 0);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyHomePage(title: "Flutter Progmob 2020 Buatan Sendiri",)),
+                    );
+                  },
+                  child: Text(
+                    "LogOut",
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
+                  ),
+                )
           ]
         ),
       ),
