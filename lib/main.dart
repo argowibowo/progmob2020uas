@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_72180247/pertemuan1.dart';
+//import 'package:flutter_72180247/pertemuan 1/pertemuan1.dart';
 import 'package:flutter_72180247/Tugaspertemuan8.dart';
+import 'package:flutter_72180247/pertemuan 2/splash.dart';
+import 'package:flutter_72180247/pertemuan 2/pertemuan2.dart';
+import 'package:flutter_72180247/pertemuan%202/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(new MaterialApp(
+    //MyApp diganti MaterialApp
+    debugShowCheckedModeBanner: false,
+    // title: 'DUTA TANI',
+    home: Splash(),
+    routes: <String, WidgetBuilder>{
+      '/LoginPage': (BuildContext context) => new LoginPage()
+    },
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,12 +23,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'PROGMOB!?!?',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Tugaspertemuan8(title: 'Selamat datang di Progmob'),
+      home: Splash(),
           debugShowCheckedModeBanner: false,
     );
   }
@@ -40,12 +52,25 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // void navigateLogin() async{
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   int isLogin = pref.get("is_login");
+  //   if(isLogin == 1){
+  //     Navigator.pushReplacement(context,
+  //     MaterialPageRoute(builder: (context) => Pertemuan2(title: "Halo Push",)),
+  //     );
+  //   }
+  // }
+  //
+  // @override
+  // void initState(){
+  //   navigateLogin();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
@@ -59,14 +84,26 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              child: Text(
+                'Login'
+              ),
+              onPressed: () async{
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Pertemuan2(title: "Halo Push",)),
+                );
+              },
+            )
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+      ),
     );
   }
 }

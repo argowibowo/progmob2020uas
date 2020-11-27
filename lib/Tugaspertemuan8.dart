@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_72180247/pertemuan%202/login.dart';
 
 class Tugaspertemuan8 extends StatefulWidget{
   Tugaspertemuan8({Key key, this.title}):super(key:key);
@@ -14,8 +15,18 @@ class _Tugaspertemuan8 extends State<Tugaspertemuan8> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      appBar: new AppBar(
+        title: new Text("PROGMOB!?!?"),
+        actions: <Widget>[
+          new IconButton(
+              icon: new Icon(Icons.exit_to_app),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    new MaterialPageRoute(
+                        builder: (BuildContext context) => new LoginPage()),
+                        (Route<dynamic> route) => false);
+              })
+        ],
       ),
       body: Form(
         key: _formKey,
