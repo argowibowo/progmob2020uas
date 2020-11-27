@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter/main.dart';
 import 'package:progmob_flutter/validation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:progmob_flutter/splashLogin.dart';
+
 
 class TugasPertemuan1Widget extends StatefulWidget{
   TugasPertemuan1Widget({Key key, this.title}) :super(key:key);
@@ -46,27 +50,51 @@ class _TugasPertemuan1WidgetState extends State<TugasPertemuan1Widget> with Vali
                     nama = value;
                   },
                 ),
-                //MEMBUAT BUTTON
+                //MEMBUAT BUTTON SUBMIT
+                RaisedButton(
+              //warna button
+              color: Colors.blue,
+              onPressed: () {
+                if(formKey.currentState.validate()){
+                  formKey.currentState.save();
+                }
+              },
+              //nambahkan text pakai child (cuma bisa 1 kalo chilc, kalo banyak pake children)
+              child:
+              Text(
+                //membuat text pada button
+                "Simpan",
+                style: TextStyle(
+                  //kasih warna text
+                    color: Colors.white
+                ),
+              )
+          ),
+                //MEMBUAT BUTTON BACK
                 RaisedButton(
                   //warna button
                     color: Colors.blue,
-                    onPressed: () {
-                      if(formKey.currentState.validate()){
-                        formKey.currentState.save();
-                      }
+                    onPressed: () async {
+                     SharedPreferences pref = await SharedPreferences.getInstance();
+                     await pref.setInt("isLogin", 0);
+                     //push biar ga ada backnya pake push replacement, kalo di back ntar item
+                     Navigator.pushReplacement(
+                       context,
+                       MaterialPageRoute(builder: (context) => SplashLogin(title:"Halo Push")),
+                     );
                     },
                     //nambahkan text pakai child (cuma bisa 1 kalo chilc, kalo banyak pake children)
                     child:
                     Text(
                       //membuat text pada button
-                      "Simpan",
+                      "Logout",
                       style: TextStyle(
                         //kasih warna text
                           color: Colors.white
                       ),
                     )
                 )
-              ]
+            ]
           ),
         ),
         ),
