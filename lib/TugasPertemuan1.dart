@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_progmob/LoginPage.dart';
 
 
 class Tgspertemuan1 extends StatefulWidget {
@@ -48,9 +51,6 @@ class _Tgspertemuan1State extends State<Tgspertemuan1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tugas Pertemuan 1'),
-      ),
       body: Padding(
         padding: EdgeInsets.all(25.0),
         child: Center(
@@ -86,6 +86,24 @@ class _Tgspertemuan1State extends State<Tgspertemuan1> {
                           color: Colors.white
                       ),
                     )
+                ),
+                RaisedButton(
+                  color: Colors.amber,
+                    onPressed: () async {
+                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      await pref.setInt("is_logged", 0);
+
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage(title: 'Nav',)),
+                      );
+                    },
+                  child:Text(
+                  "Logout",
+                  style: TextStyle(
+                      color: Colors.white
+                  ),
+                )
                 )
               ],
             ),
