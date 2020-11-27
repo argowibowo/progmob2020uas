@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/splashscreeen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'login.dart';
 
 class tugaspertemuan8 extends StatefulWidget {
   tugaspertemuan8({Key key, this.title}) : super(key: key);
@@ -64,7 +68,19 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
                         color:Colors.white,
                     )
                   ),
-
+                ),
+                RaisedButton(
+                  color: Colors.indigoAccent,
+                  onPressed:() async {
+                    SharedPreferences pref = await SharedPreferences.getInstance();
+                    await pref.setInt("is_login", 0);
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => login(title: "LOGIN")));
+                  },
+                  child: Text("Logout",
+                      style: TextStyle(
+                        color:Colors.white,
+                      )
+                  ),
                 )
               ],
             ),
@@ -79,4 +95,7 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
 
     );
   }
+}
+
+class Login {
 }
