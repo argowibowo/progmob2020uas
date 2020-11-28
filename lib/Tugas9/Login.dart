@@ -56,7 +56,7 @@ class _LoginState extends State<Login> {
                       .size
                       .height / 5,
                   child: new Image.asset(
-                    "images/hell_boy.png",
+                    "images/coba.png",
                     // width: 200,
                     // height: 200,
                   ),
