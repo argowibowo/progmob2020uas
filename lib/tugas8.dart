@@ -23,9 +23,9 @@ class _Tugas8State extends State<Tugas8>{
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
+/*      appBar: AppBar(
         title: Text('Tugas Pertemuan 8'),
-      ),
+      ),*/
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Center(
