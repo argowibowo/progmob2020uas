@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Login.dart';
+import 'package:flutter_app/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TugasPertemuan8 extends StatefulWidget {
   TugasPertemuan8({Key key, this.title}) : super(key: key);
@@ -10,15 +13,15 @@ class TugasPertemuan8 extends StatefulWidget {
 }
 
 class _TugasPertemuan8State extends State<TugasPertemuan8> {
-  GlobalKey<FormState> key = GlobalKey<FormState>();
+    GlobalKey<FormState> key = GlobalKey<FormState>();
 
-  void validate(){
-    if(key.currentState.validate()){
-      print("validated");
-    }else{
-      print("failed");
+    void validate(){
+      if(key.currentState.validate()){
+        print("validated");
+      }else{
+        print("failed");
+      }
     }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
       appBar: AppBar(
         title: Text('Tugas Pertemuan 8'),
       ),
-      body: Padding(
+      body: Padding(  
           padding: EdgeInsets.all(15.0),
         child:Center(
            child:Form(
@@ -51,24 +54,41 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
                     hintText: "Contoh: Andreas Uzumaki",
                     border: OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(3),
-                ),
+                    ),
+                  ),
+                 ),
+                  RaisedButton(
+                    color: Colors.blue,
+                    onPressed:validate,
+                    child: Text(
+                      "Simpan",
+                      style: TextStyle(
+                      color: Colors.white
+                      ),
+                    ),
+                  ),
+                  RaisedButton(
+                    color: Colors.blue,
+                    onPressed: () async {
+                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      await pref.setInt("is_login", 0);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => Login()),
+                      );
+                    },
+                    child: Text(
+                      "Logout",
+                      style: TextStyle(
+                          color: Colors.white
+                      ),
+                    ),
+                  )
+                ],
               ),
-            ),
-            RaisedButton(
-              color: Colors.blue,
-              onPressed:validate,
-              child: Text(
-                "Simpan",
-                style: TextStyle(
-                    color: Colors.white
-                ),
-              ),
-            )
-          ],
-        ),
-        )
+           )
         ),
       ),
-      );
+    );
     }
 }
