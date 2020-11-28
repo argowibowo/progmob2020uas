@@ -8,7 +8,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="PROGMOB WHOSFEENA"
-        android:icon="@mipmap/PROGMOB2020">
+        android:icon="@mipmap/progmob">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
