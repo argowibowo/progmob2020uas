@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_72180219/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class tugaspertemuan8 extends StatefulWidget {
   tugaspertemuan8({Key key, this.title}) : super(key: key);
@@ -69,7 +71,24 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
                   color: Colors.white
               ),
             ),
-          )
+          ),
+          RaisedButton(
+            color: Colors.green,
+            onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.setInt("is_login", 0);
+              Navigator.pushReplacement(
+                context, // menghilangkan tombol back di pojok kiri atas dan setelah diklik tombol kembali auto keluar hal
+                MaterialPageRoute(builder: (context) => MyHomePage (title: 'Hallo Push',)),
+              );
+            },
+            child: Text(
+              "Logout",
+              style: TextStyle(
+                  color: Colors.white
+              ),
+            ),
+          ),
         ],
       ),
     )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_72180219/tugaspertemuan8.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: tugaspertemuan8(title: 'Flutter Demo Home Page Buatan saya ni'),
+      home: MyHomePage (title: 'Flutter Demo Home Page Buatan saya ni'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -65,6 +66,22 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void navigateLogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if(isLogin == 1){
+      Navigator.pushReplacement(
+        context, // menghilangkan tombol back di pojok kiri atas dan setelah diklik tombol kembali auto keluar hal
+        MaterialPageRoute(builder: (context) => tugaspertemuan8(title: 'Hallo Push',)),
+      );
+    }
+      }
+
+  @override
+  void initState() {
+  navigateLogin();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +100,19 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              child : Text(
+                'Login'
+              ),
+                 onPressed: () async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  await prefs.setInt("is_ogin", 1);
+                   Navigator.pushReplacement(
+                     context, // menghilangkan tombol back di pojok kiri atas dan setelah diklik tombol kembali auto keluar hal
+                     MaterialPageRoute(builder: (context) => tugaspertemuan8(title: 'Hallo Push',)),
+                   );
+                 },
+            )
           ],
         ),
       ),
