@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart';
+import 'package:flutter_keren/login.dart';
 import 'package:flutter_keren/pertemuan1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -71,20 +72,20 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
                   ),
                   RaisedButton(
                     color: Colors.blue,
-                    onPressed: () async {
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      await prefs.setInt("isLogin", 0);
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => MyHomePage(title: 'Login Page')),
-                      );
-                    },
                     child: Text(
                       "Logout",
                       style: TextStyle(
                           color: Colors.white
                       ),
                     ),
+                    onPressed: () async {
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      await prefs.setInt("isLogin", 0);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => login(title: 'Login Page')),
+                      );
+                    },
                   )
                 ],
               ),

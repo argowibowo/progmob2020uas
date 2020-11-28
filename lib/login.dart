@@ -1,80 +1,92 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
+import 'package:flutter_keren/tugaspertemuan8.dart';
+import 'package:flutter_keren/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class login extends StatefulWidget {
-  final String title;
   login({Key key, this.title}) : super(key: key);
 
-  @override
-  _loginState createState() => _loginState();
-}
+  final String title;
 
-class _loginState extends State<login> {
-  GlobalKey<FormState> key = GlobalKey<FormState>();
+  @override
+  _LoginState createState() => _LoginState();
+}
+class _LoginState extends State<login> {
+  void navigateLogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if(isLogin == 1){
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => tugaspertemuan8(title: "PROGMOB2020",))
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    navigateLogin();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("PROGMOB 2020"),
+      ),
       body: Padding(
-        padding: EdgeInsets.all(15.0),
-        child: Center(
-          child: Form(
-            key: key,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextFormField(
-                  validator: (value) {
-                    if(value.isEmpty) {
-                      return "Username tidak boleh kosong";
-                    } else {
-                      return null;
-                    }
-                  },
-                  decoration: new InputDecoration(
-                    icon: Icon(
-                      Icons.account_circle,
-                      color: Colors.blue
-                    ),
-                    labelText: "Username",
-                    hintText: "contoh: kerenkezia12"
-                  ),
-                ),
-                TextFormField(
-                  validator: (value) {
-                    if(value.isEmpty) {
-                      return "Password tidak boleh kosong";
-                    } else {
-                      if(value.length < 6) {
-                        return "Password tidak boleh kurang dari 6 karakter.";
-                      } else {
-                        return null;
-                      }
-                    }
-                  },
-                  decoration: new InputDecoration(
-                      icon: Icon(
-                          Icons.vpn_key,
-                          color: Colors.blue
+        padding:EdgeInsets.all(15.0),
+        child : Center(
+            child : Form(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  TextFormField(
+                    decoration: new InputDecoration(
+                      labelText: 'Username',
+                      hintText: 'contoh: Keren Kezia',
+                      border: OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(5),
                       ),
-                      labelText: "Password",
-                      hintText: "contoh: terserah"
-                  ),
-                ),
-                RaisedButton(
-                  color: Colors.blue,
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                        color: Colors.white
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
+                  Padding(
+                    padding: EdgeInsets.all(3.0),
+                  ),
+                  TextFormField(
+                    decoration: new InputDecoration(
+                      labelText: 'Masukkan Password',
+                      hintText: '**',
+                      border: OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(5),
+                      ),
+                    ),
+                  ),
+                  RaisedButton(
+                    color: Colors.blue,
+                    child: Text(
+                      "LOGIN",
+                      style: TextStyle(
+                          color: Colors.white
+                      ),
+                    ),
+                    onPressed:() async{
+                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      await pref.setInt("Is_login", 1);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => tugaspertemuan8(title: "PROGMOB 2020",)),
+                      );
+                    },
+                  )
+                ],
+              ),
+            )
         ),
       ),
     );
   }
+
+
 }
