@@ -1,7 +1,7 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart';
-import 'package:flutter_keren/login.dart';
-import 'package:flutter_keren/pertemuan1.dart';
+import 'package:flutter_kerenkezia/login.dart';
+import 'package:flutter_kerenkezia/pertemuan1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class tugaspertemuan8 extends StatefulWidget {
