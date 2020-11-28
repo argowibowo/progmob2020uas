@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kerenkezia/login.dart';
-import 'package:flutter_kerenkezia/splashscreen.dart';
-import 'package:flutter_kerenkezia/tugaspertemuan8.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -42,7 +39,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: tugaspertemuan8(title: 'Halo Keren'),
+      home: MyHomePage(title: 'Halo Keren'),
     );
   }
 }
