@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_72180219/splashscreen.dart';
 import 'package:flutter_72180219/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage (title: 'Flutter Demo Home Page Buatan saya ni'),
+      home: SplashScreen (),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -70,16 +71,15 @@ class _MyHomePageState extends State<MyHomePage> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
     if(isLogin == 1){
-      Navigator.pushReplacement(
-        context, // menghilangkan tombol back di pojok kiri atas dan setelah diklik tombol kembali auto keluar hal
+      Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => tugaspertemuan8(title: 'Hallo Push',)),
       );
     }
-      }
+  }
 
   @override
   void initState() {
-  navigateLogin();
+
   }
 
   @override
@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
                  onPressed: () async {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
-                  await prefs.setInt("is_ogin", 1);
+                  await prefs.setInt("is_login", 1);
                    Navigator.pushReplacement(
                      context, // menghilangkan tombol back di pojok kiri atas dan setelah diklik tombol kembali auto keluar hal
                      MaterialPageRoute(builder: (context) => tugaspertemuan8(title: 'Hallo Push',)),
