@@ -117,7 +117,7 @@ class _LoginState extends State<Login> {
               SharedPreferences pref = await SharedPreferences.getInstance();
               await pref.setInt("is_login", 0);
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context)=>Pertemuan8(title: 'Push')));
+                  MaterialPageRoute(builder: (context)=>Pertemuan8(title: 'Halo Push')));
             },
             color: Colors.lightBlue,
             padding: EdgeInsets.symmetric(horizontal: 20),

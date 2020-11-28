@@ -75,7 +75,7 @@ class _Pertemuan8State extends State<Pertemuan8> {
                 await pref.setInt("is_login", 0);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => MyHomePage(title: "Push terus",)),
+                  MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo Push",)),
                 );
               },
             )

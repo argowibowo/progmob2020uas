@@ -32,12 +32,12 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => Login(title: "Push terus")));
+                builder: (context) => Login(title: "Halo Push")));
       });
     }else{
       return Timer(duration, (){
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => Pertemuan8(title: "Push terus")));
+            MaterialPageRoute(builder: (context) => Pertemuan8(title: "Halo Push")));
       });
     }
   }
