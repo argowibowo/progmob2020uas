@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Pertemuan8 extends StatefulWidget {
   Pertemuan8({Key key, this.title}) : super(key: key);
 
@@ -9,13 +11,14 @@ class Pertemuan8 extends StatefulWidget {
 }
 
 class _Pertemuan8State extends State<Pertemuan8> {
-  int _counter = 2;
+  final _formKey = GlobalKey<FormState>();
+  //int _counter = 2;
 
-  void _incrementCounter() {
+  /*void _incrementCounter() {
     setState(() {
       _counter++;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +27,14 @@ class _Pertemuan8State extends State<Pertemuan8> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
+      body: Form(
+        key: _formKey,
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+          children: [
+            // TextField
             TextFormField(
-              validator: (value){
-                if(value.isEmpty){
-                  return "Nama tidak boleh kosong";
-                }else
-                {
-                  return null;
-                }
-              },
               decoration: new InputDecoration(
                 icon: Icon(
                   Icons.people,
@@ -45,32 +43,44 @@ class _Pertemuan8State extends State<Pertemuan8> {
                 labelText: "Nama Lengkap",
                 hintText: "Contoh Adrian Yunas Wicaksono",
                   border: OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(5)
-                  )
+                      borderRadius: new BorderRadius.circular(5.0)),
               ),
-            ),
-            Padding(
-                padding: EdgeInsets.all(5.0)
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Nama tidak boleh kosong';
+                }
+                return null;
+              },
             ),
             RaisedButton(
-              focusColor: Colors.blue,
-              color: Colors.blue,
               child: Text(
                 "Submit",
-                style: TextStyle(
-                    color: Colors.white
+                style: TextStyle(color: Colors.white),
                 ),
+                color: Colors.blue,
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {}
+                },
               ),
-            )
-
-          ],
+            RaisedButton(
+              child: Text(
+                "Logout",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.blue,
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 0);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo Push",)),
+                );
+              },
+            ),
+             ],
+            ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
