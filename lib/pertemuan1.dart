@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob_app/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Pertemuan1 extends StatefulWidget {
   Pertemuan1({Key key, this.title}) : super(key: key);
 
@@ -9,23 +11,17 @@ class Pertemuan1 extends StatefulWidget {
 }
 
 class _Pertemuan1State extends State<Pertemuan1> {
-  int _counter = 2;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
       ),
       body: Center(
+        key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -48,14 +44,32 @@ class _Pertemuan1State extends State<Pertemuan1> {
               ),
             ),
             RaisedButton(
-              focusColor: Colors.lightBlue,
+              child: Text(
+                "Submit",
+                style: TextStyle(
+                    color: Colors.white),
+              ),
               color: Colors.lightBlue,
-                child: Text(
-                 "Simpan",
-                  style: TextStyle(
-                    color: Colors.white
-                  ),
-                ),
+              onPressed: () {
+
+                if (_formKey.currentState.validate()){}
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "Logout",
+                style: TextStyle(
+                    color: Colors.white),
+              ),
+              color: Colors.lightBlue,
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage(title: "Push terus",)),
+                );
+              },
             )
 
           ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob_app/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class TugasPertemuan8 extends StatefulWidget {
   TugasPertemuan8({Key key, this.title}) : super(key: key);
 
@@ -9,46 +11,40 @@ class TugasPertemuan8 extends StatefulWidget {
 }
 
 class _TugasPertemuan8State extends State<TugasPertemuan8> {
-  int _counter = 2;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
       ),
       body: Center(
+        key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             TextFormField(
+              decoration: new InputDecoration(
+                labelText: "Nama lengkap",
+                hintText: "Contoh : Nikita Semben",
+                icon: Icon(
+                  Icons.people,
+                  color: Colors.lightBlue,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: new BorderRadius.circular(5.0)),
+              ),
+
               validator: (value){
                 if(value.isEmpty){
                   return "Nama tidak boleh kosong";
                 }else
-                  {
-                    return null;
-                  }
+                {
+                  return null;
+                }
               },
-              decoration: new InputDecoration(
-                icon: Icon(
-                  Icons.people, 
-                  color: Colors.lightBlue,
-                ),
-                labelText: "Nama lengkap",
-                hintText: "Contoh : Nikita Semben",
-                border: OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(5)
-                )
-              ),
             ),
             Padding(
                 padding: EdgeInsets.all(5.0)
@@ -61,6 +57,26 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
                     color: Colors.white),
               ),
               color: Colors.lightBlue,
+              onPressed: () {
+
+                if (_formKey.currentState.validate()){}
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "Logout",
+                style: TextStyle(
+                    color: Colors.white),
+              ),
+              color: Colors.lightBlue,
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 0);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage(title: "Push terus",)),
+                );
+              },
             )
           ],
         ),
