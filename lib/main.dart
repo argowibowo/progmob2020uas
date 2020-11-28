@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_1/Pertemuan1.dart';
+import 'package:flutter_app_1/splashscreen.dart';
 import 'package:flutter_app_1/tugaspertemuan8.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: tugaspertemuan8(title: 'Flutter Demo Home Page'),
+      home: SplashScreenPage(),
     );
   }
 }
@@ -52,6 +54,22 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+void navigateLogin() async{
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  int isLogin = pref.getInt("is_login");
+    if (isLogin == 1){
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => tugaspertemuan8(title: "Halo Push",)),
+        );
+      }
+    }
+
+  @override
+  void initState() {
+    navigateLogin();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +85,20 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'Hello World',
             ),
+            RaisedButton(
+              child: Text(
+                'Login'
+              ),
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => tugaspertemuan8()),
+                );
+              },
+            ),
+
             //Text(
               //'$_counter',
               //style: Theme.of(context).textTheme.headline4,

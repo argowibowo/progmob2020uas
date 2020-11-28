@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_1/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class tugaspertemuan8 extends StatefulWidget {
   tugaspertemuan8({Key key, this.title}) : super(key: key);
 
@@ -67,7 +69,20 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
                     color: Colors.white
                 ),
               ),
-            )
+            ),
+            RaisedButton(
+              child: Text(
+                  'Logout'
+              ),
+                onPressed: () async{
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  await pref.setInt("is_login", 0);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyHomePage(title: "Hello",)),
+                  );
+                  }
+                )
           ],
         ),
       )
