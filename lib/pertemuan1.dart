@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob_2020/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Pertemuan1 extends StatefulWidget {
@@ -11,63 +13,63 @@ class Pertemuan1 extends StatefulWidget {
 }
 
 class _Pertemuan1State extends State<Pertemuan1> {
-  int _counter = 2;
-
-  void _incrementCounter() {
-    setState(() {
-
-      _counter++;
-    });
-  }
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
       ),
-      body: Center(
-
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+      body: Form(
+        key: _formKey,
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+         children:[
             TextFormField(
               decoration: new InputDecoration(
                 labelText: "Tes Input",
                 hintText: "Teks Input Format sbb",
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-            ),
-            TextFormField(
-              decoration: new InputDecoration(
-                labelText: "Tes Input2",
-                hintText: "Teks Input Format sbb",
+                icon: Icon(Icons.people,),
                 border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5),
-                )
-              ),
-            ),
+                  borderRadius: new BorderRadius.circular(5.0)),
+          ),
+          validator: (value){
+                if (value.isEmpty){
+                  return" Nama Tidak Boleh Kosong";
+                }
+                return null;
+          },
+        ),
             RaisedButton(
-              color: Colors.lightBlue,
-              child: Text("Simpan",
-                style: TextStyle(
-                  color: Colors.white
-                ),
+              child: Text("Submit",
+              style: TextStyle(color: Colors.white),
               ),
-            )
+              color: Colors.blue,
+              onPressed: (){
+                if(_formKey.currentState.validate()){}
+              },
+            ),
+
+           RaisedButton(
+             child: Text("Logout",
+               style: TextStyle(color: Colors.white),
+             ),
+             color: Colors.blue,
+             onPressed: () async {
+               SharedPreferences pref = await SharedPreferences.getInstance();
+               await pref.setInt('is_login', 0);
+               Navigator.pushReplacement(
+                 context,
+                 MaterialPageRoute(builder: (context) => MyHomePage(title: "72180263",)),
+               );
+             },
+           ),
           ],
         ),
       ),
-      //floatingActionButton: FloatingActionButton(
-        //onPressed: _incrementCounter,
-        //tooltip: 'Increment',
-        //child: Icon(Icons.add),
-     // ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
