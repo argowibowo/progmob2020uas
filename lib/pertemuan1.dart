@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
 
 void main() {
   runApp(MyApp());
 }
-class Pertemuan1 extends StatefulWidget {
-  Pertemuan1({Key key, this.title}) : super(key: key);
+class Pertmn1 extends StatefulWidget {
+  Pertmn1({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _Pertemuan1State createState() => _Pertemuan1State();
+  _Pertmn1State createState() => _Pertmn1State();
 }
 
-class _Pertemuan1State extends State<Pertemuan1> {
+class _Pertmn1State extends State<Pertmn1> {
   int _counter = 2;
 
   void _incrementCounter() {
@@ -36,7 +36,7 @@ class _Pertemuan1State extends State<Pertemuan1> {
           children: <Widget>[
           TextFormField(
         decoration: new InputDecoration(
-          labelText: "Tes Input",
+          labelText: "Teks Input",
           hintText: "TeKS YANG akan DiiNPUT fORMAtnya SbB",
           ),
           ),
@@ -45,7 +45,7 @@ class _Pertemuan1State extends State<Pertemuan1> {
            ),
            TextFormField(
              decoration: new InputDecoration(
-                 labelText: "Tes Input",
+                 labelText: "Teks Input",
                  hintText: "TeKS YANG akan DiiNPUT fORMAtnya SbB",
                  border: OutlineInputBorder(
                    borderRadius: new BorderRadius.circular(5),
@@ -57,10 +57,28 @@ class _Pertemuan1State extends State<Pertemuan1> {
              child: Text(
               "Simpan",
                style: TextStyle(
-                 color: Colors.white
-               ),
+                 color: Colors.white),
+                ),
+            onPressed: () {
+              //if (_formKey.currentState.validate()) {}
+                },
+             ),
+            RaisedButton(
+              color: Colors.blue,
+              child: Text(
+                "Logout",
+                style: TextStyle(
+                    color: Colors.white),
+                   ),
+                    onPressed: () async {
+                    SharedPreferences pref = await SharedPreferences.getInstance();
+                    await pref.setInt("is login", 1);
+                    Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo Push",)),
+            );
+            },
             ),
-            )
           ],
         ),
       ),
@@ -72,4 +90,6 @@ class _Pertemuan1State extends State<Pertemuan1> {
     );
   }
 }
+
+
 

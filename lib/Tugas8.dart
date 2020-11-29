@@ -21,9 +21,6 @@ class _Tugas8State extends State<Tugas8>{
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tugas Pertemuan 8'),
-      ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Center(
@@ -56,6 +53,17 @@ class _Tugas8State extends State<Tugas8>{
                     onPressed: validate,
                     child: Text(
                       "Simpan",
+                      style: TextStyle(
+                          color: Colors.white
+                      ),
+                    ),
+                  ),
+                  RaisedButton(
+                    //: Colors.blue,
+                    color: Colors.blue,
+                    onPressed: validate,
+                    child: Text(
+                      "Logout",
                       style: TextStyle(
                           color: Colors.white
                       ),
