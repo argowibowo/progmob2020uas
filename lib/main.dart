@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_72180264progmob/login.dart';
+import 'package:flutter_72180264progmob/splashScreen.dart';
+import 'package:flutter_72180264progmob/tugasPertemuan8.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Tugas',
+      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Tugas Pertemuan 8'),
+      home: SplashScreen(),
+      debugShowMaterialGrid: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
+
   final String title;
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -35,23 +41,54 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void navigateLogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if(isLogin == 1){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Push lagi",)),
+      );
+    }
+  }
+  @override
+  void initState() {
+    navigateLogin();
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
+
         title: Text(widget.title),
       ),
       body: Center(
+
         child: Column(
+
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'ProgMob 2020',
             ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              onPressed: () async{
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 0);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login(title: "Push lagi",)),
+                );
+              },
+              child: Text(
+                  'Login'),
+            )
           ],
         ),
       ),
