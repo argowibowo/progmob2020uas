@@ -19,7 +19,7 @@ class Pertemuan1 extends StatefulWidget {
 }
 
 class _Pertemuan1State extends State<Pertemuan1> {
-  int _counter = 2;
+  int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
