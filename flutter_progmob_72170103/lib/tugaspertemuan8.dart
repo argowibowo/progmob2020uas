@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutterprogmob72170103/login.dart';
+import 'package:flutterprogmob72170103/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TugasPertemuan8 extends StatefulWidget {
   TugasPertemuan8({Key key, this.title}) : super(key: key);
@@ -36,25 +39,19 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 TextFormField(
-                  validator : (value){
-                    if(value.isEmpty){
-                      return "Nama Tidak Boleh Kosong";
-                    }
-                    else{
-                      return null;
-                    }
-                  },
                   decoration: new InputDecoration(
-                    icon : Icon (
-                      Icons.attach_email,
-                      color: Colors.pink,
-                    ),
+                    icon : Icon (Icons.people),
                     labelText: 'Nama Lengkap',
                     hintText: 'Contoh : Brillianty Chlara Ambrelly ',
                     border: OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(3),
-                    ),
+                      borderRadius: new BorderRadius.circular(5.0)),
                   ),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Nama tidak boleh kosong';
+                    }
+                    return null;
+                  },
                 ),
                 RaisedButton(
                   color: Colors.pink,
@@ -65,7 +62,24 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
                         color: Colors.white
                     ),
                   ),
-                )
+                ),
+                RaisedButton(
+                  color: Colors.pink,
+                  onPressed: () async {
+                    SharedPreferences pref = await SharedPreferences.getInstance();
+                    await pref.setInt("is_login", 0);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
+                  },
+                  child: Text(
+                    "Logout",
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
