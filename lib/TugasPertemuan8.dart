@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob2020/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TugasPertemuan8 extends StatefulWidget {
   TugasPertemuan8({Key key, this.title}) : super(key: key);
@@ -65,7 +67,24 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
                     color: Colors.white,
                 ),
               ),
-            )
+            ),
+                  RaisedButton(
+                    color: Colors.blue,
+                    onPressed: () async {
+                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      await pref.setInt("is_login", 0);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyHomePage(title: 'Tugas 9')),
+                      );
+                    },
+                    child: Text(
+                      "Logout",
+                      style: TextStyle(
+                          color: Colors.white
+                      ),
+                    ),
+                  )
           ],
         ),
       ),
