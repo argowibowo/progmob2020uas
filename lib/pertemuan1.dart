@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob_2020/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Pertemuan1 extends StatefulWidget {
   Pertemuan1({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -10,63 +11,65 @@ class Pertemuan1 extends StatefulWidget {
 }
 
 class _Pertemuan1State extends State<Pertemuan1> {
-  int _counter = 2;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*AppBar: AppBar(
         title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextFormField(
-              decoration: new InputDecoration(
-                labelText: "Test Input",
-                hintText: "Text yang akan diinput formatnya adalah sbb",
+      ),*/
+      body: Form(
+        key: _formkey,
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextFormField(
+                decoration: new InputDecoration(
+                  labelText: "Nama Lengkap",
+                  hintText: "contoh: Jeffry Caesario",
+                icon: Icon(Icons.people),
                 border: OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(5),
-                )
+                  borderRadius: new BorderRadius.circular(5.0)),
               ),
-            ),
-            Padding(
-                padding: EdgeInsets.all(5.0),
-            ),
-            TextFormField(
-              decoration: new InputDecoration(
-                labelText: "Test Input 2",
-                hintText: "Text yang akan diinput formatnya adalah sbb",
-                border: OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(5),
-                )
-              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return "Nama tidak boleh kosong";
+                }
+                return null;
+              },
             ),
             RaisedButton(
-              focusColor: Colors.blue,
-              color: Colors.blue,
               child: Text(
-                "SIMPAN",
-                style: TextStyle(
-                  color: Colors.white
-                ),
+                  "SUBMIT",
+                  style: TextStyle(color: Colors.white),
               ),
-            )
-          ],
+                color: Colors.blue,
+                onPressed: () {
+                  if (_formkey.currentState.validate()) {}
+                },
+              ),
+              RaisedButton(
+                child: Text(
+                  "LOGOUT",
+                  style: TextStyle(color: Colors.white),
+                ),
+                  color: Colors.blue,
+                  onPressed: () async {
+                    SharedPreferences pref = await SharedPreferences.getInstance();
+                    await pref.setInt("is_login", 0);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo Push",)),
+                    );
+                },
+              ),
+            ],
+          ),
         ),
       ),
-      //floatingActionButton: FloatingActionButton(
-      //  onPressed: _incrementCounter,
-      //  tooltip: 'Increment',
-      // child: Icon(Icons.add),
-      //), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
