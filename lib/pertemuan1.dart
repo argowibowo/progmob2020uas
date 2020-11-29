@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
 
-void main() {
-  runApp(MyApp());
-}
 class Pertemuan1 extends StatefulWidget {
   Pertemuan1({Key key, this.title}) : super(key: key);
 
@@ -14,7 +10,7 @@ class Pertemuan1 extends StatefulWidget {
 }
 
 class _Pertemuan1State extends State<Pertemuan1> {
-  int _counter = 2;
+  int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -35,17 +31,8 @@ class _Pertemuan1State extends State<Pertemuan1> {
           children: <Widget>[
             TextFormField(
               decoration: new InputDecoration(
-                labelText: "Tes Input",
-                hintText: "Teks yang akan diinput formatnya SbB",
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-            ),
-            TextFormField(
-              decoration: new InputDecoration(
-                  labelText: "Tes Input",
-                  hintText: "Teks yang akan diinput formatnya SbB",
+                  labelText: "Text Input",
+                  hintText: "Teks yang akan diinput",
                   border: OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(5),
                   )
@@ -56,18 +43,13 @@ class _Pertemuan1State extends State<Pertemuan1> {
               child: Text(
                 "Simpan",
                 style: TextStyle(
-                    color: Colors.white
+                  color: Colors.white,
                 ),
               ),
             )
           ],
         ),
       ),
-      //floatingActionButton: FloatingActionButton(
-      //onPressed: _incrementCounter,
-      //tooltip: 'Increment',
-      //child: Icon(Icons.add),
-      //), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

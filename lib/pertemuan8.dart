@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_selvia/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Pertemuan8 extends StatefulWidget {
   Pertemuan8({Key key, this.title}) : super(key: key);
@@ -24,7 +26,7 @@ class _Pertemuan8State extends State<Pertemuan8> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tugas Pertemuan 8'),
+        title: Text('Pertemuan 8'),
       ),
       body: Padding(
         padding: EdgeInsets.all(15.0),
@@ -55,22 +57,38 @@ class _Pertemuan8State extends State<Pertemuan8> {
                     ),
                   ),
                   RaisedButton(
-                    color: Colors.blue,
-                    onPressed: validate,
-                    child: Text(
-                      "Simpan",
-                      style: TextStyle(
-                          color: Colors.white
+                      child: Text(
+                        "Login",
+                        style: TextStyle(color: Colors.white),
                       ),
-                    ),
-                  )
+                      color: Colors.blue,
+                      onPressed: () {
+                        if (key.currentState.validate()) {}
+                        //currentState.validate()) {}}
+                      }
+                        ),
+                  RaisedButton(
+                      child: Text(
+                        "Logout",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      color: Colors.blue,
+                      onPressed: () async {
+                        SharedPreferences pref = await SharedPreferences.getInstance();
+                        //SharedPreferences pref = await SharedPreferences.getInstance();
+                        await pref.setInt("is_login",0);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyHomePage(title : "Hallo Push",)),
+                        );
+                      }
+                  ),
                 ],
               ),
-            )
+            ),
         ),
       ),
     );
   }
 }
-
 
