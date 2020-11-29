@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/login.dart';
+import 'package:flutter_app/main.dart';
+import 'package:flutter_app/splashscreen.dart';
+import "package:shared_preferences/shared_preferences.dart";
 
 class tgsPertemuan8 extends StatefulWidget {
   tgsPertemuan8({Key key, this.title}) : super(key: key);
@@ -48,7 +52,7 @@ class _tgsPertemuan8State extends State<tgsPertemuan8> {
                         color:  Colors.blue,
                       ),
                       labelText: "Nama Lengkap",
-                      hintText: "Contoh: Elsa",
+                      hintText: "Contoh: Nathaanna Ilenne",
                       border: OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(3),
                       ),
@@ -59,6 +63,23 @@ class _tgsPertemuan8State extends State<tgsPertemuan8> {
                     onPressed:validate,
                     child: Text(
                       "Simpan",
+                      style: TextStyle(
+                          color: Colors.white
+                      ),
+                    ),
+                  ),
+                  RaisedButton(
+                    color: Colors.blue,
+                    onPressed: () async {
+                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      await pref.setInt("is_login", 0);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => Login(title: "Halo Push")),
+                      );
+                    },
+                    child: Text(
+                      "Logout",
                       style: TextStyle(
                           color: Colors.white
                       ),

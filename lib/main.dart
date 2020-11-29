@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/tgsPertemuan8.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: 'Splash Screen',
+    home: SplashScreen(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -64,6 +68,23 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void navigateLogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if(isLogin == 1) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => TugasPertemuan8(title: "Halo Push",)),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    navigateLogin();
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -100,6 +121,19 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'Hello World',
+            ),
+            RaisedButton(
+              child: Text(
+                  'Login'
+              ),
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Halo Push")),
+                );
+              },
             ),
             Text(
               '$_counter',
