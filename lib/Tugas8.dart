@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Tugas8 extends StatefulWidget {
   Tugas8({Key key, this.title}) : super(key: key);
@@ -6,10 +8,10 @@ class Tugas8 extends StatefulWidget {
   final String title;
 
   @override
-  _Tugas8State createState() => _Tugas8State();
+  _tugas8State createState() => _tugas8State();
 }
 
-class _Tugas8State extends State<Tugas8> {
+class _tugas8State extends State<Tugas8> {
   int _counter = 0;
   final _text = TextEditingController();
   bool _validate= false;
@@ -44,7 +46,7 @@ class _Tugas8State extends State<Tugas8> {
                   icon: Icon(Icons.account_circle),
                   labelText: "Nama Lengkap",
                   errorText: _validate ? 'Nama tidak boleh kosong' : null,
-                  hintText: "contoh: Ribka Tiara ",
+                  hintText: "contoh: Ribka Nita Tiara",
                   border: OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(5)
                   )
@@ -60,7 +62,20 @@ class _Tugas8State extends State<Tugas8> {
                 });
               },
               color: Colors.blueAccent,
-              child: Text('simpan'),
+              child: Text('Login'),
+              textColor: Colors.white,
+            ),
+            RaisedButton(
+              onPressed: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setInt("is_login", 1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage(title: "Hallo push",)),
+                );
+              },
+              color: Colors.blueAccent,
+              child: Text('Logout'),
               textColor: Colors.white,
             ),
           ],
