@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Pertemuan1 extends StatefulWidget {
   Pertemuan1({Key key, this.title}) : super(key: key);
@@ -46,33 +48,49 @@ class _Pertemuan1State extends State<Pertemuan1> {
             ),
 
             TextFormField(
-              decoration: new InputDecoration(
-                labelText: "Tes Input 2",
-                hintText: "Teks yang akan diinput formatnya adalah sbb",
-                  border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5),
-                  )
+                decoration: new InputDecoration(
+                    labelText: "Tes Input 2",
+                    hintText: "Teks yang akan diinput formatnya adalah sbb",
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(5),
+                    )
                 )
-              ),
+            ),
             RaisedButton(
-              focusColor: Colors.blue,
-              color:  Colors.blue,
               child: Text(
-                "Simpan",
-                style: TextStyle(
-                  color: Colors.white
-                ),
+                "Submit",
+                style: TextStyle(color: Colors.white),
               ),
+              color: Colors.white,
+              onPressed: (){
+                if (_formKey.currentState.validate()){}
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                'Logout',
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.blue,
+              onPressed: () async {
+                SharedPreferences = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 0);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage(title: 'Hallo Push',)),
+                );
+              },
             )
           ],
         ),
       ),
 
       //floatingActionButton: FloatingActionButton(
-        //onPressed: _incrementCounter,
-        //tooltip: 'Increment',
-        //child: Icon(Icons.add),
+      //onPressed: _incrementCounter,
+      //tooltip: 'Increment',
+      //child: Icon(Icons.add),
       //), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
