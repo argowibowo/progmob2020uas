@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_flutter_2020/pertemuan08.dart';
 import 'package:project_flutter_2020/pertemuan1.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -20,21 +20,18 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: pertemuan08(title: 'Flutter Demo Home Page buatan sendiri'),
+      home: pertemuan1(title: 'Flutter Demo Home Page buatan sendiri'),
     );
   }
 }
-
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
 
   final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
-
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
@@ -43,6 +40,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
       _counter++;
     });
+  }
+  void navigateLogin() async {
+    SharePreferences pref = await SharePreferences.getInstance();
+    int islogin = pref.getInt("is_LOGIN");
+    if(islogin == 1){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => pertemuan1(title: "Hallo Push",)),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    navigateLogin();
   }
 
   @override
@@ -66,8 +78,21 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headline4
             ),
+            RaisedButton(
+              child: Text(
+                'Login'
+              ),
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_Login", 1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => pertemuan1(title: "Hallo Push",)),
+                );
+              },
+            )
           ],
         ),
       ),

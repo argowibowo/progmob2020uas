@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:project_flutter_2020/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class pertemuan1 extends StatefulWidget {
   pertemuan1({Key key, this.title}) : super(key: key);
@@ -12,14 +13,8 @@ class pertemuan1 extends StatefulWidget {
 }
 
 class _pertemuan1State extends State<pertemuan1> {
-  int _counter = 2;
+  final _formKey = GlobalKey<FormState>();
 
-  void _incrementCounter() {
-    setState(() {
-
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,19 +55,32 @@ class _pertemuan1State extends State<pertemuan1> {
               color: Colors.blue,
               child: Text(
                 "Simpan",
-                style:TextStyle(
-                 color: Colors.white
-                ),
+                style:TextStyle(color: Colors.white),
               ),
-            )
+
+                 onPressed: () {
+                   if (_formKey.currentState.validate()) {}
+                 },
+                 ),
+           RaisedButton(
+            focusColor: Colors.blue,
+            color: Colors.blue,
+            child: Text(
+             "Logout",
+              style:TextStyle(color: Colors.white),
+              ),
+             onPressed: () async {
+              SharePreferences pref = await SharedPreferences.getInstance();
+               await pref.setInt("is_Login", 0);
+               Navigator.pushReplacement(
+                 context,
+                 MaterialPageRoute(builder: (context) => MyHomePage(title: "Hallo Push",)),
+               );
+              },
+           ),
           ],
         ),
       ),
-      //floatingActionButton: FloatingActionButton(
-       // onPressed: _incrementCounter,
-        //tooltip: 'Increment',
-        //child: Icon(Icons.add),
-      //), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
