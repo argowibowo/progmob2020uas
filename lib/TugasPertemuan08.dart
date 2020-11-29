@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_72180256/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TugasPertemuan08 extends StatefulWidget {
   TugasPertemuan08({Key key, this.title}) : super(key: key);
@@ -64,7 +66,25 @@ class _TugasPertemuan08State extends State<TugasPertemuan08> {
                           color: Colors.lightGreenAccent
                       ),
                     ),
-                  )
+                  ),
+                  RaisedButton(
+                    color: Colors.blue,
+                    onPressed: () async {
+                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      await pref.setInt("is_login", 0);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyHomePage(title: "Hallo Yok DI push Bund",)),
+                      );
+                    },
+                    child: Text(
+                      "Logout",
+                      style: TextStyle(
+                          color: Colors.lightGreenAccent
+                      ),
+
+                    ),
+                  ),
                 ],
               ),
             )
