@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_setelah_uts_72180190/dashboard.dart';
 import 'package:progmob_setelah_uts_72180190/pertemuan1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +20,7 @@ class _LoginpageState extends State<Loginpage> {
     if(isLogin == 1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Pertemuan1(title: "Home Page", nama: "Felix")),
+        MaterialPageRoute(builder: (context) => Dashboard(title: "Home Page")),
       );
     }
   }
@@ -100,7 +101,7 @@ class _LoginpageState extends State<Loginpage> {
                     await pref.setInt("is_login", 1);
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Pertemuan1(title: "Home Page", nama: "Felix",)),
+                      MaterialPageRoute(builder: (context) => Dashboard(title: "Home Page",)),
                     );
                   },
                 ),
