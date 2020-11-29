@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter/dashbord.dart';
 import 'package:progmob_flutter/login.dart';
 import 'package:progmob_flutter/pertemuan2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
       return Timer(duration, (){
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_){
-              return Pertemuan2(title: "Halaman Utama");
+              return Dashboard(title: "Dashboard");
             })
         );
       });
@@ -51,6 +52,13 @@ class _SplashScreenState extends State<SplashScreen> {
         );
       });
     }
+    // return Timer(duration, (){
+    //   Navigator.of(context).pushReplacement(
+    //       MaterialPageRoute(builder: (_){
+    //         return Login(title: "Login Page");
+    //       })
+    //   );
+    // });
   }
 
   double _height = 400;

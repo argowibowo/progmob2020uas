@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter/dashbord.dart';
 import 'package:progmob_flutter/pertemuan2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,7 +44,6 @@ class _LoginState extends State<Login> {
       ),
       body: Form(
         key: _formKey,
-        // using SingleChildScrollView biar tidak ada garis markanya :)
         child: SingleChildScrollView(
           padding: EdgeInsets.all(20.0),
           child: Column(
@@ -55,8 +55,6 @@ class _LoginState extends State<Login> {
                   height: MediaQuery.of(context).size.height / 5,
                 child: new Image.asset(
                   "images/logo.png",
-                  // width: 200,
-                  // height: 200,
                 ),
               ),
               new TextFormField(
@@ -108,6 +106,7 @@ class _LoginState extends State<Login> {
                     },
                   ),
                 ),
+
               ),
               RaisedButton (
                 color: Colors.blue,
@@ -132,7 +131,7 @@ class _LoginState extends State<Login> {
                       await pref.setInt("is_login", 1);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => Pertemuan2(title: "Halaman Utama",)),
+                        MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard",)),
                       );
                     // }
                     _formKey.currentState.save();
