@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progmob_aftuts/Colors/constant.dart';
+import 'package:progmob_aftuts/Pages/loginPage.dart';
 import 'package:progmob_aftuts/SplashScreen/spalshscreen.dart';
 import 'package:progmob_aftuts/tugaspertemuan8.dart';
 
@@ -36,6 +37,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: SplashScreenPage.id,
       routes: {
         SplashScreenPage.id: (context) => SplashScreenPage(),
+        LoginPage.id : (context) => LoginPage(),
         TugasPertemuan8.id: (context) => TugasPertemuan8(),
       },
     );

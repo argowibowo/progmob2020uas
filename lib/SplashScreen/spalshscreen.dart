@@ -1,9 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:progmob_aftuts/tugaspertemuan8.dart';
+import 'package:progmob_aftuts/Pages/loginPage.dart';
 
-
+// WARNING, NOTE BUAT TEMAN TEMAN HEHE
+// BAKAL KETAUAN KALO COPY CODE PROGRAM
+// KARENA CODINGAN INI BELUM DIAJARKAN DI MATERI PERKULIAHAN
+// COPY BOLEH TAPI JANGAN DIJIPLAK YA :D, HARUS DIPAHAMI ALURNYA
 
 class SplashScreenPage extends StatefulWidget {
   static const String id = 'splash_screen';
@@ -17,7 +20,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     return Timer(duration, (){
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_){
-            return TugasPertemuan8();
+            return LoginPage();
           })
       );
     });
