@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
 
-      home: MyHomePage(title: 'Flutter Progmob 72170109 TugasPertemuan8'),
+      home: MyHomePage(title: 'Flutter 721701'),
       debugShowCheckedModeBanner: false,
     );
   }
