@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'main.dart';
 
 class TugasPertemuan8 extends StatefulWidget {
   TugasPertemuan8({Key key, this.title}) : super(key: key);
@@ -10,10 +14,10 @@ class TugasPertemuan8 extends StatefulWidget {
 }
 
 class _TugasPertemuan8State extends State<TugasPertemuan8> {
-  GlobalKey<FormState> key = GlobalKey<FormState>();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   void validate(){
-    if (key.currentState.validate()){
+    if (formkey.currentState.validate()){
       print("Berhasil");
     }
     else {
@@ -31,7 +35,7 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
         padding:EdgeInsets.all(15.0),
         child: Center(
           child : Form(
-            key : key,
+            key : formkey,
           child : Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -65,17 +69,29 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
                     color: Colors.white
                 ),
               ),
+            ),
+                  RaisedButton(
+                  color: Colors.blue,
+                  onPressed: () async {
+                    SharedPreferences pref = await SharedPreferences.getInstance();
+                    await pref.setInt("is_login", 0);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyHomePage(title: 'Logout',)),
+                    );
+                  },
+                  child: Text(
+                    "Logout",
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
+                  ),
+                )
+                ],
+              ),
             )
-          ],
         ),
       ),
-      ),
-      ),
-      //floatingActionButton: FloatingActionButton(
-      // onPressed: _incrementCounter,
-      // tooltip: 'Increment',
-      //child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

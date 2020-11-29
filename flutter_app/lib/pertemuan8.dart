@@ -10,7 +10,7 @@ class pertemuan8 extends StatefulWidget {
 }
 
 class _pertemuan8State extends State<pertemuan8> {
-  int _counter = 2;
+  int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -40,7 +40,7 @@ class _pertemuan8State extends State<pertemuan8> {
             TextFormField(
               decoration: new InputDecoration(
                 labelText: "Tes Input 2",
-                hintText: "Teks yang akan diinput formatnya adalah sbb",
+                hintText: "Teks yang akan diinput yaitu",
                 border: OutlineInputBorder(
                     borderRadius: new BorderRadius.circular(5),
                 )
