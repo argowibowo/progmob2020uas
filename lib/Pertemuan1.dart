@@ -30,13 +30,13 @@ class _Pertemuan1State extends State<Pertemuan1> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextFormField(
-              decoration: new InputDecoration(
-                  labelText: "Text Input",
-                  hintText: "Teks yang akan diinput",
-                  border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5),
-                  )
-              ),
+             decoration: new InputDecoration(
+               labelText: "Text Input",
+               hintText: "Teks yang akan diinput",
+               border: OutlineInputBorder(
+                 borderRadius: new BorderRadius.circular(5),
+               )
+             ),
             ),
             RaisedButton(
               color: Colors.blue,

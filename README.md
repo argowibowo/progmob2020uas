@@ -1,4 +1,4 @@
-# flutter_app_progmob_2020
+# flutter_progmob_2020
 
 A new Flutter application.
 

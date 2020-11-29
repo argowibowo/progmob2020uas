@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_progmob_2020/TugasPertemuan8.dart';
+import 'package:flutter_progmob_2020/Pertemuan1.dart';
+import 'package:flutter_progmob_2020/SplashScreen.dart';
+import 'package:flutter_progmob_2020/TugasPertemuan8.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -7,6 +10,7 @@ void main() {
 const String_title ='Hello world';
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // This is the theme of your application.
         //
-        // Try running your application with "flutter run". You'll see the
+        // Try running your a pplication with "flutter run". You'll see the
         // application has a blue toolbar. Then, without quitting the app, try
         // changing the primarySwatch below to Colors.green and then invoke
         // "hot reload" (press "r" in the console where you ran "flutter run",
@@ -29,7 +33,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TugasPertemuan8(title: 'Flutter Demo Home Page'),
+      home: SplashScreen  (),
     );
   }
 }
@@ -66,6 +70,24 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void navigatelogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int islogin = pref.getInt("is_login");
+    if(islogin == 1) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Halo Push",)),
+      );
+    }
+  }
+
+
+  @override
+  void initState() {
+    navigatelogin();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -84,33 +106,33 @@ class _MyHomePageState extends State<MyHomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Hello world!',
+              'Hello World',
             ),
-        /*Text(
+            RaisedButton(
+              child: Text(
+                'Login'
+              ),
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Halo Push",)),
+                );
+              },
+
+            ),
+            /*Text(
               //'$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),*/
-        ],
+          ],
+        ),
       ),
-    ),
-    /*floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
