@@ -1,4 +1,7 @@
+import 'package:baru1/main.dart';
 import 'package:flutter/material.dart';
+import 'package:baru1/Login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class tugasPertemuan8 extends StatefulWidget {
   tugasPertemuan8({Key key, this.title}) : super(key: key);
@@ -54,6 +57,18 @@ class _tugasPertemuan8State extends State<tugasPertemuan8> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.all(5.0),
+                  ),
+                  TextFormField(
+                    decoration: new InputDecoration(
+                      labelText: "Password",
+                      hintText: "1234",
+                      border: OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(3),
+                      ),
+                    ),
+                  ),
                   RaisedButton(
                     color: Colors.blue,
                     onPressed:validate,
@@ -63,7 +78,22 @@ class _tugasPertemuan8State extends State<tugasPertemuan8> {
                           color: Colors.white
                       ),
                     ),
-                  )
+                  ) ,
+                       RaisedButton(
+                        child: Text(
+                          "Logout",
+                          style: TextStyle(color : Colors.white),
+                        ),
+                        color:Colors.blue,
+                            onPressed: () async {
+                           SharedPreferences pref = await SharedPreferences.getInstance();
+                           await pref.setInt("is_login",1 );
+                              Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) =>MyHomePage(title: "Hello Push",))
+                      );
+                     },
+                   ),
                 ],
               ),
             )
