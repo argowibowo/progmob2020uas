@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progmob72170109/pertemuan1.dart';
 import 'package:flutter_progmob72170109/tugaspertemuan8.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,18 +14,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: tugaspertemuan8(title: 'Flutter Progmob 72170109 TugasPertemuan8'),
+
+      home: MyHomePage(title: 'Flutter Progmob 72170109 TugasPertemuan8'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -49,6 +43,23 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+void navigateLogin() async{
+     SharedPreferences pref = await SharedPreferences.getInstance();
+     int isLogin = pref.getInt("is_login");
+     if (isLogin == 1){
+       Navigator.pushReplacement(
+         context,
+         MaterialPageRoute(builder: (context) => pertemuan1(title: "Hallo Push",)),
+       );
+
+     }
+}
+
+  @override
+  void initState() {
+    navigateLogin();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
+
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
@@ -66,6 +78,20 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              child: Text(
+                'Login'
+              ),
+              onPressed: ()  async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+               await pref.setInt("is_login", 1);
+                Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => pertemuan1(title: "Hallo Push",)),
+            );
+
+              }
+            )
           ],
         ),
       ),

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
-class tugaspertemuan8 extends StatefulWidget {
-  tugaspertemuan8({Key key, this.title}) : super(key: key);
-
+class pertemuan8 extends StatefulWidget {
+  pertemuan8({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _tugaspertemuan8 createState() => _tugaspertemuan8();
+  _Pertemuan8State createState() => _Pertemuan8State();
 }
-
-class _tugaspertemuan8 extends State<tugaspertemuan8> {
+class _Pertemuan8State extends State<pertemuan8> {
+  final _formKey = GlobalKey<FormState>();
   int _counter = 2;
 
   void _incrementCounter() {
@@ -23,51 +22,51 @@ class _tugaspertemuan8 extends State<tugaspertemuan8> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+
       ),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              decoration: new InputDecoration(
-                labelText: "Nama Lengkap ",
-                hintText: "contoh: Melsiora Fernandes",
-                border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(20.0)
-                       // icon: Icon(Icons.people),
-        ),
-
-                )
-              ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-            ),
-            TextField(
-             decoration: new InputDecoration(
-                labelText: "Nama Tidak Boleh Kosong ",
-                //  hintText: "Teks Yang akan diInput Formatnya adalah sbb",
-
-
-             ),
-            ),
-            RaisedButton(
-              focusColor: Colors.blue,
-              color: Colors.blue,
-              child: Text(
-                "Submit" ,
-                style: TextStyle(
-                    color: Colors.white
+      body: Form(
+        key: _formKey,
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              //TextField(),
+              TextFormField(
+                decoration: new InputDecoration(
+                  hintText: "Contoh: Melsiora Saniba Fernandes",
+                  labelText: "Nama Lengkap ",
+                  icon: Icon(Icons.people),
+                  border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(5.0)),
                 ),
+
+                // The validator receives the text that the user has entered.
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Nama Tidak Boleh Kosong';
+                  }
+                  return null;
+                },
               ),
-            )
-          ],
+              RaisedButton(
+                child: Text(
+                  "Submit",
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.blue,
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {}
+                },
+              ),
+            ],
+          ),
         ),
       ),
-      //floatingActionButton: FloatingActionButton(
-      // onPressed: _incrementCounter,
-      //tooltip: 'Increment',
-      //child: Icon(Icons.add),
-      //), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
+
+
+
+
