@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter/login.dart';
 import 'package:progmob_flutter/pertemuan1.dart';
+import 'package:progmob_flutter/splashscreen.dart';
 import 'package:progmob_flutter/tugaspertemuan8.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TugasPertemuan8(title: 'Tugas Pertemuan 1'),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -37,6 +40,22 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+  void navigateLogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("isLogin");
+    if(isLogin==1){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Hallo Push",)),
+      );
+    }
+  }
+
+  @override
+  void initState(){
+    navigateLogin();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +74,19 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              child: Text(
+                'Login'
+              ),
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login",1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Hallo Push",)),
+                );
+              }
+            )
           ],
         ),
       ),
