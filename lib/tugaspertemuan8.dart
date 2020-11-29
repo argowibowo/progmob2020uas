@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob/Pref.dart';
+import 'package:flutter_progmob/main.dart';
 import 'dart:ffi';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Tugas8 extends StatefulWidget {
   Tugas8({Key key, this.title}) : super(key: key);
@@ -61,12 +65,29 @@ class _Tugas8State extends State<Tugas8> {
                     color: Colors.blue,
                     onPressed: Validate,
                     child: Text(
-                      "Submit",
+                      "SIMPAN",
                       style: TextStyle(
                           color: Colors.white
                       ),
                     ),
-                  )
+                  ),
+                    RaisedButton(
+                    color: Colors.blue,
+                    onPressed: () async {
+                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      await pref.setInt("is_login",0);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => preferences(title: 'Halo DEDEN',)),
+                      );
+                    },
+                    child: Text(
+                      "LOGOUT",
+                      style: TextStyle(
+                          color: Colors.white
+                      ),
+                    ),
+                    )
                 ],
               ),
             )
