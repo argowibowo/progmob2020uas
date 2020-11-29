@@ -1,113 +1,67 @@
-import 'dart:ffi';
 import 'package:flutter/material.dart';
-import 'package:flutter_keren/login.dart';
-import 'package:flutter_keren/pertemuan1.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class tugaspertemuan8 extends StatefulWidget {
-  tugaspertemuan8({Key key, this.title}) : super(key: key);
-
+class TugasPertemuan8 extends StatefulWidget {
+  TugasPertemuan8({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _tugaspertemuan8State createState() => _tugaspertemuan8State();
-}
+  _TugasPertemuan8State createState() => _TugasPertemuan8State();
+  }
 
-class _tugaspertemuan8State extends State<tugaspertemuan8> {
-  GlobalKey<FormState> key = GlobalKey<FormState>();
+class _TugasPertemuan8State extends State<TugasPertemuan8> {
+  int _counter = 2;
 
-  Void Validate(){
-    if (key.currentState.validate()){
-      print("Validate");
-    }
-    else {
-      print("failed");
-    }
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tugas Pertemuan 8"),
+        title: Text(widget.title),
       ),
-      body: Padding(
-        padding:EdgeInsets.all(15.0),
-        child : Center(
-            child : Form(
-              key: key,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  TextFormField(
-                    validator: (value){
-                      if(value.isEmpty){
-                        return "Nama Tidak Boleh Kosong";
-                      }
-                      else{
-                        return null;
-                      }
-                    },
-                    decoration: new InputDecoration(
-                      icon:Icon (
-                        Icons.account_circle_rounded,
-                        color: Colors.blue,
-                      ),
-                      labelText: 'Nama Lengkap',
-                      hintText: 'Contoh: Keren Kezia',
-                      border: OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(3),
-                      ),
-                    ),
-                  ),
-                  RaisedButton(
-                    color: Colors.blue,
-                    onPressed: Validate,
-                    child: Text(
-                      "Submit",
-                      style: TextStyle(
-                          color: Colors.white
-                      ),
-                    ),
-                  ),
-                  RaisedButton(
-                    color: Colors.blue,
-                    child: Text(
-                      "Logout",
-                      style: TextStyle(
-                          color: Colors.white
-                      ),
-                    ),
-                    onPressed: () async {
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
-                      await prefs.setInt("isLogin", 0);
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => login(title: 'Login Page')),
-                      );
-                    },
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextFormField(
+              decoration: new InputDecoration(
+                labelText: "Makanan Kesukaan",
+                hintText: "Nasi Goreng, Mie Goreng, Ayam Geprek",
+              ),
+            ),
+            Padding(
+                padding: EdgeInsets.all(5.0)
+            ),
+            TextFormField(
+              decoration: new InputDecoration(
+                  labelText: "Minuman Kesukaan",
+                  hintText: "Jus Orange, Jus Mangga, Jus Pisang",
+                  border: OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(5),
                   )
-                ],
+              ),
+            ),
+            RaisedButton(
+              color: Colors.blue,
+              child: Text(
+                "Simpan",
+                style: TextStyle(
+                    color: Colors.white
+                ),
               ),
             )
+          ],
         ),
       ),
+      //floatingActionButton: FloatingActionButton(
+      //onPressed: _incrementCounter,
+      //tooltip: 'Increment',
+      //child: Icon(Icons.add),
+      //),
     );
-  }
-
-  void checkLogin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    int isLogin = prefs.getInt('isLogin');
-    if(isLogin == 0) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MyHomePage(title: 'Login Page')),
-      );
-    }
-  }
-
-  @override
-  void initState() {
-    checkLogin();
   }
 }
