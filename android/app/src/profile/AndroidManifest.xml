@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.example.flutter_72180249">
+=======
+    package="com.example.flutter_keren">
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
     <!-- Flutter needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->

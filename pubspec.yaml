@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 name: flutter_72180249
+=======
+name: flutter_keren
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
 description: A new Flutter application.
 
 # The following line prevents the package from being accidentally published to
@@ -28,6 +32,11 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
+<<<<<<< HEAD
+=======
+  shared_preferences: ^0.5.12+4
+  splashscreen: ^1.3.5
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
 
 dev_dependencies:
   flutter_test:
@@ -45,7 +54,12 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+<<<<<<< HEAD
   # assets:
+=======
+  assets:
+    - assets/splash.jpg
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

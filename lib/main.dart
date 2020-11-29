@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 
 void main() {
   runApp(MyApp());
+=======
+import 'package:flutter_keren/login.dart';
+import 'package:flutter_keren/pertemuan1.dart';
+import 'package:flutter_keren/Splashscreen.dart';
+import 'package:flutter_keren/tugaspertemuan8.dart';
+
+void main() {
+  runApp(MyApp()
+  );
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
 }
 
 class MyApp extends StatelessWidget {
@@ -9,6 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< HEAD
       title: 'Hello World Flutter',
       theme: ThemeData(
         // This is the theme of your application.
@@ -27,6 +39,15 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Hello World'),
+=======
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: Splashscreen(),
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
     );
   }
 }
@@ -63,6 +84,24 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+<<<<<<< HEAD
+=======
+  /*void navigateLogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if(isLogin == 1){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => tugaspertemuan8(title: "Halo Push",)),
+      );
+    }
+  }
+  @override
+  void initState() {
+    navigateLogin();
+  }*/
+
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -81,6 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
+<<<<<<< HEAD
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -99,11 +139,33 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'Hello World :)',
+=======
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
             ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+<<<<<<< HEAD
+=======
+            /*RaisedButton(
+              child: Text(
+                'LOGIN'
+              ),
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => pertemuan1(title: "Halo Push",)),
+                );
+              },
+            )*/
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
           ],
         ),
       ),

@@ -22,23 +22,33 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+<<<<<<< HEAD
 apply plugin: 'kotlin-android'
+=======
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion 29
 
+<<<<<<< HEAD
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
+=======
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
     lintOptions {
         disable 'InvalidPackage'
     }
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+<<<<<<< HEAD
         applicationId "com.example.flutter_72180249"
+=======
+        applicationId "com.example.flutter_keren"
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
         minSdkVersion 16
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
@@ -57,7 +67,10 @@ android {
 flutter {
     source '../..'
 }
+<<<<<<< HEAD
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+=======
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48

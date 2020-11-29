@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.example.flutter_72180249">
+=======
+    package="com.example.flutter_keren">
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
          In most cases you can leave this as-is, but you if you want to provide
@@ -7,8 +11,13 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
+<<<<<<< HEAD
         android:label="flutter_72180249"
         android:icon="@mipmap/ic_launcher">
+=======
+        android:label="Progmob Flutter 2020"
+        android:icon="@mipmap/limbad">
+>>>>>>> 97553fac611acf62e655b8f1f49054a22ad5ae48
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
