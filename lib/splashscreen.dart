@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_kerenkezia/login.dart';
-import 'package:flutter_kerenkezia/main.dart';
-import 'package:flutter_kerenkezia/login.dart';
+import 'package:flutter_keren/material.dart';
+import 'package:flutter_keren/login.dart';
+import 'package:flutter_keren/main.dart';
+import 'package:flutter_keren/login.dart';
 
 
 class Splashscreen extends StatefulWidget {
