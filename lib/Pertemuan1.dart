@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
-class pertemuan1 extends StatefulWidget {
-  pertemuan1({Key key, this.title}) : super(key: key);
+class Pertemuan1 extends StatefulWidget {
+  Pertemuan1({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _pertemuan1 createState() => _pertemuan1();
+  _Pertemuan1State createState() => _Pertemuan1State();
 }
 
-class _pertemuan1 extends State<pertemuan1> {
-  int _counter = 2;
+class _Pertemuan1State extends State<Pertemuan1> {
+  int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
-
       _counter++;
     });
   }
@@ -22,20 +21,22 @@ class _pertemuan1 extends State<pertemuan1> {
   @override
   Widget build(BuildContext context) {
 
+    /*Text(
+              //'$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),*/
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
       ),
       body: Center(
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextFormField(
               decoration: new InputDecoration(
                 labelText: "Tes Input",
-                hintText: "Teks yang akan diinput formatnya adalah sbb",
+                hintText: "Teks yang akan diinput",
               ),
             ),
             Padding(
@@ -44,10 +45,10 @@ class _pertemuan1 extends State<pertemuan1> {
             TextFormField(
               decoration: new InputDecoration(
                 labelText: "Tes Input 2",
-                hintText: "Teks yang akan diinput formatnya adalah sbb",
+                hintText: "Teks yang akan diinput",
                 border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5),
-                )
+                  borderRadius: new BorderRadius.circular(5),
+                ),
               ),
             ),
             RaisedButton(
@@ -55,8 +56,8 @@ class _pertemuan1 extends State<pertemuan1> {
               child: Text(
                 "Simpan",
                 style: TextStyle(
-                  color: Colors.white
-                )
+                    color: Colors.white
+                ),
               ),
             )
           ],
