@@ -55,7 +55,7 @@ class _Pertemuan8State extends State<Pertemuan8> {
                     color: Colors.white
                 ),
               ),
-            )
+            ),
 
           ],
         ),
