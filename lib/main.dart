@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/TugasPertemuan8.dart';
+import 'package:flutter_app/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -71,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isLogin == 1)
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Halo Push",)),
+        MaterialPageRoute(builder: (context) => Dashboard(title: "Halo Push",)),
       );
   }
 
@@ -131,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 await pref.setInt("is_login", 1);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Halo Push",)),
+                  MaterialPageRoute(builder: (context) => Dashboard(title: "Halo Push",)),
                 );
               }
             )
