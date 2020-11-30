@@ -1,0 +1,71 @@
+// CARA 1 --> Buat menu disamping
+                // onLongPress: () {
+                //   showDialog(
+                //       context: context,
+                //       builder: (_) => AlertDialog(
+                //         content: Column(
+                //           mainAxisSize: MainAxisSize.min,
+                //           children: <Widget>[
+                //             FlatButton(
+                //                 onPressed: (){
+                //                   Navigator.pop(context);
+                //                 },
+                //                 child: Text("Update")
+                //             ),
+                //             FlatButton(
+                //                 onPressed: (){
+                //                   Navigator.pop(context);
+                //                 },
+                //                 child: Text("Delete")
+                //             ),
+                //           ],
+                //         ),
+                //       )
+                //   );
+                // },
+
+
+
+
+               // body: Center(
+                     //     child: ListView(
+                     //       children: <Widget>[
+                     //         ListTile(
+                     //           title: Text("Dosen"),
+                     //           subtitle: Text("Menu Dosen"),
+                     //           trailing: Icon(Icons.people),
+                     //           onTap: () {
+                     //             Navigator.pop(context);
+                     //             Navigator.push(
+                     //                 context,
+                     //                 MaterialPageRoute(builder: (context) => Dosen(title: "Data Dosen"))
+                     //             );
+                     //           },
+                     //         ),
+                     //         ListTile(
+                     //           title: Text("Mahasiswa"),
+                     //           subtitle: Text("Menu Mahasiswa"),
+                     //           trailing: Icon(Icons.people_outline),
+                     //           onTap: () {
+                     //             Navigator.pop(context);
+                     //             Navigator.push(
+                     //                 context,
+                     //                 MaterialPageRoute(builder: (context) => Mahasiswa(title: "Data Mahasiswa"))
+                     //             );
+                     //           },
+                     //         ),
+                     //         ListTile(
+                     //           title: Text("Matakuliah"),
+                     //           subtitle: Text("Menu Matakuliah"),
+                     //           trailing: Icon(Icons.book_sharp),
+                     //           onTap: () {
+                     //             Navigator.pop(context);
+                     //             Navigator.push(
+                     //                 context,
+                     //                 MaterialPageRoute(builder: (context) => Matakuliah(title: "Data Matakuliah"))
+                     //             );
+                     //           },
+                     //         ),
+                     //       ],
+                     //     ),
+                     // ),
