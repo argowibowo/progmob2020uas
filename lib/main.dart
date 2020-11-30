@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob/dashboard.dart';
 import 'package:flutter_progmob/splashscreen.dart';
 import 'package:flutter_progmob/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isiLogin ==1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Tugaspertemuan8(title: "Welcome",)),
+        MaterialPageRoute(builder: (context) => Dashboard(title: "Welcome",)),
       );
     }
 
@@ -87,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 await pref.setInt("is_login", 1);
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => Tugaspertemuan8(title: "Welcome",)),
+                    MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard",)),
                   );
                 }
             )
