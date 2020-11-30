@@ -1,18 +1,17 @@
-
 import 'package:flutter/material.dart';
-class Pertemuan8 extends StatefulWidget {
-  Pertemuan8({Key key, this.title}) : super(key: key);
 
+class Pertemuan1 extends StatefulWidget {
+  Pertemuan1({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _Pertemuan8State createState() => _Pertemuan8State();
+  _Pertemuan1State createState() => _Pertemuan1State();
 }
 
-class _Pertemuan8State extends State<Pertemuan8> {
+class _Pertemuan1State extends State<Pertemuan1> {
   int _counter = 2;
 
-  void _incrementCounter() {
+  void _incrementCounter(){
     setState(() {
       _counter++;
     });
@@ -20,7 +19,6 @@ class _Pertemuan8State extends State<Pertemuan8> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -29,27 +27,28 @@ class _Pertemuan8State extends State<Pertemuan8> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextFormField(
-              decoration: new InputDecoration(
-                labelText: "Nama Lengkap",
-                hintText: "Sekolastika Julita",
-              ),
+          TextFormField(
+            decoration: new InputDecoration(
+              labelText: "Tes Input",
+              hintText: "Text yang akan diinput formatnya adalah sbb",
             ),
+          ),
             Padding(
-                padding: EdgeInsets.all(5.0)
+              padding: EdgeInsets.all(5.0),
             ),
             TextFormField(
               decoration: new InputDecoration(
-                  labelText: "NIM",
-                  hintText: "Contoh 72170136",
-                  border: OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(5)
-                  )
+                labelText: "Tes Input 2",
+                hintText: "Text yang akan diinput formatnya adalah sbb",
+                border: OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(5),
+                )
               ),
             ),
             RaisedButton(
-              focusColor: Colors.blue,
+              onPressed: null,
               color: Colors.blue,
+              // disabledColor: Colors.blue,
               child: Text(
                 "Simpan",
                 style: TextStyle(
@@ -57,7 +56,6 @@ class _Pertemuan8State extends State<Pertemuan8> {
                 ),
               ),
             )
-
           ],
         ),
       ),
@@ -65,7 +63,7 @@ class _Pertemuan8State extends State<Pertemuan8> {
       //   onPressed: _incrementCounter,
       //   tooltip: 'Increment',
       //   child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
+      // ),
     );
   }
 }
