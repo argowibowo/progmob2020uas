@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Timer(w, () {
       Navigator.of(context) .pushReplacement(
         MaterialPageRoute(builder: (_) {
-          return Login();
+          return Login(title: "Login");
         }),
       );
     });
