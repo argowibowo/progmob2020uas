@@ -5,6 +5,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter/dashboard.dart';
 import 'package:progmob_flutter/pertemuan1.dart';
 import 'package:progmob_flutter/splashLogin.dart';
 import 'package:progmob_flutter/tugasPertemuan1Widget.dart';
@@ -50,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Timer(Duration(seconds: 3), () => Navigator.pushReplacement(
       context,
-        MaterialPageRoute(builder: (context) => SplashLogin(title:"Halo Push")),
+        MaterialPageRoute(builder: (context) => SplashLogin(title:"Splash")),
     ));
   }
 

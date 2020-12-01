@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter/dashboard.dart';
 import 'package:progmob_flutter/pertemuan1.dart';
 import 'package:progmob_flutter/tugasPertemuan1Widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -59,7 +60,7 @@ class _SplashLoginState extends State<SplashLogin> with Validation{
     if(isLogin == 1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => TugasPertemuan1Widget(title:"Halo Push")),
+        MaterialPageRoute(builder: (context) => Dashboard(title:"Dashboard")),
       );
     }
   }
@@ -94,7 +95,7 @@ class _SplashLoginState extends State<SplashLogin> with Validation{
                     hintText: "Username",
                     //MEMBUAT BORDER OUTLINE
                     border: OutlineInputBorder(
-                    borderRadius : new BorderRadius.circular(5),
+                    borderRadius : new BorderRadius.circular(32.0),
                     ),
                   ),
                 validator: validateUser,
@@ -109,7 +110,7 @@ class _SplashLoginState extends State<SplashLogin> with Validation{
                   hintText: "Password",
                   //MEMBUAT BORDER OUTLINE
                   border: OutlineInputBorder(
-                    borderRadius : new BorderRadius.circular(5),
+                    borderRadius : new BorderRadius.circular(32.0),
                   ),
                 ),
                 validator: validateUser,
@@ -119,25 +120,25 @@ class _SplashLoginState extends State<SplashLogin> with Validation{
               ),
               RaisedButton(
                 color: Colors.blue,
-                child: Text(
-                    "Login",
-                  style: TextStyle(
-                    //kasih warna text
-                      color: Colors.white
-                  ),
+                      child: Text(
+                          "Login",
+                        style: TextStyle(
+                          //kasih warna text
+                            color: Colors.white
+                        ),
                 ),
                 //------------------PINDAH HALAMAN
                 onPressed:() async {
                   if(formKey.currentState.validate()){
                     formKey.currentState.save();
+                    SharedPreferences pref = await SharedPreferences.getInstance();
+                    await pref.setInt("isLogin", 1);
+                    //push biar ga ada backnya pake push replacement, kalo di back ntar item
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => Dashboard(title:"Dashboard")),
+                    );
                   }
-                  SharedPreferences pref = await SharedPreferences.getInstance();
-                  await pref.setInt("isLogin", 1);
-                  //push biar ga ada backnya pake push replacement, kalo di back ntar item
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => TugasPertemuan1Widget(title:"Halo Push")),
-                  );
                 },
               )
             ]
