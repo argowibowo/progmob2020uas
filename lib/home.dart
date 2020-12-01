@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:progmob2020/datadosen.dart';
+import 'package:progmob2020/datajadwal.dart';
 import 'package:progmob2020/datamahasiswa.dart';
 import 'package:progmob2020/datamatakuliah.dart';
 import 'package:progmob2020/login.dart';
@@ -44,6 +45,60 @@ class _HomeState extends State<Home> {
               ),
             ),
             ListTile(
+              title: Text("Dosen"),
+              subtitle: Text("Menu Dosen"),
+              trailing: Icon(Icons.people),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Dosen(title: "Data Dosen"))
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Mahasiswa"),
+              subtitle: Text("Menu Mahasiswa"),
+              trailing: Icon(Icons.people_outline),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Mahasiswa(title: "Data Mahasiswa"))
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Matakuliah"),
+              subtitle: Text("Menu Matakuliah"),
+              trailing: Icon(Icons.book_sharp),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Matakuliah(title: "Data Matakuliah"))
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Jadwal"),
+              subtitle: Text("Menu Jadwal"),
+              trailing: Icon(Icons.schedule),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Jadwal(title: "Data Jadwal"))
+                );
+              },
+            ),
+            Divider(
+              color: Colors.black,
+              height: 10,
+              indent: 10,
+              endIndent: 10,
+            ),
+            ListTile(
               title: Text("Logout"),
               trailing: Icon(Icons.exit_to_app),
               onTap: () async {
@@ -61,43 +116,7 @@ class _HomeState extends State<Home> {
 
       body: Container(
         child: Center(
-          child: ListView(
-            children: <Widget>[
-              ListTile(
-                title: Text("Dosen"),
-                subtitle: Text("Menu Dosen"),
-                trailing: Icon(Icons.people),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Dosen(title: "Data Dosen"))
-                  );
-                },
-              ),
-              ListTile(
-                title: Text("Mahasiswa"),
-                subtitle: Text("Menu Mahasiswa"),
-                trailing: Icon(Icons.people_outline),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Mahasiswa(title: "Data Mahasiswa"))
-                  );
-                },
-              ),
-              ListTile(
-                title: Text("Matakuliah"),
-                subtitle: Text("Menu Matakuliah"),
-                trailing: Icon(Icons.book_sharp),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Matakuliah(title: "Data Matakuliah"))
-                  );
-                },
-              ),
-            ],
-          ),
+          child: Text("Home"),
         ),
       )
     );
