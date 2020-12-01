@@ -52,20 +52,20 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  // void navigateLogin() async{
-  //   SharedPreferences pref = await SharedPreferences.getInstance();
-  //   int isLogin = pref.get("is_login");
-  //   if(isLogin == 1){
-  //     Navigator.pushReplacement(context,
-  //     MaterialPageRoute(builder: (context) => Pertemuan2(title: "Halo Push",)),
-  //     );
-  //   }
-  // }
-  //
-  // @override
-  // void initState(){
-  //   navigateLogin();
-  // }
+  void navigateLogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.get("is_login");
+    if(isLogin == 1){
+      Navigator.pushReplacement(context,
+      MaterialPageRoute(builder: (context) => Pertemuan2(title: "Halo Push",)),
+      );
+    }
+  }
+
+  @override
+  void initState(){
+    navigateLogin();
+  }
 
   @override
   Widget build(BuildContext context) {
