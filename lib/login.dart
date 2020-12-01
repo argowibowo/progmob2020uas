@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter/dashboard.dart';
 import 'package:progmob_flutter/splashscreen.dart';
 import 'package:progmob_flutter/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("HALAMAN LOGIN"),
+        title: Text("Halaman Login"),
       ),
 
       body: Form(
@@ -95,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (_formKey.currentState.validate()) {}
                   SharedPreferences pref = await SharedPreferences.getInstance();
                   await pref.setInt("is_login", 1);
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Tugaspertemuan8(title: "TUGAS PERTEMUAN 8")));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Dashboard(title: "Dashboard")));
                 },
               ),
             ],

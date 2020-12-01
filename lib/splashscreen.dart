@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter/dashboard.dart';
 import 'dart:async';
 import 'package:progmob_flutter/login.dart';
 import 'package:progmob_flutter/tugaspertemuan8.dart';
@@ -27,7 +28,7 @@ class _SplashScreen extends State<SplashScreen>{
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
     if(isLogin == 1){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Tugaspertemuan8(title: "TUGAS PERTMUAN 8")));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Dashboard(title: "DASHBOARD")));
     }
   }
 

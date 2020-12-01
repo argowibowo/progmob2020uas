@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="progmob_flutter"
+        android:label="Progmob Flutter"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
