@@ -1,10 +1,8 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart';
+import 'package:flutter_kerenkezia/dashboard.dart';
 import 'package:flutter_kerenkezia/tugaspertemuan8.dart';
-import 'package:flutter_kerenkezia/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-
 
 class login extends StatefulWidget {
   login({Key key, this.title}) : super(key: key);
@@ -12,16 +10,18 @@ class login extends StatefulWidget {
   final String title;
 
   @override
-  _LoginState createState() => _LoginState();
+  _loginState createState() {
+    return _loginState();
+  }
 }
-class _LoginState extends State<login> {
+class _loginState extends State<login> {
   void navigateLogin() async{
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
     if(isLogin == 1){
       Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => tugaspertemuan8(title: "PROGMOB2020",))
+          MaterialPageRoute(builder:(context) => dashboard(title: "DASHBOARD"))
       );
     }
   }
@@ -58,15 +58,15 @@ class _LoginState extends State<login> {
                   ),
                   TextFormField(
                     decoration: new InputDecoration(
-                      labelText: 'Masukkan Password',
-                      hintText: '**',
+                      labelText: 'Password',
+                      hintText: 'contoh: Limbad',
                       border: OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(5),
                       ),
                     ),
                   ),
                   RaisedButton(
-                    color: Colors.blue,
+                    color: Colors.pink,
                     child: Text(
                       "LOGIN",
                       style: TextStyle(
@@ -78,7 +78,7 @@ class _LoginState extends State<login> {
                       await pref.setInt("Is_login", 1);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => tugaspertemuan8(title: "PROGMOB 2020",)),
+                        MaterialPageRoute(builder:(context) => dashboard(title: "Dashboard")),
                       );
                     },
                   )

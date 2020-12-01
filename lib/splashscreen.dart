@@ -1,10 +1,8 @@
 import 'dart:async';
-
-import 'package:flutter_keren/material.dart';
-import 'package:flutter_keren/login.dart';
-import 'package:flutter_keren/main.dart';
-import 'package:flutter_keren/login.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter_kerenkezia/dashboard.dart';
+import 'package:flutter_kerenkezia/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Splashscreen extends StatefulWidget {
 
@@ -16,6 +14,16 @@ class _Splashscreen extends State<Splashscreen> {
   void initState(){
     super.initState();
     splashStart();
+    navigateLogin();
+  }
+
+  void navigateLogin() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if (isLogin == 1) {
+      Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (context) => dashboard(title: "DASHBOARD")));
+    }
   }
 
   splashStart() async{
@@ -32,7 +40,7 @@ class _Splashscreen extends State<Splashscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.redAccent,
+      backgroundColor: Colors.blue,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

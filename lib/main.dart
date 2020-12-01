@@ -1,20 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_kerenkezia/Splashscreen.dart';
 
 void main() {
-  runApp(MaterialApp(
-      title: "Aplikasi Flutter",
-      home: Scaffold(
-        appBar: AppBar(title: Text('Aplikasi Flutter'),),
-        body: Material(
-          color: Colors.white,
-          child: Center(
-            child: Text("Hello World !", textDirection: TextDirection.ltr,
-              style: TextStyle(color: Colors.deepPurple, fontSize: 40.0),
-            ),
-          ),
-        ),
-      )
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -39,7 +27,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Halo Keren'),
+      home: Splashscreen(),
     );
   }
 }
