@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_1/Pertemuan1.dart';
+import 'package:flutter_app_1/login.dart';
 import 'package:flutter_app_1/splashscreen.dart';
 import 'package:flutter_app_1/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SplashScreenPage(),
+      home: splashscreen(),
     );
   }
 }
