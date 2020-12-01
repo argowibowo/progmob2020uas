@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter_2020/dashboard.dart';
 import 'package:progmob_flutter_2020/pertemuan8.dart';
 import 'package:progmob_flutter_2020/splashscrn.dart';
 import 'package:progmob_flutter_2020/tugas8.dart';
@@ -74,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isLogin==1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Tugas8(title: "Tugas Pertemuan 8",)),
+        MaterialPageRoute(builder: (context) => Dashboard(title: "Tugas 10",)),
       );
     }
   }

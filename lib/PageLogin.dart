@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progmob_flutter_2020/bottomnavigation.dart';
+import 'package:progmob_flutter_2020/dashboard.dart';
 import 'package:progmob_flutter_2020/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:progmob_flutter_2020/tugas8.dart';
@@ -85,7 +86,8 @@ class _PageLoginState extends State<PageLogin> {
 
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => bottomnavvgtn(title: 'Tugas 9',)),
+                  MaterialPageRoute(builder: (context) => Dashboard(title: 'Tugas 10',)
+                  ),
                 );
               },
             )
