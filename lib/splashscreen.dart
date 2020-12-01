@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_72180185/dashboard.dart';
 import 'package:flutter_72180185/main.dart';
 import 'package:flutter_72180185/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,22 +22,39 @@ class _SplashScreenState extends State<SplashScreen> {
     startSplashScreen();
   }
 
+  // startSplashScreen() async {
+  //   var duration = const Duration(seconds: 5);
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   int login = pref.getInt("is_login");
+  //   if(login == 0){
+  //   return Timer(duration, () {
+  //     Navigator.pushReplacement(context,
+  //         MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo Push",)));
+  //   });
+  // }else {
+  //     return Timer(duration, () {
+  //       Navigator.pushReplacement(context,
+  //           MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "TugasPertemuan8",)));
+  //     });
+  //   }
+  // }
+
   startSplashScreen() async {
-    var duration = const Duration(seconds: 5);
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    int login = pref.getInt("is_login");
-    if(login == 0){
-    return Timer(duration, () {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo Push",)));
-    });
-  }else {
+      var duration = const Duration(seconds: 5);
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      int login = pref.getInt("is_login");
+      if(login == 0){
       return Timer(duration, () {
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "TugasPertemuan8",)));
+            MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard",)));
       });
+    }else {
+        return Timer(duration, () {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "TugasPertemuan8",)));
+        });
+      }
     }
-  }
 
   @override
   Widget build(BuildContext context) {
