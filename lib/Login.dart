@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wil_app/Tugaspertemuan8.dart';
+import 'package:wil_app/dashboardwil.dart';
 
 
 
@@ -77,7 +78,7 @@ class _LoginState extends State<Login> {
                     await pref.setInt("is_login", 1);
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Tugaspertemuan8(title : "Sistem Akademik",)),
+                      MaterialPageRoute(builder: (context) => Dashboardwil(title : "Sistem Akademik",)),
                     );
                   },
                 ),
