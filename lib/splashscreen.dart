@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter/dashboard.dart';
 import 'dart:async';
 import 'package:progmob_flutter/login.dart';
 import 'package:progmob_flutter/tugaspertemuan8.dart';
@@ -23,19 +24,11 @@ class _SplashScreen extends State<SplashScreen>{
     });
   }
 
-  void navigateLogin() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    int isLogin = pref.getInt("is_login");
-    if(isLogin == 1){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => tugaspertemuan8(title: "Tugas Pertemuan 8")));
-    }
-  }
-
   @override
   void initState(){
     super.initState();
     splashscreenStart();
-    navigateLogin();
+    //navigateLogin();
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progmob_flutter/Pertemuan1.dart';
+import 'package:progmob_flutter/dashboard.dart';
 import 'package:progmob_flutter/splashscreen.dart';
 import 'package:progmob_flutter/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isLogin == 1) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => tugaspertemuan8()),
+        MaterialPageRoute(builder: (context) => tugaspertemuan8(title : "Tugas Pertemuan 8")),
       );
     }
   }
@@ -125,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 await pref.setInt("is_login", 1);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => tugaspertemuan8()),
+                  MaterialPageRoute(builder: (context) => tugaspertemuan8(title: "Tugas Pertemuan 8")),
                 );
               },
             )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter/dashboard.dart';
 import 'package:progmob_flutter/splashscreen.dart';
 import 'package:progmob_flutter/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +18,24 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+
+  void navigateLogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if(isLogin == 1) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Dashboard(title : "Dashbooard")),
+      );
+    }
+  }
+
+
+  @override
+  void initState() {
+    navigateLogin();
+  }
+
   @override
 
   Widget build(BuildContext context) {
@@ -95,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (_formKey.currentState.validate()) {}
                   SharedPreferences pref = await SharedPreferences.getInstance();
                   await pref.setInt("is_login", 1);
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => tugaspertemuan8(title: "TUGAS PERTEMUAN 8")));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Dashboard(title: "Dashboard")));
                 },
               ),
             ],
