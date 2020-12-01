@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Home.dart';
-import 'package:flutter_app/Dashboard.dart';
-import 'package:flutter_app/Profile.dart';
+import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/Home.dart';
+import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/Dashboard.dart';
+import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/Profile.dart';
 import 'package:flutter/cupertino.dart';
 /*void main(){
   runApp(MaterialApp(

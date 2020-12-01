@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter_app/Login.dart';
-import 'package:flutter_app/NavBar.dart';
+import 'file:///D:/Android/Project_Flutter/flutter_app/lib/Login.dart';
+import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/NavBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

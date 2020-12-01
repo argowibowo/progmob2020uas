@@ -1,9 +1,10 @@
 import 'dart:ffi';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Home.dart';
-import 'package:flutter_app/NavBar.dart';
-import 'package:flutter_app/SplashScreen.dart';
+import 'package:flutter_app/Dashboard.dart';
+import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/Home.dart';
+import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/NavBar.dart';
+import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/SplashScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
@@ -13,6 +14,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
   GlobalKey<FormState> key = GlobalKey<FormState>();
 
   Void Validate(){
@@ -31,21 +33,6 @@ class _LoginState extends State<Login> {
       _isHidePassword = !_isHidePassword;
     });
   }
-
-  /*void navigateLogin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    int isLogin = prefs.getInt("is_login");
-    if(isLogin == 1){
-      Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => NavBar(title: "ProgMob",)),
-      );
-    }
-  }
-
-  @override
-  void initState() {
-    navigateLogin();
-  }*/
 
   @override
   Widget build(BuildContext context) {

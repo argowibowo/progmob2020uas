@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/NavBar.dart';
+import 'package:flutter_app/Dashboard.dart';
 import 'package:flutter_app/Login.dart';
-import 'package:flutter_app/SplashScreen.dart';
+import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/NavBar.dart';
+import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/SplashScreen.dart';
 import 'package:flutter_app/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home:SplashScreen(),
+      home:Dashboard(),
     );
   }
 }
