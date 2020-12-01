@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Home.dart';
 import 'package:flutter_app/Pertemuan8.dart';
+import 'package:flutter_app/Splashscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 void main(){
   runApp(MyApp());
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
 
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Pertemuan8(title: 'Flutter Widget'),
+      home: SplashScreen(),
     );
   }
 }
