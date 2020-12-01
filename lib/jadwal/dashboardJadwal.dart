@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-class DashboardMatakuliah extends StatefulWidget{
-  DashboardMatakuliah({Key key, this.title}) :super(key:key);
+class DashboardJadwal extends StatefulWidget{
+  DashboardJadwal({Key key, this.title}) :super(key:key);
   final String title;
 
   @override
-  _DashboardMatakuliahState createState()=> _DashboardMatakuliahState();
+  _DashboardJadwalState createState()=> _DashboardJadwalState();
 }
 
-class _DashboardMatakuliahState extends State<DashboardMatakuliah>{
+class _DashboardJadwalState extends State<DashboardJadwal>{
   int _counter = 2;
 
   void _incrementCounter(){
@@ -33,19 +33,20 @@ class _DashboardMatakuliahState extends State<DashboardMatakuliah>{
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 ListTile(
-                  leading: Icon(Icons.article),
+                  leading: Icon(Icons.schedule),
                   title: Text("Pemrograman Mobile"),
                   subtitle : Text("[SI3333] - Jumat, 09.30 - 11.20 WIB"),
+                ),
+                ListTile(
+                  leading: Icon(Icons.schedule),
+                  title: Text("Keamanan Teknologi Informasi"),
+                  subtitle : Text("[SI3343] - Senin, 11.30 - 13.20 WIB"),
                 )
               ],
             )
         ),
       ),
-      /*floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child : Icon(Icons.add),
-      ),*/
+
     );
   }
 }

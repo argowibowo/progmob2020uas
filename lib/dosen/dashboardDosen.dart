@@ -21,57 +21,26 @@ class _DashboardDosenState extends State<DashboardDosen>{
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: (){},)
+        ],
       ),
-      body:Center(
-        child: Column( //kalo pake colomn nanti tulisannya akan kebawah
-          //kalo mau ke samping, pakai ROW
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:<Widget>[
-              Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              Padding(
-                //jarak biar gk mepet
-                padding: EdgeInsets.all(16.0),
-              ),
-              //MEMBUAT TEXT INPUT
-              /*TextFormField(
-                decoration: new InputDecoration(
-                  labelText: "Tes Input",
-                  hintText: "Teks yang ditampilkan"
-                  //MEMBUAT BORDER OUTLINE
-                  border: OutlineInputBorder(
-                  borderRadius : new BorderRadius.circular(5),
-                  ),
-                ),
-              )*/
-              //MEMBUAT BUTTON
-              RaisedButton(
-                //warna button
-                  color: Colors.blue,
-                  //nambahkan text pakai child (cuma bisa 1 kalo chilc, kalo banyak pake children)
-                  child:
-                  Text(
-                    //membuat text pada button
-                    "Simpan",
-                    style: TextStyle(
-                      //kasih warna text
-                        color: Colors.white
-                    ),
+      body:Container(
+            child:Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    leading: Icon(Icons.person),
+                    title: Text("Jong Jek Siang"),
+                    subtitle : Text("123456 - jjs@staff.ukdw.ac.id"),
                   )
+                ],
               )
-            ]
+          ),
         ),
-      ),
-      /*floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child : Icon(Icons.add),
-      ),*/
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:progmob_flutter/dosen/dashboardDosen.dart';
+import 'package:progmob_flutter/jadwal/dashboardJadwal.dart';
 import 'package:progmob_flutter/mahasiswa/dashboardMahasiswa.dart';
 import 'package:progmob_flutter/main.dart';
+import 'package:progmob_flutter/matakuliah/dashboardMatakuliah.dart';
 import 'package:progmob_flutter/splashLogin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class Dashboard extends StatefulWidget{
@@ -61,6 +63,26 @@ class _DashboardState extends State<Dashboard>{
                       MaterialPageRoute(builder: (context) => DashboardMahasiswa(title:"Dashboard Mahasiswa")));
                 },
               ),
+              ListTile(
+                title: Text("Data Matakuliah"),
+                trailing: Icon(Icons.article),
+                subtitle: Text("Menu CRUD Matakuliah"),
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => DashboardMatakuliah(title:"Dashboard Matakuliah")));
+                },
+              ),
+              ListTile(
+                title: Text("Data Jadwal"),
+                trailing: Icon(Icons.schedule),
+                subtitle: Text("Menu CRUD Jadwal"),
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => DashboardJadwal(title:"Dashboard Jadwal")));
+                },
+              ),
               //MEMBUAT PEMISAH
               Divider(
                 color: Colors.black,
@@ -81,11 +103,9 @@ class _DashboardState extends State<Dashboard>{
             ]
         ),
       ),
-      /*floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child : Icon(Icons.add),
-      ),*/
+      body: Center(
+        child: Text("Dashboard")
+      )
     );
   }
 }
