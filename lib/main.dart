@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kerenkezia/Splashscreen.dart';
+import 'package:flutter_kerenkezia/splash.dart';
 
 void main() {
   runApp(MyApp());
