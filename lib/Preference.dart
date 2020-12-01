@@ -1,5 +1,7 @@
 import 'dart:ffi';
 import 'package:fluter_hello_world/Tugaspertemuan8.dart';
+import 'package:fluter_hello_world/dashboard.dart';
+import 'package:fluter_hello_world/dosen/DashboardDosen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class Login extends StatefulWidget {
@@ -17,7 +19,7 @@ class _LoginState extends State<Login> {
   if(isLogin == 1){
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => Tugaspertemuan8(title: "PROGMOB2020",))
+      MaterialPageRoute(builder: (context) => Dashboard(title: "PROGMOB2020",))
     );
   }
   }
@@ -74,7 +76,7 @@ class _LoginState extends State<Login> {
                       await pref.setInt("Is_login", 1);
                       Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Tugaspertemuan8(title: "PROGMOB 2020",)),
+                      MaterialPageRoute(builder: (context) => Dashboard(title: "PROGMOB 2020",)),
                     );
                   },
                   )
