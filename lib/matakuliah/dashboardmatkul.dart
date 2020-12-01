@@ -39,31 +39,30 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
                 leading: Icon(Icons.book_sharp),
                 title: Text("Pemograman Mobile"),
                 subtitle: Text("SI333"),
-                trailing: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuItem<String>>[
-                    new PopupMenuItem<String>(
-                      child: const Text('Update'), value: 'Update',
-                    ),
-                    new PopupMenuItem<String>(
-                      child: const Text('Delete'), value: 'Delete',
-                    )
-                  ],
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.book_sharp),
-                title: Text("Pengolahan Data Multimedia"),
-                subtitle: Text("SI1333"),
-                trailing: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuItem<String>>[
-                    new PopupMenuItem<String>(
-                      child: const Text('Update'), value: 'Update',
-                    ),
-                    new PopupMenuItem<String>(
-                      child: const Text('Delete'), value: 'Delete',
-                    )
-                  ],
-                ),
+                onLongPress: () {
+                  showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            FlatButton(
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Update")
+                            ),
+                            FlatButton(
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Delete")
+                            ),
+                          ],
+                        ),
+                      )
+                  );
+                },
               ),
             ],
           ),

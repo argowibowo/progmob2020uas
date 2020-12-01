@@ -39,31 +39,30 @@ class _DashboardJadwalState extends State<DashboardJadwal> {
                 leading: Icon(Icons.event_note_outlined),
                 title: Text("Pemograman Mobile"),
                 subtitle: Text("Jumat Sesi 2 (09.30-11.30)"),
-                trailing: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuItem<String>>[
-                    new PopupMenuItem<String>(
-                      child: const Text('Update'), value: 'Update',
-                    ),
-                    new PopupMenuItem<String>(
-                      child: const Text('Delete'), value: 'Delete',
-                    )
-                  ],
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.event_note_outlined),
-                title: Text("Pengolahan Data Multimedia"),
-                subtitle: Text("Senin Sesi 5 (15.30-17.30)"),
-                trailing: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuItem<String>>[
-                    new PopupMenuItem<String>(
-                      child: const Text('Update'), value: 'Update',
-                    ),
-                    new PopupMenuItem<String>(
-                      child: const Text('Delete'), value: 'Delete',
-                    )
-                  ],
-                ),
+                onLongPress: () {
+                  showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            FlatButton(
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Update")
+                            ),
+                            FlatButton(
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Delete")
+                            ),
+                          ],
+                        ),
+                      )
+                  );
+                },
               ),
             ],
           ),

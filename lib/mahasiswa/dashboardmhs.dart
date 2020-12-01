@@ -39,31 +39,30 @@ class _DashboardMhsState extends State<DashboardMhs> {
                 leading: Icon(Icons.person),
                 title: Text("Magdalena Evelyn Halim"),
                 subtitle: Text("72180180 - magdalena.evelyn@si.ukdw.ac.id"),
-                trailing: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuItem<String>>[
-                    new PopupMenuItem<String>(
-                      child: const Text('Update'), value: 'Update',
-                    ),
-                    new PopupMenuItem<String>(
-                      child: const Text('Delete'), value: 'Delete',
-                    )
-                  ],
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.person),
-                title: Text("Elbie Reyova Evendi"),
-                subtitle: Text("72180196 - elbie.reyova@si.ukdw.ac.id"),
-                trailing: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuItem<String>>[
-                    new PopupMenuItem<String>(
-                      child: const Text('Update'), value: 'Update',
-                    ),
-                    new PopupMenuItem<String>(
-                      child: const Text('Delete'), value: 'Delete',
-                    )
-                  ],
-                ),
+                onLongPress: () {
+                  showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            FlatButton(
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Update")
+                            ),
+                            FlatButton(
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Delete")
+                            ),
+                          ],
+                        ),
+                      )
+                  );
+                },
               ),
             ],
           ),
