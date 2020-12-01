@@ -1,10 +1,12 @@
+
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_1/HalamanLogin.dart';
+import 'package:flutter_app_1/dashboard.dart';
+import 'package:flutter_app_1/main.dart';
 import 'package:flutter_app_1/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_app_1/SplashScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
@@ -29,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
       return Timer(duration, (){
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_){
-              return Pertemuan8(title: "Login");
+              return Dashboard(title: "Login");
             })
         );
       });
@@ -46,14 +48,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.pink,
-        body: Center(
-            child: Image.asset(
-                "images/images2.png",
-              width: 100.0,
-              height: 100.0,
-                ),
-              ),
-            );
+      body: Center(
+        child: Image.asset(
+          "images/images2.png",
+          width: 100.0,
+          height: 100.0,
+        ),
+      ),
+    );
 
   }
 }

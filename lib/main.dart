@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_1/HalamanLogin.dart';
+import 'package:flutter_app_1/dashboard.dart';
 import 'package:flutter_app_1/pertemuan1.dart';
+import 'package:flutter_app_1/splashscreen.dart';
 import 'package:flutter_app_1/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_app_1/SplashScreen.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
 
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HalamanLogin(title: 'SplashScreen'),
+      home: Dashboard(title: ("Dashboard"),),
     );
   }
 }
@@ -57,7 +58,7 @@ class HalamanLogin extends StatefulWidget {
     if(isLogin == 1){
      Navigator.pushReplacement(
          context,
-         MaterialPageRoute(builder: (context) =>Pertemuan8(title: "Hallo Push",)),
+         MaterialPageRoute(builder: (context) =>Dashboard(title: "Hallo Push",)),
       );
     }
   }
@@ -92,51 +93,51 @@ class HalamanLogin extends StatefulWidget {
 
           TextFormField(
             decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black87)
-            ),
-            prefixIcon: Icon(Icons.person, size: 40,),
-            hintText: "Masukkan Nama",
-            hintStyle: TextStyle(color: Colors.black87),
-            labelText: "Nama",
-            labelStyle: TextStyle(color: Colors.black87),
-            ),
-            ),
-          SizedBox(height: 20,),
-          TextFormField(
-            obscureText: true,
-            decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black87)
-             ),
-              prefixIcon: Icon(Icons.person, size: 40,),
-              hintText: "Masukkan Password",
-              hintStyle: TextStyle(color: Colors.black87),
-              labelText: "Password",
-              labelStyle: TextStyle(color: Colors.black87),
+              border: OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black87)
               ),
+                prefixIcon: Icon(Icons.person, size: 40,),
+                hintText: "Masukkan Nama",
+                hintStyle: TextStyle(color: Colors.black87),
+                labelText: "Nama",
+                labelStyle: TextStyle(color: Colors.black87),
+                ),
+                ),
+            SizedBox(height: 20,),
+            TextFormField(
+                obscureText: true,
+                decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black87)
+                ),
+                  prefixIcon: Icon(Icons.person, size: 40,),
+                  hintText: "Masukkan Password",
+                  hintStyle: TextStyle(color: Colors.black87),
+                  labelText: "Password",
+                  labelStyle: TextStyle(color: Colors.black87),
+                  ),
+                ),
+            SizedBox(height: 20,),
+                RaisedButton(
+                    child: Text(
+                  "Login",
+                  style: TextStyle(color: Colors.white),
+                  ),
+                  color: Colors.black87,
+                  onPressed: () async {
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  await pref.setInt("is_login", 1);
+                  Navigator.pushReplacement(
+                  context,
+                    MaterialPageRoute(builder: (context) =>Dashboard(title: "Hallo Push",)),
+                 );
+                  },
               ),
-          SizedBox(height: 20,),
-      RaisedButton(
-        child: Text(
-          "Login",
-          style: TextStyle(color: Colors.white),
+            ],
+          ),
         ),
-        color: Colors.black87,
-        onPressed: () async {
-          SharedPreferences pref = await SharedPreferences.getInstance();
-          await pref.setInt("is_login", 1);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) =>Pertemuan8(title: "Hallo Push",)),
-          );
-        },
-      ),
-      ],
-    ),
-  ),
     );
 
           //Card(
