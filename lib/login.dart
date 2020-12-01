@@ -22,7 +22,7 @@ class _LoginState extends State<Login>{
   void navigateLogin() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
-    if (isLogin == 1) {
+    if (isLogin == 0) {
       Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => Home (title: "Home",)),
       );
@@ -90,39 +90,46 @@ class _LoginState extends State<Login>{
                     icon: Icon(
                       showPassword? Icons.visibility :Icons.visibility_off,
                     ),
-                  )
+                  onPressed: () {
+                    setState(() {
+                      this.showPassword = !this.showPassword;
+                    });
+                  },
                 ),
               ),
-        Padding(padding: EdgeInsets.all(5.0),
+             ),
+    Padding(padding: EdgeInsets.all(5.0),
+    ),
+         RaisedButton(
+        child: Text("Login",
+        style: TextStyle(color: Colors.white),
         ),
-              RaisedButton(
-                child: Text("Login",
-                  style: TextStyle(color: Colors.white),
-                ),
-                color: Colors.blue,
-                onPressed: (){
-                  if(_formKey.currentState.validate()){}
-                },
-              ),
+        color: Colors.blue,
+        onPressed: (){
+        if(_formKey.currentState.validate()){}
+        },
+        ),
 
-              RaisedButton(
-                child: Text("Logout",
-                  style: TextStyle(color: Colors.white),
-                ),
-                color: Colors.blue,
-                onPressed: () async {
-                  SharedPreferences pref = await SharedPreferences.getInstance();
-                  await pref.setInt('is_login', 1);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => Home(title: "Tugas 9",)),
-                  );
-                },
-              ),
-            ],
-          ),
+        RaisedButton(
+        child: Text("Logout",
+        style: TextStyle(color: Colors.white),
         ),
-      ),
+        color: Colors.blue,
+        onPressed: () async {
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        await pref.setInt('is_login', 1);
+        Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Home(title: "Home",)),
+        );
+            // }
+            _formKey.currentState.save();
+          },
+      )
+      ],
+    ),
+    )
+        ),
     );
   }
 }
