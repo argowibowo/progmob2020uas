@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dashboard.dart';
 import 'package:flutter_app/main.dart';
 import 'package:flutter_app/Pertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -116,7 +117,7 @@ class _LogInState extends State<Login> {
               SharedPreferences pref = await SharedPreferences.getInstance();
               await pref.setInt("is_login", 0);
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context)=>Pertemuan8(title: 'Push')));
+                  MaterialPageRoute(builder: (context)=>Dashboard(title: 'Push Hela')));
             },
             color: Colors.lightBlue,
             padding: EdgeInsets.symmetric(horizontal: 20),
