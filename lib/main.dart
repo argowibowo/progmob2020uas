@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_72180256/Pertemuan01.dart';
 import 'package:flutter_app_72180256/SplashScreen.dart';
 import 'package:flutter_app_72180256/TugasPertemuan08.dart';
+import 'package:flutter_app_72180256/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -115,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 await pref.setInt("is_login", 1);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => TugasPertemuan08(title: "Hallo Yok DI push Bund",)),
+                  MaterialPageRoute(builder: (context) => DashBoard(title: "Hallo Yok DI push Bund",)),
                 );
               },
             )
