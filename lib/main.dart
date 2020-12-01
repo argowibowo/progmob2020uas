@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob_app/dashboard.dart';
 import 'package:flutter_progmob_app/logIn.dart';
 import 'package:flutter_progmob_app/pertemuan1.dart';
 import 'package:flutter_progmob_app/splashScreen.dart';
@@ -48,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isLogin == 1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Push terus",)),
+        MaterialPageRoute(builder: (context) => Dashboard(title: "Push terus",)),
       );
     }
   }

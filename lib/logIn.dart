@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob_app/dashboard.dart';
 import 'package:flutter_progmob_app/main.dart';
 import 'package:flutter_progmob_app/tugasPertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -116,7 +117,7 @@ Widget _formBuilder(){
             SharedPreferences pref = await SharedPreferences.getInstance();
             await pref.setInt("is_login", 0);
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context)=>TugasPertemuan8(title: 'Push')));
+                  MaterialPageRoute(builder: (context)=>Dashboard(title: 'Push')));
           },
           color: Colors.lightBlue,
           padding: EdgeInsets.symmetric(horizontal: 20),

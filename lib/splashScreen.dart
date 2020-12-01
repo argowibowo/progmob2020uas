@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob_app/dashboard.dart';
 import 'package:flutter_progmob_app/logIn.dart';
 import 'package:flutter_progmob_app/main.dart';
 import 'package:flutter_progmob_app/tugasPertemuan8.dart';
@@ -37,13 +38,12 @@ class _SplashScreenState extends State<SplashScreen> {
     }else{
       return Timer(duration, (){
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Push terus")));
+            MaterialPageRoute(builder: (context) => Dashboard(title: "Push terus")));
       });
     }
   }
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
       ),
