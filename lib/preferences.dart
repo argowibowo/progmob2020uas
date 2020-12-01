@@ -1,14 +1,18 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart';
+import 'package:hello_world_flutter/dashboard.dart';
 import 'package:hello_world_flutter/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 class preferences extends StatefulWidget {
   preferences({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _PreferencesState createState() => _PreferencesState();
+  _PreferencesState createState() {
+    return _PreferencesState();
+  }
 }
 class _PreferencesState extends State<preferences> {
   void navigateLogin() async{
@@ -17,7 +21,7 @@ class _PreferencesState extends State<preferences> {
     if(isLogin == 1){
       Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => tugaspertemuan8(title: "PROGMOB2020",))
+          MaterialPageRoute(builder:(context) => dashboard(title: "DASHBOARD"))
       );
     }
   }
@@ -54,8 +58,8 @@ class _PreferencesState extends State<preferences> {
                   ),
                   TextFormField(
                     decoration: new InputDecoration(
-                      labelText: 'Masukkan Password',
-                      hintText: '**',
+                      labelText: 'Password',
+                      hintText: '*******',
                       border: OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(5),
                       ),
@@ -74,7 +78,7 @@ class _PreferencesState extends State<preferences> {
                       await pref.setInt("Is_login", 1);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => tugaspertemuan8(title: "PROGMOB 2020",)),
+                        MaterialPageRoute(builder:(context) => dashboard(title: "Dashboard")),
                       );
                     },
                   )

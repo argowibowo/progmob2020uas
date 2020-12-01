@@ -36,7 +36,7 @@ class _pertemuan1State extends State<pertemuan1> {
             ),
             TextFormField(
                 decoration: new InputDecoration(
-                    labelText: 'Test Input',
+                    labelText: 'Teks Input',
                     hintText: 'Teks yang akan diinput formatnya adalah sbb',
                     border: OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(5)),

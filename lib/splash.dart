@@ -1,8 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:hello_world_flutter/dashboard.dart';
 import 'package:hello_world_flutter/main.dart';
 import 'package:hello_world_flutter/preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class splash extends StatefulWidget {
 
@@ -11,20 +12,29 @@ class splash extends StatefulWidget {
 
 class _splash extends State<splash> {
 
-  void initState(){
-    super.initState();
-    splashStart();
-  }
-
   splashStart() async{
     var duration = const Duration(seconds: 3);
     return Timer(duration,(){
-     Navigator.pushReplacement(
-       context,
-       MaterialPageRoute(builder: (context) => preferences(title: "Welcome !",)),
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => preferences(title: "Welcome !",)),
 
-     );
+      );
     });
+  }
+
+  void navigateLogin() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if(isLogin == 1){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => dashboard(title: "DASHBOARD")));
+    }
+  }
+
+  void initState(){
+    super.initState();
+    splashStart();
+    navigateLogin();
   }
 
   @override
