@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Home.dart';
+import 'package:flutter_app/Jadwal/dashboardjadwal.dart';
+import 'package:flutter_app/Mahasiswa/dashboardmahasiswa.dart';
+import 'package:flutter_app/Matakuliah/dashboardmatakuliah.dart';
 import 'package:flutter_app/tugaspertemuan9.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -53,6 +56,34 @@ class _DashboardState extends State<Dashboard> {
               title: Text("Data Mahasiswa"),
               subtitle: Text("CRUD Data Mahasiswa"),
               trailing: Icon(Icons.people),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Mahasiswa()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Data Matakuliah"),
+              subtitle: Text("CRUD Data Matakuliah"),
+              trailing: Icon(Icons.book),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Matakuliah()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Data Jadwal"),
+              subtitle: Text("CRUD Data Jadwal"),
+              trailing: Icon(Icons.lock_clock),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Jadwal()),
+                );
+              },
             ),
             Divider(
               color: Colors.black,
@@ -75,6 +106,13 @@ class _DashboardState extends State<Dashboard> {
             ),
           ],
         ),
+      ),
+      body: Container(
+       child: Center(
+         child: Text(
+           "Dashboard Utama",style: TextStyle(fontSize: 30),
+         ),
+       ),
       ),
     );
   }
