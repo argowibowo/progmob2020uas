@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_72180219/dashboard.dart';
 import 'package:flutter_72180219/splashscreen.dart';
 import 'package:flutter_72180219/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SplashScreen (),
+      home: Dashboard (),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -72,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
     int isLogin = pref.getInt("is_login");
     if(isLogin == 1){
       Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => tugaspertemuan8(title: 'Hallo Push',)),
+        MaterialPageRoute(builder: (context) => Dashboard (title: "Dashboard",)),
       );
     }
   }
@@ -109,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   await prefs.setInt("is_login", 1);
                    Navigator.pushReplacement(
                      context, // menghilangkan tombol back di pojok kiri atas dan setelah diklik tombol kembali auto keluar hal
-                     MaterialPageRoute(builder: (context) => tugaspertemuan8(title: 'Hallo Push',)),
+                     MaterialPageRoute(builder: (context) => Dashboard (title: "Dashboard",)),
                    );
                  },
             )

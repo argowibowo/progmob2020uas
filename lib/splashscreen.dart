@@ -47,8 +47,8 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
       body: AnimatedContainer(
         // Use the properties stored in the State class.
-        width: 500,
-        height: 500,
+        width: 1000,
+        height: 1000,
         // Define how long the animation should take.
         duration: Duration(seconds: 1),
         // Provide an optional curve to make the animation feel smoother.
