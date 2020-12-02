@@ -63,7 +63,7 @@ class _LoginState extends State<Login> {
                 new TextFormField(
                   validator: (value) {
                     if (value.isEmpty && value.length == 0) {
-                      return "Username tidak boleh kosong";
+                      return "Username Gak Boleh Kosong Dab";
                     } else
                       return null;
                   },
@@ -82,7 +82,7 @@ class _LoginState extends State<Login> {
                 new TextFormField(
                   validator: (value) {
                     if (value.isEmpty && value.length == 0) {
-                      return "Password tidak boleh kosong";
+                      return "Password Gak Boleh Kosong";
                     } else
                       return null;
                   },
