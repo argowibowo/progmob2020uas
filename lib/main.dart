@@ -1,3 +1,6 @@
+import 'package:baru1/Mahasiswa/dashboard_mahasiswa.dart';
+import 'package:baru1/dashboard.dart';
+import 'package:baru1/tugaspertemuan8.dart';
 import 'package:flutter/material.dart';
 //import 'package:baru1/tugaspertemuan8.dart';
 import 'package:baru1/pertemuan.dart';
@@ -32,7 +35,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SplashScreen(),
+      home: SplashScreenPage(),
     );
   }
 }
@@ -74,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isiLogin ==1){
       Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>Login(title: "Halo Push",))
+          MaterialPageRoute(builder: (context) => Dashboard(title: "Halo Push",))
       );
     }
   }
@@ -124,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   await pref.setInt("is_login",1 );
               Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) =>Login(title: "Halo Push",))
+                  MaterialPageRoute(builder: (context) =>Dashboard(title: "Halo Push",))
               );
             }),
           ],

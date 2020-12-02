@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Pertemuan1 extends StatefulWidget {
-  Pertemuan1({Key key, this.title}) : super(key: key);
+
+class Pertemuan extends StatefulWidget {
+  Pertemuan({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _Pertemuan1State createState() => _Pertemuan1State();
+  _PertemuanState createState() => _PertemuanState();
 }
 
-class _Pertemuan1State extends State<Pertemuan1> {
+class _PertemuanState extends State<Pertemuan> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -21,10 +22,6 @@ class _Pertemuan1State extends State<Pertemuan1> {
   @override
   Widget build(BuildContext context) {
 
-    /*Text(
-              //'$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),*/
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
