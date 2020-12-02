@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isLogin == 1){
       Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => navigation(title: "Dashboard")),
+          MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard")),
       );
     }
   }

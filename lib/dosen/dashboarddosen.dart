@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_progmob_2020/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';

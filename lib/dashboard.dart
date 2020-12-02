@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progmob_2020/jadwal/dashboardjadwal.dart';
 import 'package:flutter_progmob_2020/main.dart';
 import 'package:flutter_progmob_2020/matkul/dashboardmatkul.dart';
+import 'package:flutter_progmob_2020/pertemuan1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dosen/dashboarddosen.dart';
 import 'mahasiswa/dashboardmahasiswa.dart';
@@ -18,7 +19,6 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final _formkey = GlobalKey<FormState>();
-
 
   @override
   void initState() {
@@ -103,7 +103,7 @@ class _DashboardState extends State<Dashboard> {
                 trailing: Icon(Icons.exit_to_app),
                 onTap: () async {
                   SharedPreferences pref = await SharedPreferences.getInstance();
-                  await pref.setInt("is_Login", 0);
+                  await pref.setInt("is_login", 0);
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo Push",)),
