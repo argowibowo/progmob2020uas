@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob_2020/dashboard.dart';
 import 'package:flutter_progmob_2020/navigation.dart';
 import 'package:flutter_progmob_2020/pertemuan1.dart';
 import 'package:flutter_progmob_2020/splashscreen.dart';
@@ -99,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   await pref.setInt("is_login", 1);
                   Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => navigation(title: "Dashboard",)),
+                  MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard",)),
                 );
               },
             )

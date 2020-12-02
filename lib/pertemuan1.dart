@@ -16,9 +16,8 @@ class _Pertemuan1State extends State<Pertemuan1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*AppBar: AppBar(
-        title: Text(widget.title),
-      ),*/
+      appBar: AppBar(
+      ),
       body: Form(
         key: _formkey,
         child: Container(

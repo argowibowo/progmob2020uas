@@ -15,8 +15,8 @@ class _navigationState extends State<navigation> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     home(),
-    Pertemuan1(title: 'Dashboard',),
-    setting()
+    Pertemuan1(title: '',),
+    setting(title: '',)
   ];
 
   void onTappedBar(int index){

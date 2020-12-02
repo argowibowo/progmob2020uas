@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progmob_2020/main.dart';
+import 'package:flutter_progmob_2020/pertemuan1.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 class splashscreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _splashscreenState extends State<splashscreen> {
       backgroundColor: Colors.green,
       image: Image.asset('asset/tenor.gif'),
       photoSize: 150.0,
-      navigateAfterSeconds: MyHomePage(title: 'Test',),
+      navigateAfterSeconds: MyHomePage(title: '',),
     );
   }
 }
