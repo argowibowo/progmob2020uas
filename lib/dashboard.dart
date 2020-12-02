@@ -5,6 +5,7 @@ import 'package:flutter_app_1/dashboarddosen.dart';
 import 'package:flutter_app_1/dashboardjadwal.dart';
 import 'package:flutter_app_1/dashboardmatkul.dart';
 import 'package:flutter_app_1/dashboardmhs.dart';
+import 'package:flutter_app_1/halamanlogin.dart';
 import 'package:flutter_app_1/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -102,7 +103,7 @@ class _DashboardState extends State<Dashboard> {
                 await pref.setInt("is_login", 0);
                 Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => HalamanLogin(title: "Halo Push",)),
+                    MaterialPageRoute(builder: (context) => HalamanLogin(title: "Halo ",)),
                 );
               },
              ),

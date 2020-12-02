@@ -1,11 +1,10 @@
 
+
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_1/dashboard.dart';
-import 'package:flutter_app_1/main.dart';
-import 'package:flutter_app_1/tugaspertemuan8.dart';
+import 'package:flutter_app_1/halamanlogin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
       return Timer(duration, (){
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_){
-              return HalamanLogin (title: "HalamanLogin");
+              return HalamanLogin (title: "Login");
             })
         );
       });
@@ -31,31 +30,59 @@ class _SplashScreenState extends State<SplashScreen> {
       return Timer(duration, (){
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_){
-              return Dashboard(title: "Login");
+              return HalamanLogin(title: "Login");
             })
         );
       });
     }
   }
 
+  double _height = 200;
+  double _width = 200;
+
   @override
   void initState() {
     super.initState();
-    startSplashScreen();
+    var duration = const Duration(seconds: 2);
+    Timer(duration, () {
+      startSplashScreen();
+      setState(() {
+        if(_height != 600)
+          _height = _height + 100;
+        if(_width != 600)
+          _width = _width + 100;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.pink,
-      body: Center(
-        child: Image.asset(
-          "images/images2.png",
-          width: 100.0,
-          height: 100.0,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        body: Container(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AnimatedContainer(
+                  duration: Duration(seconds: 3),
+                  curve: Curves.bounceInOut,
+                  width: _width,
+                  height: _height,
+                  child: Image.asset(
+                    "images/images2.png",
+                    width: _width,
+                    height: _height,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                ),
+              ],
+            )
         ),
       ),
     );
-
   }
 }
