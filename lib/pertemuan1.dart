@@ -74,7 +74,7 @@ class _pertemuan1State extends State<pertemuan1> {
                await pref.setInt("is_Login", 0);
                Navigator.pushReplacement(
                  context,
-                 MaterialPageRoute(builder: (context) => MyHomePage(title: "Hallo Push",)),
+                 MaterialPageRoute(builder: (context) => pertemuan1(title: "Hallo Push",)),
                );
               },
            ),

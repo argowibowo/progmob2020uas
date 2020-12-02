@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_flutter_2020/dasboard.dart';
 import 'package:project_flutter_2020/pertemuan08.dart';
 import 'package:project_flutter_2020/pertemuan1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(islogin == 1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => pertemuan1(title: "Hallo Push",)),
+        MaterialPageRoute(builder: (context) => Dashboard(title: "Hallo Push",)),
       );
     }
   }
@@ -89,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 await pref.setInt("is_Login", 1);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => pertemuan1(title: "Hallo Push",)),
+                  MaterialPageRoute(builder: (context) => Dashboard(title: "Hallo Push",)),
                 );
               },
             )
