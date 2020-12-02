@@ -36,5 +36,5 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - - assets/images/0.jpg
+    - assets/images/0.jpg
 

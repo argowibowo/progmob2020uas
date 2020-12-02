@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:progmob_aftuts/tugaspertemuan8.dart';
 import 'account.dart';
+import 'dashboard.dart';
 import 'forgotPage.dart';
 // import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
@@ -25,7 +26,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
 //  static const TextStyle optionStyle =
 //      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
-    TugasPertemuan8(),
+    Dashboard(),
     ForgotPage(),
     Account(),
   ];
@@ -84,7 +85,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
           GestureDetector(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => TugasPertemuan8()));
+                  MaterialPageRoute(builder: (context) => Dashboard()));
             },
             child: Container(
               decoration: BoxDecoration(
