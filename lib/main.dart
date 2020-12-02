@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Dashboard.dart';
 import 'package:flutter_app/Pertemuan1.dart';
 import 'package:flutter_app/Tugas8.dart';
 import 'package:flutter_app/Tugas9/SplashScreen.dart';
@@ -51,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isLogin == 1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Tugas8(title: "Hallo push",)),
+        MaterialPageRoute(builder: (context) => Dashboard(title: "Hallo ",)),
       );
     }
   }
@@ -93,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 await prefs.setInt("is_login", 1);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => Tugas8(title: "Hallo push",)),
+                  MaterialPageRoute(builder: (context) => Dashboard(title: "Hallo push",)),
                 );
               },
             ),
