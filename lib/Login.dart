@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progmob_2020/Login.dart';
 import 'package:flutter_progmob_2020/TugasPertemuan8.dart';
+import 'package:flutter_progmob_2020/dashboard.dart';
 import 'package:flutter_progmob_2020/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +20,7 @@ class _LoginState extends State<Login> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => TugasPertemuan8(title: 'Login')),
+            builder: (context) => Dashboard(title: 'Login')),
       );
     }
   }
@@ -71,7 +72,7 @@ class _LoginState extends State<Login> {
                       await pref.setInt("is_login", 1);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => TugasPertemuan8()),
+                        MaterialPageRoute(builder: (context) => Dashboard()),
                       );
                     },
                     child: Text(
