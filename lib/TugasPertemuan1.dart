@@ -92,7 +92,6 @@ class _Tgspertemuan1State extends State<Tgspertemuan1> {
                     onPressed: () async {
                       SharedPreferences pref = await SharedPreferences.getInstance();
                       await pref.setInt("is_logged", 0);
-
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => LoginPage(title: 'Nav',)),

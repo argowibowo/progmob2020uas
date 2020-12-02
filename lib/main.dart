@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_progmob/TugasPertemuan1.dart';
 import 'package:flutter_progmob/bottomnav.dart';
+import 'package:flutter_progmob/dashboard.dart';
 import 'package:flutter_progmob/pertemuan1.dart';
 import 'package:flutter_progmob/LoginPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (isLogged == 1) {
         return Timer(dur,(){
         Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => bottomnav(title: 'Nav',)),
+          MaterialPageRoute(builder: (context) => Dashboard(title: 'Nav',)),
         );
       });
       } else {

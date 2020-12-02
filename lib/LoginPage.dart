@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progmob/bottomnav.dart';
+import 'package:flutter_progmob/dashboard.dart';
 import 'package:flutter_progmob/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_progmob/TugasPertemuan1.dart';
@@ -87,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => bottomnav(title: 'Nav',)),
+                  MaterialPageRoute(builder: (context) => Dashboard(title: 'Nav',)),
                 );
               },
             )
