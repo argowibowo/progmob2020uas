@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/DashboardDosen/dashboarddosen.dart';
 import 'package:flutter_app/DashboardJadwal/dashboardjadwal.dart';
@@ -6,31 +5,24 @@ import 'package:flutter_app/DashboardMatkul/dashboardmatakuliah.dart';
 import 'package:flutter_app/DashboardMhs/dashboardmahasiswa.dart';
 import 'package:flutter_app/Tugas9/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-class Home extends StatefulWidget {
-  Home({Key key, this.title}) : super(key: key);
+
+class dashboard extends StatefulWidget {
+  dashboard({Key key, this.title}) : super(key: key);
   final String title;
+  @override
+  _dashboardState createState() => _dashboardState();
+}
+class _dashboardState extends State<dashboard> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-
-      _counter++;
-    });
+  void initState() {
+    super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-
-        title: Text(widget.title),
       ),
       drawer: Drawer(
         child: ListView(
