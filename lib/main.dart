@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_2020/dashboard.dart';
 import 'package:flutter_2020/pertemuan1.dart';
 import 'package:flutter_2020/Splashscreen.dart';
 import 'package:flutter_2020/tugas8.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: splshscrn(),
+      home: Dasbrd(),
     );
   }
 }
@@ -74,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isLogin==1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Tugas8(title:"Tugas Pertemuan 8")),
+        MaterialPageRoute(builder: (context) => Dasbrd(title:"Dashboard",)),
       );
     }
   }
@@ -119,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 await pref.setInt("is_Login", 1);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => Tugas8(title: "Tugas Pertemuan 8",)),
+                  MaterialPageRoute(builder: (context) => Tugas8(title: "Tugas 8",)),
                 );
               },
             )
