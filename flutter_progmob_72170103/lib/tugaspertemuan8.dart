@@ -57,7 +57,7 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
                   color: Colors.pink,
                   onPressed: validate,
                   child: Text(
-                    "Simpan",
+                    "Submit",
                     style: TextStyle(
                         color: Colors.white
                     ),

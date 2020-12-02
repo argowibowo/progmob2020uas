@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutterprogmob72170103/dashboard.dart';
 import 'package:flutterprogmob72170103/login.dart';
 import 'package:flutterprogmob72170103/pertemuan1.dart';
+import 'package:flutterprogmob72170103/splashscreen.dart';
 import 'package:flutterprogmob72170103/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Login(),
+      home: SplashScreen(),
 
     );
   }
@@ -67,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isLogin == 1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Halo Guys",)),
+        MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard",)),
       );
     }
   }
