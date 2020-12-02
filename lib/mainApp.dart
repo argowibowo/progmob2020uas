@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Login.dart/';
+import 'package:flutter_app/splashscreen.dart';
 import 'package:flutter_app/tugaspertemuan8.dart/';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_app/main.dart/';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
 
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Login(title: ' Login '),
+      home: SplashScreen(),
     );
   }
 }
