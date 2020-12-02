@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:progmob2020_flutter/home_view.dart';
+import 'package:progmob2020_flutter/dashboard.dart';
+//import 'package:progmob2020_flutter/home_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashLogin extends StatefulWidget {
@@ -13,18 +14,18 @@ class SplashLogin extends StatefulWidget {
 
 class _SplashLoginState extends State<SplashLogin> {
 
+  final _formKey = GlobalKey<FormState>();
   final myUsernameController = TextEditingController();
   final myPasswordController = TextEditingController();
   String username, password;
 
-  final formKey = GlobalKey<FormState>();
   void navigateLogin() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
     if(isLogin == 1){
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) {
-          return HomePage();
+          return Dashboard(title: "Dashboard",);
         }),
       );
     }
@@ -60,13 +61,13 @@ class _SplashLoginState extends State<SplashLogin> {
               controller: myUsernameController,
               decoration: new InputDecoration(
                 labelText: "Username",
-                hintText: "contoh: 72180210",
+                hintText: "contoh: natasha",
                 icon: Icon(
                   Icons.people,
                   color: Colors.blue,
                 ),
                 border: OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(5),
+                  borderRadius: new BorderRadius.circular(4),
                 ),
               ),
             ),
@@ -77,7 +78,7 @@ class _SplashLoginState extends State<SplashLogin> {
               //cekdata field kosong
               validator: (value){
                 if(value.isEmpty){
-                  return 'Please Input Username';
+                  return 'Please Input Password';
                 }
                 return null;
               },
@@ -93,27 +94,32 @@ class _SplashLoginState extends State<SplashLogin> {
                   color: Colors.blue,
                 ),
                 border: OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(5),
+                  borderRadius: new BorderRadius.circular(4),
                 ),
             ),
             ),
               RaisedButton(
-              color: Colors.blue,
-              onPressed: () async {
-                SharedPreferences pref = await SharedPreferences.getInstance();
-                await pref.setInt("is_login", 0);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
-              },
-              child: Text(
-                "SUBMIT",
-                style: TextStyle(
-                    color: Colors.white
+                color: Colors.blue,
+                onPressed: () async{
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  await pref.setInt("is_login", 0);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard",)),
+                  );
+                },
+                child: Text(
+                  "LOGIN",
+                  style: TextStyle(
+                      color: Colors.white
+                  ),
                 ),
+
               ),
-            )
+
+
+
+
           ],
         ),
       ),
