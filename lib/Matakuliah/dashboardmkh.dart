@@ -32,6 +32,14 @@ class _DashboardMkhState extends State<DashboardMkh> {
                     leading: Icon(Icons.assignment_outlined),
                     title:Text("E-Commerce"),
                     subtitle: Text("3 SKS - Budi Sutedjo DO, S.Kom, M.M."),
+                      trailing: PopupMenuButton(
+                        itemBuilder: (_) => <PopupMenuItem<String>>[
+                          new PopupMenuItem<String>(
+                              child: const Text('Update'), value: 'Update'),
+                          new PopupMenuItem<String>(
+                              child: const Text('Delete'), value: 'Delete'),
+                        ],
+                      )
                   )
                 ],
               )

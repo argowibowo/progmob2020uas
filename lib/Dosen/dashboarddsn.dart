@@ -32,6 +32,14 @@ class _DashboardDsnState extends State<DashboardDsn> {
                     leading: Icon(Icons.people),
                     title:Text("Budi Sutedjo DO, S.Kom, M.M."),
                     subtitle: Text("109E235 - budi.sutedjo@staff.ukdw.ac.id"),
+                      trailing: PopupMenuButton(
+                        itemBuilder: (_) => <PopupMenuItem<String>>[
+                          new PopupMenuItem<String>(
+                              child: const Text('Update'), value: 'Update'),
+                          new PopupMenuItem<String>(
+                              child: const Text('Delete'), value: 'Delete'),
+                        ],
+                      )
                   )
                 ],
               )

@@ -32,6 +32,14 @@ class _DashboardJdwlState extends State<DashboardJdwl> {
                     leading: Icon(Icons.schedule),
                     title:Text("Kamis, 17:30 - 19.20"),
                     subtitle: Text("E-Commerce - Budi Sutedjo DO, S.Kom, M.M."),
+                      trailing: PopupMenuButton(
+                        itemBuilder: (_) => <PopupMenuItem<String>>[
+                          new PopupMenuItem<String>(
+                              child: const Text('Update'), value: 'Update'),
+                          new PopupMenuItem<String>(
+                              child: const Text('Delete'), value: 'Delete'),
+                        ],
+                      )
                   )
                 ],
               )

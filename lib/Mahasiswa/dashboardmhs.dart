@@ -32,6 +32,14 @@ class _DashboardMhsState extends State<DashboardMhs> {
                     leading: Icon(Icons.person),
                     title:Text("Yose Awanaustus Salawangi"),
                     subtitle: Text("72180217 - yose.asalawangi@si.ukdw.ac.id"),
+                      trailing: PopupMenuButton(
+                        itemBuilder: (_) => <PopupMenuItem<String>>[
+                          new PopupMenuItem<String>(
+                              child: const Text('Update'), value: 'Update'),
+                          new PopupMenuItem<String>(
+                              child: const Text('Delete'), value: 'Delete'),
+                        ],
+                      )
                   )
                 ],
               )
