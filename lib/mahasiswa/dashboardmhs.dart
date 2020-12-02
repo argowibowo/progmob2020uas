@@ -64,6 +64,21 @@ class _DashboardMhsState extends State<DashboardMhs> {
                   ],
                 ),
               ),
+              ListTile(
+                leading: Icon(Icons.person),
+                title: Text("Carolus"),
+                subtitle: Text("72170104 - Carolus@si.ukdw.ac.id"),
+                trailing: PopupMenuButton(
+                  itemBuilder: (_) => <PopupMenuItem<String>>[
+                    new PopupMenuItem<String>(
+                      child: const Text('Update'), value: 'Update',
+                    ),
+                    new PopupMenuItem<String>(
+                      child: const Text('Delete'), value: 'Delete',
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),

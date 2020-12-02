@@ -84,6 +84,22 @@ class _DashboardDosenState extends State<DashboardDosen> {
                   ],
                 ),
               ),
+              ListTile(
+                leading: Icon(Icons.person),
+                title: Text("Budi Sutedjo"),
+                subtitle: Text("0923E35 - Budisutedjo@staff.ukdw.ac.id"),
+                trailing: PopupMenuButton(
+                  itemBuilder: (_) =>
+                  <PopupMenuItem<String>>[
+                    new PopupMenuItem<String>(
+                      child: const Text('Update'), value: 'Update',
+                    ),
+                    new PopupMenuItem<String>(
+                      child: const Text('Delete'), value: 'Delete',
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),

@@ -36,8 +36,8 @@ class _DashboardJadwalState extends State<DashboardJadwal> {
             children: <Widget>[
               ListTile(
                 leading: Icon(Icons.event_note_outlined),
-                title: Text("Kemanan Teknlogi Informasi"),
-                subtitle: Text("Kamis Sesi 1 (07.30- 09.20)"),
+                title: Text("Aplikasi Berbasis Dekstop"),
+                subtitle: Text("Senin (13.30- 15.20)"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(
@@ -52,7 +52,22 @@ class _DashboardJadwalState extends State<DashboardJadwal> {
               ListTile(
                 leading: Icon(Icons.event_note_outlined),
                 title: Text("BISNIS CERDAS LAYANAN KESEHATAN"),
-                subtitle: Text("Jumat Sesi 2 (19.30-11.20)"),
+                subtitle: Text("Jumat Sesi 2 (07.30-09.20)"),
+                trailing: PopupMenuButton(
+                  itemBuilder: (_) => <PopupMenuItem<String>>[
+                    new PopupMenuItem<String>(
+                      child: const Text('Update'), value: 'Update',
+                    ),
+                    new PopupMenuItem<String>(
+                      child: const Text('Delete'), value: 'Delete',
+                    )
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.event_note_outlined),
+                title: Text("KEAMANAN TEKNOLOGI INFORMASI"),
+                subtitle: Text("Senin Sesi 2 (11.30-13.20)"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(

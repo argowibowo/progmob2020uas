@@ -34,7 +34,7 @@ class _DashboardState extends State<Dashboard> {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text("Agusta Avelina Saputri Male"),
+              accountName: Text("Avelina Male"),
               accountEmail: Text("Agusta.avelina@Si.ukdw.ac.id"),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,

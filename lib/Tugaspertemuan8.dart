@@ -6,9 +6,9 @@ class Tugaspertemuan8 extends StatefulWidget {
   final String title;
 
   @override
-  _Pertemuan8State createState() => _Pertemuan8State();
+  _Tugaspertemuan8State createState() => _Tugaspertemuan8State();
 }
-class _Pertemuan8State extends State<Tugaspertemuan8> {
+class _Tugaspertemuan8State extends State<Tugaspertemuan8> {
   final _formKey = GlobalKey<FormState>();
   int _counter = 2;
 
@@ -33,7 +33,7 @@ class _Pertemuan8State extends State<Tugaspertemuan8> {
               //TextField(),
               TextFormField(
                 decoration: new InputDecoration(
-                  hintText: "Agusta Avelina Saputri Male",
+                  hintText: "Avelina Male",
                   labelText: "Nama Lengkap ",
                   icon: Icon(Icons.people),
                   border: OutlineInputBorder(

@@ -51,8 +51,23 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
               ),
               ListTile(
                 leading: Icon(Icons.book_sharp),
-                title: Text("Pemrograman Mobile"),
+                title: Text("PEMOGRAMAN MOBILE"),
                 subtitle: Text("SI3333"),
+                trailing: PopupMenuButton(
+                  itemBuilder: (_) => <PopupMenuItem<String>>[
+                    new PopupMenuItem<String>(
+                      child: const Text('Update'), value: 'Update',
+                    ),
+                    new PopupMenuItem<String>(
+                      child: const Text('Delete'), value: 'Delete',
+                    )
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.book_sharp),
+                title: Text("PEMOGRAMAN WEB"),
+                subtitle: Text("SI3332"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(
