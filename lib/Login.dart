@@ -59,8 +59,8 @@ class _LoginState extends State<Login> {
                   validator: (value){
                     if(value.isEmpty && value.length == 0) {
                       return "Username tidak boleh kosong";
-                      // } else if (!value.contains('7217019')){
-                      //   return "Username Anda salah";
+                      // }
+                      //
                     } else
                       return null;
                   },
