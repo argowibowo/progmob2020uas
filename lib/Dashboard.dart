@@ -1,9 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter72180249/dosen/DashboardDosen.dart';
 import 'package:flutter72180249/jadwal/DashboardJadwal.dart';
+import 'package:flutter72180249/login.dart';
 import 'package:flutter72180249/mahasiswa/DashboardMahasiswa.dart';
 import 'package:flutter72180249/main.dart';
-import 'package:flutter72180249/Dashboard.dart';
 import 'package:flutter72180249/login.dart';
 import 'package:flutter72180249/matakuliah/DashboardMatKul.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -76,7 +77,7 @@ class _DashboardState extends State<Dashboard> {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Dashboard Matakuliah",)),
+                    MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Dashboard Mata Kuliah",)),
                   );
                 },
               ),

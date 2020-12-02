@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_keren/tugaspertemuan8.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class Pertemuan1 extends StatefulWidget {
+  Pertemuan1({Key key, this.title}) : super(key: key);
+
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _Pertemuan1State createState() => _Pertemuan1State();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _Pertemuan1State extends State<Pertemuan1> {
+  int _counter = 0;
 
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -23,38 +29,27 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextFormField(
+             decoration: new InputDecoration(
+               labelText: "Text Input",
+               hintText: "Teks yang akan diinput",
+               border: OutlineInputBorder(
+                 borderRadius: new BorderRadius.circular(5),
+               )
+             ),
+            ),
             RaisedButton(
-              child:Text(
-                  'Login'
+              color: Colors.blue,
+              child: Text(
+                "Simpan",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
-              onPressed: () async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                await prefs.setInt("isLogin", 1);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => tugaspertemuan8(title: 'Home Page')),
-                );
-              },
             )
           ],
         ),
       ),
     );
-  }
-
-  void checkLogin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    int isLogin = prefs.getInt('isLogin');
-    if(isLogin == 1) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => tugaspertemuan8(title: 'Home Page')),
-      );
-    }
-  }
-
-  @override
-  void initState() {
-    checkLogin();
   }
 }
