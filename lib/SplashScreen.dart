@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Timer(duration, () {
       Navigator.of(context) .pushReplacement(
         MaterialPageRoute(builder: (_) {
-          return MyHomePage(title: 'Tugas 9');
+          return MyHomePage(title: 'Tugas Dashboard');
         }),
       );
     });

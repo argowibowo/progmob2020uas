@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progmob2020/Pertemuan1.dart';
+import 'package:flutter_progmob2020/SplashScreen.dart';
 import 'package:flutter_progmob2020/TugasPertemuan8.dart';
+import 'package:flutter_progmob2020/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TugasPertemuan8(title: 'Flutter Demo Home Page'),
+      home: SplashScreen(),
     );
   }
 }
@@ -77,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => TugasPertemuan8(title: "Halo Push",)),
+            builder: (context) => Dashboard(title: "Halo Push",)),
       );
     }
   }
@@ -133,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 await pref.setInt("is_login", 1);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Halo Push")),
+                  MaterialPageRoute(builder: (context) => Dashboard(title: "Halo Push")),
                 );
               },
             )
