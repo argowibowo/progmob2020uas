@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_72170134/pertemuan8.dart';
+import 'package:progmob_flutter/pertemuan8.dart';
 
 
 void main() {
@@ -30,8 +30,12 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Tugas pertemuan 8'),
+
+      home: MyHomePage(title: 'Tugas peremuan 8'),
     );
+
+
+
   }
 }
 
@@ -102,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Hello Tatan',
+              'Hello World!',
             ),
             Text(
               '$_counter',
