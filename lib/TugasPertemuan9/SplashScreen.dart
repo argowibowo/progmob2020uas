@@ -46,10 +46,10 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(duration, () {
       startSplashScreen();
       setState(() {
-        if(_height != 600)
-          _height = _height + 100;
-        if(_width != 600)
-          _width = _width + 100;
+        if(_height != 800)
+          _height = _height + 400;
+        if(_width != 800)
+          _width = _width + 400;
       });
     });
   }

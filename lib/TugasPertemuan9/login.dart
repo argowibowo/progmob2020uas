@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_progmob2020/TugasPertemuan9/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_app_progmob2020/TugasPertemuan10/dashboard.dart';
 
 SharedPreferences isLogin;
 
@@ -123,7 +124,7 @@ class _loginState extends State<login> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => home(title: "Home",)),
+                            builder: (context) => DashBoard(title: "Home",)),
                       );
                       // }
                       _formKey.currentState.save();
