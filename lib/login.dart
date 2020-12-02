@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_2020/dashboard.dart';
 import 'package:flutter_app_2020/home.dart';
 import 'package:flutter_app_2020/tugaspertemuan8.dart';
 import 'package:flutter_app_2020/main.dart';
@@ -75,7 +76,7 @@ class _LoginState extends State<Login> {
                       await pref.setInt("is_login", 1);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => tugaspertemuan8()),
+                        MaterialPageRoute(builder: (context) => DashBoard(title: 'DashBoard',)),
                       );
                     },
                     child: Text(
