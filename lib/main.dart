@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/tugaspertemuan8.dart';
 import 'package:flutter_app/splashscreeen.dart';
 
 void main() {
@@ -16,24 +15,21 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MySplash(title: 'Splash'),
+      home: MySplash(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
     MyHomePage({Key key, this.title}) : super(key: key);
+
     final String title;
+
     @override
     _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _incrementCounter() {
-    setState(() {
-
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      /*floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),*/ // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
