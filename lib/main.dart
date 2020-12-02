@@ -1,4 +1,5 @@
 import 'package:andre_fapp/TugasPertemuan8.dart';
+import 'package:andre_fapp/dashboard.dart';
 import 'package:andre_fapp/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:andre_fapp/pertemuan1.dart';
@@ -73,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => TugasPertemuan8(title: "Halo Push",)),
+            builder: (context) => DashBoard(title: "Halo Push",)),
       );
     }
   }
@@ -129,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 await pref.setInt("is_login", 1);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Halo Push")),
+                  MaterialPageRoute(builder: (context) => DashBoard(title: "Halo Push")),
                 );
               },
             ),

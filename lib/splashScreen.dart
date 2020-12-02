@@ -1,3 +1,4 @@
+import 'package:andre_fapp/login.dart';
 import 'package:flutter/material.dart';
 //import 'package:andre_fapp/Home.dart';
 import 'package:andre_fapp/TugasPertemuan8.dart';
@@ -24,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Timer(duration, () {
       Navigator.of(context) .pushReplacement(
         MaterialPageRoute(builder: (_) {
-          return MyHomePage(title:'Login');
+          return Login(title:'Login');
         }),
       );
     });
