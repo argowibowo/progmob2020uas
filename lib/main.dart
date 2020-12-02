@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progmob_2020/Pertemuan1.dart';
 import 'package:flutter_progmob_2020/SplashScreen.dart';
 import 'package:flutter_progmob_2020/TugasPertemuan8.dart';
+import 'package:flutter_progmob_2020/dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -76,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => TugasPertemuan8(title: "Halo Push",)),
+            builder: (context) => DashBoard(title: "Halo Push",)),
       );
     }
   }
@@ -132,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 await pref.setInt("is_login", 1);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => TugasPertemuan8(title: "Halo Push")),
+                  MaterialPageRoute(builder: (context) => DashBoard(title: "Halo Push")),
                 );
               },
             )
