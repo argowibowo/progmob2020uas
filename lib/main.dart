@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_72170102/pertemuan1.dart';
+import 'package:flutter_72170102/Pertemuan1.dart';
 import 'package:flutter_72170102/Tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
 
-      home: MyHomePage(title: 'Flutter 721701'),
+      home: MyHomePage(title: 'Flutter 72170102'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -91,7 +91,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
 
                 }
-            )
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+              RaisedButton(
+                child: Text(
+                  "Halaman Selanjutnya"
+                ),
+                onPressed: (){
+                  Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => Tugaspertemuan8(title: "Home",)),
+                  );
+                },
+                ),
+
           ],
         ),
       ),

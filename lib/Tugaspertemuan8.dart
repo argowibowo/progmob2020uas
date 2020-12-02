@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class pertemuan8 extends StatefulWidget {
-  pertemuan8({Key key, this.title}) : super(key: key);
+class Tugaspertemuan8 extends StatefulWidget {
+  Tugaspertemuan8({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
   _Pertemuan8State createState() => _Pertemuan8State();
 }
-class _Pertemuan8State extends State<pertemuan8> {
+class _Pertemuan8State extends State<Tugaspertemuan8> {
   final _formKey = GlobalKey<FormState>();
   int _counter = 2;
 
@@ -33,7 +33,7 @@ class _Pertemuan8State extends State<pertemuan8> {
               //TextField(),
               TextFormField(
                 decoration: new InputDecoration(
-                  hintText: "Contoh: Melsiora Saniba Fernandes",
+                  hintText: "Agusta Avelina Saputri Male",
                   labelText: "Nama Lengkap ",
                   icon: Icon(Icons.people),
                   border: OutlineInputBorder(

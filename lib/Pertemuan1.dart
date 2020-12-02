@@ -37,7 +37,7 @@ class _Pertemuan1State extends State<Pertemuan1> {
               //TextField(),
               TextFormField(
                 decoration: new InputDecoration(
-                  hintText: "Contoh: Avelina Male",
+                  hintText: "Agusta Avelina Saputri Male",
                   labelText: "Nama Lengkap ",
                   icon: Icon(Icons.people),
                   border: OutlineInputBorder(
