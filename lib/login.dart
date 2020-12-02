@@ -75,7 +75,7 @@ class _LoginState extends State<Login> {
                       await pref.setInt("is_login", 1);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => tugaspertemuan8()),
+                        MaterialPageRoute(builder: (context) => Dashboard()),
                       );
                     },
                     child: Text(
