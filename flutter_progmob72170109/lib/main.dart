@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob72170109/dashboard.dart';
 import 'package:flutter_progmob72170109/pertemuan1.dart';
 import 'package:flutter_progmob72170109/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,7 +50,7 @@ void navigateLogin() async{
      if (isLogin == 1){
        Navigator.pushReplacement(
          context,
-         MaterialPageRoute(builder: (context) => pertemuan1(title: "Hallo Push",)),
+         MaterialPageRoute(builder: (context) => Dashboard(title: "Hallo Push",)),
        );
 
      }
