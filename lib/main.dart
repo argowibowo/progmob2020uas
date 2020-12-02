@@ -67,21 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
-void navigateLogin() async{
-  SharedPreferences pref = await SharedPreferences.getInstance();
-    int isLogin = pref.getInt("is_login");
-    if(isLogin == 1) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => tugas_pertemuan8(title: "Halo",)),
-      );
-    }
-}
-  @override
-  void initState() {
-    navigateLogin();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -120,23 +106,21 @@ void navigateLogin() async{
             Text(
               'You have pushed the button this many times:',
             ),
-            RaisedButton(
-                child: Text(
-                  'Login'
-                ),
-                onPressed: () async{
-                  SharedPreferences pref = await SharedPreferences.getInstance();
-                  await pref.setInt("is_login", 1);
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => tugas_pertemuan8(title: "Halo",)),
-                  );
-                },
-            ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              child: Text(
+                  "Halaman Berikut"
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Pertemuan1(title: "Push",)),
+                );
+              },
+            )
           ],
         ),
       ),

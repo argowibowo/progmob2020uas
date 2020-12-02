@@ -13,80 +13,54 @@ class tugas_pertemuan8 extends StatefulWidget {
 }
 
 class _tugas_pertemuan8State extends State<tugas_pertemuan8> {
-  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  int _counter = 2;
 
-  void validate(){
-    if(formkey.currentState.validate()){
-      print("validated");
-    }else{
-      print("failed");
-    }
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tugas Flutter Widget'),
+        title: Text(widget.title),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(15.0),
-        child:Center(
-            child:Form(
-              key:formkey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  TextFormField(
-                    validator: (value){
-                      if(value.isEmpty){
-                        return "Nama Tidak Boleh Kosong";
-                      }else{
-                        return null;
-                      }
-                    },
-                    decoration: new InputDecoration(
-                      icon:Icon(
-                        Icons.people,
-                        color:  Colors.blue,
-                      ),
-                      labelText: "Nama Lengkap",
-                      hintText: "Contoh: Yohana Thalia",
-                      border: OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(3),
-                      ),
-                    ),
-                  ),
-                  RaisedButton(
-                    color: Colors.blue,
-                    onPressed:validate,
-                    child: Text(
-                      "Simpan",
-                      style: TextStyle(
-                          color: Colors.white
-                      ),
-                    ),
-                  ),
-                  RaisedButton(
-                    color: Colors.blue,
-                    onPressed: () async {
-                    SharedPreferences pref = await SharedPreferences.getInstance();
-                    await pref.setInt("is_login", 0);
-                    Navigator.pushReplacement(
-                    context,
-                   MaterialPageRoute(builder: (context) => MyHomePage(title: 'Logout',)),
-               );
-            },
-                   child: Text(
-                      "Logout",
-                  style: TextStyle(
-                   color: Colors.white
-             ),
-                   ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextFormField(
+              decoration: new InputDecoration(
+                labelText: "Nama Lengkap",
+                hintText: "Thalia",
+              ),
+            ),
+            Padding(
+                padding: EdgeInsets.all(5.0)
+            ),
+            TextFormField(
+              decoration: new InputDecoration(
+                  labelText: "NIM",
+                  hintText: "72170144",
+                  border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(5)
                   )
-                ],
+              ),
+            ),
+            RaisedButton(
+              focusColor: Colors.blue,
+              color: Colors.blue,
+              child: Text(
+                "Save",
+                style: TextStyle(
+                    color: Colors.white
+                ),
               ),
             )
+
+          ],
         ),
       ),
     );
