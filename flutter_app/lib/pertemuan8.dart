@@ -31,7 +31,7 @@ class _pertemuan8State extends State<pertemuan8> {
             TextFormField(
               decoration: new InputDecoration(
                 labelText: "Tes Input",
-                hintText: "Teks yang akan diinput formatnya adalah sbb",
+                hintText: "Teks yang akan diinput yaitu",
               ),
             ),
               Padding(
