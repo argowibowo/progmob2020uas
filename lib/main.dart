@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:simpelproject/splaschscreen.dart';
 import 'package:simpelproject/tugaspertemuan8.dart';
-import 'package:splashscreen/splashscreen.dart';
+import 'package:simpelproject/dashboard.dart';
 
 void main() =>runApp(MyApp()); 
   
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: splaschscreen(),
+      home: Dashboard(),
     );
   }
 }
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isLogin==1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => FormScreen(title: "Tugas Pertemuan 8",))
+        MaterialPageRoute(builder: (context) => FormScreen(title: "Dashboard",))
       );
     }
   }
