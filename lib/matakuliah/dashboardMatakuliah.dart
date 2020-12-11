@@ -24,7 +24,11 @@ class _DashboardMatakuliahState extends State<DashboardMatakuliah>{
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: (){},)
+            onPressed: (){
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddMatakuliah(title:"Tambah Matakuliah"))
+              ).then(onGoBack);
+            },)
         ],
       ),
       body:Container(
