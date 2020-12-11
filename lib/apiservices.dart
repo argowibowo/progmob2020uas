@@ -299,9 +299,9 @@ class ApiServices {
       "nama": data.nama,
       "nim_progmob": data.nim_progmob,
       "kode": data.kode,
-      "hari": data.hari.toString(),
-      "sesi": data.sesi.toString(),
-      "sks": data.sks.toString(),
+      "hari": data.hari,
+      "sesi": data.sesi,
+      "sks": data.sks,
       "kode_cari": kode_cari
     });
 

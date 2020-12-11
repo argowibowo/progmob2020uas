@@ -86,9 +86,9 @@ class _AddMatkulState extends State<AddMatkul> {
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      keyboardType: TextInputType.number,
+                      //keyboardType: TextInputType.number,
                       onSaved: (String value){
-                        this.mk.hari = int.parse(value);
+                        this.mk.hari = value;
                       },
                     ),
                     SizedBox(
@@ -104,9 +104,9 @@ class _AddMatkulState extends State<AddMatkul> {
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      keyboardType: TextInputType.number,
+                      //keyboardType: TextInputType.number,
                       onSaved: (String value){
-                        this.mk.sesi = int.parse(value);
+                        this.mk.sesi = value;
                       },
                     ),
                     SizedBox(
@@ -121,9 +121,9 @@ class _AddMatkulState extends State<AddMatkul> {
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      keyboardType: TextInputType.number,
+                      //keyboardType: TextInputType.number,
                       onSaved: (String value){
-                        this.mk.sks = int.parse(value);
+                        this.mk.sks = value;
                       },
                     ),
                     SizedBox(

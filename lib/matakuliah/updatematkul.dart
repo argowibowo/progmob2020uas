@@ -91,10 +91,10 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      initialValue: this.mk.hari.toString(),
-                      keyboardType: TextInputType.number,
+                      initialValue: this.mk.hari,
+                      //keyboardType: TextInputType.number,
                       onSaved: (String value){
-                        this.mk.hari = int.parse(value);
+                        this.mk.hari = value;
                       },
                     ),
                     SizedBox(
@@ -110,10 +110,10 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      initialValue: this.mk.sesi.toString(),
-                      keyboardType: TextInputType.number,
+                      initialValue: this.mk.sesi,
+                      //keyboardType: TextInputType.number,
                       onSaved: (String value){
-                        this.mk.sesi = int.parse(value);
+                        this.mk.sesi = value;
                       },
                     ),
                     SizedBox(
@@ -128,10 +128,10 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      initialValue: this.mk.sks.toString(),
-                      keyboardType: TextInputType.number,
+                      initialValue: this.mk.sks,
+                      //keyboardType: TextInputType.number,
                       onSaved: (String value){
-                        this.mk.sks = int.parse(value);
+                        this.mk.sks = value;
                       },
                     ),
                     SizedBox(

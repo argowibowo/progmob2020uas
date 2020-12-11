@@ -105,9 +105,9 @@ class Matkul{
   String id;
   String kode;
   String nama;
-  int hari;
-  int sesi;
-  int sks;
+  String hari;
+  String sesi;
+  String sks;
   String nim_progmob;
 
   //konstruktor
