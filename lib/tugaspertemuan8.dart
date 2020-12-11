@@ -50,7 +50,7 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
                       decoration: new InputDecoration(
                         icon: Icon(Icons.people),
                         labelText: "Nama Lengkap",
-                        hintText: "contoh: Magdalena Evelyn Halim",
+                        hintText: "contoh: Argo Uchiha",
                         border: OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(5),
                         ),

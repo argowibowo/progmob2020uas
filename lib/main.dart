@@ -23,6 +23,7 @@ import 'package:progmob_flutter/pertemuan1.dart';
 import 'package:progmob_flutter/pertemuan2.dart';
 import 'package:progmob_flutter/splashscreen.dart';
 import 'package:progmob_flutter/tugaspertemuan8.dart';
+import 'package:progmob_flutter/tugaspertemuan8cara_argo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
