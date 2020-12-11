@@ -5,10 +5,16 @@ import 'package:progmob_setelah_uts_72180190/loginpage.dart';
 import 'package:progmob_setelah_uts_72180190/mahasiswa/dashboardmhs.dart';
 import 'package:progmob_setelah_uts_72180190/matakuliah/dashboardmatakuliah.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:progmob_setelah_uts_72180190/model.dart';
+
+import 'apiservices.dart';
+
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key key, this.title}) : super(key: key);
   final String title;
+
+
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -16,6 +22,8 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final _formkey = GlobalKey<FormState>();
+
+  List<Mahasiswa> lMhs = new List();
 
   void initState() {
     super.initState();
@@ -128,7 +136,7 @@ class _DashboardState extends State<Dashboard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Dashboard", style: TextStyle(fontSize: 20, color: Colors.cyan),),
+            Text("Dashboard".toString(), style: TextStyle(fontSize: 20, color: Colors.cyan),),
           ],
         ),
       ),
