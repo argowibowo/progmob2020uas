@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_72180212/datadosen.dart';
+import 'package:flutter_72180212/DashboardDosen.dart';
 import 'package:flutter_72180212/datajadwal.dart';
-import 'package:flutter_72180212/datamahasiswa.dart';
-import 'package:flutter_72180212/datamatakuliah.dart';
+import 'package:flutter_72180212/DashboardMhs.dart';
+import 'package:flutter_72180212/DashboardMatkul.dart';
 import 'package:flutter_72180212/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
                   Navigator.pop(context);
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Dosen(title: "Data Dosen"))
+                      MaterialPageRoute(builder: (context) => DashboardDosen(title: "Data Dosen"))
                   );
                 },
               ),
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
                   Navigator.pop(context);
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Mahasiswa(title: "Data Mahasiswa"))
+                      MaterialPageRoute(builder: (context) => DashboardMhs(title: "Data Mahasiswa"))
                   );
                 },
               ),
@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
                   Navigator.pop(context);
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Matakuliah(title: "Data Matakuliah"))
+                      MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Data Matakuliah"))
                   );
                 },
               ),
