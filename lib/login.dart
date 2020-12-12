@@ -123,14 +123,6 @@ class _LoginState extends State<Login> {
                   ),
                   onPressed: () async {
                     if(_formKey.currentState.validate()){
-                      // // get value from textbox
-                      // username = myUsernameController.text;
-                      // password = myPasswordController.text;
-                      // if(username != '72180180'){
-                      //   return "Username anda salah";
-                      // } else if(password != '12345'){
-                      //   return "Password anda salah";
-                      // } else {
                       SharedPreferences pref = await SharedPreferences.getInstance();
                       await pref.setInt("is_login", 1);
                       Navigator.pushReplacement(
