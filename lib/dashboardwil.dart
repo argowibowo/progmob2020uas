@@ -125,7 +125,7 @@ class _DashboardwilState extends State<Dashboardwil> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DashboardMatakuliah(title: "Menu Matakuliah",)),
+                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Menu Matakuliah",)),
                 );
               },
             ),
@@ -150,7 +150,7 @@ class _DashboardwilState extends State<Dashboardwil> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DashboardJadwal(title: "Menu Jadwal",)),
+                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Menu Jadwal",)),
                 );
               },
             ),
@@ -188,8 +188,10 @@ class _DashboardwilState extends State<Dashboardwil> {
           child: Center(
             child: Text("Dibuat Oleh WiL",
               style: TextStyle(
-                fontSize: 20
+                fontSize: 20,
+
               ),
+
 
             ),
           ),

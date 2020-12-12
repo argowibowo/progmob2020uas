@@ -1,92 +1,131 @@
+
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wil_app/Login.dart';
+import 'package:wil_app/model.dart';
+import 'package:wil_app/apiservices.dart';
+import 'package:wil_app/dosen/adddosen.dart';
+import 'package:wil_app/dosen/updatedosen.dart';
 
 
-class Dashboard_dosen extends StatefulWidget {
-  Dashboard_dosen({Key key, this.title}) : super(key: key);
 
 
-
+  class Dashboard_dosen extends StatefulWidget {
+    Dashboard_dosen({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
   _Dashboard_dosenState createState() => _Dashboard_dosenState();
-}
+  }
 
-class _Dashboard_dosenState extends State<Dashboard_dosen> {
-  int _counter = 2;
+  class _Dashboard_dosenState extends State<Dashboard_dosen> {
+  final _formKey = GlobalKey<FormState>();
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  List<Dosen> listDosen;
+
+  FutureOr onGoBack(dynamic value) {
+  setState(() {
+
+  });
+  }
+
+  @override
+  void initState() {
+  super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dosen"),
+        title: Text(widget.title),
         actions: <Widget>[
           IconButton(
-            icon:Icon(Icons.add),
-            onPressed: (){},
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddDosen(title: "Input Data Dosen"))
+                ).then(onGoBack);
+              }
           )
         ],
-
       ),
 
-      body: Container(
-        child: Card(
-          child : Column(
-            mainAxisSize: MainAxisSize.min,
-            children : <Widget>[
-              ListTile(
-                leading: Icon(Icons.person),
-                title: Text("Jong Jek Siang"),
-                subtitle: Text("0516180230 - jjs@staff.ukdw.ac.id"),
-                onLongPress: (){
-                  showDialog(
-                      context: context,
-                      builder: (_) => new AlertDialog(
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            FlatButton(
-                              child: Text(
-                                "Update",
-                                style: TextStyle(
+      body: FutureBuilder(
+        future: ApiServices().getDosen(),
+        builder: (BuildContext context, AsyncSnapshot<List<Dosen>> snapshot) {
+          if (snapshot.hasError){
+            return Center(
+              child: Text(
+                  "Something wrong with message: ${snapshot.error.toString()}"
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            listDosen = snapshot.data;
 
-                                ),
-                              ),
-                              onPressed: (){
-                                Navigator.pop(context);
-                                //nanti akan pindah ke menu update dosen
-                              },
-                            ),
-                            FlatButton(
-                              child: Text(
-                                "Delete",
-                                style: TextStyle(
+            return ListView.builder(
+              itemBuilder: (context, position) {
+                return Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(listDosen[position].nama + ", " + listDosen[position].gelar),
+                      subtitle: Text(listDosen[position].nidn + " - " + listDosen[position].email),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(listDosen[position].foto),
+                      ),
+                      onLongPress: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  FlatButton(
+                                      onPressed: (){
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => UpdateDosen(title: "Update Data Dosen",
+                                                dosen: listDosen[position],
+                                                nidncari: listDosen[position].nidn))
+                                        ).then(onGoBack);
+                                      },
+                                      child: Text("Update")
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    height: 20,
+                                  ),
+                                  FlatButton(
+                                      onPressed: () async {
+                                        ApiServices().deleteDosen(listDosen[position].nidn);
+                                        Navigator.pop(context);
+                                        setState(() {
 
-                                ),
+                                        });
+                                      },
+                                      child: Text("Delete")
+                                  ),
+                                ],
                               ),
-                              onPressed: (){
-                                Navigator.pop(context);
-                                //nanti akan pindah ke menu delete dosen
-                              },
-                            ),
-                          ],
-                        ),
-                      )
-                  );
-                },
-              )
-            ],
-          ),
-        ),
+                            )
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+              itemCount: listDosen.length,
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }
-}
+  }

@@ -1,12 +1,16 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wil_app/Login.dart';
+import 'package:wil_app/model.dart';
+import 'package:wil_app/apiservices.dart';
+import 'package:wil_app/mahasiswa/addmhs.dart';
+import 'package:wil_app/mahasiswa/updatemhs.dart';
+
 
 
 class DashboardMahasiswa extends StatefulWidget {
   DashboardMahasiswa({Key key, this.title}) : super(key: key);
-
-
 
   final String title;
 
@@ -15,79 +19,115 @@ class DashboardMahasiswa extends StatefulWidget {
 }
 
 class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
-  int _counter = 2;
+  final _formkey = GlobalKey<FormState>();
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  List<Mahasiswa> listMhs = new List();
+
+  FutureOr onGoBack(dynamic value){
+    setState(() {});
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("Mahasiswa"),
+        title: Text(widget.title),
         actions: <Widget>[
           IconButton(
-            icon:Icon(Icons.add),
-            onPressed: (){},
+            icon: Icon(Icons.add),
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddMhs(title:"Input Data Mahasiswa")),
+              ).then((onGoBack)
+              );
+            },
           )
-        ],
 
+        ],
       ),
 
-      body: Container(
-        child: Card(
-          child : Column(
-            mainAxisSize: MainAxisSize.min,
-            children : <Widget>[
-              ListTile(
-                leading: Icon(Icons.person),
-                title: Text("Wilfridus Bau Mau "),
-                subtitle: Text("72180230 - wilfridus.bau@si.ukdw.ac.id"),
-                onLongPress: (){
-                  showDialog(
-                      context: context,
-                      builder: (_) => new AlertDialog(
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            FlatButton(
-                              child: Text(
-                                "Update",
-                                style: TextStyle(
+      body: FutureBuilder(
+        future: ApiServices().getMahasiswa(),
+        builder: (BuildContext context, AsyncSnapshot<List<Mahasiswa>> snapshot) {
+          if (snapshot.hasError){
+            return Center(
+              child: Text(
+                  "Something wrong with message: ${snapshot.error.toString()}"
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
 
-                                ),
-                              ),
-                              onPressed: (){
-                                Navigator.pop(context);
-                                //nanti akan pindah ke menu update mahasiswa
-                              },
-                            ),
-                            FlatButton(
-                              child: Text(
-                                "Delete",
-                                style: TextStyle(
+            listMhs = snapshot.data;
 
-                                ),
+            return ListView.builder(
+              itemBuilder: (context, position) {
+                return Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(listMhs[position].nama + " - " + listMhs[position].nim),
+                      subtitle: Text(listMhs[position].email),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(listMhs[position].foto),
+                      ),
+                      onLongPress: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  FlatButton(
+                                      onPressed: (){
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => UpdateMhs(title: "Update Data Mahasiswa",
+                                                mhs: listMhs[position],
+                                                nimcari: listMhs[position].nim))
+                                        ).then(onGoBack);
+                                      },
+                                      child: Text("Update")
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    height: 20,
+                                  ),
+                                  FlatButton(
+                                      onPressed: () async {
+                                        ApiServices().deleteMhs(listMhs[position].nim);
+                                        Navigator.pop(context);
+                                        setState(() {
+
+                                        });
+                                      },
+                                      child: Text("Delete")
+                                  ),
+                                ],
                               ),
-                              onPressed: (){
-                                Navigator.pop(context);
-                                //nanti akan pindah ke menu update mahasiswa
-                              },
-                            ),
-                          ],
-                        ),
-                      )
-                  );
-                },
-              )
-            ],
-          ),
-        ),
+                            )
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+              itemCount: listMhs.length,
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
+
+
+
+
   }
 }
