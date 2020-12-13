@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Pertemuan1.dart';
 import 'package:flutter_app/Tugas8.dart';
+import 'package:flutter_app/Tugas9/Home.dart';
 import 'package:flutter_app/Tugas9/Splashscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isLogin == 1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Tugas8(title: "Hallo push",)),
+        MaterialPageRoute(builder: (context) => Home(title: "Hallo push",)),
       );
     }
   }

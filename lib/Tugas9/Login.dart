@@ -22,10 +22,10 @@ class _LoginState extends State<Login> {
   void navigateLogin() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
-    if (isLogin == 1) {
+    if(isLogin == 1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Home(title: "Home",)),
+        MaterialPageRoute(builder: (context) => Home(title: "Halaman Utama",)),
       );
     }
   }
@@ -43,6 +43,7 @@ class _LoginState extends State<Login> {
       ),
       body: Form(
           key: _formKey,
+          // using SingleChildScrollView biar tidak ada garis markanya :)
           child: SingleChildScrollView(
             padding: EdgeInsets.all(20.0),
             child: Column(
@@ -50,10 +51,8 @@ class _LoginState extends State<Login> {
               children: <Widget>[
                 new Container(
                   margin: EdgeInsets.only(left: 20, right: 20),
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height / 5,
+                  // seberapa besar device, akan diukur tingginya
+                  height: MediaQuery.of(context).size.height / 5,
                   child: new Image.asset(
                     "images/icon.png",
                     // width: 200,
@@ -61,15 +60,17 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 new TextFormField(
-                  validator: (value) {
-                    if (value.isEmpty && value.length == 0) {
+                  validator: (value){
+                    if(value.isEmpty && value.length == 0) {
                       return "Username tidak boleh kosong";
+                    } else if (!value.contains('72180204')){
+                      return "Username atau password";
                     } else
                       return null;
                   },
                   controller: myUsernameController,
                   decoration: new InputDecoration(
-                    icon: const Icon(Icons.account_circle),
+                    icon: const Icon(Icons.person),
                     labelText: "Username",
                     border: OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(5),
@@ -80,9 +81,11 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.all(5.0),
                 ),
                 new TextFormField(
-                  validator: (value) {
-                    if (value.isEmpty && value.length == 0) {
+                  validator: (value){
+                    if(value.isEmpty && value.length == 0) {
                       return "Password tidak boleh kosong";
+                    } else if (!value.contains('12345')){
+                      return "Username atau password";
                     } else
                       return null;
                   },
@@ -96,6 +99,8 @@ class _LoginState extends State<Login> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
+                        // Icons.visibility_off,
+                        // color: this.showPassword ? Colors.blue : Colors.grey,
                         showPassword ? Icons.visibility : Icons.visibility_off,
                       ),
                       onPressed: () {
@@ -105,9 +110,11 @@ class _LoginState extends State<Login> {
                       },
                     ),
                   ),
+
                 ),
-                RaisedButton(
+                RaisedButton (
                   color: Colors.blue,
+                  // disabledColor: Colors.blue,
                   child: Text(
                     "Login",
                     style: TextStyle(
@@ -115,14 +122,12 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-                      SharedPreferences pref = await SharedPreferences
-                          .getInstance();
+                    if(_formKey.currentState.validate()){
+                      SharedPreferences pref = await SharedPreferences.getInstance();
                       await pref.setInt("is_login", 1);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => Home(title: "Home",)),
+                        MaterialPageRoute(builder: (context) => Home(title: "Dashboard",)),
                       );
                       // }
                       _formKey.currentState.save();

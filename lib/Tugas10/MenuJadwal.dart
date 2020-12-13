@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,9 +36,9 @@ class _JadwalState extends State<Jadwal> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                leading: Icon(Icons.bookmark_border),
-                title: Text("Senin"),
-                subtitle: Text("Matakuliah Dasar-Dasar Pemrograman"),
+                leading: Icon(Icons.person),
+                title: Text("Dasar-Dasar Pemrograman"),
+                subtitle: Text("Sesi 2"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(
@@ -53,9 +51,9 @@ class _JadwalState extends State<Jadwal> {
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.bookmark_border),
-                title: Text("Selasa"),
-                subtitle: Text("Matakuliah Data Mining"),
+                leading: Icon(Icons.person),
+                title: Text("Data Warehouse"),
+                subtitle: Text("Sesi 3"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(
@@ -68,9 +66,9 @@ class _JadwalState extends State<Jadwal> {
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.bookmark_border),
-                title: Text("Rabu"),
-                subtitle: Text(" Matakuliah Pemrograman Web"),
+                leading: Icon(Icons.person),
+                title: Text("Pemrograman Web"),
+                subtitle: Text("Sesi 1"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(

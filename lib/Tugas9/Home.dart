@@ -6,6 +6,7 @@ import 'package:flutter_app/Tugas10/DataMatakuliah.dart';
 import 'package:flutter_app/Tugas10/MenuJadwal.dart';
 import 'package:flutter_app/Tugas9/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 class Home extends StatefulWidget {
   Home({Key key, this.title}) : super(key: key);
   final String title;
@@ -15,12 +16,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _counter = 0;
+  final _formKey = GlobalKey<FormState>();
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
                   Navigator.pop(context);
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Dosen(title: "Data Dosen"))
+                      MaterialPageRoute(builder: (context) => DashboardDosen(title: "Data Dosen"))
                   );
                 },
               ),
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
                   Navigator.pop(context);
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Mahasiswa(title: "Data Mahasiswa"))
+                      MaterialPageRoute(builder: (context) => DashboardMhs(title: "Data Mahasiswa"))
                   );
                 },
               ),
@@ -75,14 +75,14 @@ class _HomeState extends State<Home> {
                   Navigator.pop(context);
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Matakuliah(title: "Data Matakuliah"))
+                      MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Data Matakuliah"))
                   );
                 },
               ),
               ListTile(
                 title: Text("Jadwal"),
                 subtitle: Text("Menu Jadwal"),
-                trailing: Icon(Icons.book_sharp),
+                trailing: Icon(Icons.schedule),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -90,6 +90,12 @@ class _HomeState extends State<Home> {
                       MaterialPageRoute(builder: (context) => Jadwal(title: "Data Jadwal"))
                   );
                 },
+              ),
+              Divider(
+                color: Colors.black,
+                height: 10,
+                indent: 10,
+                endIndent: 10,
               ),
               ListTile(
                 title: Text("Logout"),
@@ -109,10 +115,7 @@ class _HomeState extends State<Home> {
 
         body: Container(
           child: Center(
-            child: ListView(
-              children: <Widget>[
-              ],
-            ),
+            child: Text("Home"),
           ),
         )
     );
