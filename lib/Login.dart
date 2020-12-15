@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_app/Pertemuan8.dart';
+import 'package:flutter_app/dashboardmain.dart';
 
 
 
@@ -78,7 +79,7 @@ class _LoginState extends State<Login> {
                     await pref.setInt("is_login", 1);
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Home(title : "Flutter App",)),
+                      MaterialPageRoute(builder: (context) => Dashboardmain(title : "Flutter App",)),
                     );
                   },
                 ),

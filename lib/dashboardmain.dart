@@ -1,22 +1,25 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_app/Login.dart';
 import 'package:flutter_app/dosen/dashboard_dosen.dart';
 import 'package:flutter_app/jadwal/dashboard_jadwal.dart';
 import 'package:flutter_app/mahasiswa/dashboard_mahasiswa.dart';
 //import 'package:flutter_app/Matakuliah/dashboard_matakuliah.dart';
 
-import 'package:flutter_app/Login.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-class Home extends StatefulWidget {
-  Home({Key key, this.title}) : super(key: key);
+
+class Dashboardmain extends StatefulWidget {
+  Dashboardmain({Key key, this.title}) : super(key: key);
+
+
+
   final String title;
 
   @override
-  _HomeState createState() => _HomeState();
+  _DashboardmainState createState() => _DashboardmainState();
 }
 
-class _HomeState extends State<Home> {
-  int _counter = 0;
+class _DashboardmainState extends State<Dashboardmain> {
+  int _counter = 2;
 
   void _incrementCounter() {
     setState(() {
@@ -68,12 +71,11 @@ class _HomeState extends State<Home> {
                   color: Colors.grey,
                 ),
               ),
-              onTap: () {
+              onTap: (){
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>
-                      Dashboard_dosen(title: "Menu Dosen",)),
+                  MaterialPageRoute(builder: (context) => Dashboard_dosen(title: "Menu Dosen",)),
                 );
               },
             ),
@@ -94,12 +96,11 @@ class _HomeState extends State<Home> {
                   color: Colors.grey,
                 ),
               ),
-              onTap: () {
+              onTap: (){
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>
-                      DashboardMahasiswa(title: "Menu Mahasiswa",)),
+                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Menu Mahasiswa",)),
                 );
               },
             ),
@@ -120,12 +121,11 @@ class _HomeState extends State<Home> {
                   color: Colors.grey,
                 ),
               ),
-              onTap: () {
+              onTap: (){
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>
-                      DashboardMahasiswa(title: "Menu Matakuliah",)),
+                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Menu Matakuliah",)),
                 );
               },
             ),
@@ -146,12 +146,11 @@ class _HomeState extends State<Home> {
                   color: Colors.grey,
                 ),
               ),
-              onTap: () {
+              onTap: (){
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>
-                      DashboardMahasiswa(title: "Menu Jadwal",)),
+                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Menu Jadwal",)),
                 );
               },
             ),
@@ -172,13 +171,12 @@ class _HomeState extends State<Home> {
                 Icons.exit_to_app,
                 color: Color(0xFF0D47A1),
               ),
-              onTap: () async {
+              onTap: () async{
                 SharedPreferences pref = await SharedPreferences.getInstance();
                 await pref.setInt("is_login", 0);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) =>
-                      Login(title: "Login Sistem Akademik",)),
+                  MaterialPageRoute(builder: (context) => Login(title: "Login Sistem Akademik",)),
                 );
               },
             ),
@@ -187,16 +185,16 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: Container(
-        child: Center(
-          child: Text("Nael",
-            style: TextStyle(
-              fontSize: 20,
+          child: Center(
+            child: Text("Nael",
+              style: TextStyle(
+                fontSize: 20,
+
+              ),
+
 
             ),
-
-
           ),
-        ),
       ),
     );
   }
