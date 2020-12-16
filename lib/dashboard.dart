@@ -46,7 +46,7 @@ class _dashboardState extends State<dashboard> {
                 onTap: (){
                   Navigator.pop(context);
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => dashboardmhs(title:"Dashboard Mahasiswa")));
+                      MaterialPageRoute(builder: (context) => DashboardMahasiswa(title:"Dashboard Mahasiswa")));
                 },
               ),
 
@@ -57,7 +57,7 @@ class _dashboardState extends State<dashboard> {
                 onTap: (){
                   Navigator.pop(context);
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => dashboarddosen(title:"Dashboard Dosen")));
+                      MaterialPageRoute(builder: (context) => DashboardDosen(title:"Dashboard Dosen")));
                 },
               ),
 
