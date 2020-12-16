@@ -59,7 +59,7 @@ class _DashboardState extends State<Dashboard> {
               onTap: (){
                 Navigator.pop(context);
                 Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Mahasiswa()),
+                  MaterialPageRoute(builder: (context) => Mahasiswadb()),
                 );
               },
             ),
