@@ -35,7 +35,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
             onPressed: (){
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AddMahasiswa(title: "Tambah Data Mahasiswa")),
+                  MaterialPageRoute(builder: (context) => AddMhs(title: "Tambah Data Mahasiswa")),
               ).then(onGoBack);
             },
           )
@@ -76,7 +76,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
                                       Navigator.pop(context);
                                       Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => UpdateMahasiswa(title: "Update Mahasiswa",
+                                          MaterialPageRoute(builder: (context) => UpdateMhs(title: "Update Mahasiswa",
                                               mhs:lMhs[position], nimcari: lMhs[position].nim)),
                                       ).then(onGoBack);
                                     },
