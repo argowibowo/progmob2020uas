@@ -149,4 +149,62 @@ class ApiServices{
       return false;
     }
   }
+
+  Future<bool> updateDsnWithFoto(Dosen data, File file,
+      String nidncari) async {
+    String isfotoupdate = "0";
+    var request = http.MultipartRequest(
+        'POST', Uri.parse("$baseUrl/api/progmob/dosen/updatewithfoto")
+    );
+
+    Map<String, String> headers = {"Content-type": "multipart/form-data"};
+
+    request.headers.addAll(headers);
+    if (file != null) {
+      request.files.add(
+          http.MultipartFile(
+              "foto",
+              file.readAsBytes().asStream(),
+              file.lengthSync(),
+              filename: file.path
+          )
+      );
+      isfotoupdate = "1";
+    }
+
+    request.fields.addAll({
+      "nama": data.nama,
+      "nidn": data.nidn,
+      "alamat": data.alamat,
+      "email": data.email,
+      "gelar": data.gelar,
+      "nim_progmob": data.nim_progmob,
+      "nidn_cari": nidncari,
+      "is_foto_update": isfotoupdate
+    });
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> deleteDsn(String nidn) async {
+    final response = await client.post(
+        "$baseUrl/api/progmob/dosen/delete",
+        headers :{"content-type" : "application/json"},
+        body : jsonEncode(<String, String>{
+          "nidn":nidn,
+          "nim_progmob": "72180225"
+        })
+    );
+
+    if (response.statusCode == 200){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

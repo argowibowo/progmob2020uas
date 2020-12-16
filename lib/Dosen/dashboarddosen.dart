@@ -1,13 +1,28 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class Dosen extends StatefulWidget {
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/Dosen/adddosen.dart';
+import 'package:flutter_app/Dosen/updatedsn.dart';
+import 'package:flutter_app/Mahasiswa/updatemhs.dart';
+import 'package:flutter_app/apiservices.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_app/model.dart';
+
+class Dosendb extends StatefulWidget {
+  Dosendb({Key key, this.title}) :super(key:key);
+  final String title;
   @override
-  _DosenState createState() => _DosenState();
+  _DosendbState createState() => _DosendbState();
 }
 
-class _DosenState extends State<Dosen> {
-  GlobalKey<FormState> key = GlobalKey<FormState>();
+class _DosendbState extends State<Dosendb> {
+  final _formkey = GlobalKey<FormState>();
+
+  List<Dosen> lDsn = new List();
+
+  FutureOr onGoBack(dynamic value) {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,39 +32,85 @@ class _DosenState extends State<Dosen> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: (){},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddDsn(title: "Tambah Dosen",)),
+              ).then(onGoBack);
+            },
           ),
         ],
-        ),
-
-      body: Container(
-          child: GestureDetector(
-            child: Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text("Jong Jek siang"),
-                    subtitle: Text("08127127 - jjs@gmail.com"),
-                    trailing: PopupMenuButton(
-                          itemBuilder: (BuildContext context) {
-                            return List<PopupMenuEntry<String>>()
-                              ..add(PopupMenuItem<String>(
-                                value: 'edit',
-                                child: Text('Edit'),
-                              ))
-                              ..add(PopupMenuItem<String>(
-                                value: 'delete',
-                                child: Text('Delete'),
-                              ));
-                          },
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
+      ),
+      body: FutureBuilder(
+        future: ApiServices().getDosen(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Dosen>> snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text("ada yang salah: ${snapshot.error.toString()}"),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            lDsn = snapshot.data;
+            return ListView.builder(
+              itemBuilder: (context, position) {
+                return Card(
+                    margin: new EdgeInsets.symmetric(
+                        horizontal: 5.0, vertical: 1.0),
+                    child: Container(
+                      child: ListTile(
+                        title: Text(
+                            lDsn[position].nama + " - " + lDsn[position].nidn),
+                        subtitle: Text(lDsn[position].email),
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(lDsn[position].foto),
+                        ),
+                        onLongPress: () {
+                          showDialog(
+                              context: context,
+                              builder: (_) => new AlertDialog(
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    FlatButton(
+                                      child: Text("UPDATE"),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => UpdateDsn(title:"Ubah data",dsn: lDsn[position],nidncari: lDsn[position].nidn)),
+                                        ).then(onGoBack);
+                                      },
+                                    ),
+                                    Divider(
+                                      color: Colors.black,
+                                      height: 20,
+                                    ),
+                                    FlatButton(
+                                      child: Text("Delete"),
+                                      onPressed: () async {
+                                        ApiServices()
+                                            .deleteMhs(lDsn[position].nidn);
+                                        Navigator.pop(context);
+                                        setState(() {});
+                                      },
+                                    )
+                                  ],
+                                ),
+                              )
+                          );
+                        },
+                      ),
+                    )
+                );
+              },
+              itemCount: lDsn.length,
+            );
+          }else{
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }
