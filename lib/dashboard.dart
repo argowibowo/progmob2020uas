@@ -6,6 +6,8 @@ import 'package:flutter_app_1/mahasiswa/dbmahsiswa.dart';
 import 'package:flutter_app_1/matkul/dbmatkul.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'mahasiswa/DashboardMhs.dart';
+
 class dashboard extends StatefulWidget {
   dashboard({Key key, this.title}) : super(key: key);
 
@@ -47,7 +49,7 @@ class _dashboardState extends State<dashboard> {
                   Navigator.pop(context);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) =>
-                          dbmahasiswa(title: "Mahasiswa")));
+                          DashboardMhs(title: "Mahasiswa")));
                 },
               ),
 
@@ -71,7 +73,7 @@ class _dashboardState extends State<dashboard> {
                   Navigator.pop(context);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) =>
-                          dbmatkul(title: " Matakuliah")));
+                          DashboardMhs(title: " Matakuliah")));
                 },
               ),
 
