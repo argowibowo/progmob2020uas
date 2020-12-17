@@ -4,6 +4,7 @@ import 'package:progmob_flutter/Jadwal/dashboardjadwal.dart';
 import 'package:progmob_flutter/login.dart';
 import 'package:progmob_flutter/Mahasiswa/dashboardmahasiswa.dart';
 import 'package:progmob_flutter/Matakuliah/dashboardmatakuliah.dart';
+import 'package:progmob_flutter/model.dart';
 import 'package:progmob_flutter/tugaspertemuan8.dart';
 import 'dart:async';
 
@@ -50,10 +51,10 @@ class _DashboardState extends State<Dashboard> {
               subtitle: Text("Menu CRUD Data Dosen"),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Dosen(title: "Dashboard Dosen")),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => Dosen(title: "Dashboard Dosen")),
+                // );
               },
             ),
             ListTile(
@@ -64,7 +65,7 @@ class _DashboardState extends State<Dashboard> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Mahasiswa(title: "Dashboard Mahasiswa")),
+                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Dashboard Mahasiswa")),
                 );
               },
             ),
@@ -86,10 +87,10 @@ class _DashboardState extends State<Dashboard> {
               subtitle: Text("Menu CRUD Data Jadwal"),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Jadwal(title: "Dashboard Jadwal")),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => Jadwal(title: "Dashboard Jadwal")),
+                // );
               },
             ),
             Divider(
