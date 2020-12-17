@@ -1,4 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob_app/mahasiswa/AddMhs.dart';
+import 'package:flutter_progmob_app/mahasiswa/updateMhs.dart';
+
+import '../apiservice.dart';
+import '../model.dart';
 class DashboardMhs extends StatefulWidget {
   DashboardMhs({Key key, this.title}) : super(key: key);
 
@@ -10,6 +17,12 @@ class DashboardMhs extends StatefulWidget {
 
 class _DashboardMhsState extends State<DashboardMhs> {
   final _formKey = GlobalKey<FormState>();
+
+  List<Mahasiswa> mhs = new List();
+
+  FutureOr onGoBack(dynamic value){
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -24,36 +37,81 @@ class _DashboardMhsState extends State<DashboardMhs> {
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(context, 
+                    MaterialPageRoute(builder: (context)=> AddMhs(title: "Masukkan data")),
+                ).then(onGoBack);
+              },
             ),
           ],
         ),
-        body: Container(
-            child: GestureDetector(
-
-              child: Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.person),
-                      title: Text("Nikita Semben"),
-                      subtitle: Text("72180237  - nikita.semben@si.ukdw.ac.id"),
-                      trailing: PopupMenuButton(
-                        itemBuilder: (_) => <PopupMenuItem<String>>[
-                          new PopupMenuItem<String>(
-                            child: const Text('Update'), value: 'Edit',
+        body: FutureBuilder(
+          future: ApiServices().getMahasiswa(),
+          builder: (BuildContext context, AsyncSnapshot<List<Mahasiswa>> snapshot){
+            if (snapshot.hasError){
+              return Center(
+                child: Text(
+                    "Something Wrong With message: ${snapshot.error.toString()}"),
+              );
+            }else if (snapshot.connectionState == ConnectionState.done){
+              mhs = snapshot.data;
+              return ListView.builder(
+                itemBuilder: (context, position) {
+                  return Card( /////////////copy nanti bagian card yang sudah dibuat minggu lalu
+                    //elevation: 8.0,
+                      margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
+                      child: Container(
+                        child: ListTile(
+                          title: Text(mhs[position].nama + " - " + mhs[position].nim),
+                          subtitle: Text(mhs[position].email),
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(mhs[position].foto),
                           ),
-                          new PopupMenuItem<String>(child: const Text('Delete'), value: 'Hapus',
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-
-            )
+                          onLongPress: (){
+                            showDialog(context: context,
+                                builder: (_) => new AlertDialog(
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      FlatButton(
+                                        child: Text("Update"),
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context)=> UpdateMhs(title: "Input Data Mahasiswa", mhs: mhs[position], nimcari: mhs[position].nim)),
+                                          ).then(onGoBack);
+                                        },
+                                      ),
+                                      Divider(
+                                        color: Colors.black,
+                                        height: 20,
+                                      ),
+                                      FlatButton(
+                                        child: Text("Delete"),
+                                        onPressed: () async{
+                                          ApiServices().deleteMhs(mhs[position].nim);
+                                          Navigator.pop(context);
+                                          setState(() {});
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                )
+                            );
+                          },
+                        ),
+                      )
+                  );
+                },
+                itemCount: mhs.length,
+              );
+            } else{
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
         )
     );
   }

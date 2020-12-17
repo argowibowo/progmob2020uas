@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     startSplashScreen();
   }
   startSplashScreen() async{
-    var duration = const Duration(seconds: 5);
+    var duration = const Duration(seconds: 3);
     SharedPreferences pref = await SharedPreferences.getInstance();
     int login = pref.getInt("is_login");
     if(login == 0){

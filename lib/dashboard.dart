@@ -4,6 +4,9 @@ import 'package:flutter_progmob_app/jadwal/dashboardJadwal.dart';
 import 'package:flutter_progmob_app/mahasiswa/dashboardMhs.dart';
 import 'package:flutter_progmob_app/main.dart';
 import 'package:flutter_progmob_app/matakuliah/dashboardMatkul.dart';
+import 'package:flutter_progmob_app/tampilan/awal.dart';
+import 'package:flutter_progmob_app/tampilan/profile.dart';
+import 'package:flutter_progmob_app/tampilan/simpan.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
@@ -17,6 +20,17 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final _formKey = GlobalKey<FormState>();
+  int _seletedIndex = 0;
+  final _layoutPage = [
+    Awal(),
+    Simpan(),
+    Profile()
+  ];
+  void _onTabItem(int index){
+    setState(() {
+      _seletedIndex = index;
+    });
+  }
 
   @override
   void initState() {
@@ -107,11 +121,30 @@ class _DashboardState extends State<Dashboard> {
         ],
       ),
     ),
-      body: Container(
-        child: Center(
-          child: Text("Dashboard", style: TextStyle(fontSize: 20),
+      // body: Container(
+      //   child: Center(
+      //     child: Text("Dashboard", style: TextStyle(fontSize: 20),
+      //     ),
+      //   ),
+      body: _layoutPage.elementAt(_seletedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Awal')
           ),
-        ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.save),
+              title: Text('Simpan')
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              title: Text('Profile')
+          ),
+        ],
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _seletedIndex,
+        onTap: _onTabItem,
       ),
     );
   }
