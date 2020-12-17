@@ -45,11 +45,11 @@ class ApiServices {
     }
   }
 
-  
+
   Future<bool> createMhsWithFoto(Mahasiswa data, File file, String filename) async {
     var request = http.MultipartRequest(
-      'POST',
-      Uri.parse("$baseUrl/api/progmob/mhs/createwithfoto")
+        'POST',
+        Uri.parse("$baseUrl/api/progmob/mhs/createwithfoto")
     );
 
 
@@ -59,17 +59,17 @@ class ApiServices {
 
     request.headers.addAll(headers);
 
-   
+
     request.files.add(
-      http.MultipartFile(
-          "foto",
-          file.readAsBytes().asStream(),
-          file.lengthSync(),
-          filename: filename
-      )
+        http.MultipartFile(
+            "foto",
+            file.readAsBytes().asStream(),
+            file.lengthSync(),
+            filename: filename
+        )
     );
 
-    
+
     request.fields.addAll({
       "nama": data.nama,
       "nim": data.nim,
@@ -148,7 +148,7 @@ class ApiServices {
     }
   }
 
- 
+
   Future<List<Dosen>> getDosen() async {
     final response = await client.get("$baseUrl/api/progmob/dosen/72170136");
     if (response.statusCode == 200) {
@@ -272,7 +272,7 @@ class ApiServices {
     }
   }
 
-  
+
   Future<List<Matakuliah>> getMatkul() async {
     final response = await client.get("$baseUrl/api/progmob/matkul/72170136");
     if (response.statusCode == 200) {

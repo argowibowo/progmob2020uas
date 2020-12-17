@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:progmob_flutter/apiservices.dart';
+import 'package:progmob_flutter/apiservice.dart';
 import 'package:progmob_flutter/model.dart';
 import 'package:image_picker/image_picker.dart';
 
