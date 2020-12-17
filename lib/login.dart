@@ -44,6 +44,7 @@ class _LoginState extends State<Login> {
       ),
       body: Form(
         key: _formKey,
+        // using SingleChildScrollView biar tidak ada garis markanya :)
         child: SingleChildScrollView(
           padding: EdgeInsets.all(20.0),
           child: Column(
@@ -55,14 +56,16 @@ class _LoginState extends State<Login> {
                   height: MediaQuery.of(context).size.height / 5,
                 child: new Image.asset(
                   "images/Salvador.png",
+                  // width: 200,
+                  // height: 200,
                 ),
               ),
               new TextFormField(
                 validator: (value){
                   if(value.isEmpty && value.length == 0) {
                     return "Username tidak boleh kosong";
-                  // } else if (!value.contains('7217019')){
-                  //   return "Username Anda salah";
+                  } else if (!value.contains('72170129')){
+                    return "Username Anda salah";
                   } else
                   return null;
                 },
@@ -82,8 +85,8 @@ class _LoginState extends State<Login> {
                 validator: (value){
                   if(value.isEmpty && value.length == 0) {
                     return "Password tidak boleh kosong";
-                  // } else if (!value.contains('12345')){
-                  //   return "Password Anda salah";
+                  } else if (!value.contains('12345')){
+                    return "Password Anda salah";
                   } else
                   return null;
                 },
@@ -97,6 +100,8 @@ class _LoginState extends State<Login> {
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
+                      // Icons.visibility_off,
+                      // color: this.showPassword ? Colors.blue : Colors.grey,
                       showPassword ? Icons.visibility : Icons.visibility_off,
                     ),
                     onPressed: () {
