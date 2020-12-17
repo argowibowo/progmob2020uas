@@ -97,8 +97,8 @@ class _AddMhsState extends State<AddMhs> {
                         decoration: InputDecoration(
                           labelText: "Email",
                           hintText: "Email Mahasiswa",
-                          // border: OutlineInputBorder(),
-                          // contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                         ),
                         keyboardType: TextInputType.emailAddress,
                         onSaved: (String value){
