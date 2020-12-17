@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'dosen/dashboarddosen.dart';
-import 'jadwal/dashboardjadwal.dart';
-import 'login.dart';
-import 'mahasiswa/dashboardmhs.dart';
-import 'matakuliah/dashboardmatkul.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_progmob_2020/dosen/dashboarddosen.dart';
+import 'package:flutter_progmob_2020/jadwal/dashboardjadwal.dart';
+import 'package:flutter_progmob_2020/login.dart';
+import 'package:flutter_progmob_2020/mahasiswa/dashboardmhs.dart';
+import 'package:flutter_progmob_2020/matakuliah/dashboardmatkul.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key key, this.title}) : super(key: key);
@@ -34,8 +33,8 @@ class _DashboardState extends State<Dashboard> {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text("Thalia"),
-              accountEmail: Text("Yohana.thalia@Si.ukdw.ac.id"),
+                accountName: Text("Thalia"),
+                accountEmail: Text("Yohana.thalia@Si.ukdw.ac.id"),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text(
@@ -46,53 +45,49 @@ class _DashboardState extends State<Dashboard> {
             ),
             ListTile(
               title: Text("Data Dosen"),
-              subtitle: Text("Menu CRUD Dosen"),
+              subtitle: Text("Menu CRUD Data Dosen"),
               trailing: Icon(Icons.people),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>
-                        DashboardDosen(title: "Dashboard Dosen"))
+                  MaterialPageRoute(builder: (context) => DashboardDosen(title: "Dashboard Dosen"))
                 );
               },
             ),
             ListTile(
               title: Text("Data Mahasiswa"),
-              subtitle: Text("Menu CRUD Mahasiswa"),
+              subtitle: Text("Menu CRUD Data Mahasiswa"),
               trailing: Icon(Icons.people_outline),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>
-                        DashboardMhs(title: "Dashboard Mahasiswa"))
+                  MaterialPageRoute(builder: (context) => DashboardMhs(title: "Dashboard Mahasiswa"))
                 );
               },
             ),
             ListTile(
               title: Text("Data Matakuliah"),
-              subtitle: Text("Menu CRUD Matakuliah"),
+              subtitle: Text("Menu CRUD Data Matakuliah"),
               trailing: Icon(Icons.book_sharp),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>
-                        DashboardMatkul(title: "Dashboard Matakuliah"))
+                  MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Dashboard Matakuliah"))
                 );
               },
             ),
             ListTile(
               title: Text("Data Jadwal"),
-              subtitle: Text("Menu CRUD Jadwal"),
+              subtitle: Text("Menu CRUD Data Jadwal"),
               trailing: Icon(Icons.event_note_outlined),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>
-                        DashboardJadwal(title: "Dashboard Jadwal"))
+                  MaterialPageRoute(builder: (context) => DashboardJadwal(title: "Dashboard Jadwal"))
                 );
               },
             ),
@@ -110,8 +105,7 @@ class _DashboardState extends State<Dashboard> {
                 await pref.setInt("is_login", 0);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => Login(title: "Login Page",)),
+                  MaterialPageRoute(builder: (context) => Login(title: "Login Page",)),
                 );
               },
             ),
@@ -125,6 +119,11 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ),
     );
   }
 }
