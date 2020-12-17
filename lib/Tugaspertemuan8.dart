@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_72180247/model.dart';
 import 'package:flutter_72180247/pertemuan%202/login.dart';
-import 'package:flutter_72180247/pertemuan%203/dosen.dart';
-import 'package:flutter_72180247/pertemuan%203/jadwal.dart';
-import 'package:flutter_72180247/pertemuan%203/mahasiswa.dart';
-import 'package:flutter_72180247/pertemuan%203/matakuliah.dart';
+import 'package:flutter_72180247/dosen/dosen.dart';
+import 'package:flutter_72180247/jadwal//jadwal.dart';
+import 'package:flutter_72180247/mahasiswa/mahasiswa.dart';
+import 'package:flutter_72180247/matakuliah/matakuliah.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Tugaspertemuan8 extends StatefulWidget{
@@ -43,7 +44,7 @@ class _Tugaspertemuan8 extends State<Tugaspertemuan8> {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Dosen(title: "Data Dosen")),
+                MaterialPageRoute(builder: (context) => dashboardDosen(title: "Data Dosen")),
               );
             },
           ),
@@ -55,7 +56,7 @@ class _Tugaspertemuan8 extends State<Tugaspertemuan8> {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Mahasiswa(title: "Data Mahasiswa")),
+                MaterialPageRoute(builder: (context) => dashboardMahasiswa(title: "Data Mahasiswa")),
               );
             },
           ),
@@ -67,7 +68,7 @@ class _Tugaspertemuan8 extends State<Tugaspertemuan8> {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Jadwal(title: "Data Jadwal")),
+                MaterialPageRoute(builder: (context) => dashboardJadwal(title: "Data Jadwal")),
               );
             },
           ),
@@ -79,7 +80,7 @@ class _Tugaspertemuan8 extends State<Tugaspertemuan8> {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Matakuliah(title: "Data MataKuliah")),
+                MaterialPageRoute(builder: (context) => dashboardMatakuliah(title: "Data MataKuliah")),
               );
             },
           ),

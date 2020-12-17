@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_72180247/Tugaspertemuan8.dart';
+import 'package:flutter_72180247/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
     if (username.text.length != 0 || password.text.length != 0) {
       Navigator.of(context).pushAndRemoveUntil(
           new MaterialPageRoute(
-              builder: (BuildContext context) => new Tugaspertemuan8()),
+              builder: (BuildContext context) => new HomePage()),
               (Route<dynamic> route) => false);
     } else {
       showDialog(
