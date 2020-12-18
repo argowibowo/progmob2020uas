@@ -83,7 +83,7 @@ class _tugaspertemuan8State extends State<tugaspertemuan8> {
                       await prefs.setInt("isLogin", 0);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => login(title: 'Login Page')),
+                        MaterialPageRoute(builder: (context) => Login(title: 'Login Page')),
                       );
                     },
                   )

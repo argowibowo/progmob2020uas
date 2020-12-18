@@ -31,7 +31,7 @@ class _Splashscreen extends State<Splashscreen> {
     return Timer(duration,(){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => login(title: "PROGMOB 2020 !",)),
+        MaterialPageRoute(builder: (context) => Login(title: "PROGMOB 2020 !",)),
 
       );
     });

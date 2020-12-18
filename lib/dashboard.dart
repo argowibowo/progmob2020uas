@@ -3,7 +3,9 @@ import 'package:flutter_kerenkezia/Dosen/dashboarddosen.dart';
 import 'package:flutter_kerenkezia/Jadwal/dashboardjadwal.dart';
 import 'package:flutter_kerenkezia/Mahasiswa/dashboardmahasiswa.dart';
 import 'package:flutter_kerenkezia/Matakuliah/dashboardmatkul.dart';
+import 'package:flutter_kerenkezia/home.dart';
 import 'package:flutter_kerenkezia/login.dart';
+import 'package:flutter_kerenkezia/griddashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class dashboard extends StatefulWidget {
@@ -22,6 +24,55 @@ class _dashboardState extends State<dashboard> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Dashboard"),
+      ),
+      body: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 110,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Johny s Family",
+                      style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      "Home",
+                      style: TextStyle(
+                              color: Color(0xffa29aac),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                IconButton(
+                  alignment: Alignment.topCenter,
+                  icon: Image.asset(
+                    "assets/notification.png",
+                    width: 24,
+                  ),
+                  onPressed: () {},
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          HomeScreen()
+        ],
       ),
       drawer:Drawer(
         child: ListView(
@@ -96,7 +147,7 @@ class _dashboardState extends State<dashboard> {
                 onTap: () async{
                   SharedPreferences pref = await SharedPreferences.getInstance();
                   await pref.setInt("is_login", 0);
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => login(title: "Login",)));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login(title: "Login",)));
                 },
               ),
             ]

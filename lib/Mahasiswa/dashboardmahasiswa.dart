@@ -26,6 +26,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
 
   @override
   Widget build(BuildContext context) {
+    ApiServices().getJadwal();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
