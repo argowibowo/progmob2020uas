@@ -1,124 +1,117 @@
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/login.dart';
-import 'package:flutter_app/MataKuliah/dashboardMk.dart';
-import 'package:flutter_app/Mahasiswa/dashboardMhs.dart';
-import 'package:flutter_app/Jadwal/dashboardJdwl.dart';
-import 'package:flutter_app/Dosen/dashboardDsn.dart';
+import 'package:flutter_app/apiservice.dart';
+import 'package:flutter_app/Mahasiswa/tambahMhs.dart';
+import 'package:flutter_app/Mahasiswa/updateMhs.dart';
+import 'package:flutter_app/main.dart';
+import 'package:flutter_app/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Dashboard extends StatefulWidget {
-  Dashboard({Key key, this.title}) : super(key: key);
-
+class dashboardMhs extends StatefulWidget {
+  dashboardMhs({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _DashboardState createState() => _DashboardState();
+  _dashboardMhsState createState() => _dashboardMhsState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _dashboardMhsState extends State<dashboardMhs> {
+  final _formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    super.initState();
+  List<Mahasiswa> lMhs = new List();
+
+  FutureOr onGoBack(dynamic value){
+    setState(() {});
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text("Nathaanna Ilenne H"),
-              accountEmail: Text("nathaana.ilenne@si.ukdw.ac.id"),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Text(
-                  "N",
-                  style: TextStyle(fontSize: 40.0),
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text("Data Dosen"),
-              trailing: Icon(Icons.people),
-              subtitle: Text("Menu Data Dosen"),
-              onTap: () {
-                Navigator.pop(context);
+        appBar: AppBar(
+          title: Text(widget.title),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => dashboardDsn(title: "Dosen")),
-                );
-              },
-            ),
-            ListTile(
-              title: Text("Data Mahasiswa"),
-              trailing: Icon(Icons.people),
-              subtitle: Text("Menu Data Mahasiswa"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => dashboardMhs(title: "Mahasiswa")),
-                );
-              },
-            ),
-            ListTile(
-              title: Text("Data Mata Kuliah"),
-              trailing: Icon(Icons.book),
-              subtitle: Text("Menu Data Mata Kuliah"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => dashboardMk(title: "Mata Kuliah")),
-                );
-              },
-            ),
-            ListTile(
-              title: Text("Data Jadwal"),
-              trailing: Icon(Icons.schedule),
-              subtitle: Text("Menu Data Jadwal"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => dashboardJdwl(title: "Jadwal")),
-                );
-              },
-            ),
-            Divider(
-              color: Colors.black,
-              height: 20,
-              indent: 10,
-              endIndent: 10,
-            ),
-            ListTile(
-              title: Text("Logout"),
-              trailing: Icon(Icons.exit_to_app),
-              onTap: () async {
-                SharedPreferences pref = await SharedPreferences.getInstance();
-                await pref.setInt("is_login", 0);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => Login(title: "Login")),
-                );
+                  MaterialPageRoute(builder: (context) => AddMhs(title: "Input Data Mahasiswa")),
+                ).then(onGoBack);
               },
             )
           ],
         ),
-      ),
-      body: Container(
-          child: Center(
-            child: Text("Dashboard",
-              style: TextStyle(
-                  fontSize: 20
-              ),
-            ),
-          )
-      ),
+        body: FutureBuilder(
+          future: ApiServices().getMahasiswas(),
+          builder: (BuildContext context, AsyncSnapshot<List<Mahasiswa>> snapshot){
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                    "Something wrong with this message: ${snapshot.error.toString()}"),
+              );
+            }else if (snapshot.connectionState == ConnectionState.done) {
+              lMhs = snapshot.data;
+              return ListView.builder(
+                itemBuilder: (context, position) {
+                  return Card(
+                    //elevation: 8.0,
+                      margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
+                      child: Container(
+                        child: ListTile(
+                          title: Text(lMhs[position].nama + " - " + lMhs[position].nim),
+                          subtitle: Text(lMhs[position].email),
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(lMhs[position].foto),
+                          ),
+                          onLongPress: (){
+                            showDialog(
+                                context: context,
+                                builder: (_) => new AlertDialog(
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      FlatButton(
+                                        child: Text("Update"),
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => UpdateMhs(title: "Input Data Mahasiswa", mhs:lMhs[position], nimcari: lMhs[position].nim)),
+                                          ).then(onGoBack);
+                                        },
+                                      ),
+                                      Divider(
+                                        color: Colors.black,
+                                        height: 20,
+                                      ),
+                                      FlatButton(
+                                        child: Text("Delete"),
+                                        onPressed: () async{
+                                          ApiServices().deleteMhs(lMhs[position].nim);
+                                          Navigator.pop(context);
+                                          setState(() {});
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                )
+                            );
+                          },
+                        ),
+                      )
+                  );
+                },
+                itemCount: lMhs.length,
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        )
     );
   }
 }
