@@ -78,7 +78,7 @@ class _DashBoardState extends State<DashBoard> {    //<~~
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Dashboard Mata Kuliah")),
+                  MaterialPageRoute(builder: (context) => DashboardMatakuliah(title: "Dashboard Mata Kuliah")),
                 );
               },
             ),

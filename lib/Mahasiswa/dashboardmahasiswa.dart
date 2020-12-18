@@ -1,15 +1,15 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_progmob_2020/apiservices.dart';
-import 'package:flutter_progmob_2020/mahasiswa/addMhs.dart';
-import 'package:flutter_progmob_2020/mahasiswa/updateMhs.dart';
-import 'package:flutter_progmob_2020/main.dart';
+import 'package:flutter_progmob_2020/Mahasiswa/addMhs.dart';
+import 'package:flutter_progmob_2020/Mahasiswa/updateMhs.dart';
 import 'package:flutter_progmob_2020/model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_progmob_2020/apiservices.dart';
+
 
 class DashboardMahasiswa extends StatefulWidget {
   DashboardMahasiswa({Key key, this.title}) : super(key: key);
+
   final String title;
 
   @override
@@ -31,6 +31,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          backgroundColor: Colors.red,
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),
@@ -43,6 +44,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
             )
           ],
         ),
+        backgroundColor: Colors.yellow,
         body: FutureBuilder(
           future: ApiServices().getMahasiswas(),
           builder: (BuildContext context, AsyncSnapshot<List<Mahasiswa>> snapshot){
