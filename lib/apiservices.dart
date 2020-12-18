@@ -4,7 +4,6 @@ import 'package:flutter_app/model.dart';
 import 'package:http/http.dart' show Client;
 import 'package:http/http.dart' as http;
 
-
 class ApiServices{
   final String baseUrl = "https://argouchiha.000webhostapp.com";
 

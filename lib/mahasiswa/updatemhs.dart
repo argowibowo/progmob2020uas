@@ -45,7 +45,7 @@ class _UpdateMhsState extends State<UpdateMhs> {
         title: new Text(this.title),
       ),
       body: Container(
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
         child: SingleChildScrollView(
             child: Stack(
               children: <Widget>[
@@ -61,7 +61,7 @@ class _UpdateMhsState extends State<UpdateMhs> {
                           labelText: "NIM",
                           hintText:  "NIM",
                           border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                          contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                         ),
                         initialValue: this.mhs.nim,
                         onSaved: (String value){
@@ -76,7 +76,7 @@ class _UpdateMhsState extends State<UpdateMhs> {
                           labelText: "Nama",
                           hintText:  "Nama Mahasiswa",
                           border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                          contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                         ),
                         initialValue: this.mhs.nama,
                         onSaved: (String value){
@@ -91,7 +91,7 @@ class _UpdateMhsState extends State<UpdateMhs> {
                           labelText: "Alamat",
                           hintText:  "Alamat Mahasiswa",
                           border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                          contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                         ),
                         initialValue: this.mhs.alamat,
                         onSaved: (String value){
@@ -106,7 +106,7 @@ class _UpdateMhsState extends State<UpdateMhs> {
                           labelText: "Email",
                           hintText:  "Email Mahasiswa",
                           border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                          contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                         ),
                         initialValue: this.mhs.email,
                         keyboardType:  TextInputType.emailAddress,
@@ -140,7 +140,7 @@ class _UpdateMhsState extends State<UpdateMhs> {
                       ),
                       MaterialButton(
                         minWidth: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                         color: Colors.blueAccent,
                         onPressed: (){
                           _pickImage(ImageSource.gallery);
@@ -164,7 +164,7 @@ class _UpdateMhsState extends State<UpdateMhs> {
                       ),
                       MaterialButton(
                         minWidth: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                         color: Colors.blueAccent,
                         onPressed: (){
                           return showDialog(
@@ -172,7 +172,7 @@ class _UpdateMhsState extends State<UpdateMhs> {
                             builder: (context){
                               return AlertDialog(
                                 title: Text("Update Data"),
-                                content: Text("Apakah yakin ingin menyimpan data ini? "),
+                                content: Text("Apakah Yakin Data ingin di Simpan?"),
                                 actions: <Widget>[
                                   FlatButton(
                                     onPressed: () async {
