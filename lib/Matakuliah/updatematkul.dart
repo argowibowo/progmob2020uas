@@ -4,33 +4,25 @@ import 'package:flutterku72160025/apiservices.dart';
 import 'package:flutterku72160025/model.dart';
 import 'package:image_picker/image_picker.dart';
 
-// Menyimpan formnya
-final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
-
-class AddDosen extends StatefulWidget {
-  AddDosen({Key key, @required this.title}) : super(key: key);
+class UpdateMatkul extends StatefulWidget {
   final String title;
+  Matakuliah matkul;
+  String kodecari;
+
+  UpdateMatkul({Key key, @required this.title, @required this.matkul, @required this.kodecari}) : super(key: key);
 
   @override
-  _AddDosenState createState() => _AddDosenState(title);
+  _UpdateMatkulState createState() => _UpdateMatkulState(title, matkul, kodecari);
 }
 
-class _AddDosenState extends State<AddDosen> {
+class _UpdateMatkulState extends State<UpdateMatkul> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  _AddDosenState(this.title);
+  final String kodecari;
+  Matakuliah matkul;
   bool isLoading = false;
-  Dosen dosen = new Dosen();
-  File _imageFile;
 
-  // Select image from galery or camera
-  Future<void> _pickImage(ImageSource source) async {
-    File selected = await ImagePicker.pickImage(source: source);
-
-    setState(() {
-      _imageFile = selected;
-    });
-  }
+  _UpdateMatkulState(this.title, this.matkul, this.kodecari);
 
   @override
   void initState() {
@@ -57,13 +49,14 @@ class _AddDosenState extends State<AddDosen> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "NIDN",
-                          hintText: "NIDN",
+                          labelText: "Kode",
+                          hintText: "Kode Matakuliah",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
+                      initialValue: this.matkul.kode,
                       onSaved: (String value) {
-                        this.dosen.nidn = value;
+                        this.matkul.kode = value;
                       },
                     ),
                     SizedBox(height: 15,
@@ -71,89 +64,59 @@ class _AddDosenState extends State<AddDosen> {
                     TextFormField(
                       decoration: InputDecoration(
                           labelText: "Nama",
-                          hintText: "Nama Dosen",
+                          hintText: "Nama Matakuliah",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
+                      initialValue: this.matkul.nama,
                       onSaved: (String value) {
-                        this.dosen.nama = value;
+                        this.matkul.nama = value;
                       },
                     ),
                     SizedBox(height: 15,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Alamat",
-                          hintText: "Alamat Dosen",
+                          labelText: "Hari",
+                          hintText: "Hari Matakuliah",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
+                      initialValue: this.matkul.hari.toString(),
+                      keyboardType: TextInputType.number,
                       onSaved: (String value) {
-                        this.dosen.alamat = value;
+                        this.matkul.hari = int.parse(value);
                       },
                     ),
                     SizedBox(height: 15,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Email",
-                          hintText: "Email Dosen",
+                          labelText: "Kode",
+                          hintText: "Kode Matakuliah",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
-                      keyboardType: TextInputType.emailAddress,
+                      initialValue: this.matkul.sesi.toString(),
+                      keyboardType: TextInputType.number,
                       onSaved: (String value) {
-                        this.dosen.email = value;
+                        this.matkul.sesi = int.parse(value);
                       },
                     ),
                     SizedBox(height: 15,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Gelar",
-                          hintText: "Gelar Dosen",
+                          labelText: "SKS",
+                          hintText: "SKS Matakuliah",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
-                      keyboardType: TextInputType.emailAddress,
+                      initialValue: this.matkul.sks.toString(),
+                      keyboardType: TextInputType.number,
                       onSaved: (String value) {
-                        this.dosen.gelar = value;
+                        this.matkul.sks = int.parse(value);
                       },
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    // Ternary Operation -> objek ? true : false atau else
-                    _imageFile == null
-                        ? Text("Silahkan memilih gambar terlebih dahulu")
-                        : Image.file(
-                      _imageFile,
-                      fit: BoxFit.cover,
-                      height: 300.0,
-                      alignment: Alignment.topCenter,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    MaterialButton(
-                      minWidth: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
-                      onPressed: () {
-                        _pickImage(ImageSource.gallery);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          new Icon(Icons.image, color: Colors.white,),
-                          Text(
-                            "Upload Foto",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold
-                            ),
-                          )
-                        ],
-                      ),
                     ),
                     SizedBox(
                       height: 15,
@@ -167,17 +130,15 @@ class _AddDosenState extends State<AddDosen> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: Text("Simpan Data"),
+                              title: Text("Ubah Data"),
                               content: Text("Apakah Anda yakin akan menyimpan data ini?"),
                               actions: <Widget>[
                                 FlatButton(
                                     onPressed: () async {
                                       _formState.currentState.save();
                                       setState(() => isLoading = true);
-                                      this.dosen.nim_progmob = "72170129";
-                                      // List<int> imageByte = _imageFile.readAsBytesSync();
-                                      // this.mhs.foto = base64Encode(imageByte);
-                                      ApiServices().createDosenWithFoto(this.dosen, _imageFile, _imageFile.path).then((isSuccess) {
+                                      this.matkul.nim_progmob = "72170129";
+                                      ApiServices().updateMatkul(this.matkul, kodecari).then((isSuccess) {
                                         setState(() => isLoading = false);
                                         if (isSuccess) {
                                           Navigator.pop(context);
@@ -209,7 +170,10 @@ class _AddDosenState extends State<AddDosen> {
                             fontWeight: FontWeight.bold
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
@@ -232,12 +196,8 @@ class _AddDosenState extends State<AddDosen> {
                 ],
               )
                   : Container(),
-              SizedBox(
-                height: 20,
-              ),
             ],
           ),
-
         ),
       ),
     );

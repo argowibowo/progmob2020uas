@@ -1,73 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_72160025/pertemuan1.dart';
+class Pertemuan8 extends StatefulWidget {
+  Pertemuan8({Key key, this.title}) : super(key: key);
 
-class Tugaspertemuan8 extends StatefulWidget {
-  Tugaspertemuan8({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _Tugaspertemuan8State createState() => _Tugaspertemuan8State();
+  _Pertemuan8State createState() => _Pertemuan8State();
 }
 
-class _Tugaspertemuan8State extends State<Tugaspertemuan8> {
-  String validateName(String value) {
-    if (value.isEmpty) {
-      return 'Nama Tidak Boleh Kosong !!!';
-    }
-    return null;
-  }
+class _Pertemuan8State extends State<Pertemuan8> {
+  int _counter = 2;
 
-  final formKey = GlobalKey<FormState>();
-  String name = '';
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: Center(
-        child: Form(
-          key: formKey,
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(padding: EdgeInsets.all(10.0)),
-              TextFormField(
-                decoration: new InputDecoration(
-                    icon: Icon(Icons.people),
-                    labelText: "Nama Lengkap",
-                    hintText: "Contoh: Brian Eldrin Sombuk",
-                    border: OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(5),
-                    )),
-                validator: validateName,
-                onSaved: (String value) {
-                  name = value;
-                },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextFormField(
+              decoration: new InputDecoration(
+                labelText: "Nama Lengkap",
+                hintText: "Brian Eldrin Sombuk",
               ),
-              RaisedButton(
-                color: Colors.blue,
-                child: Text(
-                  "Simpan",
-                  style: TextStyle(color: Colors.white),
+            ),
+            Padding(
+                padding: EdgeInsets.all(5.0)
+            ),
+            TextFormField(
+              decoration: new InputDecoration(
+                  labelText: "NIM",
+                  hintText: "Contoh 72160025",
+                  border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(5)
+                  )
+              ),
+            ),
+            RaisedButton(
+              focusColor: Colors.blue,
+              color: Colors.blue,
+              child: Text(
+                "Simpan",
+                style: TextStyle(
+                    color: Colors.white
                 ),
-                onPressed: () {
-                  if (formKey.currentState.validate()){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Pertemuan1(title: "Home Page", nama: name,)),
-                    );
-                  }
-                  else {
-                    formKey.currentState.save();
-                  }
-                },
               ),
-            ],
-          ),
+            )
+
+          ],
         ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

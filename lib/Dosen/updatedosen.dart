@@ -4,24 +4,26 @@ import 'package:flutterku72160025/apiservices.dart';
 import 'package:flutterku72160025/model.dart';
 import 'package:image_picker/image_picker.dart';
 
-// Menyimpan formnya
-final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
-
-class AddDosen extends StatefulWidget {
-  AddDosen({Key key, @required this.title}) : super(key: key);
+class UpdateDosen extends StatefulWidget {
   final String title;
+  Dosen dosen;
+  String nidncari;
+
+  UpdateDosen({Key key, @required this.title, @required this.dosen, @required this.nidncari}) : super(key: key);
 
   @override
-  _AddDosenState createState() => _AddDosenState(title);
+  _UpdateDosenState createState() => _UpdateDosenState(title, dosen, nidncari);
 }
 
-class _AddDosenState extends State<AddDosen> {
+class _UpdateDosenState extends State<UpdateDosen> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  _AddDosenState(this.title);
+  final String nidncari;
+  Dosen dosen;
   bool isLoading = false;
-  Dosen dosen = new Dosen();
   File _imageFile;
+
+  _UpdateDosenState(this.title, this.dosen, this.nidncari);
 
   // Select image from galery or camera
   Future<void> _pickImage(ImageSource source) async {
@@ -62,6 +64,7 @@ class _AddDosenState extends State<AddDosen> {
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
+                      initialValue: this.dosen.nidn,
                       onSaved: (String value) {
                         this.dosen.nidn = value;
                       },
@@ -75,6 +78,7 @@ class _AddDosenState extends State<AddDosen> {
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
+                      initialValue: this.dosen.nama,
                       onSaved: (String value) {
                         this.dosen.nama = value;
                       },
@@ -88,6 +92,7 @@ class _AddDosenState extends State<AddDosen> {
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
+                      initialValue: this.dosen.alamat,
                       onSaved: (String value) {
                         this.dosen.alamat = value;
                       },
@@ -97,11 +102,12 @@ class _AddDosenState extends State<AddDosen> {
                     TextFormField(
                       decoration: InputDecoration(
                           labelText: "Email",
-                          hintText: "Email Dosen",
+                          hintText: "Email Mahasiswa",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
                       keyboardType: TextInputType.emailAddress,
+                      initialValue: this.dosen.email,
                       onSaved: (String value) {
                         this.dosen.email = value;
                       },
@@ -115,7 +121,7 @@ class _AddDosenState extends State<AddDosen> {
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
-                      keyboardType: TextInputType.emailAddress,
+                      initialValue: this.dosen.gelar,
                       onSaved: (String value) {
                         this.dosen.gelar = value;
                       },
@@ -124,10 +130,22 @@ class _AddDosenState extends State<AddDosen> {
                       height: 15,
                     ),
                     // Ternary Operation -> objek ? true : false atau else
-                    _imageFile == null
-                        ? Text("Silahkan memilih gambar terlebih dahulu")
-                        : Image.file(
+                    (_imageFile == null && this.dosen.foto == null)
+                        ?
+                    Text("Silahkan pilih gambar terlebih dahulu")
+                        :
+                    (_imageFile != null)
+                        ?
+                    Image.file(
                       _imageFile,
+                      fit: BoxFit.cover,
+                      height: 300.0,
+                      alignment: Alignment.topCenter,
+                      width: MediaQuery.of(context).size.width,
+                    )
+                        :
+                    Image.network(
+                      this.dosen.foto,
                       fit: BoxFit.cover,
                       height: 300.0,
                       alignment: Alignment.topCenter,
@@ -167,7 +185,7 @@ class _AddDosenState extends State<AddDosen> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: Text("Simpan Data"),
+                              title: Text("Ubah Data"),
                               content: Text("Apakah Anda yakin akan menyimpan data ini?"),
                               actions: <Widget>[
                                 FlatButton(
@@ -175,9 +193,7 @@ class _AddDosenState extends State<AddDosen> {
                                       _formState.currentState.save();
                                       setState(() => isLoading = true);
                                       this.dosen.nim_progmob = "72170129";
-                                      // List<int> imageByte = _imageFile.readAsBytesSync();
-                                      // this.mhs.foto = base64Encode(imageByte);
-                                      ApiServices().createDosenWithFoto(this.dosen, _imageFile, _imageFile.path).then((isSuccess) {
+                                      ApiServices().updateDosenWithFoto(this.dosen, _imageFile, nidncari).then((isSuccess) {
                                         setState(() => isLoading = false);
                                         if (isSuccess) {
                                           Navigator.pop(context);
@@ -209,7 +225,10 @@ class _AddDosenState extends State<AddDosen> {
                             fontWeight: FontWeight.bold
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
@@ -232,12 +251,8 @@ class _AddDosenState extends State<AddDosen> {
                 ],
               )
                   : Container(),
-              SizedBox(
-                height: 20,
-              ),
             ],
           ),
-
         ),
       ),
     );

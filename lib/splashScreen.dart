@@ -1,38 +1,112 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import 'package:flutterku72160025/dashbord.dart';
+import 'package:flutterku72160025/login.dart';
+import 'package:flutterku72160025/pertemuan2.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
+  SplashScreen({Key key}) : super(key: key);
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Timer(Duration(seconds: 3),
-            () => Navigator.pushReplacementNamed(context, '/home'));
+
+  // void navigateLogin() async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   int isLogin = pref.getInt("is_login");
+  //   if(isLogin == 1){
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => Pertemuan2(title: "Halaman Utama",)),
+  //     );
+  //   }
+  //   else {
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => Login(title: "Login Page",)),
+  //     );
+  //   }
+  // }
+
+  startSplashScreen() async {
+    var duration = const Duration(seconds: 2);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if(isLogin == 1){
+      return Timer(duration, (){
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_){
+              return Dashboard(title: "Dashboard");
+            })
+        );
+      });
+    } else {
+      return Timer(duration, (){
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_){
+              return Login(title: "Login Page");
+            })
+        );
+      });
+    }
+    // return Timer(duration, (){
+    //   Navigator.of(context).pushReplacement(
+    //       MaterialPageRoute(builder: (_){
+    //         return Login(title: "Login Page");
+    //       })
+    //   );
+    // });
   }
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
+  double _height = 400;
+  double _width = 400;
 
-        Image.asset('assets/Anggopi.jpeg', height: 200.0,),
+  @override
+  void initState() {
+    super.initState();
+    var duration = const Duration(seconds: 2);
+    Timer(duration, () {
+      startSplashScreen();
+      setState(() {
+        if(_height != 600)
+          _height = _height + 100;
+        if(_width != 600)
+          _width = _width + 100;
+      });
+    });
+  }
 
-        SizedBox(height: 30.0),
-
-        SpinKitSquareCircle(color: Colors.deepOrange,)
-      ],
-    ), // This trailing comma makes auto-formatting nicer for build methods.
-  );
-}}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.deepOrange,
+        body: Container(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedContainer(
+                duration: Duration(seconds: 2),
+                curve: Curves.bounceOut,
+                width: _width,
+                height: _height,
+                child: Image.asset(
+                  "assets/anggopi.jpeg",
+                  width: _width,
+                  height: _height,
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+              ),
+            ],
+          )
+        ),
+      ),
+    );
+  }
+}
