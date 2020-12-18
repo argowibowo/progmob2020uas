@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class DashboardDosen extends StatefulWidget {
   DashboardDosen({Key key, this.title}) : super(key: key);
 
@@ -39,7 +38,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
                     ListTile(
                       leading: Icon(Icons.person),
                       title: Text("Jong Jek Siang"),
-                      subtitle: Text("0516119001 - jjs@staff.ukdw.ac.id"),
+                      subtitle: Text("7200001 - jjs@staff.ukdw.ac.id"),
                       trailing: PopupMenuButton(
                         itemBuilder: (_) => <PopupMenuItem<String>>[
                           new PopupMenuItem<String>(
@@ -53,6 +52,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
                   ],
                 ),
               ),
+
             )
         )
     );

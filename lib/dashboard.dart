@@ -27,6 +27,101 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("DashBoard 72180181"),
+        backgroundColor: Colors.blue[500],
+      ),
+      backgroundColor: Colors.blue[100],
+      body: Container(
+        padding: EdgeInsets.all(30.0),
+        child: GridView.count(
+          crossAxisCount: 2,
+          children: <Widget>[
+            Card(
+              margin: EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Dashboard Mahasiswa",)),
+                  );
+                },
+                splashColor: Colors.green,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(Icons.people, size: 70.0,),
+                      Text("Mahasiswa", style : new TextStyle(fontSize: 17.0))
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              margin: EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DashboardDosen(title: "Dashboard Dosen",)),
+                  );
+                },
+                splashColor: Colors.green,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(Icons.people_outlined, size: 70.0,),
+                      Text("Dosen", style : new TextStyle(fontSize: 17.0))
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              margin: EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DashboardMatakuliah(title: "Dashboard Matakuliah",)),
+                  );
+                },
+                splashColor: Colors.green,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(Icons.book_online_outlined, size: 70.0,),
+                      Text("MataKuliah", style : new TextStyle(fontSize: 17.0))
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              margin: EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DashboardJadwal(title: "Dashboard Jadwal",)),
+                  );
+                },
+                splashColor: Colors.green,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(Icons.schedule, size: 70.0,),
+                      Text("Jadwal", style : new TextStyle(fontSize: 17.0))
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -43,48 +138,16 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             ListTile(
-              title: Text("Data Dosen"),
+              title: Text("Profil"),
               trailing: Icon(Icons.people),
-              subtitle: Text("Menu CRUD Data Dosen"),
-              onTap: (){
-                Navigator.pop(context);
-                Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DashboardDosen(title: "Dashboard Dosen",)),
-                );
-              },
+              subtitle: Text("Profil Mahasiswa"),
+              onTap: (){},
             ),
             ListTile(
-              title: Text("Data Mahasiswa"),
-              trailing: Icon(Icons.people_outlined),
-              subtitle: Text("Menu CRUD Data Mahasiswa"),
-              onTap: (){
-                Navigator.pop(context);
-                Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Dashboard Mahasiswa",)),
-                );
-              },
-            ),
-            ListTile(
-              title: Text("Data Matakuliah"),
-              trailing: Icon(Icons.book_online_outlined),
-              subtitle: Text("Menu CRUD Data Matakuliah"),
-              onTap: (){
-                Navigator.pop(context);
-                Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DashboardMatakuliah(title: "Dashboard Matakuliah",)),
-                );
-              },
-            ),
-            ListTile(
-              title: Text("Data Jadwal"),
-              trailing: Icon(Icons.schedule),
-              subtitle: Text("Menu CRUD Data Jadwal"),
-              onTap: (){
-                Navigator.pop(context);
-                Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DashboardJadwal(title: "Dashboard Jadwal",)),
-                );
-              },
+              title: Text("Tentang"),
+              trailing: Icon(Icons.info),
+              subtitle: Text("Tentang Informasi"),
+              onTap: (){},
             ),
             Divider(
               color: Colors.black,
@@ -95,7 +158,7 @@ class _DashboardState extends State<Dashboard> {
             ListTile(
               title: Text("Logout"),
               trailing: Icon(Icons.exit_to_app),
-              subtitle: Text("Menu CRUD Data Jadwal"),
+              subtitle: Text("Keluar"),
               onTap: ()async{
                 SharedPreferences pref = await SharedPreferences.getInstance();
                 await pref.setInt("is_login", 0);
@@ -105,12 +168,6 @@ class _DashboardState extends State<Dashboard> {
               },
             ),
           ],
-        ),
-      ),
-      body: Container(
-        child: Center(
-          child: Text("Dashboard", style: TextStyle(fontSize: 20),
-          ),
         ),
       ),
     );

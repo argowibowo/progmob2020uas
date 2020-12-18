@@ -33,7 +33,6 @@ class DashboardSI{
 
 //------------------------------mahasiswa----------------------------------
 class Mahasiswa {
-
   String id;
   String nama;
   String nim;
@@ -67,9 +66,14 @@ String mahasiswaToJson(Mahasiswa data){
   String sesi;
   String dosen;
   String nama;
+  String sks;
   int jmlMhs;
   Matakuliah(this.kodeMatakuliah, this.hari, this.sesi, this.dosen, this.nama, this.jmlMhs);
+  get nim_progmob => null;
+  get kode => null;
+  set kode(String kode) {}
 }
+
 //-----------------------------------------dosen---------------------------------
 class Dosen {
   String id;
