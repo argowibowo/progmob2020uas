@@ -44,7 +44,7 @@ class _Tugaspertemuan8 extends State<Tugaspertemuan8> {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => dashboardDosen(title: "Data Dosen")),
+                MaterialPageRoute(builder: (context) => Dashboard_dosen(title: "Data Dosen")),
               );
             },
           ),

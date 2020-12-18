@@ -1,47 +1,48 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_72180247/apiservice.dart';
-import 'dart:io';
-import 'dart:convert';
 import 'package:flutter_72180247/model.dart';
 import 'package:image_picker/image_picker.dart';
 
-final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
-
-class AddMhs extends StatefulWidget{
+class UpdateDosen extends StatefulWidget{
   final String title;
+  Dosen dosen;
+  String nidncari;
 
-  AddMhs({Key key, @required this.title}) : super(key: key);
+  UpdateDosen({Key key, @required this.title, @required this.dosen, @required this.nidncari}) : super(key: key);
 
   @override
-_AddMhsState createState() => new _AddMhsState(title);
+  _UpdateDosenState createState() => _UpdateDosenState(title, dosen, nidncari);
 }
 
-class _AddMhsState extends State<AddMhs> {
+class _UpdateDosenState extends State<UpdateDosen>{
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-
-  _AddMhsState(this.title);
-
+  final String nidncari;
+  Dosen dosen;
   bool _isloading = false;
-  Mahasiswa mhs = new Mahasiswa();
   File _imageFile;
 
-  Future<void> _pickImage(ImageSource source) async {
+  _UpdateDosenState(this.title, this.dosen, this.nidncari);
+
+  Future<void> _pickImage(ImageSource source) async{
     File selected = await ImagePicker.pickImage(source: source);
+
     setState(() {
       _imageFile = selected;
     });
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return new Scaffold(
       backgroundColor: Color(0xffff4d4d),
       appBar: new AppBar(
         title: new Text(this.title),
       ),
       body: Container(
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+        padding: EdgeInsets.fromLTRB(10,0,10,10),
         child: SingleChildScrollView(
           child: Stack(
             children: <Widget>[
@@ -54,14 +55,14 @@ class _AddMhsState extends State<AddMhs> {
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                          labelText: "NIM",
-                          hintText: "NIM",
+                          labelText: "NIDN",
+                          hintText: "NIDN",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         ),
-                        keyboardType: TextInputType.number,
-                        onSaved: (String value) {
-                          this.mhs.nim = value;
+                        initialValue: this.dosen.nidn,
+                        onSaved: (String value){
+                          this.dosen.nidn = value;
                         },
                       ),
                       SizedBox(
@@ -70,12 +71,13 @@ class _AddMhsState extends State<AddMhs> {
                       TextFormField(
                         decoration: InputDecoration(
                           labelText: "Nama",
-                          hintText: "Nama Mahasiswa",
+                          hintText: "Nama Dosen",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         ),
-                        onSaved: (String value) {
-                          this.mhs.nama = value;
+                        initialValue: this.dosen.nama,
+                        onSaved: (String value){
+                          this.dosen.nama = value;
                         },
                       ),
                       SizedBox(
@@ -84,12 +86,13 @@ class _AddMhsState extends State<AddMhs> {
                       TextFormField(
                         decoration: InputDecoration(
                           labelText: "Alamat",
-                          hintText: "Alamat Mahasiswa",
+                          hintText: "Alamat Dosen",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         ),
-                        onSaved: (String value) {
-                          this.mhs.alamat = value;
+                        initialValue: this.dosen.alamat,
+                        onSaved: (String value){
+                          this.dosen.alamat = value;
                         },
                       ),
                       SizedBox(
@@ -103,31 +106,38 @@ class _AddMhsState extends State<AddMhs> {
                           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         ),
                         keyboardType: TextInputType.emailAddress,
-                        onSaved: (String value) {
-                          this.mhs.email = value;
+                        initialValue: this.dosen.email,
+                        onSaved: (String value){
+                          this.dosen.email = value;
                         },
                       ),
                       SizedBox(
                         height: 15,
                       ),
                       //ternary operation == objek ? true : false atau else
-                      _imageFile == null
-                          ? Text('Silahkan masukan gambar')
-                          : Image.file(
+                      (_imageFile == null && this.dosen.foto ==null)
+                          ?
+                      Text('Silahkan masukan gambar')
+                          :
+                      (_imageFile !=null)
+                          ?
+                      Image.file(
                         _imageFile,
                         fit: BoxFit.cover,
                         height: 300,
                         alignment: Alignment.topCenter,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
+                        width: MediaQuery.of(context).size.width,
+                      )
+                          :
+                      Image.network(
+                        this.dosen.foto,
+                        fit: BoxFit.cover,
+                        height: 300,
+                        alignment: Alignment.topCenter,
+                        width: MediaQuery.of(context).size.width,
                       ),
                       MaterialButton(
-                        minWidth: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
+                        minWidth: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                         color: Colors.blue,
                         onPressed: () {
@@ -170,14 +180,8 @@ class _AddMhsState extends State<AddMhs> {
                                       onPressed: () async {
                                         _formState.currentState.save();
                                         setState(() => _isloading = true);
-                                        this.mhs.nim_progmob = "72180247";
-                                        List<int> imageBytes = _imageFile
-                                            .readAsBytesSync();
-                                        this.mhs.foto =
-                                            base64Encode(imageBytes);
-                                        ApiServices().createMhsWithFoto(
-                                            this.mhs, _imageFile,
-                                            _imageFile.path).then((isSuccess) {
+                                        this.dosen.nim_progmob = "72180247";
+                                        ApiServices().updateDosenWithFoto(this.dosen, _imageFile, nidncari).then((isSuccess){
                                           setState(() => _isloading = false);
                                           if (isSuccess) {
                                             Navigator.pop(context);
@@ -214,6 +218,12 @@ class _AddMhsState extends State<AddMhs> {
               _isloading
                   ? Stack(
                 children: <Widget>[
+                  Opacity(opacity: 0.3,
+                    child: ModalBarrier(
+                      dismissible: false,
+                      color: Colors.grey,
+                    ),
+                  ),
                   Center(
                     child: CircularProgressIndicator(),
                   )

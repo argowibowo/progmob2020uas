@@ -26,6 +26,7 @@ class _dashboardMahasiswaState extends State<dashboardMahasiswa>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      backgroundColor: Color(0xffff4d4d),
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[

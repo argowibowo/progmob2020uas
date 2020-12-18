@@ -1,4 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_72180247/matakuliah/UpdateMatakuliah.dart';
+import 'package:flutter_72180247/matakuliah/addMatakuliah.dart';
+import 'package:flutter_72180247/model.dart';
+import 'package:flutter_72180247/apiservice.dart';
 
 class dashboardMatakuliah extends StatefulWidget {
   dashboardMatakuliah({Key key, this.title}) : super(key: key);
@@ -9,6 +14,13 @@ class dashboardMatakuliah extends StatefulWidget {
 }
 
 class _dashboardMatakuliahState extends State<dashboardMatakuliah> {
+  final _formKey = GlobalKey<FormState>();
+
+  List<Matakuliah> listMatakuliah;
+
+  FutureOr onGoBack(dynamic value) {
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -18,54 +30,95 @@ class _dashboardMatakuliahState extends State<dashboardMatakuliah> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffff4d4d),
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.red,
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
-              onPressed: () {}
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddMatkul(title: "Input Data Matakuliah"))
+                ).then(onGoBack);
+              }
           )
         ],
       ),
 
-      body: Container(
-        child: Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                leading: Icon(Icons.school),
-                title: Text("Pemrograman Berbasis Web"),
-                subtitle: Text("SI3333"),
-                trailing: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuItem<String>>[
-                    new PopupMenuItem<String>(
-                      child: const Text('Update'), value: 'Update',
-                    ),
-                    new PopupMenuItem<String>(
-                      child: const Text('Delete'), value: 'Delete',
-                    )
-                  ],
-                ),
+      body: FutureBuilder(
+        future: ApiServices().getMatkul(),
+        builder: (BuildContext context, AsyncSnapshot<List<Matakuliah>> snapshot) {
+          if (snapshot.hasError){
+            return Center(
+              child: Text(
+                  "Something wrong with message: ${snapshot.error.toString()}"
               ),
-              ListTile(
-                leading: Icon(Icons.school),
-                title: Text("Aplikasi Berbasis Dekstop"),
-                subtitle: Text("S12363"),
-                trailing: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuItem<String>>[
-                    new PopupMenuItem<String>(
-                      child: const Text('Update'), value: 'Update',
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            listMatakuliah = snapshot.data;
+
+            return ListView.builder(
+              itemBuilder: (context, position) {
+                return Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(listMatakuliah[position].kode + ", " + listMatakuliah[position].nama),
+                      subtitle: Text(listMatakuliah[position].hari + " - " + listMatakuliah[position].sesi + " - "
+                          + listMatakuliah[position].sks),
+
+                      onLongPress: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  FlatButton(
+                                      onPressed: (){
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => UpdateMatkul(title: "Update Data Matakuliah",
+                                                mk: listMatakuliah[position],
+                                                kodecari: listMatakuliah[position].kode))
+                                        ).then(onGoBack);
+                                      },
+                                      child: Text("Update")
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    height: 20,
+                                  ),
+                                  FlatButton(
+                                      onPressed: () async {
+                                        ApiServices().deleteMatkul(listMatakuliah[position].kode);
+                                        Navigator.pop(context);
+                                        setState(() {
+
+                                        });
+                                      },
+                                      child: Text("Delete")
+                                  ),
+                                ],
+                              ),
+                            )
+                        );
+                      },
                     ),
-                    new PopupMenuItem<String>(
-                      child: const Text('Delete'), value: 'Delete',
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+                  ),
+                );
+              },
+              itemCount: listMatakuliah.length,
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }
