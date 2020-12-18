@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               //       begin: Alignment.topCenter, end: Alignment.bottomCenter),
               image: DecorationImage(
                   alignment: Alignment.topCenter,
-                  image: NetworkImage('https://www.jagoanhosting.com/wp-content/uploads/2017/10/bg-top-header.png')),
+                  image: NetworkImage('https://www.advancedsciencenews.com/wp-content/uploads/2020/06/graham-holtshausen-fUnfEz3VLv4-unsplash.jpg')),
             ),
           ),
           SafeArea(
