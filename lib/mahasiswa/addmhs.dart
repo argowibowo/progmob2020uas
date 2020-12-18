@@ -47,7 +47,7 @@ class _AddMhsState extends State<AddMhs> {
       ),
 
       body: Container(
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
         child: SingleChildScrollView(
           child: Stack(
             children: <Widget>[
@@ -60,10 +60,11 @@ class _AddMhsState extends State<AddMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "NIM",
-                        hintText: "NIM",
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                          icon: Icon(Icons.attribution_rounded),
+                          labelText: "NIM",
+                          hintText: "Contoh: 72180180",
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
                       onSaved: (String value) {
                         this.mhs.nim = value;
@@ -73,8 +74,9 @@ class _AddMhsState extends State<AddMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.person),
                           labelText: "Nama",
-                          hintText: "Nama Mahasiswa",
+                          hintText: "Contoh: Magdalena Evelyn Halim",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -86,8 +88,9 @@ class _AddMhsState extends State<AddMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.house),
                           labelText: "Alamat",
-                          hintText: "Alamat Mahasiswa",
+                          hintText: "Contoh: Jl. Magelang",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -99,8 +102,9 @@ class _AddMhsState extends State<AddMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.email_rounded),
                           labelText: "Email Mahasiswa",
-                          hintText: "Email Mahasiswa",
+                          hintText: "Contoh: mevelynh@gmail.com",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -122,10 +126,16 @@ class _AddMhsState extends State<AddMhs> {
                           alignment: Alignment.topCenter,
                           width: MediaQuery.of(context).size.width,
                       ),
+                    SizedBox(
+                      height: 5,
+                    ),
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
+                      color: Colors.cyan,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0)
+                      ),
                       onPressed: () {
                         _pickImage(ImageSource.gallery);
                       },
@@ -150,7 +160,10 @@ class _AddMhsState extends State<AddMhs> {
                     MaterialButton(
                         minWidth: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                        color: Colors.blue,
+                        color: Colors.cyan,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0)
+                        ),
                         onPressed: () {
                           return showDialog(
                               context: context,
@@ -198,7 +211,10 @@ class _AddMhsState extends State<AddMhs> {
                           fontWeight: FontWeight.bold
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
@@ -221,6 +237,9 @@ class _AddMhsState extends State<AddMhs> {
                 ],
               )
                   : Container(),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),

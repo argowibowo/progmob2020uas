@@ -48,7 +48,7 @@ class _UpdateMhsState extends State<UpdateMhs> {
       ),
 
       body: Container(
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
         child: SingleChildScrollView(
           child: Stack(
             children: <Widget>[
@@ -61,8 +61,9 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.attribution_rounded),
                           labelText: "NIM",
-                          hintText: "NIM",
+                          hintText: "Contoh: 72180180",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -75,8 +76,9 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.person),
                           labelText: "Nama",
-                          hintText: "Nama Mahasiswa",
+                          hintText: "Contoh: Magdalena Evelyn Halim",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -89,8 +91,9 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.house),
                           labelText: "Alamat",
-                          hintText: "Alamat Mahasiswa",
+                          hintText: "Contoh: Jl. Magelang",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -103,8 +106,9 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.email_rounded),
                           labelText: "Email Mahasiswa",
-                          hintText: "Email Mahasiswa",
+                          hintText: "Contoh: mevelynh@gmail.com",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -139,10 +143,16 @@ class _UpdateMhsState extends State<UpdateMhs> {
                       alignment: Alignment.topCenter,
                       width: MediaQuery.of(context).size.width,
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
+                      color: Colors.cyan,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0)
+                      ),
                       onPressed: () {
                         _pickImage(ImageSource.gallery);
                       },
@@ -167,13 +177,16 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
+                      color: Colors.cyan,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0)
+                      ),
                       onPressed: () {
                         return showDialog(
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: Text("Simpan Data"),
+                              title: Text("Ubah Data"),
                               content: Text("Apakah Anda akan menyimpan data ini?"),
                               actions: <Widget>[
                                 FlatButton(
@@ -241,6 +254,9 @@ class _UpdateMhsState extends State<UpdateMhs> {
                 ],
               )
                   : Container(),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),

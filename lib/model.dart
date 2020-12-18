@@ -4,6 +4,52 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
+// ------------------------------login----------------------------------
+class LoginResult {
+  String nimnik;
+  String password;
+  String nama;
+
+  LoginResult({
+    this.nimnik, this.password, this.nama
+  });
+
+  factory LoginResult.createLoginResult(Map<String, dynamic> map) {
+    return LoginResult(
+      nimnik: map['nimnik'],
+      password: map['password'],
+      nama: map['nama'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {"nimnik": nimnik, "password": password, "nama": nama};
+  }
+
+  @override
+  String toString() {
+    return 'Login{nimnik: $nimnik, password: $password, nama: $nama}';
+  }
+
+  factory LoginResult.fromJson(Map<String, dynamic> json) {
+    return LoginResult(
+      nimnik: json["nimnik"],
+      password: json["password"],
+      nama: json["nama"],
+    );
+  }
+}
+
+List<LoginResult> loginFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<LoginResult>.from(data.map((item) => LoginResult.fromJson(item)));
+}
+
+String loginToJson(LoginResult data) {
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+
 // ------------------------------chart----------------------------------
 class ClicksPerYear {
   final String year;
@@ -22,15 +68,17 @@ class DashboardSI {
   String dosen;
   String matakuliah;
   String jadwal;
+  String nim_progmob;
 
-  DashboardSI({this.mahasiswa, this.dosen, this.matakuliah, this.jadwal});
+  DashboardSI({this.mahasiswa, this.dosen, this.matakuliah, this.jadwal, this.nim_progmob});
 
   factory DashboardSI.fromJson(Map<String, dynamic> json) {
     return DashboardSI(
       mahasiswa: json["mahasiswa"],
       dosen: json["dosen"],
       matakuliah: json["matakuliah"],
-      jadwal: json["jadwal"]
+      jadwal: json["jadwal"],
+      nim_progmob: json["nim_progmob"]
     );
   }
 }
@@ -124,9 +172,9 @@ class Matakuliah{
   String id;
   String kode;
   String nama;
-  int hari;
-  int sesi;
-  int sks;
+  String hari;
+  String sesi;
+  String sks;
   String nim_progmob;
 
   Matakuliah({
@@ -155,6 +203,61 @@ List<Matakuliah> matkulFromJson(String jsonData) {
 }
 
 String matkulToJson(Matakuliah data) {
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+
+// ------------------------------jadwal------------------------------
+class Jadwal{
+  String id; // <-- id jadwal
+  String id_dosen;
+  String id_matkul;
+  String kode; // <-- kode matkul
+  String nama_matkul;
+  String nama_dosen;
+  String nidn;
+  String nim_progmob;
+  String hari;
+  String sesi;
+  String sks;
+
+  Jadwal({
+    this.id, this.id_dosen, this.id_matkul, this.kode, this.nama_matkul, this.nama_dosen, this.nidn,
+    this.nim_progmob, this.hari, this.sesi, this.sks
+  });
+
+  factory Jadwal.fromJson(Map<String, dynamic> map) {
+    return Jadwal(
+        id: map["id"],
+        id_dosen: map["id_dosen"],
+        id_matkul: map["id_matkul"],
+        kode: map["kode"],
+        nama_matkul: map["matkul"],
+        nama_dosen: map["dosen"],
+        nim_progmob: map["nim_progmob"],
+        hari: map["hari"],
+        sesi: map["sesi"],
+        sks: map["sks"]);
+  }
+
+  Map<String, dynamic> toJson() => <String, dynamic> {
+    "id": id, "id_dosen": id_dosen, "id_matkul": id_matkul, "kode": kode, "nama_matkul": nama_matkul, "nama_dosen": nama_dosen, "nim_progmob": nim_progmob,
+    "hari": hari, "nama": sesi, "sesi": nim_progmob, "sks": sks
+  };
+
+  @override
+  String toString() {
+    return 'Jadwal{id: $id, id_dosen: $id_dosen, id_matkul: $id_matkul, kode: $kode, nama_matkul: $nama_matkul, nama_dosen: $nama_dosen, '
+        'nim_progmob: $nim_progmob, kode: $kode, hari: $hari, sesi: $sesi, sks: $sks}';
+  }
+}
+
+List<Jadwal> jadwalFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<Jadwal>.from(data.map((item) => Jadwal.fromJson(item)));
+}
+
+String jadwalToJson(Jadwal data) {
   final jsonData = data.toJson();
   return json.encode(jsonData);
 }

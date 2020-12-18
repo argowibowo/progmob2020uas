@@ -2,9 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:progmob_flutter/apiservices.dart';
 import 'package:progmob_flutter/model.dart';
-import 'package:image_picker/image_picker.dart';
 
-// Menyimpan formnya
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
 class AddMatkul extends StatefulWidget {
@@ -35,7 +33,7 @@ class _AddMatkulState extends State<AddMatkul> {
       ),
 
       body: Container(
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
         child: SingleChildScrollView(
           child: Stack(
             children: <Widget>[
@@ -47,8 +45,9 @@ class _AddMatkulState extends State<AddMatkul> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.bookmark_outline_rounded),
                           labelText: "Kode",
-                          hintText: "Kode Matakuliah",
+                          hintText: "Contoh: SI02",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -60,8 +59,9 @@ class _AddMatkulState extends State<AddMatkul> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.library_books),
                           labelText: "Nama",
-                          hintText: "Nama Matakuliah",
+                          hintText: "Contoh: Pemograman Mobile",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -73,42 +73,45 @@ class _AddMatkulState extends State<AddMatkul> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.today),
                           labelText: "Hari",
-                          hintText: "Hari Matakuliah",
+                          hintText: "Contoh: 3",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
                       keyboardType: TextInputType.number,
                       onSaved: (String value) {
-                        this.matkul.hari = int.parse(value);
+                        this.matkul.hari = value;
                       },
                     ),
                     SizedBox(height: 15,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.access_time_rounded),
                           labelText: "Sesi",
-                          hintText: "Sesi Matakuliah",
+                          hintText: "Contoh: 2",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
                       keyboardType: TextInputType.number,
                       onSaved: (String value) {
-                        this.matkul.sks = int.parse(value);
+                        this.matkul.sesi = value;
                       },
                     ),
                     SizedBox(height: 15,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.confirmation_number),
                           labelText: "SKS",
-                          hintText: "SKS Matakuliah",
+                          hintText: "Contoh: 3",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
                       keyboardType: TextInputType.number,
                       onSaved: (String value) {
-                        this.matkul.sks = int.parse(value);
+                        this.matkul.sks = value;
                       },
                     ),
                     SizedBox(
@@ -117,7 +120,10 @@ class _AddMatkulState extends State<AddMatkul> {
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
+                      color: Colors.cyan,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0)
+                      ),
                       onPressed: () {
                         return showDialog(
                           context: context,
@@ -163,7 +169,10 @@ class _AddMatkulState extends State<AddMatkul> {
                             fontWeight: FontWeight.bold
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),

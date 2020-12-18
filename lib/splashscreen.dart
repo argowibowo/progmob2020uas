@@ -4,6 +4,7 @@ import 'package:progmob_flutter/dashbord.dart';
 import 'package:progmob_flutter/login.dart';
 import 'package:progmob_flutter/pertemuan2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:progmob_flutter/components//constant.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
@@ -39,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
       return Timer(duration, (){
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_){
-              return Dashboard(title: "Dashboard");
+              return Dashboard(title: "Dashboard",);
             })
         );
       });
@@ -83,7 +84,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.cyan,
+        // backgroundColor: Colors.cyan,
+        backgroundColor: kPrimaryColor,
         body: Container(
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,

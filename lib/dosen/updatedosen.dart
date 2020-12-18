@@ -47,7 +47,7 @@ class _UpdateDosenState extends State<UpdateDosen> {
       ),
 
       body: Container(
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
         child: SingleChildScrollView(
           child: Stack(
             children: <Widget>[
@@ -59,8 +59,9 @@ class _UpdateDosenState extends State<UpdateDosen> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.attribution_rounded),
                           labelText: "NIDN",
-                          hintText: "NIDN",
+                          hintText: "Contoh: 0516118902",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -73,8 +74,9 @@ class _UpdateDosenState extends State<UpdateDosen> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.person),
                           labelText: "Nama",
-                          hintText: "Nama Dosen",
+                          hintText: "Contoh: Argo Wibowo",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -87,8 +89,9 @@ class _UpdateDosenState extends State<UpdateDosen> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.house),
                           labelText: "Alamat",
-                          hintText: "Alamat Dosen",
+                          hintText: "Contoh: Jl. Magelang",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -101,8 +104,9 @@ class _UpdateDosenState extends State<UpdateDosen> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.email_rounded),
                           labelText: "Email",
-                          hintText: "Email Mahasiswa",
+                          hintText: "Contoh: argo@staff.ukdw.ac.id",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -116,8 +120,9 @@ class _UpdateDosenState extends State<UpdateDosen> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
+                          icon: Icon(Icons.perm_identity_outlined),
                           labelText: "Gelar",
-                          hintText: "Gelar Dosen",
+                          hintText: "Contoh: S.Kom.",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
@@ -151,10 +156,16 @@ class _UpdateDosenState extends State<UpdateDosen> {
                       alignment: Alignment.topCenter,
                       width: MediaQuery.of(context).size.width,
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
+                      color: Colors.cyan,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0)
+                      ),
                       onPressed: () {
                         _pickImage(ImageSource.gallery);
                       },
@@ -179,7 +190,10 @@ class _UpdateDosenState extends State<UpdateDosen> {
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
+                      color: Colors.cyan,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0)
+                      ),
                       onPressed: () {
                         return showDialog(
                           context: context,

@@ -18,12 +18,20 @@ class _DashboardMhsState extends State<DashboardMhs> {
   final _formKey = GlobalKey<FormState>();
 
   List<Mahasiswa> listMhs;
+  var refreshkey = GlobalKey<RefreshIndicatorState>();
 
   // Refresh kembali halaman dashboard
   FutureOr onGoBack(dynamic value) {
     // Refresh state
     setState(() {
 
+    });
+  }
+
+  Future<Null> refreshlist() async {
+    await Future.delayed(Duration(seconds: 2)); //wait here for 2 second
+    setState(() {
+      ApiServices().getMahasiswa();
     });
   }
 
@@ -37,93 +45,105 @@ class _DashboardMhsState extends State<DashboardMhs> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddMhs(title: "Input Data Mahasiswa"))
-                ).then(onGoBack);
-              }
-          )
-        ],
+        // actions: <Widget>[
+        //   IconButton(
+        //       icon: Icon(Icons.add),
+        //       onPressed: () {
+        //         Navigator.push(
+        //             context,
+        //             MaterialPageRoute(builder: (context) => AddMhs(title: "Input Data Mahasiswa"))
+        //         ).then(onGoBack);
+        //       }
+        //   )
+        // ],
       ),
 
-      body: FutureBuilder(
-        future: ApiServices().getMahasiswa(),
-        builder: (BuildContext context, AsyncSnapshot<List<Mahasiswa>> snapshot) {
-         if (snapshot.hasError){
-           return Center(
-             child: Text(
-               "Something wrong with message: ${snapshot.error.toString()}"
-             ),
-           );
-         } else if (snapshot.connectionState == ConnectionState.done) {
-           // get data mahasiswa
-           listMhs = snapshot.data;
+      body: RefreshIndicator(
+        onRefresh: refreshlist,
+        child: FutureBuilder(
+          future: ApiServices().getMahasiswa(),
+          builder: (BuildContext context, AsyncSnapshot<List<Mahasiswa>> snapshot) {
+            if (snapshot.hasError){
+              return Center(
+                child: Text(
+                    "Something wrong with message: ${snapshot.error.toString()}"
+                ),
+              );
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              // get data mahasiswa
+              listMhs = snapshot.data;
 
-           return ListView.builder(
-               itemBuilder: (context, position) {
-                 return Card(
-                   margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
-                   child: Container(
-                     child: ListTile(
-                       title: Text(listMhs[position].nama + " - " + listMhs[position].nim),
-                       subtitle: Text(listMhs[position].email),
-                       leading: CircleAvatar(
-                         backgroundImage: NetworkImage(listMhs[position].foto),
-                       ),
-                       onLongPress: () {
-                         showDialog(
-                             context: context,
-                           builder: (_) => AlertDialog(
-                             content: Column(
-                               mainAxisSize: MainAxisSize.min,
-                               children: <Widget>[
-                                 FlatButton(
-                                     onPressed: (){
-                                       Navigator.pop(context);
-                                         Navigator.push(
-                                             context,
-                                             MaterialPageRoute(builder: (context) => UpdateMhs(title: "Update Data Mahasiswa",
-                                             mhs: listMhs[position],
-                                             nimcari: listMhs[position].nim))
-                                         ).then(onGoBack);
-                                     },
-                                     child: Text("Update")
-                                 ),
-                                 Divider(
-                                   color: Colors.black,
-                                   height: 20,
-                                 ),
-                                 FlatButton(
-                                     onPressed: () async {
-                                       ApiServices().deleteMhs(listMhs[position].nim);
-                                       Navigator.pop(context);
-                                       setState(() {
+              return ListView.builder(
+                itemBuilder: (context, position) {
+                  return Card(
+                    margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                    child: Container(
+                      child: ListTile(
+                        title: Text(listMhs[position].nama + " - " + listMhs[position].nim),
+                        subtitle: Text(listMhs[position].email),
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(listMhs[position].foto),
+                        ),
+                        onLongPress: () {
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    FlatButton(
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(builder: (context) => UpdateMhs(title: "Update Data Mahasiswa",
+                                                  mhs: listMhs[position],
+                                                  nimcari: listMhs[position].nim))
+                                          ).then(onGoBack);
+                                        },
+                                        child: Text("Update")
+                                    ),
+                                    Divider(
+                                      color: Colors.black,
+                                      height: 20,
+                                    ),
+                                    FlatButton(
+                                        onPressed: () async {
+                                          ApiServices().deleteMhs(listMhs[position].nim);
+                                          Navigator.pop(context);
+                                          setState(() {
 
-                                       });
-                                     },
-                                     child: Text("Delete")
-                                 ),
-                               ],
-                             ),
-                           )
-                         );
-                       },
-                     ),
-                   ),
-                 );
-               },
-             itemCount: listMhs.length,
-           );
-         } else {
-           return Center(
-             child: CircularProgressIndicator(),
-           );
-         }
+                                          });
+                                        },
+                                        child: Text("Delete")
+                                    ),
+                                  ],
+                                ),
+                              )
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+                itemCount: listMhs.length,
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddMhs(title: "Input Data Mahasiswa"))
+          ).then(onGoBack);
         },
+        child: Icon(Icons.add),
       ),
     );
   }
