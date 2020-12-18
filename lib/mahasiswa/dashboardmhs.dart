@@ -1,4 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_72170102/Apiservice.dart';
+
+import '../model.dart';
+import 'addmhs.dart';
 
 class DashboardMhs extends StatefulWidget {
   DashboardMhs({Key key, this.title}) : super(key: key);
@@ -11,6 +17,13 @@ class DashboardMhs extends StatefulWidget {
 class _DashboardMhsState extends State<DashboardMhs> {
   final _formKey = GlobalKey<FormState>();
 
+  List<Mahasiswa> lMhs = new List();
+
+  FutureOr onGoBack(dynamic value){
+    setState(() {
+
+    });
+  }
   @override
   void initState() {
     super.initState();
@@ -24,7 +37,12 @@ class _DashboardMhsState extends State<DashboardMhs> {
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
-              onPressed: () {}
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddMhs(title: "Input Data Mahasiswa")),
+                ).then(onGoBack);
+              },
           )
         ],
       ),
