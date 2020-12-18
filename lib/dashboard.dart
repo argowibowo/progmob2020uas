@@ -34,10 +34,10 @@ class _DashBoardState extends State<DashBoard> {
               accountName: Text("Riswan S. Tritama"),
               accountEmail: Text("riswan.sulia@si.ukdw.ac.id"),
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Image.asset(
-                  "images/Jen.png",
-                ),
+                backgroundColor: Colors.transparent,
+                 child: Image.asset(
+                   "images/ninny.png",
+                 ),
               ),
             ),
             ListTile(
