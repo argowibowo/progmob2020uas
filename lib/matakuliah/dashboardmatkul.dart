@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DashboardMatkul extends StatefulWidget {
-  DashboardMatkul({Key key, this.title}) : super(key: key);
+class dashboardMatkul extends StatefulWidget {
+  dashboardMatkul({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _DashboardMatkulState createState() => _DashboardMatkulState();
+  _dashboardMatkulState createState() => _dashboardMatkulState();
 }
 
-class _DashboardMatkulState extends State<DashboardMatkul> {
+class _dashboardMatkulState extends State<dashboardMatkul> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -37,8 +37,8 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
             children: <Widget>[
               ListTile(
                 leading: Icon(Icons.book_sharp),
-                title: Text("Bahasa Indonesia"),
-                subtitle: Text("MH1033"),
+                title: Text("Aplikasi Berbasis Desktop"),
+                subtitle: Text("SI12323"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(
@@ -53,7 +53,7 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
               ListTile(
                 leading: Icon(Icons.book_sharp),
                 title: Text("Pemrograman Mobile"),
-                subtitle: Text("SI1333"),
+                subtitle: Text("SI13323"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(
@@ -69,11 +69,6 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ),
     );
   }
 }

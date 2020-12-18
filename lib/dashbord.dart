@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:progmob_flutter/dosen/dashboarddosen.dart';
-import 'package:progmob_flutter/jadwal/dashboardjadwal.dart';
-import 'package:progmob_flutter/login.dart';
-import 'package:progmob_flutter/mahasiswa/dashboardmhs.dart';
-import 'package:progmob_flutter/matakuliah/dashboardmatkul.dart';
+import 'package:flutter_project_2020/dashboard.dart';
+import 'package:flutter_project_2020/dosen/dashboarddosen.dart';
+import 'package:flutter_project_2020/jadwal//dashboardjadwal.dart';
+import 'package:flutter_project_2020/login.dart';
+import 'package:flutter_project_2020/mahasiswa/dashboardmhs.dart';
+import 'package:flutter_project_2020/matkul/dashboardmatkul.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Dashboard extends StatefulWidget {
+class dashboard extends StatefulWidget {
   Dashboard({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _DashboardState createState() => _DashboardState();
+  _dashboardState createState() => _dashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _dashboardState extends State<dashboard> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -29,53 +30,52 @@ class _DashboardState extends State<Dashboard> {
         title: Text(widget.title),
       ),
       drawer: Drawer(
-        // Pakai List karena bentuknya berupa list -> ke bawah
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-                accountName: Text("Jonathan Mata"),
-                accountEmail: Text("jonathan.leonardo@si.ukdw.ac.id"),
+              accountName: Text("Jonathan Mata"),
+              accountEmail: Text("jonathan.leonardo@si.ukdw.ac.id"),
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.black,
                 child: Text(
-                  "ME",
-                  style: TextStyle(fontSize: 40.0),
+                  "User",
+                  style: TextStyle(fontSize: 20.0),
                 ),
               ),
             ),
             ListTile(
               title: Text("Data Dosen"),
-              subtitle: Text("Menu CRUD Data Dosen"),
+              subtitle: Text("CRUD Data Dosen"),
               trailing: Icon(Icons.people),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                  MaterialPageRoute(builder: (context) => DashboardDosen(title: "Dashboard Dosen"))
+                    MaterialPageRoute(builder: (context) => DashboardDosen(title: "Dashboard Dosen"))
                 );
               },
             ),
             ListTile(
               title: Text("Data Mahasiswa"),
-              subtitle: Text("Menu CRUD Data Mahasiswa"),
+              subtitle: Text("CRUD data Mahasiswa"),
               trailing: Icon(Icons.people_outline),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                  MaterialPageRoute(builder: (context) => DashboardMhs(title: "Dashboard Mahasiswa"))
+                    MaterialPageRoute(builder: (context) => DashboardMhs(title: "Dashboard Mahasiswa"))
                 );
               },
             ),
             ListTile(
               title: Text("Data Matakuliah"),
-              subtitle: Text("Menu CRUD Data Matakuliah"),
+              subtitle: Text("CRUD Data Matakuliah"),
               trailing: Icon(Icons.book_sharp),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                  MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Dashboard Matakuliah"))
+                    MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Dashboard Matakuliah"))
                 );
               },
             ),
@@ -87,7 +87,7 @@ class _DashboardState extends State<Dashboard> {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                  MaterialPageRoute(builder: (context) => DashboardJadwal(title: "Dashboard Jadwal"))
+                    MaterialPageRoute(builder: (context) => DashboardJadwal(title: "Dashboard Jadwal"))
                 );
               },
             ),
@@ -115,15 +115,10 @@ class _DashboardState extends State<Dashboard> {
       body: Container(
         child: Center(
           child: Text("Dashboard",
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 15),
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ),
     );
   }
 }

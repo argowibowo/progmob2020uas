@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DashboardJadwal extends StatefulWidget {
-  DashboardJadwal({Key key, this.title}) : super(key: key);
+class dashboardJadwal extends StatefulWidget {
+  dashboardJadwal({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _DashboardJadwalState createState() => _DashboardJadwalState();
+  _dashboardJadwalState createState() => _dashboardJadwalState();
 }
 
-class _DashboardJadwalState extends State<DashboardJadwal> {
+class _dashboardJadwalState extends State<dashboardJadwal> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -37,8 +37,8 @@ class _DashboardJadwalState extends State<DashboardJadwal> {
             children: <Widget>[
               ListTile(
                 leading: Icon(Icons.event_note_outlined),
-                title: Text("Bahasa Indonesia"),
-                subtitle: Text("Kamis Sesi 2 (09.30-11.00)"),
+                title: Text("Aplikasi Berbasis Desktop"),
+                subtitle: Text("Senin Sesi 4 (13.30.30-15.20)"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(
@@ -53,7 +53,7 @@ class _DashboardJadwalState extends State<DashboardJadwal> {
               ListTile(
                 leading: Icon(Icons.event_note_outlined),
                 title: Text("Pemrograman Mobile"),
-                subtitle: Text("Jumat Sesi 2 (09.30-11.00)"),
+                subtitle: Text("Jumat Sesi 2 (09.30-11.20)"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(
@@ -69,11 +69,6 @@ class _DashboardJadwalState extends State<DashboardJadwal> {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ),
     );
   }
 }

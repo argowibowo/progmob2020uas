@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:progmob_flutter/dashbord.dart';
-import 'package:progmob_flutter/pertemuan2.dart';
+import 'package:flutter_project_2020/dashboard.dart';
+import 'package:flutter_project_2020/login.dart';
+import 'package:flutter_project_2020/pertemuan2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences isLogin;
 
-class Login extends StatefulWidget {
+class login extends StatefulWidget {
   Login({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _LoginState createState() => _LoginState();
+  _loginState createState() => _loginState();
 }
 
-class _LoginState extends State<Login> {
+class _loginState extends State<login> {
   final _formKey = GlobalKey<FormState>();
   final myUsernameController = TextEditingController();
   final myPasswordController = TextEditingController();
@@ -43,104 +44,99 @@ class _LoginState extends State<Login> {
         title: Text(widget.title),
       ),
       body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Container(
-                margin: EdgeInsets.only(left: 20, right: 20),
-                  // seberapa besar device, akan diukur tingginya
+          key: _formKey,
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                  margin: EdgeInsets.only(left: 15, right: 15),
                   height: MediaQuery.of(context).size.height / 5,
-                child: new Image.asset(
-                  "",
-                ),
-              ),
-              new TextFormField(
-                validator: (value){
-                  if(value.isEmpty && value.length == 0) {
-                    return "Username tidak boleh kosong";
-                  // } else if (!value.contains('72170134')){
-                  //   return "Username Anda salah";
-                  } else
-                  return null;
-                },
-                controller: myUsernameController,
-                decoration: new InputDecoration(
-                  icon: const Icon(Icons.person),
-                  labelText: "Username",
-                  border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5),
+                  child: new Image.asset(
+                    "gambar/L.png",
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(5.0),
-              ),
-              new TextFormField(
-                validator: (value){
-                  if(value.isEmpty && value.length == 0) {
-                    return "Password tidak boleh kosong";
-                  // } else if (!value.contains('12345')){
-                  //   return "Password Anda salah";
-                  } else
-                  return null;
-                },
-                obscureText: !this.showPassword,
-                controller: myPasswordController,
-                decoration: new InputDecoration(
-                  icon: const Icon(Icons.lock),
-                  labelText: "Password",
-                  border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(5),
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      showPassword ? Icons.visibility : Icons.visibility_off,
+                new TextFormField(
+                  validator: (value){
+                    if(value.isEmpty && value.length == 0) {
+                      return "HARUS DI ISI";
+                    } else
+                      return null;
+                  },
+                  controller: myUsernameController,
+                  decoration: new InputDecoration(
+                    icon: const Icon(Icons.person),
+                    labelText: "Username",
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(5),
                     ),
-                    onPressed: () {
-                      setState(() {
-                        this.showPassword = !this.showPassword;
-                      });
-                    },
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                ),
+                new TextFormField(
+                  validator: (value){
+                    if(value.isEmpty && value.length == 0) {
+                      return "Harus DI ISI";
+                    } else
+                      return null;
+                  },
+                  obscureText: !this.showPassword,
+                  controller: myPasswordController,
+                  decoration: new InputDecoration(
+                    icon: const Icon(Icons.lock),
+                    labelText: "Password",
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(5),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        showPassword ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          this.showPassword = !this.showPassword;
+                        });
+                      },
+                    ),
+                  ),
 
-              ),
-              RaisedButton (
-                color: Colors.blue,
-                // disabledColor: Colors.blue,
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                      color: Colors.white
-                  ),
                 ),
-                onPressed: () async {
-                  if(_formKey.currentState.validate()){
-                    // // get value from textbox
-                    // username = myUsernameController.text;
-                    // password = myPasswordController.text;
-                    // if(username != '72170134'){
-                    //   return "Username anda salah";
-                    // } else if(password != '12345'){
-                    //   return "Password anda salah";
-                    // } else {
+                RaisedButton (
+                  color: Colors.blue,
+                  // disabledColor: Colors.blue,
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
+                  ),
+                  onPressed: () async {
+                    if(_formKey.currentState.validate()){
+                      // // get value from textbox
+                      // username = myUsernameController.text;
+                      // password = myPasswordController.text;
+                      // if(username != '72170167'){
+                      //   return "Username anda salah";
+                      // } else if(password != '101010'){
+                      //   return "Password anda salah";
+                      // } else {
                       SharedPreferences pref = await SharedPreferences.getInstance();
                       await pref.setInt("is_login", 1);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard",)),
                       );
-                    // }
-                    _formKey.currentState.save();
-                  }
-                },
-              )
-            ],
-          ),
-        )
+                      // }
+                      _formKey.currentState.save();
+                    }
+                  },
+                )
+              ],
+            ),
+          )
 
       ),
     );

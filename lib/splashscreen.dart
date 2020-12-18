@@ -1,37 +1,19 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
-import 'package:progmob_flutter/dashbord.dart';
-import 'package:progmob_flutter/login.dart';
-import 'package:progmob_flutter/pertemuan2.dart';
-
+import 'package:flutter_project_2020/dashboard.dart';
+import 'package:flutter_project_2020/login.dart';
+import 'package:flutter_project_2020/pertemuan2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SplashScreen extends StatefulWidget {
+
+class splashscreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  _splashscreenState createState() => _splashscreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-
-  // void navigateLogin() async {
-  //   SharedPreferences pref = await SharedPreferences.getInstance();
-  //   int isLogin = pref.getInt("is_login");
-  //   if(isLogin == 1){
-  //     Navigator.pushReplacement(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => Pertemuan2(title: "Home",)),
-  //     );
-  //   }
-  //   else {
-  //     Navigator.pushReplacement(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => Login(title: "Login",)),
-  //     );
-  //   }
-  // }
+class _splashscreenState extends State<splashscreen> {
 
   startSplashScreen() async {
     var duration = const Duration(seconds: 2);
@@ -54,13 +36,6 @@ class _SplashScreenState extends State<SplashScreen> {
         );
       });
     }
-    // return Timer(duration, (){
-    //   Navigator.of(context).pushReplacement(
-    //       MaterialPageRoute(builder: (_){
-    //         return Login(title: "Login");
-    //       })
-    //   );
-    // });
   }
 
   double _height = 400;
@@ -87,27 +62,25 @@ class _SplashScreenState extends State<SplashScreen> {
       home: Scaffold(
         backgroundColor: Colors.cyan,
         body: Container(
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AnimatedContainer(
-                duration: Duration(seconds: 2),
-                curve: Curves.bounceOut,
-                width: _width,
-                height: _height,
-                child: Image.asset(
-                  "L.png",
+            child: Column(
+              children: [
+                AnimatedContainer(
+                  duration: Duration(seconds: 2),
+                  curve: Curves.bounceOut,
                   width: _width,
                   height: _height,
+                  child: Image.asset(
+                    "gambar/mcr.png",
+                    width: _width,
+                    height: _height,
+                  ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.center,
-              ),
-            ],
-          )
+                Align(
+                  alignment: Alignment.center,
+                ),
+              ],
+            )
         ),
       ),
     );
   }
-}
