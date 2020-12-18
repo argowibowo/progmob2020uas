@@ -1,1 +1,131 @@
-//BELUM DITAMBAH
+
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:wil_app/model.dart';
+import 'package:wil_app/apiservices.dart';
+import 'package:wil_app/matakuliah/addmatkul.dart';
+import 'package:wil_app/matakuliah/updatematkul.dart';
+
+
+
+
+class Dashboard_matakuliah extends StatefulWidget {
+  Dashboard_matakuliah({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _Dashboard_matakuliahState createState() => _Dashboard_matakuliahState();
+}
+
+class _Dashboard_matakuliahState extends State<Dashboard_matakuliah> {
+  final _formKey = GlobalKey<FormState>();
+
+  List<Matakuliah> listMatakuliah;
+
+  FutureOr onGoBack(dynamic value) {
+    setState(() {
+
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.grey,
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddMatkul(title: "Input Data Matakuliah"))
+                ).then(onGoBack);
+              }
+          )
+        ],
+      ),
+
+      body: FutureBuilder(
+        future: ApiServices().getMatkul(),
+        builder: (BuildContext context, AsyncSnapshot<List<Matakuliah>> snapshot) {
+          if (snapshot.hasError){
+            return Center(
+              child: Text(
+                  "Something wrong with message: ${snapshot.error.toString()}"
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            listMatakuliah = snapshot.data;
+
+            return ListView.builder(
+              itemBuilder: (context, position) {
+                return Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(listMatakuliah[position].kode + ", " + listMatakuliah[position].nama),
+                      subtitle: Text(listMatakuliah[position].hari + " - " + listMatakuliah[position].sesi + " - "
+                          + listMatakuliah[position].sks),
+
+                      onLongPress: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  FlatButton(
+                                      onPressed: (){
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => UpdateMatkul(title: "Update Data Matakuliah",
+                                                matkul: listMatakuliah[position],
+                                                kodecari: listMatakuliah[position].kode))
+                                        ).then(onGoBack);
+                                      },
+                                      child: Text("Update")
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    height: 20,
+                                  ),
+                                  FlatButton(
+                                      onPressed: () async {
+                                        ApiServices().deleteMatkul(listMatakuliah[position].kode);
+                                        Navigator.pop(context);
+                                        setState(() {
+
+                                        });
+                                      },
+                                      child: Text("Delete")
+                                  ),
+                                ],
+                              ),
+                            )
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+              itemCount: listMatakuliah.length,
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
+    );
+  }
+}

@@ -4,7 +4,7 @@ import 'package:wil_app/Tugaspertemuan8.dart';
 import 'package:wil_app/dashboardwil.dart';
 
 
-
+// SharedPreferences isLogin;
 class Login extends StatefulWidget {
   Login({Key key, this.title}) : super(key: key);
 
@@ -28,70 +28,113 @@ class _LoginState extends State<Login> {
     });
   }
 
+// class _LoginState extends State<Login> {
+//   final _formKey = GlobalKey<FormState>();
+//   final myUsernameController = TextEditingController();
+//   final myPasswordController = TextEditingController();
+//   String username, password;
+//   bool showPassword = false;
+//
+//   void navigateLogin() async {
+//     SharedPreferences pref = await SharedPreferences.getInstance();
+//     int isLogin = pref.getInt("is_login");
+//     if (isLogin == 1) {
+//       Navigator.pushReplacement(
+//         context,
+//         MaterialPageRoute(builder: (context) => Dashboardwil(title: "Sistem Informasi Akademik",)),
+//       );
+//     }
+//   }
+
+  // @override
+  // void initState() {
+  //   navigateLogin();
+  // }
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      backgroundColor: Colors.deepPurple,
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    decoration: new InputDecoration(
-                      hintText: "Username",
-                      labelText: "Username",
-                    ),
 
+          child: Column(
+
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(50.0),
+              ),
+              CircleAvatar(
+                radius: 50.0,
+                backgroundColor: Colors.lightBlue[600],
+                backgroundImage: AssetImage('assets/images/logo.png'),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+
+                  decoration: new InputDecoration(
+
+                    hintText: "Username",
+                    labelText: "Username",
                   ),
 
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    decoration: new InputDecoration(
-                      hintText: "Password",
-                      labelText: "Password",
-                    ),
+
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+
+                  decoration: new InputDecoration(
+                    hintText: "Password",
+                    labelText: "Password",
+
+
 
                   ),
 
+
+
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                ),
-                RaisedButton(
-                  child: Text(
-                    "Login",
-                    style: TextStyle(color: Colors.white),
+              ),
+
+
+              RaisedButton(
+                color: Colors.blue,
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                      color: Colors.white
                   ),
-                  color: Colors.blue,
-                  onPressed: () async {
-                    SharedPreferences pref = await SharedPreferences.getInstance();
+                ),
+                onPressed: () async {
+                  if (_formKey.currentState.validate()) {
+                    SharedPreferences pref = await SharedPreferences
+                        .getInstance();
                     await pref.setInt("is_login", 1);
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Dashboardwil(title : "Sistem Akademik",)),
+                      MaterialPageRoute(
+                          builder: (context) => Dashboardwil(title: "Sistem Informasi Akademik",)),
                     );
-                  },
-                ),
+                    // }
+                    _formKey.currentState.save();
+                  }
+                },
+              )
 
 
-              ],
-            ),
+
+            ],
           ),
         ),
       ),
     );
-
-
-
   }
 }

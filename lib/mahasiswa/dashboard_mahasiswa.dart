@@ -34,6 +34,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
 
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.grey,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),

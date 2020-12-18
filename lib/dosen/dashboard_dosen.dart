@@ -39,6 +39,7 @@ import 'package:wil_app/dosen/updatedosen.dart';
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.grey,
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),

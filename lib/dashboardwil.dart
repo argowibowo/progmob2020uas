@@ -5,6 +5,8 @@ import 'package:wil_app/dosen/dashboard_dosen.dart';
 import 'package:wil_app/jadwal/dashboard_jadwal.dart';
 import 'package:wil_app/mahasiswa/dashboard_mahasiswa.dart';
 import 'package:wil_app/matakuliah/dashboard_matakuliah.dart';
+import 'package:wil_app/apiservices.dart';
+import 'package:wil_app/model.dart';
 
 
 class Dashboardwil extends StatefulWidget {
@@ -41,14 +43,14 @@ class _DashboardwilState extends State<Dashboardwil> {
               accountName: Text("Wilfridus Bau Mau "),
               accountEmail: Text("wilfridus.bau@si.ukdw.ac.id"),
               decoration: BoxDecoration(
-                color: Color(0xFF0D47A1),
+                color: Colors.deepPurple,
               ),
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Color(0xFFE8EAF6),
+                backgroundColor: Colors.red,
                 child: Text(
                   "WM",
                   style: TextStyle(
-                      color: Color(0xFF0D47A1),
+                      color: Colors.black,
                       fontSize: 40
                   ),
                 ),
@@ -58,17 +60,18 @@ class _DashboardwilState extends State<Dashboardwil> {
               title: Text(
                 "Data Dosen",
                 style: TextStyle(
-                  color: Color(0xFF0D47A1),
+                  color: Colors.purple,
                 ),
               ),
+
               trailing: Icon(
                 Icons.people,
-                color: Color(0xFF0D47A1),
+                color: Colors.purple,
               ),
               subtitle: Text(
                 "Menu CRUD Data Dosen",
                 style: TextStyle(
-                  color: Colors.grey,
+                  color:Colors.black,
                 ),
               ),
               onTap: (){
@@ -83,17 +86,17 @@ class _DashboardwilState extends State<Dashboardwil> {
               title: Text(
                 "Data Mahasiswa",
                 style: TextStyle(
-                  color: Color(0xFF0D47A1),
+                  color: Colors.purple,
                 ),
               ),
               trailing: Icon(
                 Icons.people_alt_outlined,
-                color: Color(0xFF0D47A1),
+                color: Colors.purple,
               ),
               subtitle: Text(
                 "Menu CRUD Data Mahasiswa",
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
               ),
               onTap: (){
@@ -108,24 +111,24 @@ class _DashboardwilState extends State<Dashboardwil> {
               title: Text(
                 "Data Matakuliah",
                 style: TextStyle(
-                  color: Color(0xFF0D47A1),
+                  color: Colors.purple,
                 ),
               ),
               trailing: Icon(
                 Icons.library_books,
-                color: Color(0xFF0D47A1),
+                color: Colors.purple,
               ),
               subtitle: Text(
                 "Menu CRUD Data Matakuliah",
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
               ),
               onTap: (){
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Menu Matakuliah",)),
+                  MaterialPageRoute(builder: (context) => Dashboard_matakuliah(title: "Menu Matakuliah",)),
                 );
               },
             ),
@@ -133,24 +136,24 @@ class _DashboardwilState extends State<Dashboardwil> {
               title: Text(
                 "Data Jadwal",
                 style: TextStyle(
-                  color: Color(0xFF0D47A1),
+                  color: Colors.purple,
                 ),
               ),
               trailing: Icon(
                 Icons.schedule,
-                color: Color(0xFF0D47A1),
+                color: Colors.purple,
               ),
               subtitle: Text(
                 "Menu CRUD Data Jadwal",
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
               ),
               onTap: (){
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Menu Jadwal",)),
+                  MaterialPageRoute(builder: (context) => DashBoardJadwal(title: "Menu Jadwal",)),
                 );
               },
             ),
@@ -164,12 +167,12 @@ class _DashboardwilState extends State<Dashboardwil> {
               title: Text(
                 "Logout",
                 style: TextStyle(
-                  color: Color(0xFF0D47A1),
+                  color: Colors.purple,
                 ),
               ),
               trailing: Icon(
                 Icons.exit_to_app,
-                color: Color(0xFF0D47A1),
+                color: Colors.purple,
               ),
               onTap: () async{
                 SharedPreferences pref = await SharedPreferences.getInstance();
@@ -184,17 +187,108 @@ class _DashboardwilState extends State<Dashboardwil> {
 
         ),
       ),
+      //Future masukin disini bodynya
       body: Container(
-          child: Center(
-            child: Text("Dibuat Oleh WiL",
-              style: TextStyle(
-                fontSize: 20,
+        padding: EdgeInsets.all(30.0),
+        color: Colors.deepPurple,
+        child: GridView.count(
+          crossAxisCount: 2,
+          children: <Widget>[
+            Card(
+
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Dashboard_dosen(title : "Data Dosen",)),
+                  );
+                },
+
+
+
+                splashColor: Colors.green,
+                child: Center(
+                  child: Column(
+
+                    children: <Widget>[
+                      Icon(Icons.person_pin, size:70.0, color:Colors.amber),
+                      Text("Dosen", style : new TextStyle(fontSize: 17.0)),
+                      Text("Aktif 4", style : new TextStyle(fontSize: 17.0)),
+
+                    ],
+
+                  ),
+                ),
 
               ),
 
-
             ),
-          ),
+            Card(
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DashboardMahasiswa(title : "Data Mahasiswa",)),
+                  );
+                },
+                splashColor: Colors.green,
+                child: Center(
+                  child: Column(
+
+                    children: <Widget>[
+                      Icon(Icons.person_pin, size:70.0, color:Colors.deepOrange),
+                      Text("Mahasiswa", style : new TextStyle(fontSize: 17.0)),
+                      Text("Aktif 1", style : new TextStyle(fontSize: 17.0)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Dashboard_matakuliah(title : "Data Matakuliah",)),
+                  );
+                },
+                splashColor: Colors.green,
+                child: Center(
+                  child: Column(
+
+                    children: <Widget>[
+                      Icon(Icons.library_books, size:70.0, color: Colors.lightBlue),
+                      Text("Matakuliah", style : new TextStyle(fontSize: 17.0)),
+                      Text("Aktif 1", style : new TextStyle(fontSize: 17.0)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DashBoardJadwal(title : "Data Jadwal",)),
+                  );
+                },
+                splashColor: Colors.green,
+                child: Center(
+                  child: Column(
+
+                    children: <Widget>[
+                      Icon(Icons.school, size:70.0, color: Colors.green),
+                      Text("Perkuliahan", style : new TextStyle(fontSize: 17.0)),
+                      Text("Aktif 1", style : new TextStyle(fontSize: 17.0)),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+
       ),
     );
   }
