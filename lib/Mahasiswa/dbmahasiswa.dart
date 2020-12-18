@@ -31,6 +31,7 @@ class _MhsState extends State<Mhs> {//<~~~~
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.brown,
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
@@ -43,6 +44,7 @@ class _MhsState extends State<Mhs> {//<~~~~
           )
         ],
       ),
+        backgroundColor: Colors.blueGrey,
         body: FutureBuilder(
           future: ApiServices().getMahasiswas(),
           builder: (BuildContext context, AsyncSnapshot<List<Mahasiswa>> snapshot){

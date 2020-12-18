@@ -42,7 +42,10 @@ class _UpdateMhsState extends State<UpdateMhs> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(this.title),
+        backgroundColor: Colors.brown,
       ),
+      backgroundColor: Colors.blueGrey,
+
       body: Container(
           padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
           child: SingleChildScrollView(

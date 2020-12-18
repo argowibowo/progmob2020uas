@@ -36,7 +36,11 @@ class _PreferencesState extends State<preferences> {
     return Scaffold(
       appBar: AppBar(
         title: Text("72180201"),
+
+        backgroundColor: Colors.brown,
       ),
+      backgroundColor: Colors.blueGrey,
+
       body: Padding(
         padding:EdgeInsets.all(15.0),
         child : Center(

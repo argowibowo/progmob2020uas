@@ -32,7 +32,9 @@ class _dashboardState extends State<dashboard> {    //<~~
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.brown,
       ),
+      backgroundColor: Colors.blueGrey,
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
@@ -40,7 +42,7 @@ class _dashboardState extends State<dashboard> {    //<~~
               accountName: Text("Deden Prasetio"), //<~~~~~
               accountEmail: Text("deden.prasetio@si.ukdw.ac.id"), //<~~~~
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.lightBlueAccent,
                 child: Text(
                   "DP", //<~ ~~~~~
                   style: TextStyle(fontSize: 40.0),
@@ -118,7 +120,7 @@ class _dashboardState extends State<dashboard> {    //<~~
       ),
       body: Container(
           child: Center(
-            child: Text("DASHBOARD",
+            child: Text("HALAMAN UTAMA",
               style: TextStyle(
                   fontSize: 20
               ),

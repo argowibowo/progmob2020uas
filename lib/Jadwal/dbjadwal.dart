@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 
 class Jadwal extends StatefulWidget {   //<~~~
   Jadwal({Key key, this.title}) : super(key: key);  //<~~~~
@@ -10,6 +13,20 @@ class Jadwal extends StatefulWidget {   //<~~~
 }
 
 class _JadwalState extends State<Jadwal> {    //<~~~~
+  final _formKey = GlobalKey<FormState>();
+
+  List<Jadwal> listjadwal;
+
+  FutureOr onGoBack(dynamic value) {
+    setState(() {
+
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
 
   @override
@@ -17,13 +34,17 @@ class _JadwalState extends State<Jadwal> {    //<~~~~
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.brown,
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
-              onPressed: (){}
+              onPressed: (){
+
+              }
           )
         ],
       ),
+      backgroundColor: Colors.blueGrey,
       body: Container(
           child: GestureDetector(
             child: Card(
