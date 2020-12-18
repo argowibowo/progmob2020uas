@@ -1,13 +1,13 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_app_progmob_72180181/apiservices.dart';
 import 'package:flutter_app_progmob_72180181/model.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
-final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
+final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
-class UpdateDsn extends StatefulWidget{
+class UpdateDsn extends StatefulWidget {
   final String title;
   Dosen dsn;
   String nidncari;
@@ -15,10 +15,10 @@ class UpdateDsn extends StatefulWidget{
   UpdateDsn({Key key, @required this.title, @required this.dsn, @required this.nidncari}) : super(key: key);
 
   @override
-  _UpdateDsnState createState() => _UpdateDsnState(title,dsn, nidncari);
+  _UpdateDsnState createState() => _UpdateDsnState(title, dsn, nidncari);
 }
 
-class _UpdateDsnState extends State<UpdateDsn>{
+class _UpdateDsnState extends State<UpdateDsn> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
   final String nidncari;
@@ -26,10 +26,10 @@ class _UpdateDsnState extends State<UpdateDsn>{
   bool _isLoading = false;
   File _imageFile;
 
-  _UpdateDsnState(this.title, dsn, this.nidncari);
+  _UpdateDsnState(this.title, this.dsn, this.nidncari);
 
-  //// memeilih dari galeri
-  Future<void> _pickImage(ImageSource source) async{
+  // Select an image via gallery or camera
+  Future<void> _pickImage(ImageSource source) async {
     File selected = await ImagePicker.pickImage(source: source);
 
     setState(() {
@@ -39,7 +39,6 @@ class _UpdateDsnState extends State<UpdateDsn>{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(this.title),
@@ -52,187 +51,180 @@ class _UpdateDsnState extends State<UpdateDsn>{
                 Form(
                   key: _formState,
                   child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 15,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Nidn",
-                            hintText: "Nidn",
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "NIDN",
+                            hintText: "NIDN",
                             border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-                          ),
-                          initialValue: this.dsn.nidn,
-                          onSaved: (String value){
-                            this.dsn.nidn = value;
-                          },
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+                        initialValue: this.dsn.nidn,
+                        onSaved: (String value){
+                          this.dsn.nidn = value;
+                        },
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
                             labelText: "Nama",
-                            hintText: " Nama Dosen",
-                          ),
-                          initialValue: this.dsn.nama,
-                          onSaved: (String value){
-                            this.dsn.nama=value;
-                          },
+                            hintText: "Nama Dosen"
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-                            border: OutlineInputBorder(),
+                        initialValue: this.dsn.nama,
+                        onSaved: (String value){
+                          this.dsn.nama = value;
+                        },
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
                             labelText: "Alamat",
-                            hintText: " Alamat Dosen",
-                          ),
-                          initialValue: this.dsn.alamat,
-                          onSaved: (String value){
-                            this.dsn.alamat=value;
-                          },
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+                            hintText: "Alamat Dosen",
                             border: OutlineInputBorder(),
-                            labelText: "Email",
-                            hintText: " Email Dosen",
-                          ),
-                          initialValue: this.dsn.email,
-                          keyboardType: TextInputType.emailAddress,
-                          onSaved: (String value){
-                            this.dsn.email = value;
-                          },
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                         ),
-                        SizedBox(
-                          height: 15,
+                        initialValue: this.dsn.alamat,
+                        onSaved: (String value){
+                          this.dsn.alamat = value;
+                        },
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Email",
+                          hintText: "Email Dosen",
+                          // border: OutlineInputBorder(),
+                          // contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-                            border: OutlineInputBorder(),
-                            labelText: "Gelar",
-                            hintText: " Gelar Dosen",
-                          ),
-                          initialValue: this.dsn.email,
-                          keyboardType: TextInputType.emailAddress,
-                          onSaved: (String value){
-                            this.dsn.gelar = value;
-                          },
+                        keyboardType: TextInputType.emailAddress,
+                        initialValue: this.dsn.email,
+                        onSaved: (String value){
+                          this.dsn.email = value;
+                        },
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Gelar",
+                          hintText: "Gelar Dosen",
+                          // border: OutlineInputBorder(),
+                          // contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                         ),
-                        SizedBox(
-                          height: 15,
+                        initialValue: this.dsn.gelar,
+                        onSaved: (String value){
+                          this.dsn.gelar = value;
+                        },
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      // ternary operation ====== object? true : false atau else
+                      (_imageFile == null && this.dsn.foto == null)
+                          ?
+                      Text('Silahkan memilih gambar terlebih dahulu')
+                          :
+                      (_imageFile != null)
+                          ?
+                      Image.file(_imageFile,
+                        fit: BoxFit.cover,
+                        height: 300.0,
+                        alignment: Alignment.topCenter,
+                        width: MediaQuery.of(context).size.width,
+                      )
+                          :
+                      Image.network(
+                        this.dsn.foto,
+                        fit: BoxFit.cover,
+                        height: 300.0,
+                        alignment: Alignment.topCenter,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      MaterialButton(
+                        minWidth: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        color: Colors.blue,
+                        onPressed: () {
+                          _pickImage(ImageSource.gallery);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            new Icon(Icons.image,color: Colors.white70,),
+                            Text("Upload foto", textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                              ),)
+                          ],
                         ),
-                        (_imageFile == null && this.dsn.foto == null)
-                            ? Text('Silahkan memilih gambar terlebih dahulu')
-                            :
-                        (_imageFile != null)
-                            ?
-                        Image.file(
-                          _imageFile,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        )
-                            :
-                        Image.network(
-                          this.dsn.foto,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            color:  Colors.lightBlue,
-                            onPressed: () {
-                              _pickImage(ImageSource.gallery);
-                            },
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                new Icon(Icons.image_rounded,color: Colors.white,),
-                                Text ("Upload ",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      MaterialButton(
+                        minWidth: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        color: Colors.blue,
+                        onPressed: () {
+                          return showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text("Simpan Data"),
+                                content: Text("Apakah data ini akan disimpan?"),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () async {
+                                      _formState.currentState.save();
+                                      setState(() => _isLoading = true);
+                                      this.dsn.nim_progmob = "72180181";
+                                      ApiServices().updateDosenWithFoto(this.dsn, _imageFile, nidncari).then((isSuccess) {
+                                        setState(() => _isLoading = false);
+                                        if (isSuccess) {
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                        }
+                                      });
+                                    },
+                                    child: Text('Ya'),
                                   ),
-                                ),
-                              ],
-                            )
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        MaterialButton(
-                          minWidth: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          color: Colors.blue,
-                          onPressed: () {
-                            return showDialog(
-                              context: context,
-                              builder: (context){
-                                return AlertDialog(
-                                  title: Text("Save Data"),
-                                  content: Text(" Yakin Menyimpan data"),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      onPressed: () async{
-                                        _formState.currentState.save();
-                                        this.dsn.nim_progmob = "72180181";
-                                        setState(() => _isLoading = true);
-                                        List<int> imagesBytes = _imageFile.readAsBytesSync();
-                                        this.dsn.foto = base64Encode(imagesBytes);
-                                        ApiServices().updateDsnWithFoto(this.dsn, _imageFile, nidncari).then((isSuccess){
-                                          setState(() => _isLoading = false);
-                                          if (isSuccess){
-                                            Navigator.pop(context);
-                                            Navigator.pop(context);
-                                          } else{
-                                            Navigator.pop(context);
-                                            Navigator.pop(context);
-                                          }
-                                        });
-                                      },
-                                      child: Text("Yes"),
-                                    ),
-                                    FlatButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text ("No"),
-                                    )
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                          child: Text("Save",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold
-                            ),
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Tidak'),
+                                  )
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        child: Text("Simpan",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
                           ),
                         ),
-                      ]
+                      ),
+                    ],
                   ),
                 ),
                 _isLoading
-                    ? Stack(
+                    ?Stack(
                   children: <Widget>[
                     Opacity(
                       opacity: 0.3,
@@ -242,11 +234,11 @@ class _UpdateDsnState extends State<UpdateDsn>{
                       ),
                     ),
                     Center(
-                      child:  CircularProgressIndicator(),
-                    )
+                      child: CircularProgressIndicator(),
+                    ),
                   ],
                 )
-                    : Container(),
+                    :Container(),
               ],
             ),
           )

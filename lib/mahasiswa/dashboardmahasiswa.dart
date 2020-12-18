@@ -39,7 +39,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
           ],
         ),
         body: FutureBuilder(
-          future: ApiServices().getMahasiswa(),
+          future: ApiServices().getMahasiswas(),
           builder: (BuildContext context, AsyncSnapshot<List<Mahasiswa>> snapshot){
             if (snapshot.hasError){
               return Center(
