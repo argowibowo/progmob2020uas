@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/DashboardMenu.dart';
 import 'dart:async';
 import 'file:///D:/Android/Project_Flutter/flutter_app/lib/Login.dart';
 import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/NavBar.dart';
@@ -27,7 +28,7 @@ class _SplashScreen extends State<SplashScreen>{
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
     if(isLogin == 1){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => NavBar(title: "ProgMob")));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => DashboardMenu()));
     }
   }
 

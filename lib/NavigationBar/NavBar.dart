@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/Home.dart';
-import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/Dashboard.dart';
+import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/DashboardNavBar.dart';
 import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/Profile.dart';
 import 'package:flutter/cupertino.dart';
 /*void main(){

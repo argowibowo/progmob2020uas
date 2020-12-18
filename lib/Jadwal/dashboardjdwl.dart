@@ -1,4 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Jadwal/addjadwal.dart';
+import 'package:flutter_app/Jadwal/updatejadwal.dart';
+import 'package:flutter_app/apiservice.dart';
+import 'package:flutter_app/model.dart';
 
 class DashboardJdwl extends StatefulWidget {
   DashboardJdwl({Key key, this.title}) : super(key: key);
@@ -10,41 +15,131 @@ class DashboardJdwl extends StatefulWidget {
 }
 
 class _DashboardJdwlState extends State<DashboardJdwl> {
+
+  List<Jadwal> lJdwl = new List();
+
+  FutureOr onGoBack(dynamic value){
+    setState(() {});
+  }
+
+  String hari(int hari) {
+    switch(hari) {
+      case 1:
+        return "Senin";
+        break;
+      case 2:
+        return "Selasa";
+        break;
+      case 3:
+        return "Rabu";
+        break;
+      case 4:
+        return "Kamis";
+        break;
+      case 5:
+        return "Jumat";
+        break;
+      case 6:
+        return "Sabtu";
+        break;
+      case 7:
+        return "Minggu";
+        break;
+      default:
+        return "Hari";
+        break;
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
           title: Text(widget.title),
-          actions:<Widget>[
+          actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddJdwl(title: "Tambah Data Jadwal")),
+                ).then(onGoBack);
+              },
             )
-          ],
-        ),
-      body: Container(
-        child : GestureDetector(
-          child: Card(
-              child:  Column(
-                mainAxisSize: MainAxisSize.min,
-                children:<Widget>[
-                  ListTile(
-                    leading: Icon(Icons.schedule),
-                    title:Text("Kamis, 17:30 - 19.20"),
-                    subtitle: Text("E-Commerce - Budi Sutedjo DO, S.Kom, M.M."),
-                      trailing: PopupMenuButton(
-                        itemBuilder: (_) => <PopupMenuItem<String>>[
-                          new PopupMenuItem<String>(
-                              child: const Text('Update'), value: 'Update'),
-                          new PopupMenuItem<String>(
-                              child: const Text('Delete'), value: 'Delete'),
-                        ],
-                      )
-                  )
-                ],
-              )
-          ),
-        ),
+          ]
+      ),
+
+      body: FutureBuilder(
+        future: ApiServices().getJadwal(),
+        builder: (BuildContext context, AsyncSnapshot<List<Jadwal>> snapshot){
+          if(snapshot.hasError){
+            return Center(
+              child: Text(
+                  "Something Wrong with message: ${snapshot.error.toString()}"
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done){
+            lJdwl = snapshot.data;
+            return ListView.builder(
+              itemBuilder: (context, position){
+                return Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(lJdwl[position].dosen + " - " + lJdwl[position].matkul),
+                      subtitle: Text(
+                          "NIDN : " + lJdwl[position].nidn
+                              + "\nHari : " + hari(lJdwl[position].hari)
+                              + "\nSesi : " + lJdwl[position].sesi.toString()
+                              + "\nSKS : " + lJdwl[position].sks.toString()
+                      ),
+                      onLongPress: (){
+                        showDialog(
+                            context: context,
+                            builder: (_) => new AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  FlatButton(
+                                    child: Text("Update"),
+                                    onPressed: (){
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => UpdateJdwl(title: "Update Jadwal",
+                                            jdwl:lJdwl[position], idJdwl: lJdwl[position].id)),
+                                      ).then(onGoBack);
+                                    },
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    height: 20,
+                                  ),
+                                  FlatButton(
+                                      child: Text("Delete"),
+                                      onPressed: () async{
+                                        ApiServices().deleteJadwal(lJdwl[position].id);
+                                        Navigator.pop(context);
+                                        setState(() {});
+                                      })
+                                ],
+                              ),
+                            )
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+              itemCount: lJdwl.length,
+            );
+          } else{
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

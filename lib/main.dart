@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Dashboard.dart';
+import 'package:flutter_app/DashboardMenu.dart';
 import 'package:flutter_app/Login.dart';
 import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/NavBar.dart';
 import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/SplashScreen.dart';
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home:Dashboard(),
+      home:Login(),
     );
   }
 }

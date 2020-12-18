@@ -1,125 +1,146 @@
-import 'dart:ffi';
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Dashboard.dart';
-import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/Home.dart';
-import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/NavBar.dart';
-import 'file:///D:/Android/Project_Flutter/flutter_app/lib/NavigationBar/SplashScreen.dart';
+import 'package:flutter_app/DashboardMenu.dart';
+import 'package:flutter_app/NavigationBar/DashboardNavBar.dart';
+import 'package:flutter_app/DashboardMenu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:async';
+
+SharedPreferences isLogin;
 
 class Login extends StatefulWidget {
+  Login({Key key, this.title}) : super(key: key);
+  final String title;
+
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
+  final _formKey = GlobalKey<FormState>();
+  final myUsernameController = TextEditingController();
+  final myPasswordController = TextEditingController();
+  String username, password;
+  bool showPassword = false;
 
-  GlobalKey<FormState> key = GlobalKey<FormState>();
-
-  Void Validate(){
-    if (key.currentState.validate()){
-      print("Validate");
-    }
-    else {
-      print("failed");
+  void navigateLogin() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("is_login");
+    if(isLogin == 1){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => DashboardMenu()),
+      );
     }
   }
 
-  bool _isHidePassword = true;
-
-  void _togglePasswordVisibility(){
-    setState(() {
-      _isHidePassword = !_isHidePassword;
-    });
+  @override
+  void initState() {
+    navigateLogin();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //leading: Icon(Icons.home),
-        title: Text("Login"),
-        centerTitle: true,
+        title: Text('Login'),
       ),
       body: Form(
-        key:key,
-        child: ListView(
-            padding: EdgeInsets.all(16.0),
-          children: <Widget>[
-              TextFormField(
-                validator: (value){
-                  if(value.isEmpty){
-                    return "Username Tidak Boleh Kosong";
-                  }
-                  else{
-                    return null;
-                  }
-                },
-                style: TextStyle(
-                    fontSize: 18
+          key: _formKey,
+          // using SingleChildScrollView biar tidak ada garis markanya :)
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Container(
+                  margin: EdgeInsets.only(left: 20, right: 20),
+                  // seberapa besar device, akan diukur tingginya
+                  height: MediaQuery.of(context).size.height / 5,
+                  child: new Image.asset(
+                    "images/progmob.png",
+                    // width: 200,
+                    // height: 200,
+                  ),
                 ),
-                decoration: InputDecoration(
-                    icon: Icon(
-                        Icons.person,
-                        color: Colors.blue
+                new TextFormField(
+                  validator: (value){
+                    if(value.isEmpty && value.length == 0) {
+                      return "Username tidak boleh kosong";
+                    } else if (!value.contains('72160000')){
+                      return "Username atau password";
+                    } else
+                      return null;
+                  },
+                  controller: myUsernameController,
+                  decoration: new InputDecoration(
+                    icon: const Icon(Icons.person),
+                    labelText: "Username",
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(5),
                     ),
-                  labelText: "Username"
-                ),
-              ),
-              TextFormField(
-                validator: (value){
-                  if(value.isEmpty){
-                    return "Password Tidak Boleh Kosong";
-                  }
-                  else{
-                    return null;
-                  }
-                },
-                style: TextStyle(
-                    fontSize: 18
-                ),
-                obscureText: _isHidePassword,
-                decoration: InputDecoration(
-                  icon: Icon(
-                      Icons.lock_rounded,
-                      color: Colors.blue
-                  ),
-                  labelText: "Password",
-                  suffixIcon: IconButton(
-                    onPressed: _togglePasswordVisibility,
-                    icon: Icon(
-                      _isHidePassword ? Icons.visibility_off : Icons.visibility,
-                      color:_isHidePassword ? Colors.grey : Colors.blue
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-            ),
-            RaisedButton(
-              color: Colors.blue,
-              onPressed: () async {
-                SharedPreferences pref = await SharedPreferences.getInstance();
-                await pref.setInt("is_login", 1);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => NavBar()),
-                );
-              },
-              child: Text(
-                "Login",
-                style: TextStyle(
-                    color: Colors.white,
-                  fontSize: 18
+                Padding(
+                  padding: EdgeInsets.all(5.0),
                 ),
-              ),
-            )
-          ],
-        ),
+                new TextFormField(
+                  validator: (value){
+                    if(value.isEmpty && value.length == 0) {
+                      return "Password tidak boleh kosong";
+                    } else if (!value.contains('progmob')){
+                      return "Username atau password";
+                    } else
+                      return null;
+                  },
+                  obscureText: !this.showPassword,
+                  controller: myPasswordController,
+                  decoration: new InputDecoration(
+                    icon: const Icon(Icons.lock),
+                    labelText: "Password",
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(5),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        // Icons.visibility_off,
+                        // color: this.showPassword ? Colors.blue : Colors.grey,
+                        showPassword ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          this.showPassword = !this.showPassword;
+                        });
+                      },
+                    ),
+                  ),
+
+                ),
+                RaisedButton (
+                  color: Colors.blue,
+                  // disabledColor: Colors.blue,
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
+                  ),
+                  onPressed: () async {
+                    if(_formKey.currentState.validate()){
+                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      await pref.setInt("is_login", 1);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => DashboardMenu()),
+                      );
+                      // }
+                      _formKey.currentState.save();
+                    }
+                  },
+                )
+              ],
+            ),
+          )
+
       ),
     );
   }
 }
-
