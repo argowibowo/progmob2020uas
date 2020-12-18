@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-//import 'package:flutter/dashbord.dart';
-//import 'package:flutter/login.dart';
-//import 'package:flutter/pertemuan2.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_app/dashbord.dart';
+import 'package:flutter_app/login.dart';
+import 'package:flutter_app/pertemuan2.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
