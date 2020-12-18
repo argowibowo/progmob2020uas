@@ -6,8 +6,10 @@ class Validation{
     return null;
   }
   String validateUser(String value){
-    if(value.isEmpty){
-      return 'Username tidak boleh kosong!';
+    if(value.isEmpty && value.length == 0){
+      return 'NIM tidak boleh kosong!';
+    } else if(value.length < 8 || value.length > 8){
+      return 'NIM harus 8 karakter!';
     }
     return null;
   }
@@ -17,4 +19,5 @@ class Validation{
     }
     return null;
   }
+
 }

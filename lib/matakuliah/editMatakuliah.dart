@@ -6,35 +6,31 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'dart:convert';
 
-final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
-
-class AddDosen extends StatefulWidget {
-  AddDosen({Key key, this.title}) : super(key: key);
+class EditMatakuliah extends StatefulWidget {
   final String title;
+  Matakuliah matkul;
+  String kode_cari;
+
+  EditMatakuliah(
+      {Key key,
+      @required this.title,
+      @required this.matkul,
+      @required this.kode_cari})
+      : super(key: key);
 
   @override
-  _AddDosenState createState() => _AddDosenState(title);
+  _EditMatakuliahState createState() =>
+      _EditMatakuliahState(title, matkul, kode_cari);
 }
 
-class _AddDosenState extends State<AddDosen> {
-  final _formKey = GlobalKey<FormState>();
+class _EditMatakuliahState extends State<EditMatakuliah> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-
-  _AddDosenState(this.title);
-
+  final String kode_cari;
+  Matakuliah matkul;
   bool _isLoading = false;
-  Dosen dsn = new Dosen();
-  File _imageFile;
 
-  //pilih foto dari gallery camera hp
-  Future<void> _pickImage(ImageSource source) async {
-    File selected = await ImagePicker.pickImage(source: source);
-
-    setState(() {
-      _imageFile = selected;
-    });
-  }
+  _EditMatakuliahState(this.title, this.matkul, this.kode_cari);
 
   @override
   //widget build adalah fungsi untuk membangun antar muka sekaligus fungsi
@@ -42,10 +38,10 @@ class _AddDosenState extends State<AddDosen> {
     return new Scaffold(
       appBar: AppBar(
         title: Text(this.title),
-        backgroundColor: Colors.deepPurpleAccent[100],
+        backgroundColor: Colors.deepPurple[900],
       ),
       body: Container(
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
         child: SingleChildScrollView(
             child: Stack(
           //karena menyediakan teampilan gambar yg cukup besar
@@ -55,29 +51,29 @@ class _AddDosenState extends State<AddDosen> {
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 15,
+                    height: 15.0,
                   ),
                   TextFormField(
                       decoration: InputDecoration(
-                        labelText: "NIDN",
-                        hintText: "NIDN",
+                        labelText: "Kode Matakuliah",
+                        hintText: "Kode Matakuliah",
                         border: OutlineInputBorder(),
                         contentPadding:
                             EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      keyboardType: TextInputType.number,
+                      initialValue: this.matkul.kode,
                       onSaved: (String value) {
-                        this.dsn.nidn = value;
+                        this.matkul.kode = value;
                       },
                       validator: (value) {
-                        if (this.dsn.nidn == null) {
-                          return "NIDN tidak boleh kosong!";
+                        if (this.matkul.kode == null) {
+                          return "Kode Matakuliah tidak boleh kosong!";
                         } else {
                           return null;
                         }
                       }),
                   SizedBox(
-                    height: 15,
+                    height: 15.0,
                   ),
                   TextFormField(
                       decoration: InputDecoration(
@@ -87,123 +83,92 @@ class _AddDosenState extends State<AddDosen> {
                         contentPadding:
                             EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
+                      initialValue: this.matkul.nama,
                       onSaved: (String value) {
-                        this.dsn.nama = value;
+                        this.matkul.nama = value;
                       },
                       validator: (value) {
-                        if (this.dsn.nama == null) {
-                          return "Nama tidak boleh kosong!";
+                        if (this.matkul.nama == null) {
+                          return "Nama Matakuliah tidak boleh kosong!";
                         } else {
                           return null;
                         }
                       }),
                   SizedBox(
-                    height: 15,
+                    height: 15.0,
                   ),
                   TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Alamat",
-                        hintText: "Alamat",
+                        labelText: "Hari",
+                        hintText: "Hari",
                         border: OutlineInputBorder(),
                         contentPadding:
                             EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
+                      initialValue: this.matkul.hari,
                       onSaved: (String value) {
-                        this.dsn.alamat = value;
+                        this.matkul.hari = value;
                       },
                       validator: (value) {
-                        if (this.dsn.alamat == null) {
-                          return "Alamat tidak boleh kosong!";
+                        if (this.matkul.hari == null) {
+                          return "Hari tidak boleh kosong!";
                         } else {
                           return null;
                         }
                       }),
                   SizedBox(
-                    height: 15,
+                    height: 15.0,
                   ),
                   TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Email",
-                        hintText: "Email",
+                        labelText: "Sesi",
+                        hintText: "Sesi",
                         border: OutlineInputBorder(),
                         contentPadding:
                             EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.number,
+                      initialValue: this.matkul.sesi,
                       onSaved: (String value) {
-                        this.dsn.email = value;
+                        this.matkul.sesi = value;
                       },
                       validator: (value) {
-                        if (this.dsn.email == null) {
-                          return "Email tidak boleh kosong!";
+                        if (this.matkul.sesi == null) {
+                          return "Sesi tidak boleh kosong!";
                         } else {
                           return null;
                         }
                       }),
                   SizedBox(
-                    height: 15,
+                    height: 15.0,
                   ),
                   TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Gelar",
-                        hintText: "Gelar",
+                        labelText: "SKS",
+                        hintText: "SKS",
                         border: OutlineInputBorder(),
                         contentPadding:
                             EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      keyboardType: TextInputType.name,
+                      keyboardType: TextInputType.number,
+                      initialValue: this.matkul.sks,
                       onSaved: (String value) {
-                        this.dsn.gelar = value;
+                        this.matkul.sks = value;
                       },
                       validator: (value) {
-                        if (this.dsn.gelar == null) {
-                          return "Gelar tidak boleh kosong!";
+                        if (this.matkul.sks == null) {
+                          return "SKS tidak boleh kosong!";
                         } else {
                           return null;
                         }
                       }),
                   SizedBox(
-                    height: 15,
-                  ),
-                  _imageFile == null
-                      ? Text("Pilih Gambar")
-                      : Image.file(
-                          _imageFile,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                  MaterialButton(
-                    minWidth: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    color: Colors.deepPurple[900],
-                    onPressed: () {
-                      _pickImage(ImageSource.gallery);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Icon(
-                          Icons.image,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          "Upload Foto",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
+                    height: 15.0,
                   ),
                   MaterialButton(
                     minWidth: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    color: Colors.deepPurpleAccent[100],
+                    color: Colors.greenAccent,
                     onPressed: () {
                       if (_formState.currentState.validate()) {
                         return showDialog(
@@ -218,13 +183,9 @@ class _AddDosenState extends State<AddDosen> {
                                   onPressed: () async {
                                     _formState.currentState.save();
                                     setState(() => _isLoading = true);
-                                    this.dsn.nim_progmob = "72180196";
-                                    List<int> imageBytes =
-                                        _imageFile.readAsBytesSync();
-                                    this.dsn.foto = base64Encode(imageBytes);
+                                    this.matkul.nim_progmob = "72180196";
                                     ApiServices()
-                                        .createDsnWithFoto(this.dsn, _imageFile,
-                                            _imageFile.path)
+                                        .updateMatkul(this.matkul, kode_cari)
                                         .then((isSuccess) {
                                       setState(() => _isLoading = false);
                                       if (isSuccess) {
@@ -254,8 +215,7 @@ class _AddDosenState extends State<AddDosen> {
                       "Simpan",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Colors.deepPurple[50],
-                          fontWeight: FontWeight.bold),
+                          color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

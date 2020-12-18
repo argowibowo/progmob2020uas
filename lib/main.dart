@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Timer(Duration(seconds: 3), () => Navigator.pushReplacement(
       context,
-        MaterialPageRoute(builder: (context) => SplashLogin(title:"Splash")),
+        MaterialPageRoute(builder: (context) => SplashLogin()),
     ));
   }
 
@@ -62,9 +62,9 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Image.asset('assets/logo_progmob.png', height: 200.0,),
+            Image.asset('assets/logo_progmob2020.png', height: 200.0,),
             SizedBox(height: 30.0),
-            SpinKitChasingDots(color: Colors.greenAccent),
+            SpinKitChasingDots(color: Colors.deepPurple[900]),
 
           ]
       ),

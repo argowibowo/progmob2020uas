@@ -31,6 +31,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa>{
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.deepPurpleAccent[100],
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),

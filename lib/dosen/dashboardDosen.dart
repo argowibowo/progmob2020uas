@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:progmob_flutter/dosen/AddDosen.dart';
 import 'package:progmob_flutter/dosen/editDosen.dart';
-import 'package:progmob_flutter/mahasiswa/addMahasiswa.dart';
-import 'package:progmob_flutter/mahasiswa/editMahasiswa.dart';
 import 'package:progmob_flutter/model.dart';
 import 'package:progmob_flutter/apiservices.dart';
 
@@ -33,6 +31,7 @@ class _DashboardDosenState extends State<DashboardDosen>{
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+          backgroundColor: Colors.deepPurpleAccent[100],
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
