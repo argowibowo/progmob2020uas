@@ -109,7 +109,7 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                                     onPressed: () async {
                                       _formState.currentState.save();
                                       setState(() => isLoading = true);
-                                      this.matkul.nim_progmob = "72180230";
+                                      this.matkul.nim_progmob = "72180226";
                                       ApiServices().updateMatkul(this.matkul, kodecari).then((isSuccess) {
                                         setState(() => isLoading = false);
                                         if (isSuccess) {
