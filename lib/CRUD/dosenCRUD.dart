@@ -20,7 +20,6 @@ class _DosenCRUDState extends State<DosenCRUD> {
 
   FutureOr onGoBack(dynamic value) {
     setState(() {
-
     });
   }
 
@@ -56,7 +55,6 @@ class _DosenCRUDState extends State<DosenCRUD> {
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
             listDosen = snapshot.data;
-
             return ListView.builder(
               itemBuilder: (context, position) {
                 return SafeArea(

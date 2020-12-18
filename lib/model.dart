@@ -3,12 +3,48 @@ import 'dart:convert';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 // Dashboard
+// class DashboardKen{
+//   String mahasiswa, dosen, matakuliah, jadwal, nim_progmob;
+//   DashboardKen({
+//     this.mahasiswa, this.dosen, this.matakuliah, this.jadwal, this.nim_progmob
+//   });
+//   factory DashboardKen.fromJson(Map<String, dynamic> map) {
+//     return DashboardKen(mahasiswa: map["mahasiswa"], dosen: map["dosen"], matakuliah: map["matakuliah"], jadwal: map["jadwal"], nim_progmob: map["nim_progmob"]);
+//   }
+//   Map<String, dynamic> toJson() {
+//     return {"mahasiswa": mahasiswa, "dosen": dosen,
+//       "matakuliah": matakuliah, "jadwal": jadwal,
+//       "nim_progmob": nim_progmob};
+//   }
+//   @override
+//   String toString() {
+//     return 'DashboardKen{mahasiswa: $mahasiswa, dosen: $dosen, '
+//         'matakuliah: $matakuliah, jadwal: $jadwal, '
+//         'nim_progmob: $nim_progmob}';
+//   }
+// }
+// List<DashboardKen> dashboardkenFromJson(String jsonData) {
+//   final data = json.decode(jsonData);
+//   return List<DashboardKen>.from(data.map((item) => DashboardKen.fromJson(item)));
+// }
+// String dashboardkenToJson(DashboardKen data) {
+//   final jsonData = data.toJson();
+//   return json.encode(jsonData);
+// }
+
 class DashboardKen {
-  String mahasiswa, dosen, matakuliah, jadwal;
-  DashboardKen({this.mahasiswa, this.dosen, this.matakuliah, this.jadwal});
+  final String mahasiswa, dosen, matakuliah, jadwal, nim_progmob;
+
+  DashboardKen({this.mahasiswa, this.dosen, this.matakuliah, this.jadwal, this.nim_progmob});
+
   factory DashboardKen.fromJson(Map<String, dynamic> json) {
     return DashboardKen(
-        mahasiswa: json["mahasiswa"], dosen: json["dosen"],  matakuliah: json["matakuliah"],  jadwal: json["jadwal"]);
+      mahasiswa: json['mahasiswa'],
+      dosen: json['dosen'],
+      matakuliah: json['matakuliah'],
+      jadwal: json['jadwal'],
+      nim_progmob: json['nim_progmob'],
+    );
   }
 }
 
@@ -19,7 +55,6 @@ class Mahasiswa{
     this.id, this.nama, this.nim, this.alamat,
     this.email, this.foto, this.nim_progmob
   });
-  // Diambil Dari JSON mapping nya
   factory Mahasiswa.fromJson(Map<String, dynamic> map) {
     return Mahasiswa(id: map["id"], nama: map["nama"], nim: map["nim"], alamat: map["alamat"],
         email: map["email"], foto: map["foto"], nim_progmob: map["nim_progmob"]);
@@ -156,4 +191,46 @@ class ClicksPerYear {
       : this.color = charts.Color(
       r: color.red, g: color.green, b: color.blue, a: color.alpha
   );
+}
+//Login
+class LoginIn{
+  String id, nimnik, password, nama, email, is_admin;
+
+  //konstruktor
+  LoginIn({this.id, this.nimnik, this.password, this.nama, this.email, this.is_admin});
+
+  factory LoginIn.createLoginResult(Map<String, dynamic> map) {
+    return LoginIn(
+      id: map['id'],
+      nimnik: map['nimnik'],
+      password: map['password'],
+    );
+  }
+
+  //mapping dr json ke object
+  factory LoginIn.fromJson(Map<String, dynamic> map){
+    return LoginIn(
+        nimnik: map["nimnik"],
+        password: map["password"]
+    );
+  }
+
+  Map<String, dynamic> toJson(){
+    return{"nimnik": nimnik, "password": password};
+  }
+
+  @override
+  String toString() {
+    return 'LoginIn{nimnik: $nimnik, password: $password}';
+  }
+}
+
+List<LoginIn> loginFromJson(String jsonData){
+  final data = json.decode(jsonData);
+  return List<LoginIn>.from(data.map((item) => LoginIn.fromJson(item)));
+}
+
+String loginToJson(LoginIn data){
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
 }

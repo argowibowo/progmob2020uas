@@ -1,6 +1,7 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:progmob_aftuts/DashboardUAS/uasDashboard.dart';
 import 'package:progmob_aftuts/tugaspertemuan8.dart';
 import 'account.dart';
 import 'dashboard.dart';
@@ -26,7 +27,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
 //  static const TextStyle optionStyle =
 //      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
-    Dashboard(),
+    UasDashboard(),
     ForgotPage(),
     Account(),
   ];
@@ -71,14 +72,14 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Image.asset(
-              "assets/images/logo.png",
+              "assets/images/logo2.png",
               fit: BoxFit.cover,
               height: 60.0,
-              width: 90.0,
+              width: 150.0,
             ),
           ],
         ),
-        backgroundColor: Colors.lightBlue[600],
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         elevation: 0.0,
         actions: <Widget>[

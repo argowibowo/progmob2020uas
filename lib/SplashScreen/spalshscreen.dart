@@ -42,7 +42,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                 children: <Widget>[
                   Expanded(
                     child: Image.asset(
-                      "assets/images/logo.png",
+                      "assets/images/logo2.png",
 //                  width: 500.0,
 //                  height: 500.0,
                     ),

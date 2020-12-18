@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' show Client;
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class ApiServices {
@@ -10,14 +11,10 @@ class ApiServices {
   Client client = Client();
 
   // Dashboard
-  Future<DashboardKen> getDashboard() async {
-    final response = await client.get("$baseUrl/api/progmob/dashboard/72180234");
-    if (response.statusCode == 200) {
-      return DashboardKen.fromJson(json.decode(response.body));
-    } else {
-      return null;
-    }
+  Future<http.Response> getDashboard() {
+    return http.get('$baseUrl/api/progmob/dashboard/72180234');
   }
+
 
   // Mahasiswa
   Future<List<Mahasiswa>> getMahasiswa() async {
@@ -328,6 +325,20 @@ class ApiServices {
       return true;
     } else {
       return false;
+    }
+}
+//LOGIN
+  Future<bool> loginIn(LoginIn data) async {
+    final response = await client.post(
+      "$baseUrl/api/progmob/login",
+      headers: {"content-type": "application/json"},
+      body: loginToJson(data),
+    );
+
+    if (response.body.length <= 2) {
+      return false;
+    } else {
+      return true;
     }
   }
 }

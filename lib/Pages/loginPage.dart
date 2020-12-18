@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:progmob_aftuts/API/apiService.dart';
 import 'package:progmob_aftuts/Colors/constant.dart';
 import 'package:progmob_aftuts/Animation/fadeAnimation.dart';
 import 'package:progmob_aftuts/Pages/landingPage.dart';
+import 'package:progmob_aftuts/model.dart';
 // import 'package:plagiatcheck/login/forgot.dart';
 // import 'package:plagiatcheck/login/signPage.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
@@ -30,49 +32,28 @@ class LoginPage extends StatefulWidget {
   final String title;
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState(title);
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> _formState = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   bool showSpinner = false;
   // final _auth = FirebaseAuth.instance;
-  String username;
-  String password;
+  // String username;
+  // String password;
+  final String title;
+  _LoginPageState(this.title);
   // WARNING, NOTE BUAT TEMAN TEMAN HEHE
 // BAKAL KETAUAN KALO COPY CODE PROGRAM
 // KARENA CODINGAN INI BELUM DIAJARKAN DI MATERI PERKULIAHAN
 // COPY BOLEH TAPI JANGAN DIJIPLAK YA :D, HARUS DIPAHAMI ALURNYA
 
-
-
-
-  // final GoogleSignIn googleSignIn = new GoogleSignIn();
-  // Future<String> _testSignInWithGoogle() async {
-  //   final GoogleSignInAccount googleUser = await googleSignIn.signIn();
-  //   final GoogleSignInAuthentication googleAuth =
-  //   await googleUser.authentication;
-  //   final AuthCredential credential = GoogleAuthProvider.getCredential(
-  //     accessToken: googleAuth.accessToken,
-  //     idToken: googleAuth.idToken,
-  //   );
-  //   final FirebaseUser user = (await _auth.signInWithCredential(credential)) as FirebaseUser;
-  //   assert(user.email != null);
-  //   assert(user.displayName != null);
-  //   assert(!user.isAnonymous);
-  //   assert(await user.getIdToken() != null);
-  //Hasil Kodingan Ken coba firebase
-  //   final FirebaseUser currentUser = await _auth.currentUser();
-  //   assert(user.uid == currentUser.uid);
-  //Hasil Kodingan Ken coba firebase
-  //   return 'signInWithGoogle succeeded: $user'; // Hasil Kodingan Ken coba firebase
-  //Hasil Kodingan Ken coba firebase
-  // }
-
-  final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
   final myUsernameController = TextEditingController();
   final myPasswordController = TextEditingController();
   bool showPassword = false;
+  LoginIn login = new LoginIn();
 
   // Toggles the password show status
   void _toggle() {
@@ -108,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                   CircleAvatar(
                     radius: 50.0,
                     backgroundColor: Colors.lightBlue[600],
-                    backgroundImage: AssetImage('assets/images/logo.png'),
+                    backgroundImage: AssetImage('assets/images/logo2.png'),
                   ),
                 ),
                 FadeAnimation(
@@ -154,17 +135,17 @@ class _LoginPageState extends State<LoginPage> {
                         title: TextFormField(
                           validator: (value){
                             if(value.isEmpty && value.length == 0) {
-                              return "*Username tidak boleh kosong";
+                              return "*NIM anda tidak boleh kosong";
                             }
-                            else if (!value.contains('72180234')){
-                              return "Username Anda salah";
+                            else if (value.length < 8 || value.length > 8){
+                              return "NIM Anda kurang dari 8";
                             }
                             else
                               return null;
                           },
                           controller: myUsernameController,
-                          onChanged: (value){
-                            username = value;
+                          onSaved: (String value){
+                            this.login.nimnik = value;
                           },
                           decoration: InputDecoration(
                               border: InputBorder.none,
@@ -189,14 +170,16 @@ class _LoginPageState extends State<LoginPage> {
                         title: TextFormField(
                           validator: (value){
                             if(value.isEmpty && value.length == 0) {
-                              return "*Password tidak boleh kosong";
-                            } else if (!value.contains('12345')){
-                              return "Password Anda salah";
-                            } else
+                              return "*Password tidak boleh kosong gan";
+                            } else{
                               return null;
+                            }
                           },
                           obscureText: _obscureText,
                           controller: myPasswordController,
+                          onSaved: (String value){
+                            this.login.password = value;
+                          },
                           autofocus: false,
                           // initialValue: '',
                           keyboardType: TextInputType.text,
@@ -254,14 +237,20 @@ class _LoginPageState extends State<LoginPage> {
                       child: new InkWell(
                         onTap: () async {
                           if(_formKey.currentState.validate()){
-                            SharedPreferences pref = await SharedPreferences.getInstance();
-                            await pref.setInt("is_login", 1);
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) => MyBottomNavigationBar()),
-                            );
-                            // }
                             _formKey.currentState.save();
+                            ApiServices().loginIn(this.login).then((isSuccess) async {
+                              if(isSuccess) {
+                                //_displayDialogLogin(context);
+                                SharedPreferences pref = await SharedPreferences.getInstance();
+                                await pref.setInt("is_login_progmob", 1);
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => MyBottomNavigationBar()),
+                                );
+                              } else {
+                                _displayDialogCantLogin(context);
+                              }
+                            });
                           }
                         },
                         child: Container(
@@ -357,3 +346,42 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+_displayDialogCantLogin(BuildContext context) async {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          elevation: 2,
+          title: Text(
+            "Anda Tidak Bisa Login",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Color(0xFF03A9F4),
+                fontWeight: FontWeight.bold
+            ),
+          ),
+          content: Text(
+            "Coba Cek Kembali Datamu",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Color(0xFF03A9F4),
+            ),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              onPressed: () async{
+                Navigator.pop(context);
+              },
+              child: Text(
+                "Exit",
+                style: TextStyle(
+                    color: Colors.redAccent,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
+          ],
+        );
+      });
+}
+
