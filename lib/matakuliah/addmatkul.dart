@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:progmob_flutter/apiservices.dart';
 import 'package:progmob_flutter/model.dart';
-import 'package:image_picker/image_picker.dart';
+//import 'package:image_picker/image_picker.dart';
 
 // Menyimpan formnya
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
