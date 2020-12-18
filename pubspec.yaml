@@ -32,6 +32,11 @@ dependencies:
   http: ^0.12.2
   image_picker: 0.6.7+14
   charts_flutter: ^0.9.0
+  # Untuk dashboard
+  flutter_sparkline: "^0.1.0"
+  flutter_staggered_grid_view: "^0.2.5"
+  flutter_circular_chart: ^0.1.0
+  font_awesome_flutter: ^8.2.0
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +56,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/logo_progmob.png
+    - images/logo_univ.png
+    - images/logo_toga.png
+    - images/logo_mhs.png
+    - images/logo_dosen.png
+    - images/logo_matkul.png
+    - images/logo_jadwal.png
     #   - images/a_dot_burr.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

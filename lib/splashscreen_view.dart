@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_72180200/home_view.dart';
 import 'package:flutter_72180200/login_view.dart';
+import 'package:flutter_72180200/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreenPage extends StatefulWidget{
@@ -14,6 +15,9 @@ class SplashScreenPage extends StatefulWidget{
 class _SplashScreenPageState extends State<SplashScreenPage>{
   //definisi awal variabel isLoginProgmob, default awalnya nol (blm login)
   int isLoginProgmob = 0;
+
+  //utk ambil data yg login
+  //LoginProgmob login = new LoginProgmob();
 
   //utk animasi berubah ukuran
   var isChanged = false;
@@ -44,11 +48,11 @@ class _SplashScreenPageState extends State<SplashScreenPage>{
       //navigasi login
       if(isLoginProgmob == 1){
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomePage(title: "Home Page Progmob 2020",)),
+          MaterialPageRoute(builder: (context) => HomePage(title: "Home",)),
         );
       } else if(isLoginProgmob == 0){
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => Login(title: "Login Page",)),
+          MaterialPageRoute(builder: (context) => Login(title: "Login",)),
         );
       }
     });

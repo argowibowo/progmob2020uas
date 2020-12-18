@@ -42,6 +42,7 @@ class _AddMhsState extends State<AddMhs> {
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        margin: EdgeInsets.only(bottom: 10),
         child: SingleChildScrollView( //biar tombol gk ketutup keyboard
           child: Stack(
             children: <Widget>[
@@ -56,11 +57,30 @@ class _AddMhsState extends State<AddMhs> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "NIM",
+                        labelStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         hintText: "NIM",
+                        hintStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(5),
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1)),
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        enabledBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1), width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
+                        focusedBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Colors.green, width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
                       ),
                       keyboardType: TextInputType.number,
                       onSaved: (String value){
@@ -74,11 +94,30 @@ class _AddMhsState extends State<AddMhs> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Nama",
+                        labelStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         hintText: "Nama Mahasiswa",
+                        hintStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(5),
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1)),
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        enabledBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1), width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
+                        focusedBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Colors.green, width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
                       ),
                       onSaved: (String value){
                         this.mhs.nama = value;
@@ -91,11 +130,30 @@ class _AddMhsState extends State<AddMhs> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Alamat",
+                        labelStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         hintText: "Alamat Mahasiswa",
+                        hintStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(5),
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1)),
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        enabledBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1), width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
+                        focusedBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Colors.green, width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
                       ),
                       onSaved: (String value){
                         this.mhs.alamat = value;
@@ -108,11 +166,30 @@ class _AddMhsState extends State<AddMhs> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "E-Mail",
+                        labelStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         hintText: "E-Mail Mahasiswa",
+                        hintStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(5),
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1)),
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        enabledBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1), width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
+                        focusedBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Colors.green, width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
                       ),
                       keyboardType: TextInputType.emailAddress,
                       onSaved: (String value){

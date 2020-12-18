@@ -62,7 +62,20 @@ class _DashboardMatakuliahState extends State<DashboardMatakuliah>{
                 itemBuilder: (context, position){
                   return Card(
                     margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
+                    shadowColor: Color(0xFF1565C0),
                     child: Container(
+                      /*decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: <Color>[
+                            Color(0xFF81D4FA),
+                            Color(0xFFB3E5FC),
+                            Color(0xFFE1F5FE)
+                          ],
+                        ),
+                      ),*/
+                      margin: EdgeInsets.fromLTRB(2.5, 2.5, 2.5, 2.5),
                       child: ListTile(
                         title: Text(
                           lMatkul[position].nama + " - " + lMatkul[position].kode,
@@ -72,10 +85,10 @@ class _DashboardMatakuliahState extends State<DashboardMatakuliah>{
                           ),
                         ),
                         subtitle: Text(
-                          "Hari " + lMatkul[position].hari.toString() + " - Sesi " + lMatkul[position].sesi.toString()
-                          + " - SKS " + lMatkul[position].sks.toString(),
+                          "Hari " + lMatkul[position].hari + " - Sesi " + lMatkul[position].sesi
+                          + " - SKS " + lMatkul[position].sks,
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Colors.black38,
                           ),
                         ),
                         leading: CircleAvatar(

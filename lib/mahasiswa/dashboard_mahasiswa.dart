@@ -60,7 +60,20 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa>{
               itemBuilder: (context, position){
                 return Card(
                   margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
+                  shadowColor: Color(0xFF1565C0),
                   child: Container(
+                    /*decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: <Color>[
+                          Color(0xFF81D4FA),
+                          Color(0xFFB3E5FC),
+                          Color(0xFFE1F5FE)
+                        ],
+                      ),
+                    ),*/
+                    margin: EdgeInsets.fromLTRB(2.5, 2.5, 2.5, 2.5),
                     child: ListTile(
                       title: Text(
                         lMhs[position].nama + " - " + lMhs[position].nim,
@@ -72,7 +85,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa>{
                       subtitle: Text(
                         lMhs[position].email,
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: Colors.black38,
                         ),
                       ),
                       leading: CircleAvatar(

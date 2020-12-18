@@ -90,6 +90,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_circular_chart:
+    dependency: "direct main"
+    description:
+      name: flutter_circular_chart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -97,6 +104,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.11"
+  flutter_sparkline:
+    dependency: "direct main"
+    description:
+      name: flutter_sparkline
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
+  flutter_staggered_grid_view:
+    dependency: "direct main"
+    description:
+      name: flutter_staggered_grid_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.7"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -107,6 +128,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "8.10.1"
   http:
     dependency: "direct main"
     description:

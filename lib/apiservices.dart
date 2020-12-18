@@ -9,6 +9,33 @@ class ApiServices {
 
   Client client = Client();
 
+  //===========================================================
+  //-------------------LOGIN-----------------------------------
+  Future<bool> loginProgmob(LoginProgmob data) async {
+    final response = await client.post(
+      "$baseUrl/api/progmob/login",
+      headers: {"content-type": "application/json"},
+      body: loginToJson(data),
+    );
+
+    if (response.body.length <= 2) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  //============================================================
+  //--------------------DASHBOARD-------------------------------
+  Future<DashboardSI> getDashboard() async {
+    final response = await client.get("$baseUrl/api/progmob/dashboard/72180200");
+    if (response.statusCode == 200) {
+      return DashboardSI.fromJson(json.decode(response.body));
+    } else {
+      return null;
+    }
+  }
+
   //============================================================
   //--------------------MAHASISWA-------------------------------
   Future<List<Mahasiswa>> getMahasiswas() async {
@@ -333,4 +360,75 @@ class ApiServices {
 
   //=====================================================
   //------------------JADWAL------------------------------
+  Future<List<Jadwal>> getJadwals() async {
+    final response = await client.get("$baseUrl/api/progmob/jadwal/72180200");
+    if(response.statusCode == 200){
+      return jadwalFromJson(response.body);
+    }else{
+      return null;
+    }
+  }
+
+  Future<bool> createJadwal(Jadwal data) async {
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse("$baseUrl/api/progmob/jadwal/create")
+    );
+
+    Map<String,String> headers={
+      "Content-type":"multipart/form-data"
+    };
+
+    request.fields.addAll({
+      "id_dosen": data.id_dosen,
+      "id_matkul": data.id_matkul,
+      "nim_progmob": data.nim_progmob
+    });
+
+    var response = await request.send();
+    if(response.statusCode == 200){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  Future<bool> deleteJadwal(String id) async {
+    final response = await client.post(
+        "$baseUrl/api/progmob/jadwal/delete",
+        headers: {"content-type": "application/json"},
+        body: jsonEncode(<String, String>{
+          "id": id,
+          "nim_progmob":"72180200"
+        })
+    );
+
+    if(response.statusCode == 200){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  Future<bool> updateJadwal(Jadwal data, String id_cari /*, Dosen dataDosen, Matkul dataMatkul*/) async {
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse("$baseUrl/api/progmob/jadwal/update")
+    );
+
+    request.fields.addAll({
+      "id": id_cari,
+      "id_dosen": data.id_dosen, //id_dosen
+      "id_matkul": data.id_matkul, //id_matkul
+      "nim_progmob": data.nim_progmob,
+    });
+
+    var response = await request.send();
+    if(response.statusCode == 200){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 }

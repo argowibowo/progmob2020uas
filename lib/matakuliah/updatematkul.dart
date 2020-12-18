@@ -35,6 +35,7 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        margin: EdgeInsets.only(bottom: 10),
         child: SingleChildScrollView( //biar tombol gk ketutup keyboard
           child: Stack(
             children: <Widget>[
@@ -49,11 +50,31 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Kode",
+                        labelStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         hintText: "Kode Matakuliah",
+                        hintStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
+                        focusColor: Color(0xFF0D47A1),
                         border: OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(5),
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1)),
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        enabledBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1), width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
+                        focusedBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Colors.green, width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
                       ),
                       initialValue: this.mk.kode,
                       onSaved: (String value){
@@ -67,11 +88,31 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Nama",
+                        labelStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         hintText: "Nama Matakuliah",
+                        hintStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
+                        focusColor: Color(0xFF0D47A1),
                         border: OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(5),
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1)),
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        enabledBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1), width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
+                        focusedBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Colors.green, width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
                       ),
                       initialValue: this.mk.nama,
                       onSaved: (String value){
@@ -85,14 +126,34 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Hari",
+                        labelStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         hintText: "Hari Matakuliah",
+                        hintStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
+                        focusColor: Color(0xFF0D47A1),
                         border: OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(5),
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1)),
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        enabledBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1), width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
+                        focusedBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Colors.green, width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
                       ),
                       initialValue: this.mk.hari,
-                      //keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.number,
                       onSaved: (String value){
                         this.mk.hari = value;
                       },
@@ -104,14 +165,34 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Sesi",
+                        labelStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         hintText: "Sesi Matakuliah",
+                        hintStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
+                        focusColor: Color(0xFF0D47A1),
                         border: OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(5),
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1)),
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        enabledBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1), width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
+                        focusedBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Colors.green, width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
                       ),
                       initialValue: this.mk.sesi,
-                      //keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.number,
                       onSaved: (String value){
                         this.mk.sesi = value;
                       },
@@ -122,14 +203,34 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "SKS",
+                        labelStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
                         hintText: "SKS Matakuliah",
+                        hintStyle: TextStyle(
+                          fontSize: 15.0,
+                          height: 1,
+                          color: Color(0xFF0D47A1),
+                        ),
+                        focusColor: Color(0xFF0D47A1),
                         border: OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(5),
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1)),
                         ),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                        enabledBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Color(0xFF0D47A1), width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
+                        focusedBorder: new OutlineInputBorder( //utk ganti warna border di textinputnya
+                          borderSide: new BorderSide(color: Colors.green, width: 2.0),
+                          borderRadius: new BorderRadius.circular(10),
+                        ),
                       ),
                       initialValue: this.mk.sks,
-                      //keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.number,
                       onSaved: (String value){
                         this.mk.sks = value;
                       },
