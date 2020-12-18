@@ -5,7 +5,7 @@ import 'package:flutter_app/model.dart';
 import 'package:http/http.dart' show Client;
 import 'package:http/http.dart' as http;
 
-import 'modul.dart';
+import 'model.dart';
 
 class ApiServices {
   final String baseUrl = "https://argouchiha.000webhostapp.com";
@@ -46,7 +46,7 @@ class ApiServices {
     }
   }
 
-  Future<bool> createMhsWithFoto(Mahasiswa data, File file,
+  Future<bool> createMhsWithFoto(Mahasiswa data,  file,
       String filename) async {
     var request = http.MultipartRequest(
         'POST',
@@ -82,7 +82,7 @@ class ApiServices {
     }
   }
 
-  Future<bool> updateMhsWithFoto(Mahasiswa data, File file,
+  Future<bool> updateMhsWithFoto(Mahasiswa data, file,
       String nimcari) async {
     String isfotoupdate = "0";
     var request = http.MultipartRequest(

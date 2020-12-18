@@ -2,41 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:project_flutter_2020/dosen/dasboarddosen.dart';
 import 'package:project_flutter_2020/jadwal/dasboardjadwal.dart';
 import 'package:project_flutter_2020/mahasiswa/dasboardmhs.dart';
-import 'package:project_flutter_2020/main.dart';
 import 'package:project_flutter_2020/matakuliah/dasboardmatkul.dart';
-import 'package:project_flutter_2020/windows/profile.dart';
-import 'package:project_flutter_2020/windows/save.dart';
-import 'package:project_flutter_2020/windows/start.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../main.dart';
+import '../splashScreen.dart';
 
-class Dashboard extends StatefulWidget {
-  Dashboard({Key key, this.title}) : super(key: key);
+class Awal extends StatefulWidget {
+  Awal({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _DashboardState createState() => _DashboardState();
+  _AwalState createState() => _AwalState();
 }
-
-class _DashboardState extends State<Dashboard> {
+class _AwalState extends State<Awal> {
   final _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("DashBoard 72180208"),
-        backgroundColor: Colors.blue[500],
+      appBar:AppBar(
+        title: Text('Menu'),
       ),
-      backgroundColor: Colors.blue[100],
+      backgroundColor: Colors.lightBlue[100],
       body: Container(
         padding: EdgeInsets.all(30.0),
+
         child: GridView.count(
+          shrinkWrap: true,
           crossAxisCount: 2,
           children: <Widget>[
             Card(
@@ -45,16 +38,16 @@ class _DashboardState extends State<Dashboard> {
                 onTap: (){
                   Navigator.pop(context);
                   Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Dashboardmhs(title: "Dashboard Mahasiswa",)),
+                    MaterialPageRoute(builder: (context) => Dashboardmhs(title: "Mahasiswa",)),
                   );
                 },
-                splashColor: Colors.pinkAccent,
+                splashColor: Colors.indigoAccent,
                 child: Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Icon(Icons.people, size: 70.0,),
-                      Text(" Data Mahasiswa", style : new TextStyle(fontSize: 17.0))
+                      Text("Mahasiswa", style : new TextStyle(fontSize: 17.0))
                     ],
                   ),
                 ),
@@ -66,16 +59,16 @@ class _DashboardState extends State<Dashboard> {
                 onTap: (){
                   Navigator.pop(context);
                   Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Dashboarddosen(title: "Dashboard Dosen",)),
+                    MaterialPageRoute(builder: (context) => Dashboarddosen(title: "Dosen",)),
                   );
                 },
-                splashColor: Colors.pinkAccent,
+                splashColor: Colors.indigoAccent,
                 child: Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Icon(Icons.people_outlined, size: 70.0,),
-                      Text(" Data Dosen", style : new TextStyle(fontSize: 17.0))
+                      Text("Dosen", style : new TextStyle(fontSize: 17.0))
                     ],
                   ),
                 ),
@@ -90,13 +83,13 @@ class _DashboardState extends State<Dashboard> {
                     MaterialPageRoute(builder: (context) => Dashboardmatkul(title: "Dashboard Matakuliah",)),
                   );
                 },
-                splashColor: Colors.pinkAccent,
+                splashColor: Colors.indigoAccent,
                 child: Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Icon(Icons.book_online_outlined, size: 70.0,),
-                      Text(" Data MataKuliah", style : new TextStyle(fontSize: 17.0))
+                      Text("MataKuliah", style : new TextStyle(fontSize: 17.0))
                     ],
                   ),
                 ),
@@ -108,16 +101,16 @@ class _DashboardState extends State<Dashboard> {
                 onTap: (){
                   Navigator.pop(context);
                   Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Dashboardjadwal(title: "Dashboard Jadwal",)),
+                    MaterialPageRoute(builder: (context) => Dashboardjadwal(title: "Jadwal",)),
                   );
                 },
-                splashColor: Colors.pinkAccent,
+                splashColor: Colors.indigoAccent,
                 child: Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Icon(Icons.schedule, size: 70.0,),
-                      Text(" Data Jadwal", style : new TextStyle(fontSize: 17.0))
+                      Icon(Icons.calendar_view_day, size: 70.0,),
+                      Text("Jadwal", style : new TextStyle(fontSize: 17.0))
                     ],
                   ),
                 ),
@@ -135,7 +128,7 @@ class _DashboardState extends State<Dashboard> {
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text(
-                  "JR",
+                  "NS",
                   style: TextStyle(fontSize: 40.0),
                 ),
               ),
@@ -143,7 +136,7 @@ class _DashboardState extends State<Dashboard> {
             ListTile(
               title: Text("Profil"),
               trailing: Icon(Icons.people),
-              subtitle: Text("Profil Mahasiswa"),
+              subtitle: Text("Mahasiswa"),
               onTap: (){},
             ),
             ListTile(
@@ -166,7 +159,7 @@ class _DashboardState extends State<Dashboard> {
                 SharedPreferences pref = await SharedPreferences.getInstance();
                 await pref.setInt("is_login", 0);
                 Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => MyHomePage(title: "Hallo Push",)),
+                  MaterialPageRoute(builder: (context) => MyHomePage(title: "Push aja",)),
                 );
               },
             ),

@@ -14,7 +14,7 @@ class LogIn extends StatefulWidget {
 }
 class _LogInState extends State<LogIn> {
   String username = 'Modesta Oki';
-  String password = '171717';
+  String password = 'Secret';
 
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
