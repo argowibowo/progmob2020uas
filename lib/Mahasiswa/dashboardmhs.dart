@@ -55,12 +55,18 @@ class _DashboardmhsState extends State<Dashboardmhs> {
                               child: Text("Update"),
                               onPressed: (){
                                 Navigator.pop(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => UpdateMhs(title: "Input Data Mahasiswa")).then(onGoBack);
+                                )
                               },
                             ),
                             FlatButton(
                               child: Text("Delete"),
-                              onPressed: (){
+                              onPressed: () async {
+                                ApiServices()deleteMhs(lMhs[position].nim);
                                 Navigator.pop(context);
+                                setState(() {});
                               },
                             )
                           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/Jadwal/addJdwl.dart';
 import 'package:flutter_app/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -36,13 +37,47 @@ class _DashboardjdwlState extends State<Dashboardjdwl> {
         ],
       ),
       body: Container(
-        child: Center(
-          child: Text("Dashboard Jadwal",
-            style: TextStyle(
-                fontSize: 20
+          child: Card(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text("Jadwal"),
+                  subtitle: Text("Senin, 13:30-15:30"),
+                  onLongPress: (){
+                    showDialog(
+                        context: context,
+                        builder: (_) => new AlertDialog(
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              FlatButton(
+                                child: Text("Update"),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => UpdateJdwl(title: "Input Data Jadwal")).then(onGoBack);
+                                  )
+                                },
+                              ),
+                              FlatButton(
+                                child: Text("Delete"),
+                                onPressed: () async {
+                                  ApiServices()deleteJdwl(lJdwl[position].nim);
+                                  Navigator.pop(context);
+                                  setState(() {});
+                                },
+                              )
+                            ],
+                          ),
+                        ));
+                  },
+                )
+              ],
             ),
-          ),
-        ),
+          )
       ),
     );
   }

@@ -35,7 +35,7 @@ class Dashboarddos extends StatefulWidget {
             onPressed: (){
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AddDos(title: "Tambah Dosen")),
+                  MaterialPageRoute(builder: (context) => addDos(title: "Tambah Dosen")),
               );
             },
           )
@@ -61,12 +61,18 @@ class Dashboarddos extends StatefulWidget {
                                 child: Text("Update"),
                                 onPressed: (){
                                   Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => UpdateDos(title: "Input Data Dosen")).then(onGoBack);
+                                  )
                                 },
                               ),
                               FlatButton(
                                 child: Text("Delete"),
-                                onPressed: (){
+                                onPressed: () async {
+                                  ApiServices()deleteDos(lDos[position].nidn);
                                   Navigator.pop(context);
+                                  setState(() {});
                                 },
                               )
                             ],

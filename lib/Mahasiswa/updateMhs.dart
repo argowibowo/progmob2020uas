@@ -7,29 +7,30 @@ import 'package:image_picker/image_picker.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
-class AddDos extends StatesfulWidget {
+class AddMhs extends StatesfulWidget {
   final String title;
 
-  AddDos({Key key, @required this.title}) : super(key: key);
+  AddMhs({Key key, @required this.title}) : super(key: key);
 
   @override
-  _AddDosState createState() => new _AddDosState(title);
+  _AddMhsState createState() => new _AddMhsState(title);
 }
 
-class _AddDosState extends State<AddDos> {
+class _AddMhsState extends State<AddMhs> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  _AddDosState(this.title);
+  final String nimcari;
+  _AddMhsState(this.title);
   bool _isLoading = false;
-  Dosen dos = new Dosen();
-  file _imageFile;
+  Mahasiswa mhs = new Mahasiswa();
+  File _imageFile;
 
   Future<void> _pickImage(ImageSource source) async {
-    File selected = await ImagePicker.pickImage(source: source);
+    file selected = await ImagePicker.pickImage(source: source);
 
     setState((){
       _imageFile = selected;
-    });
+    })
   }
 
   @override
@@ -46,19 +47,20 @@ class _AddDosState extends State<AddDos> {
                 Form(
                   key: _formState,
                   child: Column(
-                      children: <Widget>[
+                      children: <widget>[
                         SizedBox(
                           height: 15,
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: "NIDN",
-                            hintText: "NIDN",
+                            labelText: "NIM",
+                            hintText: "NIM",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
+                          initialValue: this.mhs.nim,
                           onSaved: (String value){
-                            this.dos.nidn = value;
+                            this.mhs.nim = value;
                           },
                         ),
                         SizedBox(
@@ -67,12 +69,13 @@ class _AddDosState extends State<AddDos> {
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: "Nama",
-                            hintText: "Nama Dosen",
+                            hintText: "Nama Mahasiswa",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
+                          initialValue: this.mhs.nama,
                           onSaved: (String value){
-                            this.dos.namados = value;
+                            this.mhs.nama = value;
                           },
                         ),
                         SizedBox(
@@ -81,12 +84,13 @@ class _AddDosState extends State<AddDos> {
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: "Alamat",
-                            hintText: "Alamat Dosen",
+                            hintText: "Alamat Mahasiswa",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
+                          initialValue: this.mhs.alamat,
                           onSaved: (String value){
-                            this.dos.alamat = value;
+                            this.mhs.alamat = value;
                           },
                         ),
                         SizedBox(
@@ -95,13 +99,14 @@ class _AddDosState extends State<AddDos> {
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: "Email",
-                            hintText: "Email Dosen",
+                            hintText: "Email Mahasiswa",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
                           keyboardType: TextInputType.emailAddress,
+                          initialValue: this.mhs.email,
                           onSaved: (String value){
-                            this.dos.email = value;
+                            this.mhs.email = value;
                           },
                         ),
                         _imageFile == null
@@ -110,7 +115,7 @@ class _AddDosState extends State<AddDos> {
                           _imageFile,
                           fit: BoxFit.cover,
                           height: 300.0,
-                          alignment: Alignment.topCenter,
+                          alignment: ALignment.topCenter,
                           width: MediaQuery.of(context).size.width,
                         ),
                         MaterialButton(
@@ -153,10 +158,10 @@ class _AddDosState extends State<AddDos> {
                                       onPressed: () async{
                                         _formState.currentState.save();
                                         setState(() => _isLoading = true);
-                                        this.dos.nim_progmob = "72180179";
+                                        this.mhs.nim_progmob = "72180179";
                                         List<int> imageBytes = _imageFile.readAsBytesSync();
-                                        this.dos.foto = base64Encode(imageBytes);
-                                        ApiServices().createDosWithFoto(this.dos, _imageFile, _imageFile.path).then((isSuccess){
+                                        this.mhs.foto = base64Encode(imageBytes);
+                                        ApiServices().createMhsWithFoto(this.mhs, _imageFile, imageFile.path).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
                                             Navigator.pop(context);

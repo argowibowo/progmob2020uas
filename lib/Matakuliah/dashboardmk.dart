@@ -36,13 +36,47 @@ class _DashboardmkState extends State<Dashboardmk> {
         ],
       ),
       body: Container(
-        child: Center(
-          child: Text("Dashboard MataKuliah",
-            style: TextStyle(
-                fontSize: 20
+          child: Card(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text("Bahasa Korea"),
+                  subtitle: Text("Ko Seung Jae"),
+                  onLongPress: (){
+                    showDialog(
+                        context: context,
+                        builder: (_) => new AlertDialog(
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              FlatButton(
+                                child: Text("Update"),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => UpdateMk(title: "Input Data Mata Kuliah")).then(onGoBack);
+                                  )
+                                },
+                              ),
+                              FlatButton(
+                                child: Text("Delete"),
+                                onPressed: () async {
+                                  ApiServices()deleteMk(lMk[position].kode);
+                                  Navigator.pop(context);
+                                  setState(() {});
+                                },
+                              )
+                            ],
+                          ),
+                        ));
+                  },
+                )
+              ],
             ),
-          ),
-        ),
+          )
       ),
     );
   }

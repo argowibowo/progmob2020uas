@@ -19,17 +19,18 @@ class AddDos extends StatesfulWidget {
 class _AddDosState extends State<AddDos> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
+  final String nimcari;
   _AddDosState(this.title);
   bool _isLoading = false;
   Dosen dos = new Dosen();
-  file _imageFile;
+  File _imageFile;
 
   Future<void> _pickImage(ImageSource source) async {
-    File selected = await ImagePicker.pickImage(source: source);
+    file selected = await ImagePicker.pickImage(source: source);
 
     setState((){
       _imageFile = selected;
-    });
+    })
   }
 
   @override
@@ -46,7 +47,7 @@ class _AddDosState extends State<AddDos> {
                 Form(
                   key: _formState,
                   child: Column(
-                      children: <Widget>[
+                      children: <widget>[
                         SizedBox(
                           height: 15,
                         ),
@@ -57,6 +58,7 @@ class _AddDosState extends State<AddDos> {
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
+                          initialValue: this.dos.nidn,
                           onSaved: (String value){
                             this.dos.nidn = value;
                           },
@@ -71,6 +73,7 @@ class _AddDosState extends State<AddDos> {
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
+                          initialValue: this.dos.nama,
                           onSaved: (String value){
                             this.dos.namados = value;
                           },
@@ -85,6 +88,7 @@ class _AddDosState extends State<AddDos> {
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
+                          initialValue: this.dos.alamat,
                           onSaved: (String value){
                             this.dos.alamat = value;
                           },
@@ -100,6 +104,7 @@ class _AddDosState extends State<AddDos> {
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
                           keyboardType: TextInputType.emailAddress,
+                          initialValue: this.dos.email,
                           onSaved: (String value){
                             this.dos.email = value;
                           },
@@ -110,7 +115,7 @@ class _AddDosState extends State<AddDos> {
                           _imageFile,
                           fit: BoxFit.cover,
                           height: 300.0,
-                          alignment: Alignment.topCenter,
+                          alignment: ALignment.topCenter,
                           width: MediaQuery.of(context).size.width,
                         ),
                         MaterialButton(
@@ -156,7 +161,7 @@ class _AddDosState extends State<AddDos> {
                                         this.dos.nim_progmob = "72180179";
                                         List<int> imageBytes = _imageFile.readAsBytesSync();
                                         this.dos.foto = base64Encode(imageBytes);
-                                        ApiServices().createDosWithFoto(this.dos, _imageFile, _imageFile.path).then((isSuccess){
+                                        ApiServices().createDosWithFoto(this.dos, _imageFile, imageFile.path).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
                                             Navigator.pop(context);
