@@ -4,6 +4,8 @@ import 'package:flutter_progmob2020/dashboard.dart';
 import 'package:flutter_progmob2020/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+///Splash
+
 class Splashscreen extends StatefulWidget {
 
   _Splashscreen createState() => _Splashscreen();
