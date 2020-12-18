@@ -63,7 +63,7 @@ class _LoginState extends State<Login> {
                   validator: (value){
                     if(value.isEmpty && value.length == 0) {
                       return "Username tidak boleh kosong";
-                    } else if (!value.contains('72180222')){
+                    } else if (!value.contains('72160000')){
                       return "Username atau password";
                     } else
                       return null;
@@ -84,7 +84,7 @@ class _LoginState extends State<Login> {
                   validator: (value){
                     if(value.isEmpty && value.length == 0) {
                       return "Password tidak boleh kosong";
-                    } else if (!value.contains('100500')){
+                    } else if (!value.contains('progmob')){
                       return "Username atau password";
                     } else
                       return null;
