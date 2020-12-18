@@ -1,16 +1,15 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DashboardDosen extends StatefulWidget {
-  DashboardDosen({Key key, this.title}) : super(key: key);
+class dashboarddosen extends StatefulWidget {
+  dashboarddosen({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _DashboardDosenState createState() => _DashboardDosenState();
+  _dashboarddosenState createState() => _dashboarddosenState();
 }
 
-class _DashboardDosenState extends State<DashboardDosen> {
+class _dashboarddosenState extends State<dashboarddosen> {
   final _formKey = GlobalKey<FormState>();
 
   @override

@@ -131,7 +131,7 @@ class _LoginState extends State<Login> {
                       await pref.setInt("is_login", 1);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard",)),
+                        MaterialPageRoute(builder: (context) => dashboard(title: "Dashboard",)),
                       );
                     // }
                     _formKey.currentState.save();

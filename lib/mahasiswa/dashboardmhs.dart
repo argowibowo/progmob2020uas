@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DashboardMhs extends StatefulWidget {
-  DashboardMhs({Key key, this.title}) : super(key: key);
+class dashboardmhs extends StatefulWidget {
+  dashboardmhs({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _DashboardMhsState createState() => _DashboardMhsState();
+  _dashboardmhsState createState() => _dashboardmhsState();
 }
 
-class _DashboardMhsState extends State<DashboardMhs> {
+class _dashboardmhsState extends State<dashboardmhs> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -52,8 +52,8 @@ class _DashboardMhsState extends State<DashboardMhs> {
               ),
               ListTile(
                 leading: Icon(Icons.person),
-                title: Text("Uzumaki Naruto"),
-                subtitle: Text("72170999 - Naruto@si.ukdw.ac.id"),
+                title: Text("Jonathan Mata"),
+                subtitle: Text("72170099 - jonathan.leonardo@si.ukdw.ac.id"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(

@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DashboardJadwal extends StatefulWidget {
-  DashboardJadwal({Key key, this.title}) : super(key: key);
+class dashboardjadwal extends StatefulWidget {
+  dashboardjadwal({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _DashboardJadwalState createState() => _DashboardJadwalState();
+  _dashboardjadwalState createState() => _dashboardjadwalState();
 }
 
-class _DashboardJadwalState extends State<DashboardJadwal> {
+class _dashboardjadwalState extends State<dashboardjadwal> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -52,7 +52,7 @@ class _DashboardJadwalState extends State<DashboardJadwal> {
               ),
               ListTile(
                 leading: Icon(Icons.event_note_outlined),
-                title: Text("Pengolahan Data Multimedia"),
+                title: Text("Pengolahan data Multimedia"),
                 subtitle: Text("Rabu Sesi 5 (15.30-17.30)"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[

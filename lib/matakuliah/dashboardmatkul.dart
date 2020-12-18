@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DashboardMatkul extends StatefulWidget {
-  DashboardMatkul({Key key, this.title}) : super(key: key);
+class dashboardmatkul extends StatefulWidget {
+  dashboardmatkul({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _DashboardMatkulState createState() => _DashboardMatkulState();
+  _dashboardmatkulState createState() => _dashboardmatkulState();
 }
 
-class _DashboardMatkulState extends State<DashboardMatkul> {
+class _dashboardmatkulState extends State<dashboardmatkul> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -37,8 +37,8 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
             children: <Widget>[
               ListTile(
                 leading: Icon(Icons.book_sharp),
-                title: Text("Pemograman Mobile"),
-                subtitle: Text("SI333"),
+                title: Text("Data Mining"),
+                subtitle: Text("SI2121"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(
@@ -52,8 +52,8 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
               ),
               ListTile(
                 leading: Icon(Icons.book_sharp),
-                title: Text("Pengolahan Data Multimedia"),
-                subtitle: Text("SI1333"),
+                title: Text("Aplikasi Berbasis Desktop"),
+                subtitle: Text("SI12323"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(
