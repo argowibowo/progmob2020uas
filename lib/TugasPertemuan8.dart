@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter72180249/login.dart';
-import 'package:flutter72180249/main.dart';
-import 'package:flutter72180249/Dashboard.dart';
-import 'package:flutter72180249/login.dart';
+import 'package:flutter_72180249/login.dart';
+import 'package:flutter_72180249/main.dart';
+import 'package:flutter_72180249/Dashboard.dart';
+import 'package:flutter_72180249/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TugasPertemuan8 extends StatefulWidget {
@@ -81,7 +81,7 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
                      await pref.setInt("is_login",0);
                      Navigator.pushReplacement(
                        context,
-                       MaterialPageRoute(builder: (context) => LogIn(title : "Hallo Push",)),
+                       MaterialPageRoute(builder: (context) => MyHomePage(title : "Hallo Push",)),
                      );
                    }
                ),

@@ -1,13 +1,12 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter72180249/dosen/DashboardDosen.dart';
-import 'package:flutter72180249/jadwal/DashboardJadwal.dart';
-import 'package:flutter72180249/login.dart';
-import 'package:flutter72180249/mahasiswa/DashboardMahasiswa.dart';
-import 'package:flutter72180249/main.dart';
-import 'package:flutter72180249/login.dart';
-import 'package:flutter72180249/matakuliah/DashboardMatKul.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_72180249/dosen/DashboardDosen.dart';
+import 'package:flutter_72180249/jadwal/DashboardJadwal.dart';
+import 'package:flutter_72180249/login.dart';
+import 'package:flutter_72180249/mahasiswa/DashboardMahasiswa.dart';
+import 'package:flutter_72180249/main.dart';
+import 'package:flutter_72180249/login.dart';
+import 'package:flutter_72180249/matakuliah/DashboardMatKul.dart';
+import "package:shared_preferences/shared_preferences.dart";
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key key, this.title}) : super(key: key);
@@ -107,7 +106,7 @@ class _DashboardState extends State<Dashboard> {
                   await pref.setInt("is_login", 0);
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => LogIn(title: "Hello Push",)),
+                    MaterialPageRoute(builder: (context) => MyHomePage(title: "Hello Push",)),
                   );
                 },
 

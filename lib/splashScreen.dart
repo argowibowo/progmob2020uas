@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter72180249/logIn.dart';
-import 'package:flutter72180249/main.dart';
-import 'package:flutter72180249/TugasPertemuan8.dart';
+import 'package:flutter_72180249/logIn.dart';
+import 'package:flutter_72180249/main.dart';
+import 'package:flutter_72180249/TugasPertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);

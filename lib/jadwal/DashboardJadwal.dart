@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter72180249/main.dart';
+import 'package:flutter_72180249/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardJadwal extends StatefulWidget {
