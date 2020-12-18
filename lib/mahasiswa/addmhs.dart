@@ -36,6 +36,7 @@ class _AddMhsState extends State<AddMhs> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: Color(0xffff4d4d),
       appBar: new AppBar(
         title: new Text(this.title),
       ),
@@ -174,7 +175,7 @@ class _AddMhsState extends State<AddMhs> {
                                             .readAsBytesSync();
                                         this.mhs.foto =
                                             base64Encode(imageBytes);
-                                        ApiServices().createWithFoto(
+                                        ApiServices().createMhsWithFoto(
                                             this.mhs, _imageFile,
                                             _imageFile.path).then((isSuccess) {
                                           setState(() => _isloading = false);
@@ -213,12 +214,6 @@ class _AddMhsState extends State<AddMhs> {
               _isloading
                   ? Stack(
                 children: <Widget>[
-                  Opacity(opacity: 0.3,
-                    child: ModalBarrier(
-                      dismissible: false,
-                      color: Colors.grey,
-                    ),
-                  ),
                   Center(
                     child: CircularProgressIndicator(),
                   )

@@ -64,10 +64,10 @@ class _Pertemuan2 extends State<Pertemuan2>{
               onPressed: () async{
                 SharedPreferences pref = await SharedPreferences.getInstance();
                 await pref.setInt("is_login", 0);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo Push",)),
-                );
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo Push",)),
+                // );
               },
             )
           ],

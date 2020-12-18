@@ -55,7 +55,7 @@ class Splash extends StatefulWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      backgroundColor: Color(0xFFB2EBF2),
+      backgroundColor: Colors.red,
     body: Center(
       child: SingleChildScrollView(
           child: Container(
@@ -63,7 +63,7 @@ class Splash extends StatefulWidget{
               child: Column(
               children: [
                 Image.asset(
-                  "images/logo_splash.png",
+                  "images/logo_ayam.jpg",
                   width: 400.0,
                   height: 300.0,
                 ),

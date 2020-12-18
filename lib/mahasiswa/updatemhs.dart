@@ -37,6 +37,7 @@ class _UpdateMhsState extends State<UpdateMhs>{
   @override
   Widget build(BuildContext context){
     return new Scaffold(
+      backgroundColor: Color(0xffff4d4d),
       appBar: new AppBar(
         title: new Text(this.title),
       ),
