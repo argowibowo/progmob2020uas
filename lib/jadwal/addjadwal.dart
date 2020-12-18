@@ -1,41 +1,26 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:progmob2020_flutter/apiservices.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:progmob2020_flutter/model.dart';
+import 'dart:convert';
+import 'dart:io';
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
+class AddJadwal extends StatefulWidget {
+  AddJadwal({Key key, this.title}) : super(key: key);
 
-class UpdateMhs extends StatefulWidget{
   final String title;
-  Mahasiswa mhs;
-  String nimcari;
-
-  UpdateMhs({Key key, @required this.title, @required this.mhs, @required this.nimcari}) : super(key: key);
 
   @override
-  _UpdateMhsState createState() => _UpdateMhsState(title, mhs, nimcari);
+  _AddJadwalState createState() => new _AddJadwalState(title);
 }
 
-class _UpdateMhsState extends State<UpdateMhs>{
+class _AddJadwalState extends State<AddJadwal> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  final String nimcari;
-  Mahasiswa mhs;
+  _AddJadwalState(this.title);
+  Jadwal jadwal = new Jadwal();
   bool _isLoading = false;
-  File _imageFile;
 
-  _UpdateMhsState(this.title, this.mhs, this.nimcari);
-
-  //// memeilih dari galeri
-  Future<void> _pickImage(ImageSource source) async{
-    File selected = await ImagePicker.pickImage(source: source);
-
-    setState(() {
-      _imageFile = selected;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,29 +43,27 @@ class _UpdateMhsState extends State<UpdateMhs>{
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: "NIM",
-                            hintText: "NIM",
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          ),
-                          initialValue: this.mhs.nim,
-                          onSaved: (String value){
-                            this.mhs.nim = value;
-                          },
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            border: OutlineInputBorder(),
                             labelText: "Nama",
-                            hintText: " Nama Mahasiswa",
+                            hintText: "Nama Matakuliah",
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
-                          initialValue: this.mhs.nama,
                           onSaved: (String value){
-                            this.mhs.nama=value;
+                            this.jadwal.id_matkul = value;
+                          },
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            labelText: "Nama",
+                            hintText: "Nama Dosen",
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          ),
+                          onSaved: (String value){
+                            this.jadwal.id_dosen= value;
                           },
                         ),
                         SizedBox(
@@ -90,12 +73,11 @@ class _UpdateMhsState extends State<UpdateMhs>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Alamat",
-                            hintText: " Alamat Mahasiswa",
+                            labelText: "NIDN",
+                            hintText: "NIDN",
                           ),
-                          initialValue: this.mhs.alamat,
                           onSaved: (String value){
-                            this.mhs.alamat=value;
+                            this.jadwal.nidn=value;
                           },
                         ),
                         SizedBox(
@@ -105,58 +87,40 @@ class _UpdateMhsState extends State<UpdateMhs>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Email",
-                            hintText: " Email Mahasiswa",
+                            labelText: "Hari",
+                            hintText: "Hari Matakuliah",
                           ),
-                          initialValue: this.mhs.email,
-                          keyboardType: TextInputType.emailAddress,
                           onSaved: (String value){
-                            this.mhs.email = value;
+                            this.jadwal.hari=value;
                           },
                         ),
                         SizedBox(
                           height: 15,
                         ),
-                        (_imageFile == null && this.mhs.foto == null)
-                            ? Text('Silahkan Upload Foto')
-                            :
-                        (_imageFile != null)
-                            ?
-                        Image.file(
-                          _imageFile,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        )
-                            :
-                        Image.network(
-                          this.mhs.foto,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            border: OutlineInputBorder(),
+                            labelText: "Sesi",
+                            hintText: "Sesi Matakuliah",
+                          ),
+                          onSaved: (String value){
+                            this.jadwal.sesi = value;
+                          },
                         ),
-                        MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            color:  Colors.pinkAccent,
-                            onPressed: () {
-                              _pickImage(ImageSource.gallery);
-                            },
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                new Icon(Icons.image,color: Colors.white,),
-                                Text ("Upload Foto",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ],
-                            )
+                        SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            border: OutlineInputBorder(),
+                            labelText: "SKS",
+                            hintText: "SKS Matakuliah",
+                          ),
+                          onSaved: (String value){
+                            this.jadwal.sks = value;
+                          },
                         ),
                         SizedBox(
                           height: 15,
@@ -171,16 +135,15 @@ class _UpdateMhsState extends State<UpdateMhs>{
                               builder: (context){
                                 return AlertDialog(
                                   title: Text("Simpan Data"),
-                                  content: Text("Yakin Simpan?"),
+                                  content: Text("Yakin disimpan?"),
                                   actions: <Widget>[
                                     FlatButton(
                                       onPressed: () async{
                                         _formState.currentState.save();
-                                        this.mhs.nim_progmob = "72180210";
+
+                                        this.jadwal.nim_progmob = "72180210";
                                         setState(() => _isLoading = true);
-                                        List<int> imagesBytes = _imageFile.readAsBytesSync();
-                                        this.mhs.foto = base64Encode(imagesBytes);
-                                        ApiServices().updateMhsWithFoto(this.mhs, _imageFile, nimcari).then((isSuccess){
+                                        ApiServices().createJadwal(this.jadwal).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
                                             Navigator.pop(context);
@@ -237,5 +200,6 @@ class _UpdateMhsState extends State<UpdateMhs>{
           )
       ),
     );
+
   }
 }

@@ -7,35 +7,25 @@ import 'package:progmob2020_flutter/model.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
 
-class UpdateMhs extends StatefulWidget{
+class UpdateMatkul extends StatefulWidget{
   final String title;
-  Mahasiswa mhs;
-  String nimcari;
+  Matakuliah matkul;
+  String kodecari;
 
-  UpdateMhs({Key key, @required this.title, @required this.mhs, @required this.nimcari}) : super(key: key);
+  UpdateMatkul({Key key, @required this.title, @required this.matkul, @required this.kodecari}) : super(key: key);
 
   @override
-  _UpdateMhsState createState() => _UpdateMhsState(title, mhs, nimcari);
+  _UpdateMatkulState createState() => _UpdateMatkulState(title, matkul, kodecari);
 }
 
-class _UpdateMhsState extends State<UpdateMhs>{
+class _UpdateMatkulState extends State<UpdateMatkul> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  final String nimcari;
-  Mahasiswa mhs;
+  final String kodecari;
+  Matakuliah matkul;
   bool _isLoading = false;
-  File _imageFile;
 
-  _UpdateMhsState(this.title, this.mhs, this.nimcari);
-
-  //// memeilih dari galeri
-  Future<void> _pickImage(ImageSource source) async{
-    File selected = await ImagePicker.pickImage(source: source);
-
-    setState(() {
-      _imageFile = selected;
-    });
-  }
+  _UpdateMatkulState(this.title, this.matkul, this.kodecari);
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +48,14 @@ class _UpdateMhsState extends State<UpdateMhs>{
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: "NIM",
-                            hintText: "NIM",
+                            labelText: "Kode",
+                            hintText: "Kode Matakuliah",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
-                          initialValue: this.mhs.nim,
+                          initialValue: this.matkul.kode,
                           onSaved: (String value){
-                            this.mhs.nim = value;
+                            this.matkul.kode = value;
                           },
                         ),
                         SizedBox(
@@ -76,11 +66,11 @@ class _UpdateMhsState extends State<UpdateMhs>{
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
                             labelText: "Nama",
-                            hintText: " Nama Mahasiswa",
+                            hintText: " Nama Matakuliah",
                           ),
-                          initialValue: this.mhs.nama,
+                          initialValue: this.matkul.nama,
                           onSaved: (String value){
-                            this.mhs.nama=value;
+                            this.matkul.nama = value;
                           },
                         ),
                         SizedBox(
@@ -90,12 +80,12 @@ class _UpdateMhsState extends State<UpdateMhs>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Alamat",
-                            hintText: " Alamat Mahasiswa",
+                            labelText: "Hari",
+                            hintText: "Hari Matakuliah",
                           ),
-                          initialValue: this.mhs.alamat,
+                          initialValue: this.matkul.hari,
                           onSaved: (String value){
-                            this.mhs.alamat=value;
+                            this.matkul.hari = value;
                           },
                         ),
                         SizedBox(
@@ -105,58 +95,28 @@ class _UpdateMhsState extends State<UpdateMhs>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Email",
-                            hintText: " Email Mahasiswa",
+                            labelText: "Sesi",
+                            hintText: "Sesi Matakuliah",
                           ),
-                          initialValue: this.mhs.email,
-                          keyboardType: TextInputType.emailAddress,
+                          initialValue: this.matkul.sesi,
                           onSaved: (String value){
-                            this.mhs.email = value;
+                            this.matkul.sesi = value;
                           },
                         ),
                         SizedBox(
                           height: 15,
                         ),
-                        (_imageFile == null && this.mhs.foto == null)
-                            ? Text('Silahkan Upload Foto')
-                            :
-                        (_imageFile != null)
-                            ?
-                        Image.file(
-                          _imageFile,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        )
-                            :
-                        Image.network(
-                          this.mhs.foto,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            color:  Colors.pinkAccent,
-                            onPressed: () {
-                              _pickImage(ImageSource.gallery);
-                            },
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                new Icon(Icons.image,color: Colors.white,),
-                                Text ("Upload Foto",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ],
-                            )
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            border: OutlineInputBorder(),
+                            labelText: "SKS",
+                            hintText: "SKS Matakuliah",
+                          ),
+                          initialValue: this.matkul.sks,
+                          onSaved: (String value){
+                            this.matkul.sks = value;
+                          },
                         ),
                         SizedBox(
                           height: 15,
@@ -176,11 +136,9 @@ class _UpdateMhsState extends State<UpdateMhs>{
                                     FlatButton(
                                       onPressed: () async{
                                         _formState.currentState.save();
-                                        this.mhs.nim_progmob = "72180210";
+                                        this.matkul.nim_progmob = "72180210";
                                         setState(() => _isLoading = true);
-                                        List<int> imagesBytes = _imageFile.readAsBytesSync();
-                                        this.mhs.foto = base64Encode(imagesBytes);
-                                        ApiServices().updateMhsWithFoto(this.mhs, _imageFile, nimcari).then((isSuccess){
+                                        ApiServices().updateMatakuliah(this.matkul, kodecari).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
                                             Navigator.pop(context);

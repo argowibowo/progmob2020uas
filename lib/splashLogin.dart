@@ -1,8 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progmob2020_flutter/dashboard.dart';
-//import 'package:progmob2020_flutter/home_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 class SplashLogin extends StatefulWidget {
   SplashLogin({Key key, this.title}) : super(key: key);
 
@@ -64,7 +63,7 @@ class _SplashLoginState extends State<SplashLogin> {
                 hintText: "contoh: natasha",
                 icon: Icon(
                   Icons.people,
-                  color: Colors.blue,
+                  color: Colors.pinkAccent,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(4),
@@ -87,39 +86,35 @@ class _SplashLoginState extends State<SplashLogin> {
               controller: myPasswordController,
               obscureText: true,
               decoration: new InputDecoration(
-                  labelText: "Password",
-                  hintText: "Input Password",
+                labelText: "Password",
+                hintText: "Input Password",
                 icon: Icon(
                   Icons.lock_outline,
-                  color: Colors.blue,
+                  color: Colors.pinkAccent,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(4),
                 ),
+              ),
             ),
-            ),
-              RaisedButton(
-                color: Colors.blue,
-                onPressed: () async{
-                  SharedPreferences pref = await SharedPreferences.getInstance();
-                  await pref.setInt("is_login", 0);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard",)),
-                  );
-                },
-                child: Text(
-                  "LOGIN",
-                  style: TextStyle(
-                      color: Colors.white
-                  ),
+            RaisedButton(
+              color: Colors.pinkAccent,
+              onPressed: () async{
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                await pref.setInt("is_login", 0);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard",)),
+                );
+              },
+              child: Text(
+                "LOGIN",
+                style: TextStyle(
+                    color: Colors.white
                 ),
-
               ),
 
-
-
-
+            ),
           ],
         ),
       ),

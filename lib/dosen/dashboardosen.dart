@@ -1,4 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:progmob2020_flutter/apiservices.dart';
+import 'package:progmob2020_flutter/dosen/adddosen.dart';
+import 'package:progmob2020_flutter/dosen/updatedosen.dart';
+import 'package:progmob2020_flutter/model.dart';
 
 class DashboardDosen extends StatefulWidget {
   DashboardDosen({Key key, this.title}) : super(key: key);
@@ -10,6 +15,13 @@ class DashboardDosen extends StatefulWidget {
 }
 
 class _DashboardDosenState extends State<DashboardDosen> {
+  final _formKey = GlobalKey<FormState>();
+
+  List<Dosen> lDosen = new List();
+
+  FutureOr onGoBack(dynamic value){
+    setState(() {});
+  }
 
 
   @override
@@ -20,47 +32,83 @@ class _DashboardDosenState extends State<DashboardDosen> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.person_add),
-            onPressed: (){},
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddDosen(title: "Tambah Data Dosen")),
+              ).then(onGoBack);
+            },
           )
         ],
       ),
-      body: Container(
-          child: Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text("Jong Jek Siang"),
-                    subtitle: Text("0516119002 - jjs@staff.ukdw.ac.id"),
-                    onLongPress: (){
-                      showDialog(
-                          context: context,
-                          builder: (_) => new AlertDialog(
-                            content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              FlatButton(
-                                child: Text("Update"),
-                                onPressed: (){
-                                  Navigator.pop(context);
-                                },
+      body: FutureBuilder(
+        future: ApiServices().getDosen(),
+        builder: (BuildContext context, AsyncSnapshot<List<Dosen>> snapshot){
+          if(snapshot.hasError){
+            return Center(
+              child: Text(
+                  "Something Wrong with message: ${snapshot.error.toString()}"
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done){
+            lDosen = snapshot.data;
+            return ListView.builder(
+              itemBuilder: (context, position){
+                return Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(lDosen[position].nama +","+ lDosen[position].gelar + " - " + lDosen[position].nidn),
+                      subtitle: Text(lDosen[position].email),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(lDosen[position].foto),
+                      ),
+                      onLongPress: (){
+                        showDialog(
+                            context: context,
+                            builder: (_) => new AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  FlatButton(
+                                    child: Text("Update"),
+                                    onPressed: (){
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => UpdateDosen(title: "Update Dosen",
+                                            dosen:lDosen[position], nidncari: lDosen[position].nidn)),
+                                      ).then(onGoBack);
+                                    },
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    height: 20,
+                                  ),
+                                  FlatButton(
+                                      child: Text("Delete"),
+                                      onPressed: () async{
+                                        ApiServices().deleteDosen(lDosen[position].nidn);
+                                        Navigator.pop(context);
+                                        setState(() {});
+                                      })
+                                ],
                               ),
-                              FlatButton(
-                                child: Text("Delete"),
-                                onPressed: (){
-                                  Navigator.pop(context);
-                                },
-                              )
-                            ],
-                          ),
-                        )
-                      );
-                    },
+                            )
+                        );
+                      },
+                    ),
                   ),
-                ],
-              )
-          )
+                );
+              },
+              itemCount: lDosen.length,
+            );
+          } else{
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

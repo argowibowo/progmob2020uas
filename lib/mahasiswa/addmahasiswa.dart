@@ -110,7 +110,7 @@ class _AddMhsState extends State<AddMhs>{
                           height: 15,
                         ),
                         _imageFile == null
-                            ? Text('Silahkan memilih gambar terlebih dahulu')
+                            ? Text('Silahkan Upload Foto')
                             : Image.file(
                           _imageFile,
                           fit: BoxFit.cover,
@@ -121,7 +121,7 @@ class _AddMhsState extends State<AddMhs>{
                         MaterialButton(
                             minWidth: MediaQuery.of(context).size.width,
                             padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            color:  Colors.blue,
+                            color:  Colors.pinkAccent,
                             onPressed: () {
                               _pickImage(ImageSource.gallery);
                             },
@@ -145,14 +145,14 @@ class _AddMhsState extends State<AddMhs>{
                         MaterialButton(
                           minWidth: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          color: Colors.blue,
+                          color: Colors.pinkAccent,
                           onPressed: () {
                             return showDialog(
                               context: context,
                               builder: (context){
                                 return AlertDialog(
                                   title: Text("Simpan Data"),
-                                  content: Text(" Apakah anda akan menyimpan data ini"),
+                                  content: Text(" Apakah Yakin untuk disimpan?"),
                                   actions: <Widget>[
                                     FlatButton(
                                       onPressed: () async{

@@ -43,7 +43,7 @@ class _DashboardState extends State<Dashboard>{
             ),
             ListTile(
               title: Text("Data Mahasiswa"),
-              trailing: Icon(Icons.people_alt_rounded),
+              trailing: Icon(Icons.people_alt_rounded, color: Colors.pinkAccent,),
               subtitle: Text("Menu CRUD Data Mahasiswa"),
               onTap: (){
                 Navigator.pop(context);
@@ -55,7 +55,7 @@ class _DashboardState extends State<Dashboard>{
             ),
             ListTile(
               title: Text("Data Dosen"),
-              trailing: Icon(Icons.people_alt_rounded), //icon berada disebelah kanan
+              trailing: Icon(Icons.people_alt_rounded, color: Colors.pinkAccent,), //icon berada disebelah kanan
               subtitle: Text("Menu CRUD Data Dosen"),
               onTap: (){
                 Navigator.pop(context);
@@ -67,7 +67,7 @@ class _DashboardState extends State<Dashboard>{
             ),
             ListTile(
               title: Text("Data Matakuliah"),
-              trailing: Icon(Icons.library_books_rounded), //icon berada disebelah kanan
+              trailing: Icon(Icons.library_books_rounded, color: Colors.pinkAccent,), //icon berada disebelah kanan
               subtitle: Text("Menu CRUD Data Matakuliah"),
               onTap: (){
                 Navigator.pop(context);
@@ -79,7 +79,7 @@ class _DashboardState extends State<Dashboard>{
             ),
             ListTile(
               title: Text("Data Jadwal"),
-              trailing: Icon(Icons.schedule_rounded), //icon berada disebelah kanan
+              trailing: Icon(Icons.schedule_rounded, color: Colors.pinkAccent,), //icon berada disebelah kanan
               subtitle: Text("Menu CRUD Data Jadwal"),
               onTap: (){
                 Navigator.pop(context);
@@ -97,14 +97,13 @@ class _DashboardState extends State<Dashboard>{
             ),
             ListTile(
               title: Text("Logout"),
-              trailing: Icon(Icons.exit_to_app),
+              trailing: Icon(Icons.exit_to_app, color: Colors.pinkAccent,),
               onTap: () async{
                 SharedPreferences pref = await SharedPreferences.getInstance();
                 await pref.setInt("is_login", 0);
                 Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => SplashLogin(title: "LOGIN",)
-                )
+                    MaterialPageRoute(builder: (context) => SplashLogin(title: "Login"))
                 );
               },
             ),
