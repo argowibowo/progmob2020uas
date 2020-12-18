@@ -26,70 +26,26 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        drawer: Drawer(
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.orange,
+      ),
+      backgroundColor: Colors.orange[700],
+      drawer: Drawer(
+        child: Container(
+          color: Colors.orange[700],
           child: ListView(
             children: <Widget>[
               UserAccountsDrawerHeader(
-                accountName: Text("Govinda Idrusta Sinaga"),
+                accountName: Text("Govinda Sinaga"),
                 accountEmail: Text("govinda.sinaga@si.ukdw.ac.id"),
                 currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.red,
+                  backgroundColor: Colors.white,
                   child: Text(
                     "GS",
                     style: TextStyle(fontSize: 40.0),
                   ),
                 ),
-              ),
-              ListTile(
-                title: Text("Dosen"),
-                subtitle: Text("Menu Dosen"),
-                trailing: Icon(Icons.people),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DashboardDosen(title: "Data Dosen"))
-                  );
-                },
-              ),
-              ListTile(
-                title: Text("Mahasiswa"),
-                subtitle: Text("Menu Mahasiswa"),
-                trailing: Icon(Icons.people_outline),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DashboardMhs(title: "Data Mahasiswa"))
-                  );
-                },
-              ),
-              ListTile(
-                title: Text("Matakuliah"),
-                subtitle: Text("Menu Matakuliah"),
-                trailing: Icon(Icons.book_sharp),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Data Matakuliah"))
-                  );
-                },
-              ),
-              ListTile(
-                title: Text("Jadwal"),
-                subtitle: Text("Menu Jadwal"),
-                trailing: Icon(Icons.schedule),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Jadwal(title: "Data Jadwal"))
-                  );
-                },
               ),
               Divider(
                 color: Colors.black,
@@ -112,12 +68,108 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
+      ),
 
-        body: Container(
-          child: Center(
-            child: Text("Home"),
-          ),
-        )
+      body: Container(
+        padding: EdgeInsets.all(30.0),
+        child: GridView.count(
+          crossAxisCount: 2,
+          children: <Widget>[
+            Card(
+              margin: EdgeInsets.all(8.0),
+              color: Colors.orange[700],
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DashboardDosen(title: "Data Dosen"))
+                  );
+                },
+                splashColor: Colors.white,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(Icons.people, size: 70.0, color: Colors.white),
+                      Text("Dosen", style: new TextStyle(fontSize: 17.0))
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              margin: EdgeInsets.all(8.0),
+              color: Colors.orange[700],
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DashboardMhs(title: "Data Mahasiswa"))
+                  );
+                },
+                splashColor: Colors.white,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(Icons.people_outline, size: 70.0, color: Colors.white),
+                      Text("Mahasiswa", style: new TextStyle(fontSize: 17.0))
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              margin: EdgeInsets.all(8.0),
+              color: Colors.orange[700],
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Data Matakuliah"))
+                  );
+                },
+                splashColor: Colors.white,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(Icons.book_sharp, size: 70.0, color: Colors.white),
+                      Text("Matakuliah", style: new TextStyle(fontSize: 17.0))
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              margin: EdgeInsets.all(8.0),
+              color: Colors.orange[700],
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Jadwal(title: "Data Jadwal"))
+                  );
+                },
+                splashColor: Colors.white,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(Icons.schedule, size: 70.0, color: Colors.white),
+                      Text("Jadwal", style: new TextStyle(fontSize: 17.0))
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
