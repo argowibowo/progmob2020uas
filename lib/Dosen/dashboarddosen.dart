@@ -1,8 +1,13 @@
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_2020/apiservice.dart';
+import 'package:flutter_app_2020/model.dart';
+import 'package:flutter_app_2020/Dosen/adddosen.dart';
+import 'package:flutter_app_2020/Dosen/updatedosen.dart';
 
 class DashDsn extends StatefulWidget {
   DashDsn({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -10,93 +15,115 @@ class DashDsn extends StatefulWidget {
 }
 
 class _DashDsnState extends State<DashDsn> {
+  final _formKey = GlobalKey<FormState>();
+
+  List<Dosen> listDosen;
+
+  FutureOr onGoBack(dynamic value) {
+    setState(() {
+
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.brown[700],
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
-              onPressed: (){}
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddDsn(title: "Input Data Dosen"))
+                ).then(onGoBack);
+              }
           )
         ],
       ),
-      /*drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text("Riswan S. Tritama"),
-              accountEmail: Text("riswan.sulia@si.ukdw.ac.id"),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.blue,
-                child: Text(
-                  "Ha",
-                  style: TextStyle(fontSize: 40.0),
-                ),
+      backgroundColor: Colors.red[100],
+
+
+      body: FutureBuilder(
+        future: ApiServices().getDosen(),
+        builder: (BuildContext context, AsyncSnapshot<List<Dosen>> snapshot) {
+          if (snapshot.hasError){
+            return Center(
+              child: Text(
+                  "Something wrong with message: ${snapshot.error.toString()}"
               ),
-            ),
-            Divider(
-              color: Colors.black,
-              height: 20,
-              indent: 10,
-              endIndent: 10,
-            ),
-            ListTile(
-              title: Text("Logout"),
-              trailing: Icon(Icons.exit_to_app),
-              onTap: () async {
-                SharedPreferences pref = await SharedPreferences.getInstance();
-                await pref.setInt("is_login", 0);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => Login()),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            listDosen = snapshot.data;
+
+            return ListView.builder(
+              itemBuilder: (context, position) {
+                return Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(listDosen[position].nama + ", " + listDosen[position].gelar),
+                      subtitle: Text(listDosen[position].nidn + " - " + listDosen[position].email),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(listDosen[position].foto),
+                      ),
+                      onLongPress: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  FlatButton(
+                                      onPressed: (){
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => UpdateDosen(title: "Update Data Dosen",
+                                                dosen: listDosen[position],
+                                                nidncari: listDosen[position].nidn))
+                                        ).then(onGoBack);
+                                      },
+                                      child: Text("Update")
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    height: 20,
+                                  ),
+                                  FlatButton(
+                                      onPressed: () async {
+                                        ApiServices().deleteDosen(listDosen[position].nidn);
+                                        Navigator.pop(context);
+                                        setState(() {
+
+                                        });
+                                      },
+                                      child: Text("Delete")
+                                  ),
+                                ],
+                              ),
+                            )
+                        );
+                      },
+                    ),
+                  ),
                 );
               },
-            )
-          ],
-        ),
-      ),*/
-      body: Container(
-          child: GestureDetector(
-            child: Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                        leading: Icon(Icons.person),
-                        title: Text("Argo Uchiha"),
-                        subtitle: Text("08xxxxxxxxxx - argo.wibowo@staff.ukdw.ac.id"),
-                        trailing: PopupMenuButton(
-                          itemBuilder: (_) => <PopupMenuItem<String>>[
-                            new PopupMenuItem<String>(
-                                child: const Text('Update'), value: 'Update'),
-                            new PopupMenuItem<String>(
-                                child: const Text('Delete'), value: 'Delete'),
-                          ],
-                        )
-                      /*onLongPress: (){ //<~ /*
-                        showDialog(context: null,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                content: Column(
-                                  children: <Widget>[
-                                    FlatButton(
-                                        child: Text("Edit"),
-                                        onPressed: (){
-                                          Navigator.pop(context); //<~ */
-                                        })
-                                  ],
-                                ),
-                              );
-                            });
-                      },*/
-                    )
-                  ],
-                )
-            ),
-          )
+              itemCount: listDosen.length,
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }
