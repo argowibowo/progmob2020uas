@@ -1,10 +1,11 @@
 import 'package:fluter_hello_world/Preference.dart';
+import 'package:fluter_hello_world/matakuliah/DashboardMatakuliah.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluter_hello_world/dosen/DashboardDosen.dart';
 import 'package:fluter_hello_world/jadwal/DashboardJadwal.dart';
 import 'package:fluter_hello_world/mahasiswa/DashboardMahasiswa.dart';
-import 'ccc/matakuliah/DashboardMatakuliah.dart';
+import 'package:fluter_hello_world/matakuliah/DashboardMatakuliah.dart';
 import 'package:fluter_hello_world/dashboard.dart';
 import 'package:fluter_hello_world/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
