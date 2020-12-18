@@ -1,29 +1,29 @@
-import 'dart:io';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/apiservices.dart';
 import 'package:flutter_app/model.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
-class TambahMahasiswa extends StatefulWidget {
-  TambahMahasiswa({Key key, @required this.title}) : super(key: key);
+class AddDosen extends StatefulWidget {
+  AddDosen({Key key, @required this.title}) : super(key: key);
   final String title;
 
   @override
-  _TambahMahasiswaState createState() => _TambahMahasiswaState(title);
+  _AddDosenState createState() => _AddDosenState(title);
 }
 
-class _TambahMahasiswaState extends State<TambahMahasiswa> {
+class _AddDosenState extends State<AddDosen> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  _TambahMahasiswaState(this.title);
+  _AddDosenState(this.title);
   bool isLoading = false;
-  Mahasiswa mhs = new Mahasiswa();
+  Dosen dosen = new Dosen();
   File _imageFile;
+
   Future<void> _pickImage(ImageSource source) async {
-    // Gambar yang dipilih masuk ke selected
     File selected = await ImagePicker.pickImage(source: source);
 
     setState(() {
@@ -53,18 +53,17 @@ class _TambahMahasiswaState extends State<TambahMahasiswa> {
                   key: _formState,
                   child: Column(
                     children: <Widget>[
-                      // Kasih jarak sama atasnya
                       SizedBox(height: 15,
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                            labelText: "NIM",
-                            hintText: "NIM",
+                            labelText: "NIDN",
+                            hintText: "NIDN",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                         ),
                         onSaved: (String value) {
-                          this.mhs.nim = value;
+                          this.dosen.nidn = value;
                         },
                       ),
                       SizedBox(height: 15,
@@ -72,12 +71,12 @@ class _TambahMahasiswaState extends State<TambahMahasiswa> {
                       TextFormField(
                         decoration: InputDecoration(
                             labelText: "Nama",
-                            hintText: "Nama Mahasiswa",
+                            hintText: "Nama Dosen",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                         ),
                         onSaved: (String value) {
-                          this.mhs.nama = value;
+                          this.dosen.nama = value;
                         },
                       ),
                       SizedBox(height: 15,
@@ -85,33 +84,47 @@ class _TambahMahasiswaState extends State<TambahMahasiswa> {
                       TextFormField(
                         decoration: InputDecoration(
                             labelText: "Alamat",
-                            hintText: "Alamat Mahasiswa",
+                            hintText: "Alamat Dosen",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                         ),
                         onSaved: (String value) {
-                          this.mhs.alamat = value;
+                          this.dosen.alamat = value;
                         },
                       ),
                       SizedBox(height: 15,
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                            labelText: "Email Mahasiswa",
-                            hintText: "Email Mahasiswa",
+                            labelText: "Email",
+                            hintText: "Email Dosen",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                         ),
                         keyboardType: TextInputType.emailAddress,
                         onSaved: (String value) {
-                          this.mhs.email = value;
+                          this.dosen.email = value;
+                        },
+                      ),
+                      SizedBox(height: 15,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Gelar",
+                            hintText: "Gelar Dosen",
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        onSaved: (String value) {
+                          this.dosen.gelar = value;
                         },
                       ),
                       SizedBox(
                         height: 15,
                       ),
                       _imageFile == null
-                          ? Text("Silahkan memilih gambar terlebih dahulu")
+                          ? Text("Upload Foto Anda")
                           : Image.file(
                         _imageFile,
                         fit: BoxFit.cover,
@@ -131,7 +144,7 @@ class _TambahMahasiswaState extends State<TambahMahasiswa> {
                           children: <Widget>[
                             new Icon(Icons.image, color: Colors.white,),
                             Text(
-                              "Upload Foto Anda",
+                              "Upload Foto",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.white,
@@ -160,10 +173,8 @@ class _TambahMahasiswaState extends State<TambahMahasiswa> {
                                       onPressed: () async {
                                         _formState.currentState.save();
                                         setState(() => isLoading = true);
-                                        this.mhs.nim_progmob = "72180221";
-                                        // List<int> imageByte = _imageFile.readAsBytesSync();
-                                        // this.mhs.foto = base64Encode(imageByte);
-                                        ApiServices().createMhsWithFoto(this.mhs, _imageFile, _imageFile.path).then((isSuccess) {
+                                        this.dosen.nim_progmob = "72180221";
+                                        ApiServices().createDosenWithFoto(this.dosen, _imageFile, _imageFile.path).then((isSuccess) {
                                           setState(() => isLoading = false);
                                           if (isSuccess) {
                                             Navigator.pop(context);
@@ -218,9 +229,13 @@ class _TambahMahasiswaState extends State<TambahMahasiswa> {
                   ],
                 )
                     : Container(),
+                SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),
+
         ),
       ),
     );

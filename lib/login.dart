@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_app/tugaspertemuan8.dart';
+import 'package:flutter_app/dashboard.dart';
 
 
 class Login extends StatefulWidget {
@@ -76,7 +76,7 @@ class _LoginState extends State<Login> {
                     await pref.setInt("is_login", 1);
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Pertemuan8(title : "Flutter App",)),
+                      MaterialPageRoute(builder: (context) => Dashboard(title : "Data Perkuliahan",)),
                     );
                   },
                 ),
