@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/MatkulTambah.dart';
-import 'package:flutter_app/MatkulUpdate.dart';
+import 'file:///D:/Progmob%202020/flutter_app/lib/CRUDMatkul/MatkulTambah.dart';
+import 'file:///D:/Progmob%202020/flutter_app/lib/CRUDMatkul/MatkulUpdate.dart';
 import 'package:flutter_app/apiservices.dart';
 import 'package:flutter_app/model.dart';
 

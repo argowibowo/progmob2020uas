@@ -54,7 +54,7 @@ class _LoginState extends State<Login> {
                   // seberapa besar device, akan diukur tingginya
                   height: MediaQuery.of(context).size.height / 5,
                   child: new Image.asset(
-                    "images/icon.png",
+                    "images/progmob.png",
                     // width: 200,
                     // height: 200,
                   ),

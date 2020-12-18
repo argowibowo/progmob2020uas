@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/DosenUpdate.dart';
+import 'file:///D:/Progmob%202020/flutter_app/lib/CRUDDosen/DosenUpdate.dart';
 import 'package:flutter_app/apiservices.dart';
 import 'package:flutter_app/model.dart';
-import 'package:flutter_app/tambahdosen.dart';
+import 'file:///D:/Progmob%202020/flutter_app/lib/CRUDDosen/tambahdosen.dart';
 
 class DashboardDosen extends StatefulWidget {
   DashboardDosen({Key key, this.title}) : super(key: key);

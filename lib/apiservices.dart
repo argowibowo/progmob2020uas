@@ -8,7 +8,6 @@ import 'dart:io';
 
 class ApiServices {
   final String baseUrl = "https://argouchiha.000webhostapp.com";
-
   Client client = Client();
 
   // ------------------------------dashboard------------------------------
@@ -155,8 +154,7 @@ class ApiServices {
   }
 
   Future<bool> createDosen(Dosen data) async {
-    final response = await client.post(
-        "$baseUrl/api/progmob/dosen/create",
+    final response = await client.post("$baseUrl/api/progmob/dosen/create",
         headers: {"content-type": "application/json"},
         body: dosenToJson(data)
     );

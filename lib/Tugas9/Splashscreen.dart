@@ -69,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   width: _width,
                   height: _height,
                   child: Image.asset(
-                    "images/icon.png",
+                    "images/progmob.png",
                     width: _width,
                     height: _height,
                   ),
