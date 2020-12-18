@@ -36,7 +36,7 @@ class _DashboardState extends State<Dashboard> {    //<~~
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text(
-                  "@@", //<~ ~~~~~
+                  "jj", //<~ ~~~~~
                   style: TextStyle(fontSize: 40.0),
                 ),
               ),
@@ -49,7 +49,7 @@ class _DashboardState extends State<Dashboard> {    //<~~
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => dashDos(title: "Dashboard Dosen")),  //<~~~
+                  MaterialPageRoute(builder: (context) => dashdos(title: "Dashboard Dosen")),  //<~~~
                 );
               },
             ),
