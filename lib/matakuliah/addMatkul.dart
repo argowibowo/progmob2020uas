@@ -10,21 +10,21 @@ import '../model.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
 
-class AddJd extends StatefulWidget{
+class AddMatkul extends StatefulWidget{
   final String title;
 
-  AddJd({Key key, @required this.title}) : super(key: key);
+  AddMatkul({Key key, @required this.title}) : super(key: key);
 
   @override
-  _AddJdState createState() => new _AddJdState(title);
+  _AddMatkulState createState() => new _AddMatkulState(title);
 }
 
-class _AddJdState extends State<AddJd>{
+class _AddMatkulState extends State<AddMatkul>{
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  _AddJdState(this.title);
+  _AddMatkulState(this.title);
   bool _isLoading = false;
-  Jadwal jw = new Jadwal();
+  Matakuliah mt = new Matakuliah();
   File  _imageFile;
 
   //// memeilih dari galeri
@@ -55,7 +55,6 @@ class _AddJdState extends State<AddJd>{
                           height: 15,
                         ),
                         TextFormField(
-
                           decoration: InputDecoration(
                             labelText: "Matkul",
                             hintText: "Matkul",
@@ -63,7 +62,7 @@ class _AddJdState extends State<AddJd>{
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                           ),
                           onSaved: (String value){
-                            this.jw.matkul = value;
+                            this.mt.kodeMatakuliah = value;
                           },
                         ),
                         SizedBox(
@@ -73,40 +72,11 @@ class _AddJdState extends State<AddJd>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                             border: OutlineInputBorder(),
-                            labelText: "Dosen",
-                            hintText: " Dosen",
+                            labelText: "nama",
+                            hintText: " nama",
                           ),
                           onSaved: (String value){
-                            this.jw.dosen=value;
-                          },
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-                            border: OutlineInputBorder(),
-                            labelText: "nidn",
-                            hintText: " nidn",
-                          ),
-                          onSaved: (String value){
-                            this.jw.nidn=value;
-                          },
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-                            border: OutlineInputBorder(),
-                            labelText: "hari",
-                            hintText: " hari",
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          onSaved: (String value){
-                            this.jw.hari = value;
+                            this.mt.nama=value;
                           },
                         ),
                         SizedBox(
@@ -119,14 +89,15 @@ class _AddJdState extends State<AddJd>{
                             labelText: "sesi",
                             hintText: " sesi",
                           ),
-                          keyboardType: TextInputType.emailAddress,
                           onSaved: (String value){
-                            this.jw.sesi = value;
+                            this.mt.sesi=value;
                           },
                         ),
                         SizedBox(
                           height: 15,
                         ),
+
+
                         TextFormField(
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
@@ -136,7 +107,7 @@ class _AddJdState extends State<AddJd>{
                           ),
                           keyboardType: TextInputType.emailAddress,
                           onSaved: (String value){
-                            this.jw.sks = value;
+                            this.mt.sks = value;
                           },
                         ),
                         SizedBox(

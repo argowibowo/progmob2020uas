@@ -3,29 +3,32 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+
 import '../apiservice.dart';
 import '../model.dart';
 
-
-
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
 
-class AddJd extends StatefulWidget{
+class UpdateMt extends StatefulWidget{
   final String title;
+  Matakuliah mt;
+  String kode;
 
-  AddJd({Key key, @required this.title}) : super(key: key);
+  UpdateMt({Key key, @required this.title, @required this.mt, @required this.kode}) : super(key: key);
 
   @override
-  _AddJdState createState() => new _AddJdState(title);
+  _UpdateMtState createState() => _UpdateMtState(title,mt, kode);
 }
 
-class _AddJdState extends State<AddJd>{
+class _UpdateMtState extends State<UpdateMt>{
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  _AddJdState(this.title);
+  final String kode;
+  Matakuliah mt;
   bool _isLoading = false;
-  Jadwal jw = new Jadwal();
-  File  _imageFile;
+  File _imageFile;
+
+  _UpdateMtState(this.title, Mt, this.kode);
 
   //// memeilih dari galeri
   Future<void> _pickImage(ImageSource source) async{
@@ -38,6 +41,7 @@ class _AddJdState extends State<AddJd>{
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(this.title),
@@ -57,13 +61,30 @@ class _AddJdState extends State<AddJd>{
                         TextFormField(
 
                           decoration: InputDecoration(
+                            labelText: "Kode",
+                            hintText: "Kode",
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+                          ),
+                          initialValue: this.mt.kodeMatakuliah,
+                          onSaved: (String value){
+                            this.mt.kodeMatakuliah = value;
+                          },
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+                            border: OutlineInputBorder(),
                             labelText: "Matkul",
-                            hintText: "Matkul",
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+                            hintText: " Matkul",
                           ),
+                          initialValue: this.mt.nama,
                           onSaved: (String value){
-                            this.jw.matkul = value;
+                            this.mt.nama=value;
                           },
                         ),
                         SizedBox(
@@ -73,11 +94,13 @@ class _AddJdState extends State<AddJd>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                             border: OutlineInputBorder(),
-                            labelText: "Dosen",
-                            hintText: " Dosen",
+                            labelText: "Hari",
+                            hintText: " Hari",
                           ),
+                          initialValue: this.mt.hari,
+                          keyboardType: TextInputType.text,
                           onSaved: (String value){
-                            this.jw.dosen=value;
+                            this.mt.hari = value;
                           },
                         ),
                         SizedBox(
@@ -87,11 +110,13 @@ class _AddJdState extends State<AddJd>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                             border: OutlineInputBorder(),
-                            labelText: "nidn",
-                            hintText: " nidn",
+                            labelText: "Sesi",
+                            hintText: " Sesi",
                           ),
+                          initialValue: this.mt.sesi,
+                          keyboardType: TextInputType.text,
                           onSaved: (String value){
-                            this.jw.nidn=value;
+                            this.mt.sesi = value;
                           },
                         ),
                         SizedBox(
@@ -101,78 +126,19 @@ class _AddJdState extends State<AddJd>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                             border: OutlineInputBorder(),
-                            labelText: "hari",
-                            hintText: " hari",
+                            labelText: "SKS",
+                            hintText: " SKS",
                           ),
-                          keyboardType: TextInputType.emailAddress,
+                          initialValue: this.mt.sks,
+                          keyboardType: TextInputType.text,
                           onSaved: (String value){
-                            this.jw.hari = value;
+                            this.mt.sks = value;
                           },
                         ),
                         SizedBox(
                           height: 15,
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-                            border: OutlineInputBorder(),
-                            labelText: "sesi",
-                            hintText: " sesi",
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          onSaved: (String value){
-                            this.jw.sesi = value;
-                          },
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-                            border: OutlineInputBorder(),
-                            labelText: "sks",
-                            hintText: " sks",
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          onSaved: (String value){
-                            this.jw.sks = value;
-                          },
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        _imageFile == null
-                            ? Text('Pilih gambar')
-                            : Image.file(
-                          _imageFile,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-                            color:  Colors.blue,
-                            onPressed: () {
-                              _pickImage(ImageSource.gallery);
-                            },
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                new Icon(Icons.image_aspect_ratio,
-                                  color: Colors.white,),
-                                Text ("Upload Foto",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ],
-                            )
-                        ),
+
                         SizedBox(
                           height: 15,
                         ),
@@ -185,9 +151,10 @@ class _AddJdState extends State<AddJd>{
                               context: context,
                               builder: (context){
                                 return AlertDialog(
-                                  title: Text("Simpan Data"),
-                                  content: Text("yakin untuk menyimpan data tersebut"),
+                                  title: Text("Save Data"),
+                                  content: Text(" Yakin Menyimpan data"),
                                   actions: <Widget>[
+
                                     FlatButton(
                                       onPressed: () {
                                         Navigator.pop(context);

@@ -3,29 +3,32 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+
 import '../apiservice.dart';
 import '../model.dart';
 
-
-
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
 
-class AddJd extends StatefulWidget{
+class UpdateJw extends StatefulWidget{
   final String title;
+  Jadwal jw;
+  String nidncari;
 
-  AddJd({Key key, @required this.title}) : super(key: key);
+  UpdateJw({Key key, @required this.title, @required this.jw, @required this.nidncari}) : super(key: key);
 
   @override
-  _AddJdState createState() => new _AddJdState(title);
+  _UpdateJwState createState() => _UpdateJwState(title,jw, nidncari);
 }
 
-class _AddJdState extends State<AddJd>{
+class _UpdateJwState extends State<UpdateJw>{
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  _AddJdState(this.title);
+  final String nidncari;
+  Jadwal jw;
   bool _isLoading = false;
-  Jadwal jw = new Jadwal();
-  File  _imageFile;
+  File _imageFile;
+
+  _UpdateJwState(this.title, jw, this.nidncari);
 
   //// memeilih dari galeri
   Future<void> _pickImage(ImageSource source) async{
@@ -38,6 +41,7 @@ class _AddJdState extends State<AddJd>{
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(this.title),
@@ -57,13 +61,14 @@ class _AddJdState extends State<AddJd>{
                         TextFormField(
 
                           decoration: InputDecoration(
-                            labelText: "Matkul",
-                            hintText: "Matkul",
+                            labelText: "Nidn",
+                            hintText: "Nidn",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                           ),
+                          initialValue: this.jw.nidn,
                           onSaved: (String value){
-                            this.jw.matkul = value;
+                            this.jw.nidn = value;
                           },
                         ),
                         SizedBox(
@@ -73,9 +78,10 @@ class _AddJdState extends State<AddJd>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                             border: OutlineInputBorder(),
-                            labelText: "Dosen",
-                            hintText: " Dosen",
+                            labelText: "Nama",
+                            hintText: " Nama Dosen",
                           ),
+                          initialValue: this.jw.dosen,
                           onSaved: (String value){
                             this.jw.dosen=value;
                           },
@@ -87,11 +93,12 @@ class _AddJdState extends State<AddJd>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                             border: OutlineInputBorder(),
-                            labelText: "nidn",
-                            hintText: " nidn",
+                            labelText: "Matkul",
+                            hintText: " Matkul",
                           ),
+                          initialValue: this.jw.matkul,
                           onSaved: (String value){
-                            this.jw.nidn=value;
+                            this.jw.matkul=value;
                           },
                         ),
                         SizedBox(
@@ -101,10 +108,11 @@ class _AddJdState extends State<AddJd>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                             border: OutlineInputBorder(),
-                            labelText: "hari",
-                            hintText: " hari",
+                            labelText: "Hari",
+                            hintText: " Hari",
                           ),
-                          keyboardType: TextInputType.emailAddress,
+                          initialValue: this.jw.hari,
+                          keyboardType: TextInputType.text,
                           onSaved: (String value){
                             this.jw.hari = value;
                           },
@@ -116,10 +124,11 @@ class _AddJdState extends State<AddJd>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                             border: OutlineInputBorder(),
-                            labelText: "sesi",
-                            hintText: " sesi",
+                            labelText: "Sesi",
+                            hintText: " Sesi",
                           ),
-                          keyboardType: TextInputType.emailAddress,
+                          initialValue: this.jw.sesi,
+                          keyboardType: TextInputType.text,
                           onSaved: (String value){
                             this.jw.sesi = value;
                           },
@@ -131,10 +140,11 @@ class _AddJdState extends State<AddJd>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                             border: OutlineInputBorder(),
-                            labelText: "sks",
-                            hintText: " sks",
+                            labelText: "SKS",
+                            hintText: " SKS",
                           ),
-                          keyboardType: TextInputType.emailAddress,
+                          initialValue: this.jw.sks,
+                          keyboardType: TextInputType.text,
                           onSaved: (String value){
                             this.jw.sks = value;
                           },
@@ -142,37 +152,7 @@ class _AddJdState extends State<AddJd>{
                         SizedBox(
                           height: 15,
                         ),
-                        _imageFile == null
-                            ? Text('Pilih gambar')
-                            : Image.file(
-                          _imageFile,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-                            color:  Colors.blue,
-                            onPressed: () {
-                              _pickImage(ImageSource.gallery);
-                            },
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                new Icon(Icons.image_aspect_ratio,
-                                  color: Colors.white,),
-                                Text ("Upload Foto",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ],
-                            )
-                        ),
+
                         SizedBox(
                           height: 15,
                         ),
@@ -185,9 +165,10 @@ class _AddJdState extends State<AddJd>{
                               context: context,
                               builder: (context){
                                 return AlertDialog(
-                                  title: Text("Simpan Data"),
-                                  content: Text("yakin untuk menyimpan data tersebut"),
+                                  title: Text("Save Data"),
+                                  content: Text(" Yakin Menyimpan data"),
                                   actions: <Widget>[
+
                                     FlatButton(
                                       onPressed: () {
                                         Navigator.pop(context);
