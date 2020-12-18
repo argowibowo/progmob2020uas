@@ -7,18 +7,17 @@ import 'package:flutter_app_1/model.dart';
 import 'package:flutter_app_1/updatedosen.dart';
 
 
-
-class DashboardDosen extends StatefulWidget {
-  DashboardDosen({Key key, this.title}) : super(key: key);
+class dashboarddosen extends StatefulWidget {
+  dashboarddosen({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _DashboardDosenState createState() => _DashboardDosenState();
+  _dashboarddosenState createState()=> _dashboarddosenState();
 }
-class _DashboardDosenState extends State<DashboardDosen> {
+class _dashboarddosenState extends State<dashboarddosen> {
   final _formKey = GlobalKey<FormState>();
 
-  List<Dosen> IDosen= new List();
+  List<Dosen> lDosen= new List();
 
   //berfungsi ketika menginsert data baru dan akan merefresh data yang sudah di ubah
   FutureOr onGoBack(dynamic value){
@@ -51,7 +50,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
                     "Something Wrong With message: ${snapshot.error.toString()}"),
               );
             }else if (snapshot.connectionState == ConnectionState.done){
-              IDosen = snapshot.data;
+              lDosen = snapshot.data;
               return ListView.builder(
                 itemBuilder: (context, position) {
                   return Card( /////////////copy nanti bagian card yang sudah dibuat minggu lalu
@@ -59,10 +58,10 @@ class _DashboardDosenState extends State<DashboardDosen> {
                       margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
                       child: Container(
                         child: ListTile(
-                          title: Text(IDosen[position].nama + " - " + IDosen[position].nidn),
-                          subtitle: Text(IDosen[position].email),
+                          title: Text(lDosen[position].nama + " - " + lDosen[position].nidn),
+                          subtitle: Text(lDosen[position].email),
                           leading: CircleAvatar(
-                            backgroundImage: NetworkImage(IDosen[position].foto),
+                            backgroundImage: NetworkImage(lDosen[position].foto),
                           ),
                           onLongPress: (){
                             showDialog(context: context,
@@ -76,7 +75,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
                                           Navigator.pop(context);
                                           Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context)=> UpdateDosen(title: "Input Data Dosen", dosen: IDosen[position], namacari: IDosen[position].nama)),
+                                            MaterialPageRoute(builder: (context)=> UpdateDosen(title: "Input Data Dosen", dosen: lDosen[position], nidn_cari: lDosen[position].nidn)),
                                           ).then(onGoBack);
                                         },
                                       ),
@@ -87,7 +86,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
                                       FlatButton(
                                         child: Text("Delete"),
                                         onPressed: () async{
-                                          ApiServices().deleteDosen(IDosen[position].nidn);
+                                          ApiServices().deleteDosen(lDosen[position].nidn);
                                           Navigator.pop(context);
                                           setState(() {});
                                         },
@@ -101,7 +100,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
                       )
                   );
                 },
-                itemCount: IDosen.length,
+                itemCount: lDosen.length,
               );
             } else{
               return Center(

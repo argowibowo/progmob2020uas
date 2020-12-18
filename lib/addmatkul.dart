@@ -1,9 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_1/apiservices.dart';
 import 'package:flutter_app_1/model.dart';
-import 'package:image_picker/image_picker.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
 
@@ -21,17 +20,8 @@ class _AddMatkulState extends State<AddMatkul>{
   final String title;
   _AddMatkulState(this.title);
   bool _isLoading = false;
-  Matakuliah matakuliah = new Matakuliah();
-  File  _imageFile;
+  Matakuliah matkul = new Matakuliah();
 
-  //// memeilih dari galeri
-  Future<void> _pickImage(ImageSource source) async{
-    File selected = await ImagePicker.pickImage(source: source);
-
-    setState(() {
-      _imageFile = selected;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +44,13 @@ class _AddMatkulState extends State<AddMatkul>{
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: "Nama",
-                            hintText: "NamaMatkul",
+                            labelText: "Kode",
+                            hintText: "Kode",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
                           onSaved: (String value){
-                            this.matakuliah.namaMatkul = value;
+                            this.matkul.kode = value;
                           },
                         ),
                         SizedBox(
@@ -71,10 +61,10 @@ class _AddMatkulState extends State<AddMatkul>{
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
                             labelText: "Nama",
-                            hintText: " Nama Dosen",
+                            hintText: " Nama Matakuliah",
                           ),
                           onSaved: (String value){
-                            this.matakuliah.namaDosen=value;
+                            this.matkul.nama=value;
                           },
                         ),
                         SizedBox(
@@ -84,11 +74,11 @@ class _AddMatkulState extends State<AddMatkul>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Grup",
-                            hintText: " Grup",
+                            labelText: "Hari",
+                            hintText: " Hari",
                           ),
                           onSaved: (String value){
-                            this.matakuliah.grup=value;
+                            this.matkul.hari=value;
                           },
                         ),
                         SizedBox(
@@ -98,66 +88,33 @@ class _AddMatkulState extends State<AddMatkul>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Sks",
-                            hintText: " Sks",
+                            labelText: "Sesi",
+                            hintText: " Sesi",
                           ),
                           //keyboardType: TextInputType.emailAddress,
                           onSaved: (String value){
-                            this.matakuliah.sks = value;
+                            this.matkul.sesi = value;
                           },
                         ),
                         SizedBox(
                           height: 15,
                         ),
-
                         TextFormField(
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Gelar",
-                            hintText: " Gelar Dosen",
+                            labelText: "SKS",
+                            hintText: " SKS",
                           ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        _imageFile == null
-                            ? Text('Silahkan memilih gambar terlebih dahulu')
-                            :Image.file(
-                          _imageFile,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            color:  Colors.blue,
-                            onPressed: () {
-                              _pickImage(ImageSource.gallery);
-                            },
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                new Icon(Icons.image,color: Colors.white,),
-                                Text ("Upload Foto",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ],
-                            )
-                        ),
-                        SizedBox(
-                          height: 15,
+                          //keyboardType: TextInputType.emailAddress,
+                          onSaved: (String value){
+                            this.matkul.sks = value;
+                          },
                         ),
                         MaterialButton(
                           minWidth: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          color: Colors.blue,
+                          color: Colors.pink,
                           onPressed: () {
                             return showDialog(
                               context: context,
@@ -169,11 +126,9 @@ class _AddMatkulState extends State<AddMatkul>{
                                     FlatButton(
                                       onPressed: () async{
                                         _formState.currentState.save();
-                                        this.matakuliah.nim_progmob = "72180215";
                                         setState(() => _isLoading = true);
-                                        List<int> imagesBytes = _imageFile.readAsBytesSync();
-                                        this.matakuliah.foto = base64Encode(imagesBytes);
-                                        ApiServices().createMatakuliahWithFoto(this.matakuliah, _imageFile, _imageFile.path).then((isSuccess){
+                                        this.matkul.nim_progmob = "72180215";
+                                        ApiServices().createMatkul(this.matkul).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
                                             Navigator.pop(context);
@@ -192,7 +147,7 @@ class _AddMatkulState extends State<AddMatkul>{
                                       },
                                       child: Text ("Tidak"),
                                     )
-                                  ],
+                                  ]
                                 );
                               },
                             );

@@ -1,31 +1,36 @@
 import 'dart:convert';
-import 'package:charts_flutter/flutter.dart';
-///chart
-//class ClicksPerYear {
-// final String year;
-//final int clicks;
-//final charts.Color color;
 
-//ClicksPerYear(this.year, this.clicks, Color color)
-//:this.color = charts.Color(
-//     r: color.red, g: color.green, b: color.blue, a: color.alpha);
-//  )
+import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-//}
+
+//-----------------------charts------------------------------------
+class ClicksPerYear{
+  final String year;
+  final int clicks;
+  final charts.Color color;
+
+  ClicksPerYear(this.year, this.clicks, Color color)
+      : this.color = charts.Color(
+      r: color.red, g: color.green, b: color.blue, a: color.alpha);
+}
 
 //----------dashboard
 class DashboardSI{
   String mahasiswa;
   String dosen;
   String matakuliah;
-  // String jadwal;
+  String jadwal;
 
-  DashboardSI({this.mahasiswa, this.dosen});
+  DashboardSI({this.mahasiswa, this.dosen, this.matakuliah, this.jadwal});
 
   factory DashboardSI.fromJson(Map<String, dynamic> json){
     return DashboardSI(
         mahasiswa: json["mahasiswa"],
-        dosen: json["dosen"]
+        dosen: json["dosen"],
+        matakuliah: json["matakuliah"],
+        jadwal: json["jadwal"]
       // tambahkan dosen matkul dan jadwal
     );
   }
@@ -91,30 +96,89 @@ String dosenToJson(Dosen data){
 }
 ///-----------------------------------------Matkul=-----------------------------------
 class Matakuliah{
-  String namaMatkul;
-  String namaDosen;
-  String grup;
+  String id;
+  String kode;
+  String nama;
+  String hari;
+  String sesi;
   String sks;
-  String foto;
   String nim_progmob;
 
-  Matakuliah({this.namaMatkul, this.namaDosen, this.grup, this.sks, this.foto, this.nim_progmob});
+  Matakuliah({this.id, this.kode, this.nama, this.hari, this.sesi, this.sks, this.nim_progmob});
 
+  //mapping dr json ke object
   factory Matakuliah.fromJson(Map<String, dynamic> map){
-    return Matakuliah(namaMatkul: map["name"], namaDosen: map["namaDosen"], grup: map["grup"], sks: map["sks"],
-        nim_progmob: map["nim_progmob"]);
+    return Matakuliah(
+        id: map["id"],
+        kode: map["kode"],
+        nama: map["nama"],
+        hari: map["hari"],
+        sesi: map["sesi"],
+        sks: map["sks"],
+        nim_progmob: map["nim_progmob"]
+    );
   }
 
   Map<String, dynamic> toJson(){
-    return{"namaMatkul": namaMatkul, "namaDosen": namaDosen, "grup": grup, "sks": sks, "foto": foto, "nim_progmob": nim_progmob};
+    return{"id": id, "kode": kode, "nama": nama, "hari": hari, "sesi": sesi, "sks": sks, "nim_progmob": nim_progmob};
+  }
+
+  @override
+  String toString() {
+    return 'Matkul{id: $id, kode: $kode, nama: $nama, hari: $hari, sesi: $sesi, sks: $sks, nim_progmob: $nim_progmob}';
   }
 }
-List<Matakuliah> matakuliahFromJson(String jsonData) {
+
+List<Matakuliah> matkulFromJson(String jsonData){
   final data = json.decode(jsonData);
   return List<Matakuliah>.from(data.map((item) => Matakuliah.fromJson(item)));
 }
 
-String matakuliahToJson(Matakuliah data){
+String matkulToJson(Matakuliah data){
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+////==================================Jadwal/.==========================================
+class Jadwal{
+  String id;
+  String id_matkul;
+  String id_dosen;
+  String nidn;
+  String hari;
+  String sesi;
+  String sks;
+  String nim_progmob;
+
+  Jadwal({this.id, this.id_matkul, this.id_dosen, this.hari, this.sesi,
+    this.nidn, this.sks, this.nim_progmob});
+
+  factory Jadwal.fromJson(Map<String, dynamic> map){
+    return Jadwal(
+        id: map["id"],
+        id_matkul: map["id_matkul"],
+        id_dosen: map["id_dosen"],
+        nidn: map["nidn"],
+        hari: map["hari"],
+        sesi: map["sesi"],
+        nim_progmob: map["nim_progmob"]
+    );
+  }
+  Map<String, dynamic> toJson(){
+    return{"id":id, "id_matkul":id_matkul, "id_dosen": id_dosen, "nidn": nidn,"hari": hari,
+      "sesi": sesi, "sks": sks, "nim_progmob": nim_progmob};
+  }
+
+  @override
+  String toString() {
+    return 'Jadwal{id: $id, id_matkul: $id_matkul, id_dosen: $id_dosen, nidn: $nidn, hari: $hari, sesi: $sesi, sks: $sks, nim_progmob: $nim_progmob}';
+  }
+}
+List<Jadwal> jadwalFromJson(String jsonData){
+  final data = json.decode(jsonData);
+  return List<Jadwal>.from(data.map((item) => Jadwal.fromJson(item)));
+}
+
+String jadwalToJson(Jadwal data){
   final jsonData = data.toJson();
   return json.encode(jsonData);
 }

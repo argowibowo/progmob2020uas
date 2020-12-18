@@ -1,38 +1,28 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_app_1/apiservices.dart';
 import 'package:flutter_app_1/model.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' show Client;
+import 'package:http/http.dart' as http;
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
+class AddJadwal extends StatefulWidget {
+  AddJadwal({Key key, this.title}) : super(key: key);
 
-class AddDosen extends StatefulWidget{
   final String title;
-
-  AddDosen({Key key, @required this.title}) : super(key: key);
 
   @override
-  _AddDosenState createState() => new _AddDosenState(title);
+  _AddJadwalState createState() => new _AddJadwalState(title);
 }
 
-class _AddDosenState extends State<AddDosen>{
+class _AddJadwalState extends State<AddJadwal> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  _AddDosenState(this.title);
+  _AddJadwalState(this.title);
+  Jadwal jadwal = new Jadwal();
   bool _isLoading = false;
-  Dosen dosen = new Dosen();
-  File  _imageFile;
 
-  //// memeilih dari galeri
-  Future<void> _pickImage(ImageSource source) async{
-    File selected = await ImagePicker.pickImage(source: source);
-
-    setState(() {
-      _imageFile = selected;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +45,41 @@ class _AddDosenState extends State<AddDosen>{
                         ),
                         TextFormField(
                           decoration: InputDecoration(
+                            labelText: "Nama",
+                            hintText: "Nama Matakuliah",
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          ),
+                          onSaved: (String value){
+                            this.jadwal.id_matkul = value;
+                          },
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            labelText: "Nama",
+                            hintText: "Nama Dosen",
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          ),
+                          onSaved: (String value){
+                            this.jadwal.id_dosen= value;
+                          },
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            border: OutlineInputBorder(),
                             labelText: "NIDN",
                             hintText: "NIDN",
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
                           onSaved: (String value){
-                            this.dosen.nidn = value;
+                            this.jadwal.nidn=value;
                           },
                         ),
                         SizedBox(
@@ -71,11 +89,11 @@ class _AddDosenState extends State<AddDosen>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Nama",
-                            hintText: " Nama Dosen",
+                            labelText: "Hari",
+                            hintText: "Hari Matakuliah",
                           ),
                           onSaved: (String value){
-                            this.dosen.nama=value;
+                            this.jadwal.hari=value;
                           },
                         ),
                         SizedBox(
@@ -85,11 +103,11 @@ class _AddDosenState extends State<AddDosen>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Alamat",
-                            hintText: " Alamat Dosen",
+                            labelText: "Sesi",
+                            hintText: "Sesi Matakuliah",
                           ),
                           onSaved: (String value){
-                            this.dosen.alamat=value;
+                            this.jadwal.sesi = value;
                           },
                         ),
                         SizedBox(
@@ -99,58 +117,12 @@ class _AddDosenState extends State<AddDosen>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Email",
-                            hintText: " Email Dosen",
+                            labelText: "SKS",
+                            hintText: "SKS Matakuliah",
                           ),
-                          keyboardType: TextInputType.emailAddress,
                           onSaved: (String value){
-                            this.dosen.email = value;
+                            this.jadwal.sks = value;
                           },
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            border: OutlineInputBorder(),
-                            labelText: "Gelar",
-                            hintText: " Gelar Dosen",
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                         _imageFile == null
-                            ? Text('Silahkan memilih gambar terlebih dahulu')
-                            :Image.file(
-                          _imageFile,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            color:  Colors.blue,
-                            onPressed: () {
-                              _pickImage(ImageSource.gallery);
-                            },
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                new Icon(Icons.image,color: Colors.white,),
-                                Text ("Upload Foto",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ]
-                            )
                         ),
                         SizedBox(
                           height: 15,
@@ -158,23 +130,22 @@ class _AddDosenState extends State<AddDosen>{
                         MaterialButton(
                           minWidth: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          color: Colors.blue,
+                          color: Colors.pink,
                           onPressed: () {
                             return showDialog(
                               context: context,
                               builder: (context){
                                 return AlertDialog(
                                   title: Text("Simpan Data"),
-                                  content: Text(" Apakah anda akan menyimpan data ini"),
+                                  content: Text("Yakin disimpan?"),
                                   actions: <Widget>[
                                     FlatButton(
                                       onPressed: () async{
                                         _formState.currentState.save();
-                                        this.dosen.nim_progmob = "72180215";
+
+                                        this.jadwal.nim_progmob = "72180215";
                                         setState(() => _isLoading = true);
-                                        List<int> imagesBytes = _imageFile.readAsBytesSync();
-                                        this.dosen.foto = base64Encode(imagesBytes);
-                                        ApiServices().createDosenWithFoto(this.dosen, _imageFile, _imageFile.path).then((isSuccess){
+                                        ApiServices().createJadwal(this.jadwal).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
                                             Navigator.pop(context);
@@ -206,7 +177,7 @@ class _AddDosenState extends State<AddDosen>{
                             ),
                           ),
                         ),
-                      ],
+                      ]
                   ),
                 ),
                 _isLoading
@@ -216,7 +187,7 @@ class _AddDosenState extends State<AddDosen>{
                       opacity: 0.3,
                       child: ModalBarrier(
                         dismissible: false,
-                        color: Colors.grey,
+                        color: Colors.black,
                       ),
                     ),
                     Center(
@@ -231,5 +202,6 @@ class _AddDosenState extends State<AddDosen>{
           )
       ),
     );
+
   }
 }

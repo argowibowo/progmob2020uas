@@ -1,20 +1,22 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_1/addmatkul.dart';
 import 'package:flutter_app_1/apiservices.dart';
 import 'package:flutter_app_1/model.dart';
 import 'package:flutter_app_1/updatematkul.dart';
-import 'package:flutter_app_1/updatemhs.dart';
+
+
 
 class DashboardMatkul extends StatefulWidget {
   DashboardMatkul({Key key, this.title}) : super(key: key);
   final String title;
+
   @override
-  _DashboardMatkulState createState() => _DashboardMatkulState();
+  _DashboardMatkulState createState()=> _DashboardMatkulState();
 }
 class _DashboardMatkulState extends State<DashboardMatkul> {
   final _formKey = GlobalKey<FormState>();
+
   List<Matakuliah> lMatkul= new List();
 
   //berfungsi ketika menginsert data baru dan akan merefresh data yang sudah di ubah
@@ -33,22 +35,22 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
               onPressed: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context)=> AddMatkul(title :"Input Data Mahasiswa")),
+                  MaterialPageRoute(builder: (context)=> AddMatkul(title :"Input Data Matakuliah")),
                 ).then(onGoBack);
               },
             ),
           ],
         ),
         body: FutureBuilder(
-          future: ApiServices().getMahasiswa(),
-          builder: (BuildContext context, AsyncSnapshot<List<Mahasiswa>> snapshot){
+          future: ApiServices().getMatkul(),
+          builder: (BuildContext context, AsyncSnapshot<List<Matakuliah>> snapshot){
             if (snapshot.hasError){
               return Center(
                 child: Text(
                     "Something Wrong With message: ${snapshot.error.toString()}"),
               );
             }else if (snapshot.connectionState == ConnectionState.done){
-              lMatkul = snapshot.data.cast<Matakuliah>();
+              lMatkul = snapshot.data;
               return ListView.builder(
                 itemBuilder: (context, position) {
                   return Card( /////////////copy nanti bagian card yang sudah dibuat minggu lalu
@@ -56,11 +58,9 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
                       margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
                       child: Container(
                         child: ListTile(
-                          title: Text(lMatkul[position].namaMatkul + " - " + lMatkul[position].grup),
-                          subtitle: Text(lMatkul[position].namaDosen),
-                          leading: CircleAvatar(
-                            //backgroundImage: NetworkImage(lMatkul[position].foto),
-                          ),
+                          title: Text(lMatkul[position].nama + " - " + lMatkul[position].kode),
+                          subtitle: Text(lMatkul[position].hari),
+
                           onLongPress: (){
                             showDialog(context: context,
                                 builder: (_) => new AlertDialog(
@@ -73,7 +73,7 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
                                           Navigator.pop(context);
                                           Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context)=> UpdateMatkul(title: "Input Data Matakuliah", matakuliah: lMatkul[position], namacari: lMatkul[position].grup)),
+                                            MaterialPageRoute(builder: (context)=> UpdateMatkul(title: "Input Data Matakuliah", matkul: lMatkul[position], kode_cari: lMatkul[position].kode)),
                                           ).then(onGoBack);
                                         },
                                       ),
@@ -84,7 +84,7 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
                                       FlatButton(
                                         child: Text("Delete"),
                                         onPressed: () async{
-                                          ApiServices().deleteMatakuliah(lMatkul[position].grup);
+                                          ApiServices().deleteMatkul(lMatkul[position].kode);
                                           Navigator.pop(context);
                                           setState(() {});
                                         },

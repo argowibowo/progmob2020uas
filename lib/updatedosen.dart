@@ -10,23 +10,23 @@ final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
 class UpdateDosen extends StatefulWidget{
   final String title;
   Dosen dosen;
-  String namacari;
+  String nidn_cari;
 
-  UpdateDosen({Key key, @required this.title, @required this.dosen, @required this.namacari}) : super(key: key);
+  UpdateDosen({Key key, @required this.title, @required this.dosen, @required this.nidn_cari}) : super(key: key);
 
   @override
-  _UpdateDosenState createState() => _UpdateDosenState(title, dosen, namacari);
+  _UpdateDosenState createState() => _UpdateDosenState(title, dosen, nidn_cari);
 }
 
 class _UpdateDosenState extends State<UpdateDosen>{
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  final String namacari;
+  final String nidn_cari;
   Dosen dosen;
   bool _isLoading = false;
   File _imageFile;
 
-  _UpdateDosenState(this.title, this.dosen, this.namacari);
+  _UpdateDosenState(this.title, this.dosen, this.nidn_cari);
 
   //// memeilih dari galeri
   Future<void> _pickImage(ImageSource source) async{
@@ -195,7 +195,7 @@ class _UpdateDosenState extends State<UpdateDosen>{
                                         setState(() => _isLoading = true);
                                         List<int> imagesBytes = _imageFile.readAsBytesSync();
                                         this.dosen.foto = base64Encode(imagesBytes);
-                                        ApiServices().updateDosenWithFoto(this.dosen, _imageFile, namacari).then((isSuccess){
+                                        ApiServices().updateDosenWithFoto(this.dosen, _imageFile, nidn_cari).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
                                             Navigator.pop(context);

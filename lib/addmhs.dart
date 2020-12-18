@@ -146,7 +146,7 @@ class _AddMhsState extends State<AddMhs>{
                         MaterialButton(
                           minWidth: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          color: Colors.blue,
+                          color: Colors.pink,
                           onPressed: () {
                             return showDialog(
                               context: context,
@@ -181,7 +181,7 @@ class _AddMhsState extends State<AddMhs>{
                                       },
                                       child: Text ("Tidak"),
                                     )
-                                  ],
+                                  ]
                                 );
                               },
                             );
@@ -194,8 +194,8 @@ class _AddMhsState extends State<AddMhs>{
                             ),
                           ),
                         ),
-                      ]
-                  ),
+                      ],
+                  )
                 ),
                 _isLoading
                     ? Stack(
@@ -210,7 +210,7 @@ class _AddMhsState extends State<AddMhs>{
                     Center(
                       child:  CircularProgressIndicator(),
 
-                    )
+                    ),
                   ],
                 )
                     : Container(),

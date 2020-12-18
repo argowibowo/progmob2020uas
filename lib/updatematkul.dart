@@ -1,41 +1,29 @@
-import 'dart:convert';
-import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_1/apiservices.dart';
 import 'package:flutter_app_1/model.dart';
-import 'package:image_picker/image_picker.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
 
 class UpdateMatkul extends StatefulWidget{
   final String title;
-  Matakuliah matakuliah;
-  String namacari ;
+  Matakuliah matkul;
+  String kode_cari;
 
-  UpdateMatkul({Key key, @required this.title, @required this.matakuliah, @required this.namacari}) : super(key: key);
+  UpdateMatkul({Key key, @required this.title, @required this.matkul, @required this.kode_cari}) : super(key: key);
 
   @override
-  _UpdateMatkulState createState() => _UpdateMatkulState(title, matakuliah, namacari);
+  _UpdateMatkulState createState() => _UpdateMatkulState(title, matkul, kode_cari);
 }
 
 class _UpdateMatkulState extends State<UpdateMatkul>{
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  final String namacari;
-  Matakuliah matakuliah;
+  final String kode_cari;
+  Matakuliah matkul;
   bool _isLoading = false;
-  File _imageFile;
 
-  _UpdateMatkulState(this.title, this.matakuliah, this.namacari);
-
-  //// memeilih dari galeri
-  Future<void> _pickImage(ImageSource source) async{
-    File selected = await ImagePicker.pickImage(source: source);
-
-    setState(() {
-      _imageFile = selected;
-    });
-  }
+  _UpdateMatkulState(this.title, this.matkul, this.kode_cari);
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +46,14 @@ class _UpdateMatkulState extends State<UpdateMatkul>{
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: "Nama",
-                            hintText: "NamaMatkul",
+                            labelText: "Kode",
+                            hintText: "Kode",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
-                          initialValue: this.matakuliah.namaMatkul,
+                          initialValue: this.matkul.kode,
                           onSaved: (String value){
-                            this.matakuliah.namaMatkul = value;
+                            this.matkul.kode = value;
                           },
                         ),
                         SizedBox(
@@ -76,11 +64,11 @@ class _UpdateMatkulState extends State<UpdateMatkul>{
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
                             labelText: "Nama",
-                            hintText: " Nama Dosen",
+                            hintText: " Nama Matakuliah",
                           ),
-                          initialValue: this.matakuliah.namaDosen,
+                          initialValue: this.matkul.nama,
                           onSaved: (String value){
-                            this.matakuliah.namaDosen=value;
+                            this.matkul.nama=value;
                           },
                         ),
                         SizedBox(
@@ -90,12 +78,12 @@ class _UpdateMatkulState extends State<UpdateMatkul>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Grup",
-                            hintText: " Grup",
+                            labelText: "Hari",
+                            hintText: " Hari",
                           ),
-                          initialValue: this.matakuliah.grup,
+                          initialValue: this.matkul.hari,
                           onSaved: (String value){
-                            this.matakuliah.grup=value;
+                            this.matkul.hari = value;
                           },
                         ),
                         SizedBox(
@@ -105,58 +93,30 @@ class _UpdateMatkulState extends State<UpdateMatkul>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Sks",
-                            hintText: " Ska",
+                            labelText: "Sesi",
+                            hintText: " Sesi",
                           ),
-                          initialValue: this.matakuliah.sks,
-                          //keyboardType: TextInputType.emailAddress,
+                          initialValue: this.matkul.sesi,
+                          // keyboardType: TextInputType.emailAddress,
                           onSaved: (String value){
-                            this.matakuliah.sks = value;
+                            this.matkul.sesi = value;
                           },
                         ),
                         SizedBox(
                           height: 15,
                         ),
-                        (_imageFile == null && this.matakuliah.foto == null)
-                            ? Text('Silahkan memilih gambar terlebih dahulu')
-                            :
-                        (_imageFile != null)
-                            ?
-                        Image.file(
-                          _imageFile,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        )
-                            :
-                        Image.network(
-                          this.matakuliah.foto,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            color:  Colors.blue,
-                            onPressed: () {
-                              _pickImage(ImageSource.gallery);
-                            },
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                new Icon(Icons.image,color: Colors.white,),
-                                Text ("Upload Foto",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ],
-                            )
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            border: OutlineInputBorder(),
+                            labelText: "SKS",
+                            hintText: " SKS",
+                          ),
+                          initialValue: this.matkul.sks,
+                          // keyboardType: TextInputType.emailAddress,
+                          onSaved: (String value){
+                            this.matkul.sks = value;
+                          },
                         ),
                         SizedBox(
                           height: 15,
@@ -176,11 +136,9 @@ class _UpdateMatkulState extends State<UpdateMatkul>{
                                     FlatButton(
                                       onPressed: () async{
                                         _formState.currentState.save();
-                                        this.matakuliah.nim_progmob = "72180215";
                                         setState(() => _isLoading = true);
-                                        List<int> imagesBytes = _imageFile.readAsBytesSync();
-                                        this.matakuliah.foto = base64Encode(imagesBytes);
-                                        ApiServices().updateMatakuliahWithFoto(this.matakuliah, _imageFile, namacari).then((isSuccess){
+                                        this.matkul.nim_progmob = "72180215";
+                                        ApiServices().updateMatkul(this.matkul, kode_cari).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
                                             Navigator.pop(context);
