@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_72180247/UAS/login.dart';
 import 'package:flutter_72180247/dosen/dosen.dart';
 import 'package:flutter_72180247/jadwal/jadwal.dart';
 import 'package:flutter_72180247/pertemuan 2/login.dart';
@@ -27,7 +26,7 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text("christyanson"),
+              accountName: Text("Christyanson"),
               accountEmail: Text("christyason@si.ukdw.ac.id"),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -46,7 +45,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Dashboard_dosen(title: "Data Dosen")),
+                  MaterialPageRoute(builder: (context) => dashboardDosen(title: "Data Dosen")),
                 );
               },
             ),
@@ -100,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                 await pref.setInt("is_login", 0);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginUas()),
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                 );
               },
             )

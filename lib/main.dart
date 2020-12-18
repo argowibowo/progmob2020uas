@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_72180247/Tugaspertemuan8.dart';
 import 'package:flutter_72180247/pertemuan 2/splash.dart';
 import 'package:flutter_72180247/pertemuan 2/pertemuan2.dart';
-import 'package:flutter_72180247/UAS/login.dart';
+import 'package:flutter_72180247/pertemuan%202/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(new MaterialApp(
+    //MyApp diganti MaterialApp
     debugShowCheckedModeBanner: false,
+    // title: 'DUTA TANI',
     home: Splash(),
-    theme: ThemeData(
-      primarySwatch: Colors.red,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-    ),
     routes: <String, WidgetBuilder>{
-      '/LoginPage': (BuildContext context) => new LoginUas()
+      '/LoginPage': (BuildContext context) => new LoginPage()
     },
   ));
 }
@@ -27,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'PROGMOB!?!?',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Splash(),
