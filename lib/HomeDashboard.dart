@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluter_hello_world/dosen/DashboardDosen.dart';
 import 'package:fluter_hello_world/jadwal/DashboardJadwal.dart';
 import 'package:fluter_hello_world/mahasiswa/DashboardMahasiswa.dart';
-import 'package:fluter_hello_world/matakuliah/DashboardMatakuliah.dart';
+import 'ccc/matakuliah/DashboardMatakuliah.dart';
 import 'package:fluter_hello_world/dashboard.dart';
 import 'package:fluter_hello_world/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -56,7 +56,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                         CircleAvatar(
                           radius: 32,
                           backgroundImage: NetworkImage(
-                              'https://www.instagram.com/p/CDUXiiJhXHQ/?utm_source=ig_web_copy_link'),
+                              'https://scontent.fjog3-1.fna.fbcdn.net/v/t1.0-9/123394477_3482603418488371_6564439898924929845_n.jpg?_nc_cat=108&ccb=2&_nc_sid=8bfeb9&_nc_ohc=w2d3CjoLmMMAX_lfMgj&_nc_ht=scontent.fjog3-1.fna&oh=43eb660b248775a23439fe0dbf11f52f&oe=6000744C'),
                         ),
                         SizedBox(
                           width: 16,
