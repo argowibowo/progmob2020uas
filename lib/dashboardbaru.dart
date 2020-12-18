@@ -39,7 +39,7 @@ class _dashboardState extends State<dashboard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Johny s Family",
+                      "Vivin",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
