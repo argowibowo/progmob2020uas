@@ -12,6 +12,7 @@ import 'package:progmob_aftuts/Pages/landingPage.dart';
 import 'package:progmob_aftuts/tugaspertemuan8.dart';
 import 'dart:async';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'forgotPage.dart';
 
@@ -20,8 +21,14 @@ import 'forgotPage.dart';
 // KARENA CODINGAN INI BELUM DIAJARKAN DI MATERI PERKULIAHAN
 // COPY BOLEH TAPI JANGAN DIJIPLAK YA :D, HARUS DIPAHAMI ALURNYA
 
+SharedPreferences isLogin;
+
 class LoginPage extends StatefulWidget {
   static const String id = 'login_page';
+
+  LoginPage({Key key, this.title}) : super(key: key);
+  final String title;
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -29,12 +36,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool showSpinner = false;
   // final _auth = FirebaseAuth.instance;
-  String email;
+  String username;
   String password;
   // WARNING, NOTE BUAT TEMAN TEMAN HEHE
 // BAKAL KETAUAN KALO COPY CODE PROGRAM
 // KARENA CODINGAN INI BELUM DIAJARKAN DI MATERI PERKULIAHAN
 // COPY BOLEH TAPI JANGAN DIJIPLAK YA :D, HARUS DIPAHAMI ALURNYA
+
+
 
 
   // final GoogleSignIn googleSignIn = new GoogleSignIn();
@@ -61,6 +70,9 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
+  final myUsernameController = TextEditingController();
+  final myPasswordController = TextEditingController();
+  bool showPassword = false;
 
   // Toggles the password show status
   void _toggle() {
@@ -68,6 +80,16 @@ class _LoginPageState extends State<LoginPage> {
       _obscureText = !_obscureText;
     });
   }
+
+  void navigateLogin() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+  }
+
+  @override
+  void initState() {
+    navigateLogin();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -126,23 +148,27 @@ class _LoginPageState extends State<LoginPage> {
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
                       child: ListTile(
                         leading: Icon(
-                          Icons.email,
+                          Icons.person,
                           color: Colors.lightBlue,
                         ),
                         title: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
                           validator: (value){
-                            if (value.isEmpty){
-                              return "Please fill Email";
+                            if(value.isEmpty && value.length == 0) {
+                              return "*Username tidak boleh kosong";
                             }
-                            return null;
+                            else if (!value.contains('72180234')){
+                              return "Username Anda salah";
+                            }
+                            else
+                              return null;
                           },
+                          controller: myUsernameController,
                           onChanged: (value){
-                            email = value;
+                            username = value;
                           },
                           decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: 'Email',
+                              hintText: 'Username',
                               labelStyle: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey,
@@ -161,12 +187,18 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.lightBlue,
                         ),
                         title: TextFormField(
-                          onChanged: (value){
-                            password = value;
+                          validator: (value){
+                            if(value.isEmpty && value.length == 0) {
+                              return "*Password tidak boleh kosong";
+                            } else if (!value.contains('12345')){
+                              return "Password Anda salah";
+                            } else
+                              return null;
                           },
                           obscureText: _obscureText,
+                          controller: myPasswordController,
                           autofocus: false,
-                          initialValue: '',
+                          // initialValue: '',
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -221,38 +253,15 @@ class _LoginPageState extends State<LoginPage> {
                       EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
                       child: new InkWell(
                         onTap: () async {
-                          setState(() {
-                            showSpinner = true;
-                          });
-                          try{
-                            // final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
+                          if(_formKey.currentState.validate()){
+                            SharedPreferences pref = await SharedPreferences.getInstance();
+                            await pref.setInt("is_login", 1);
                             Navigator.pushReplacement(
-                                context, MaterialPageRoute(
-                                builder: (BuildContext context) => MyBottomNavigationBar()));
-                            // if (user != null){1
-                            //
+                              context,
+                              MaterialPageRoute(builder: (context) => MyBottomNavigationBar()),
+                            );
                             // }
-                            setState(() {
-                              showSpinner = false;
-                            });
-                          }
-                          on PlatformException catch (e) {
-                            // Alert(
-                            //   context: context,
-                            //   type: AlertType.warning,
-                            //   title: "Error",
-                            //   desc: "Please ensure that your email and password are correct!",
-                            //   buttons: [
-                            //     DialogButton(
-                            //       child: Text(
-                            //         "Got It",
-                            //         style: TextStyle(color: Colors.white, fontSize: 20),
-                            //       ),
-                            //       onPressed: () => Navigator.pushNamed(context, LoginPage.id),
-                            //       width: 120,
-                            //     )
-                            //   ],
-                            // ).show();
+                            _formKey.currentState.save();
                           }
                         },
                         child: Container(
