@@ -7,8 +7,8 @@ import 'package:flutter_project_2020/mahasiswa/dashboardmhs.dart';
 import 'package:flutter_project_2020/matkul/dashboardmatkul.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Dashboard extends StatefulWidget {
-  Dashboard({Key key, this.title}) : super(key: key);
+class dashbord extends StatefulWidget {
+  dashbord({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
