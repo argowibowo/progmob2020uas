@@ -52,7 +52,7 @@ class _DashboardState extends State<Dashboard> {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DashboardDosen(title: "Dashboard Dosen")),
+                    MaterialPageRoute(builder: (context) => DashBoardDosen(title: "Dashboard Dosen")),
                   );
                 },
               ),
