@@ -1,6 +1,11 @@
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_72180219/main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_72180219/matkul/apiservices.dart';
+import 'package:flutter_72180219/matkul/model.dart';
+import 'package:flutter_72180219/matkul/addmatkul.dart';
+import 'package:flutter_72180219/matkul/updatematkul.dart';
+
 
 class DashboardMatkul extends StatefulWidget {
   DashboardMatkul({Key key, this.title}) : super(key: key);
@@ -12,7 +17,15 @@ class DashboardMatkul extends StatefulWidget {
 }
 
 class _DashboardMatkulState extends State<DashboardMatkul> {
-  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+
+  List<Matakuliah> listMatkul;
+
+  FutureOr onGoBack(dynamic value) {
+    setState(() {
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,34 +34,91 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
         title: Text(widget.title),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add),
-            onPressed: (){},
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddMatkul(title: "Input Data Dosen"))
+                ).then(onGoBack);
+              }
           )
         ],
       ),
-      body: Container(
-        child: GestureDetector(
-          child: Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text("Pemorograman Mobile"),
-                    subtitle: Text("Dosen : Argo Wibowo"),
-                    trailing: PopupMenuButton(
-                      itemBuilder: (_) => <PopupMenuItem<String>>[
-                        new PopupMenuItem<String>(
-                            child: const Text('update'), value : 'update'),
-                        new PopupMenuItem<String>(
-                            child: const Text('delete'), value : 'delete'),
-                      ],
-                    )
-                )
-              ],
-            ),
-          ),
-        ),
+
+      body: FutureBuilder(
+        future: ApiServices().getMatkul(),
+        builder: (BuildContext context, AsyncSnapshot<List<Matakuliah>> snapshot) {
+          if (snapshot.hasError){
+            return Center(
+              child: Text(
+                  "Something wrong with message: ${snapshot.error.toString()}"
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            listMatkul = snapshot.data;
+
+            return ListView.builder(
+              itemBuilder: (context, position) {
+                return Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(listMatkul[position].kode + " - " + listMatkul[position].nama),
+                      subtitle: Text("Hari " + listMatkul[position].hari.toString() + " - Sesi " + listMatkul[position].sesi.toString()
+                          + " - " + listMatkul[position].sks.toString()),
+                      // leading: CircleAvatar(
+                      //   backgroundImage: NetworkImage(listMatkul[position].foto),
+                      // ),
+                      onLongPress: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  FlatButton(
+                                      onPressed: (){
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => UpdateMatkul(title: "Update Data Matakuliah",
+                                                matkul: listMatkul[position],
+                                                kodecari: listMatkul[position].kode))
+                                        ).then(onGoBack);
+                                      },
+                                      child: Text("Update")
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    height: 20,
+                                  ),
+                                  FlatButton(
+                                      onPressed: () async {
+                                        ApiServices().deleteMatkul(listMatkul[position].kode);
+                                        Navigator.pop(context);
+                                        setState(() {
+
+                                        });
+                                      },
+                                      child: Text("Delete")
+                                  ),
+                                ],
+                              ),
+                            )
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+              itemCount: listMatkul.length,
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

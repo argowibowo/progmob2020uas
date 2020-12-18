@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_72180219/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_72180219/matkul/apiservices.dart';
+import 'package:flutter_72180219/matkul/model.dart';
+import 'package:flutter_72180219/dosen/adddosen.dart';
+import 'package:flutter_72180219/dosen/updatedosen.dart';
 
 class DashboardDosen extends StatefulWidget {
   DashboardDosen({Key key, this.title}) : super(key: key);
@@ -15,6 +21,20 @@ class DashboardDosen extends StatefulWidget {
 class _DashboardDosenState extends State<DashboardDosen> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
+  List<Dosen> listDosen;
+
+  FutureOr onGoBack(dynamic value) {
+    setState(() {
+
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,35 +42,101 @@ class _DashboardDosenState extends State<DashboardDosen> {
         title: Text(widget.title),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add),
-            onPressed: (){},
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>
+                        AddDosen(title: "Input Data Dosen"))
+                ).then(onGoBack);
+              }
           )
         ],
       ),
-      body: Container(
-        child: GestureDetector(
-          child: Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text("Jong Jek Siang"),
-                  subtitle: Text("5623789125 = jjs@staff.ukdw.ac.id"),
-                  trailing: PopupMenuButton(
-                    itemBuilder: (_) => <PopupMenuItem<String>>[
-                      new PopupMenuItem<String>(
-                          child: const Text('update'), value : 'update'),
-                      new PopupMenuItem<String>(
-                          child: const Text('delete'), value : 'delete'),
-                    ],
-                  )
-                )
-              ],
-            ),
-          ),
-        ),
+
+      body: FutureBuilder(
+        future: ApiServices().getDosen(),
+        builder: (BuildContext context, AsyncSnapshot<List<Dosen>> snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                  "Something wrong with message: ${snapshot.error.toString()}"
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            listDosen = snapshot.data;
+
+            return ListView.builder(
+              itemBuilder: (context, position) {
+                return Card(
+                  margin: new EdgeInsets.symmetric(
+                      horizontal: 5.0, vertical: 5.0),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(listDosen[position].nama + ", " +
+                          listDosen[position].gelar),
+                      subtitle: Text(listDosen[position].nidn + " - " +
+                          listDosen[position].email),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(listDosen[position].foto),
+                      ),
+                      onLongPress: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) =>
+                                AlertDialog(
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      FlatButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        UpdateDosen(
+                                                            title: "Update Data Dosen",
+                                                            dosen: listDosen[position],
+                                                            nidncari: listDosen[position]
+                                                                .nidn))
+                                            ).then(onGoBack);
+                                          },
+                                          child: Text("Update")
+                                      ),
+                                      Divider(
+                                        color: Colors.black,
+                                        height: 20,
+                                      ),
+                                      FlatButton(
+                                          onPressed: () async {
+                                            ApiServices().deleteDosen(
+                                                listDosen[position].nidn);
+                                            Navigator.pop(context);
+                                            setState(() {
+
+                                            });
+                                          },
+                                          child: Text("Delete")
+                                      ),
+                                    ],
+                                  ),
+                                )
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+              itemCount: listDosen.length,
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
-                    );
+    );
   }
 }

@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
         duration: Duration(seconds: 1),
         // Provide an optional curve to make the animation feel smoother.
         curve: Curves.bounceIn,
-        child: Image.asset("images/icon-app.jpg")
+        child: Image.asset("images/dadu.jpg")
       )
       //body: Center (
         //child: Image.asset("images/icon-app.png",

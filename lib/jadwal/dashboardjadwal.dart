@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_72180219/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class DashboardJadwal extends StatefulWidget {
   DashboardJadwal({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -12,7 +13,12 @@ class DashboardJadwal extends StatefulWidget {
 }
 
 class _DashboardJadwalState extends State<DashboardJadwal> {
-  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,35 +27,56 @@ class _DashboardJadwalState extends State<DashboardJadwal> {
         title: Text(widget.title),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add),
-            onPressed: (){},
+              icon: Icon(Icons.add),
+              onPressed: () {}
           )
         ],
       ),
+
       body: Container(
-        child: GestureDetector(
-          child: Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text("SENIN"),
-                    subtitle: Text("pkl : 09.30-11.30"),
-                    trailing: PopupMenuButton(
-                      itemBuilder: (_) => <PopupMenuItem<String>>[
-                        new PopupMenuItem<String>(
-                            child: const Text('update'), value : 'update'),
-                        new PopupMenuItem<String>(
-                            child: const Text('delete'), value : 'delete'),
-                      ],
+        child: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.event_note_outlined),
+                title: Text("Sistem Basis Data"),
+                subtitle: Text("Jumat Sesi 2 (09.30-11.30)"),
+                trailing: PopupMenuButton(
+                  itemBuilder: (_) => <PopupMenuItem<String>>[
+                    new PopupMenuItem<String>(
+                      child: const Text('Update'), value: 'Update',
+                    ),
+                    new PopupMenuItem<String>(
+                      child: const Text('Delete'), value: 'Delete',
                     )
-                )
-              ],
-            ),
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.event_note_outlined),
+                title: Text("Menajemen Proses Bisnis"),
+                subtitle: Text("Senin Sesi 5 (15.30-17.30)"),
+                trailing: PopupMenuButton(
+                  itemBuilder: (_) => <PopupMenuItem<String>>[
+                    new PopupMenuItem<String>(
+                      child: const Text('Update'), value: 'Update',
+                    ),
+                    new PopupMenuItem<String>(
+                      child: const Text('Delete'), value: 'Delete',
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ),
     );
   }
 }
