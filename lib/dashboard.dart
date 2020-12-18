@@ -27,7 +27,10 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("MENU UTAMA"),
+        backgroundColor: Colors.blue[500],
       ),
+        backgroundColor: Colors.blue[100],
         drawer: Drawer(
         child: ListView(
           children: <Widget> [
@@ -35,7 +38,6 @@ class _DashboardState extends State<Dashboard> {
               accountName: Text("Diory Panjaitan"),
               accountEmail: Text("diory.rotua@si.ukdw.ac.id"),
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
                 child: Text(
                   "DP",
                   style: TextStyle(fontSize: 40.0),
@@ -74,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Dashboard Matakuliah",)),
+                  MaterialPageRoute(builder: (context) => DashboardMataKuliah(title: "Dashboard Matakuliah",)),
                 );
               },
             ),
