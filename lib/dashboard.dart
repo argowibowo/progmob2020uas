@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_1/dosen/dbdosen.dart';
-import 'package:flutter_app_1/jadwal/dbjadwal.dart';
+import 'package:flutter_app_1/dosen/DashboardDosen.dart';
+import 'package:flutter_app_1/jadwal/DashboardJadwal.dart';
+import 'package:flutter_app_1/jadwal/DashboardJadwal.dart';
 import 'package:flutter_app_1/login.dart';
-import 'package:flutter_app_1/mahasiswa/dbmahsiswa.dart';
-import 'package:flutter_app_1/matkul/dbmatkul.dart';
+import 'package:flutter_app_1/matkul/DashboardMatkul.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'mahasiswa/DashboardMhs.dart';
@@ -60,8 +60,8 @@ class _dashboardState extends State<dashboard> {
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(context,
-                      MaterialPageRoute(
-                          builder: (context) => dbdosen(title: "Dosen")));
+                      MaterialPageRoute(builder: (context) =>
+                          DashboardDosen(title: "Dosen")));
                 },
               ),
 
@@ -73,7 +73,7 @@ class _dashboardState extends State<dashboard> {
                   Navigator.pop(context);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) =>
-                          DashboardMhs(title: " Matakuliah")));
+                          DashboardMatakuliah(title: " Matakuliah")));
                 },
               ),
 
@@ -85,12 +85,12 @@ class _dashboardState extends State<dashboard> {
                   Navigator.pop(context);
                   Navigator.push(context,
                       MaterialPageRoute(
-                          builder: (context) => dbjadwal(title: "Jadwal")));
+                          builder: (context) => dashboardjadwal(title: "Jadwal")));
                 },
               ),
 
               Divider(
-                color: Colors.yellowAccent,
+                color: Colors.lightBlueAccent,
                 height: 20,
                 indent: 10,
                 endIndent: 10,
@@ -104,7 +104,7 @@ class _dashboardState extends State<dashboard> {
                       .getInstance();
                   await pref.setInt("is_login", 0);
                   Navigator.pushReplacement(context, MaterialPageRoute(
-                      builder: (context) => login(title: "Login",)));
+                      builder: (context) => Login(title: "Login",)));
                 },
               ),
             ]

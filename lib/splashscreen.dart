@@ -18,7 +18,7 @@ class _splashscreen extends State<splashscreen> {
     return Timer(duration,(){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => login(title: "Welcome !",)),
+        MaterialPageRoute(builder: (context) => Login(title: "PROGMOB UAS !",)),
 
       );
     });
@@ -41,7 +41,7 @@ class _splashscreen extends State<splashscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.black,
       body: Center(
         child: Image.asset(
           "images/evos.png",

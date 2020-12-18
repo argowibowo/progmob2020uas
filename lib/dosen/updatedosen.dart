@@ -5,24 +5,30 @@ import 'package:flutter_app_1/model.dart';
 import 'package:flutter_app_1/apiservices.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../apiservices.dart';
+
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
 
-class AddMhs extends StatefulWidget{
+class updateDosen extends StatefulWidget{
   final String title;
+  Dosen dosen;
+  String nidncari;
 
-  AddMhs({Key key, @required this.title}) : super(key: key);
+  updateDosen({Key key, @required this.title, @required this.dosen, @required this.nidncari}) : super(key: key);
 
   @override
-  _AddMhsState createState() => new _AddMhsState(title);
+  _updateDosenState createState() => _updateDosenState(title, dosen, nidncari);
 }
 
-class _AddMhsState extends State<AddMhs>{
+class _updateDosenState extends State<updateDosen>{
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  _AddMhsState(this.title);
+  final String nidncari;
+  Dosen dosen;
   bool _isLoading = false;
-  Mahasiswa mhs = new Mahasiswa();
-  File  _imageFile;
+  File _imageFile;
+
+  _updateDosenState(this.title, this.dosen, this.nidncari);
 
   //// memeilih dari galeri
   Future<void> _pickImage(ImageSource source) async{
@@ -54,13 +60,14 @@ class _AddMhsState extends State<AddMhs>{
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: "NIM",
-                            hintText: "NIM",
+                            labelText: "NIDN",
+                            hintText: "NIDN",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
+                          initialValue: this.dosen.nidn,
                           onSaved: (String value){
-                            this.mhs.nim = value;
+                            this.dosen.nidn = value;
                           },
                         ),
                         SizedBox(
@@ -71,10 +78,11 @@ class _AddMhsState extends State<AddMhs>{
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
                             labelText: "Nama",
-                            hintText: " Nama Mahasiswa",
+                            hintText: " Nama Dosen",
                           ),
+                          initialValue: this.dosen.nama,
                           onSaved: (String value){
-                            this.mhs.nama=value;
+                            this.dosen.nama=value;
                           },
                         ),
                         SizedBox(
@@ -85,10 +93,11 @@ class _AddMhsState extends State<AddMhs>{
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
                             labelText: "Alamat",
-                            hintText: " Alamat Mahasiswa",
+                            hintText: " Alamat Dosen",
                           ),
+                          initialValue: this.dosen.alamat,
                           onSaved: (String value){
-                            this.mhs.alamat=value;
+                            this.dosen.alamat=value;
                           },
                         ),
                         SizedBox(
@@ -99,20 +108,47 @@ class _AddMhsState extends State<AddMhs>{
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
                             labelText: "Email",
-                            hintText: " Email Mahasiswa",
+                            hintText: " Email Dosen",
                           ),
+                          initialValue: this.dosen.email,
                           keyboardType: TextInputType.emailAddress,
                           onSaved: (String value){
-                            this.mhs.email = value;
+                            this.dosen.email = value;
+                          },
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            border: OutlineInputBorder(),
+                            labelText: "Gelar",
+                            hintText: " Gelar Dosen",
+                          ),
+                          initialValue: this.dosen.gelar,
+                          onSaved: (String value){
+                            this.dosen.gelar=value;
                           },
                         ),
                         SizedBox(
                           height: 15,
                         ),
-                        _imageFile == null
+                        SizedBox(
+                          height: 15,
+                        ),
+                        (_imageFile == null && this.dosen.foto == null)
                             ? Text('Silahkan memilih gambar terlebih dahulu')
-                            : Image.file(
+                            :
+                        (_imageFile != null)
+                            ?
+                        Image.file(
                           _imageFile,
+                          fit: BoxFit.cover,
+                          height: 300.0,
+                          alignment: Alignment.topCenter,
+                          width: MediaQuery.of(context).size.width,
+                        )
+                            :
+                        Image.network(
+                          this.dosen.foto,
                           fit: BoxFit.cover,
                           height: 300.0,
                           alignment: Alignment.topCenter,
@@ -145,23 +181,23 @@ class _AddMhsState extends State<AddMhs>{
                         MaterialButton(
                           minWidth: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          color: Colors.lightBlueAccent,
+                          color: Colors.blue,
                           onPressed: () {
                             return showDialog(
                               context: context,
                               builder: (context){
                                 return AlertDialog(
                                   title: Text("Simpan Data"),
-                                  content: Text(" Apakah anda akan menyimpan data ini"),
+                                  content: Text(" Apakah anda akan menyimpan data ini ?"),
                                   actions: <Widget>[
                                     FlatButton(
                                       onPressed: () async{
                                         _formState.currentState.save();
-                                        this.mhs.nim_progmob = "72180194";
+                                        this.dosen.nim_progmob = "72180194";
                                         setState(() => _isLoading = true);
-                                        List<int> imagesBytes = _imageFile.readAsBytesSync();
-                                        this.mhs.foto = base64Encode(imagesBytes);
-                                        ApiServices().createMhsWithFoto(this.mhs, _imageFile, _imageFile.path).then((isSuccess){
+                                        // List<int> imagesBytes = _imageFile.readAsBytesSync();
+                                        // this.dosen.foto = base64Encode(imagesBytes);
+                                        ApiServices().updateDsnWithFoto(this.dosen, _imageFile, nidncari).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
                                             Navigator.pop(context);
