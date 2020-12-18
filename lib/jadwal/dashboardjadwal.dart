@@ -1,5 +1,13 @@
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:progmob_flutter_2020/apiservices.dart';
+import 'package:progmob_flutter_2020/jadwal/addJadwal.dart';
+import 'package:progmob_flutter_2020/jadwal/updateJadwal.dart';
+// import 'package:progmob_flutter_2020/matakuliah/addMatkul.dart';
+// import 'package:progmob_flutter_2020/matakuliah/updateMatkul.dart';
+import 'package:progmob_flutter_2020/model.dart';
+
 
 class DashBoardJadwal extends StatefulWidget {
   DashBoardJadwal({Key key, this.title}) : super(key: key);
@@ -11,6 +19,13 @@ class DashBoardJadwal extends StatefulWidget {
 
 class _DashBoardJadwalState extends State<DashBoardJadwal> {
   final _formKey = GlobalKey<FormState>();
+
+  List<Jadwal> lJadwal = new List();
+
+  FutureOr onGoBack(dynamic value){
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,68 +34,82 @@ class _DashBoardJadwalState extends State<DashBoardJadwal> {
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),
-              onPressed: (){},
-            ),
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddJadwal(title: "Input Data Jadwal Kuliah")),
+                ).then(onGoBack);
+              },
+            )
           ],
         ),
-
-        body: Container(
-          child: GestureDetector(
-            onLongPress: (){
-              showDialog(context: null,
-                child:  AlertDialog(
-                  content: Column(
-                    children: <Widget>[
-                      FlatButton(
-                        child: Text("Edit"),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      FlatButton(
-                        child: Text("Delete"),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+        body: FutureBuilder(
+          future: ApiServices().getJadwal(),
+          builder: (BuildContext context, AsyncSnapshot<List<Jadwal>> snapshot){
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                    "Something wrong with this message: ${snapshot.error.toString()}"),
+              );
+            }else if (snapshot.connectionState == ConnectionState.done) {
+              lJadwal = snapshot.data;
+              return ListView.builder(
+                itemBuilder: (context, position) {
+                  return Card(
+                    //elevation: 8.0,
+                      margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
+                      child: Container(
+                        child: ListTile(
+                          title: Text(lJadwal[position].matkul + " " + lJadwal[position].dosen +" - " + lJadwal[position].sesi),
+                          subtitle: Text(lJadwal[position].hari),
+                          //subtitle: Text(lJadwal[position].hari),
+                          leading: Icon(Icons.book_outlined),
+                          onLongPress: (){
+                            showDialog(
+                                context: context,
+                                builder: (_) => new AlertDialog(
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      FlatButton(
+                                        child: Text("Update"),
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => UpdateJdwl(title: "Update Data", id: lJadwal[position].id)),
+                                          ).then(onGoBack);
+                                        },
+                                      ),
+                                      Divider(
+                                        color: Colors.black,
+                                        height: 20,
+                                      ),
+                                      FlatButton(
+                                        child: Text("Delete"),
+                                        onPressed: () async{
+                                          ApiServices().deleteJadwal(lJadwal[position].id);
+                                          Navigator.pop(context);
+                                          setState(() {});
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                )
+                            );
+                          },
+                        ),
                       )
-                    ],
-                  ),
-                ),
-              );},
-            child: Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                      leading: Icon(Icons.watch_later_outlined),
-                      title: Text("Senin"),
-                      subtitle: Text("SI3343 - Keamanan TI - 11.30 "),
-                      trailing: PopupMenuButton(
-                        itemBuilder: (_) => <PopupMenuItem<String>>[
-                          new PopupMenuItem<String>(
-                              child: const Text('Update'), value: 'Udt'),
-                          new PopupMenuItem<String>(
-                            child: const Text('Delete'), value: 'Del',),
-                        ],
-                      )
-                  ),
-                  ListTile(
-                      leading: Icon(Icons.watch_later_outlined),
-                      title: Text("Senin"),
-                      subtitle: Text("SI4323 - Manajemen Rantai Pasok - 15.30 "),
-                      trailing: PopupMenuButton(
-                        itemBuilder: (_) => <PopupMenuItem<String>>[
-                          new PopupMenuItem<String>(
-                              child: const Text('Update'), value: 'Udt'),
-                          new PopupMenuItem<String>(
-                            child: const Text('Delete'), value: 'Del',),
-                        ],
-                      )
-                  )
-                ],
-              ),
-            ),
-          ),
+                  );
+                },
+                itemCount: lJadwal.length,
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
         )
     );
   }

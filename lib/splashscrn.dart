@@ -15,7 +15,7 @@ class _splashscrnState extends State<splashscrn> {
       backgroundColor: Colors.greenAccent,
       image: Image.asset('assets/education.gif'),
       photoSize: 150.0,
-      navigateAfterSeconds: PageLogin(title: 'Tugas 10',),
+      navigateAfterSeconds: PageLogin(title: 'Tugas Akhir Semester',),
     );
   }
 }

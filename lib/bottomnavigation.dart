@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:progmob_flutter_2020/abt.dart';
+import 'package:progmob_flutter_2020/dashboard.dart';
 import 'package:progmob_flutter_2020/home.dart';
+import 'package:progmob_flutter_2020/main.dart';
 import 'package:progmob_flutter_2020/tugas8.dart';
 
 class bottomnavvgtn extends StatefulWidget {
@@ -32,10 +34,17 @@ class _bottomnavvgtnState extends State<bottomnavvgtn> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: _children[_currentIndex],
+      backgroundColor: Color(0xFFF0F0F0),
+      //body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        onTap:  onTappedBar,
+        //onTap:  onTappedBar,
         currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        onTap: (index){
+          setState(() {
+            _currentIndex = index;
+          });
+        },
         items: [
           BottomNavigationBarItem(
               icon: new Icon(Icons.home_work_outlined),
@@ -51,6 +60,10 @@ class _bottomnavvgtnState extends State<bottomnavvgtn> {
           )
         ],
       ),
+      body: getBodyWidget(),
     );
+  }
+  getBodyWidget(){
+    (_currentIndex==0)? Dashboard(): abt();
   }
 }

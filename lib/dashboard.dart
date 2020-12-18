@@ -24,100 +24,131 @@ class _DashboardState extends State<Dashboard>{
       print("failed");
     }
   }
-
+  var dashbrd = [
+    "Data Mahasiswa",
+    "Data Dosen",
+    "Pilihan Mata Kuliah",
+    "Jadwal Kuliah"
+  ];
+  var images = [
+    "assets/mahasiswa.png",
+    "assets/dosen.png",
+    "assets/matkul.png",
+    "assets/jadwal.png"
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      ),
-      drawer: Drawer(
-        child: ListView(
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountName: Text("Marcellus Davine Setiawan"),
-                accountEmail: Text("marcellus.davine@si.ukdw.ac.id"),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.lightBlueAccent,
-                  child: Text(
-                    "MDS",
-                    style: TextStyle(fontSize: 20.0),
-                  ),
+      appBar: AppBar(),
+    drawer: Drawer(
+      child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text("Marcellus Davine Setiawan"),
+              accountEmail: Text("marcellus.davine@si.ukdw.ac.id"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.lightBlueAccent,
+                child: Text(
+                  "MDS",
+                  style: TextStyle(fontSize: 20.0),
                 ),
               ),
-              ListTile(
-                title: Text("Data Dosen"),
-                trailing: Icon(Icons.people_alt_outlined),
-                subtitle: Text("Menu CRUD Data Dosen"),
-                onTap: (){
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DashBoardDosen(title: "Dashboard Dosen",)
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text("Data Mahasiswa"),
-                trailing: Icon(Icons.people),
-                subtitle: Text("Menu CRUD Data Mahasiswa"),
-                onTap: (){
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DashBoardMhs(title: "Dashboard Mahasiswa",)
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text("Data Matakuliah"),
-                trailing: Icon(Icons.book_outlined),
-                subtitle: Text("Menu CRUD Data Matakuliah"),
-                onTap: (){
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DashBoardMatkul(title: "Dashboard Mata Kuliah",)
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text("Data Jadwal Kuliah"),
-                trailing: Icon(Icons.schedule_rounded),
-                subtitle: Text("Menu CRUD Data Jadwal Kuliah"),
-                onTap: (){
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DashBoardJadwal(title: "Dashboard Jadwal Kuliah"
-                        "",)
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text("Logout"),
-                trailing: Icon(Icons.exit_to_app_outlined),
-                onTap: () async{
-                  SharedPreferences pref = await  SharedPreferences.getInstance();
-                  await pref.setInt("is_login", 0);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context)=> MyHomePage(title: "Tugas 10",)
-                    ),
-                  );
-                },
-              ),
-            ]
-        ),
-      ),
-      body: Container(
-        child: Center(
-          child: Text("Dashboard",
-            style: TextStyle(
-              fontSize: 20
             ),
-          ),
-        ),
+            ListTile(
+              title: Text("Data Dosen"),
+              trailing: Icon(Icons.people_alt_outlined),
+              subtitle: Text("Menu CRUD Data Dosen"),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DashBoardDosen(title: "Dashboard Dosen",)
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Data Mahasiswa"),
+              trailing: Icon(Icons.people),
+              subtitle: Text("Menu CRUD Data Mahasiswa"),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DashBoardMhs(title: "Dashboard Mahasiswa",)
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Data Matakuliah"),
+              trailing: Icon(Icons.book_outlined),
+              subtitle: Text("Menu CRUD Data Matakuliah"),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DashBoardMatkul(title: "Dashboard Mata Kuliah",)
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Data Jadwal Kuliah"),
+              trailing: Icon(Icons.schedule_rounded),
+              subtitle: Text("Menu CRUD Data Jadwal Kuliah"),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DashBoardJadwal(title: "Dashboard Jadwal Kuliah"
+                      "",)
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Logout"),
+              trailing: Icon(Icons.exit_to_app_outlined),
+              onTap: () async{
+                SharedPreferences pref = await  SharedPreferences.getInstance();
+                await pref.setInt("is_login", 0);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context)=> MyHomePage(title: "Tugas 10",)
+                  ),
+                );
+              },
+            ),
+          ]
       ),
+    ),
+   body: Container(
+     child:  GridView.builder(
+       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+           crossAxisCount: 2
+       ),
+       itemBuilder: (BuildContext context, int index) {
+         if (index < 4) {
+           return Card(
+             child: Column(
+               children: <Widget>[
+                 SizedBox(
+                   height: 10,
+                 ),
+                 Image.asset(images[index], height: 89, width: 89),
+                 Padding(
+                   padding: EdgeInsets.all(20),
+                   child: Text(dashbrd[index], style: TextStyle(
+                       fontSize: 13.5, height: 1.2, fontWeight: FontWeight
+                       .bold),
+                       textAlign: TextAlign.center),
+                 )
+               ],
+             ),
+           );
+         } else {
+           return null;
+         }
+       },
+     ),
+    ),
     );
   }
 }
