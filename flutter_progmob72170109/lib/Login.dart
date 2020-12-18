@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_progmob72170109/main.dart';
-import 'package:flutter_progmob72170109/pertemuan1.dart';
+import 'package:flutter_progmob72170109/uasprogmob.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -14,7 +13,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  String username = 'Melsiora Saniba Fernandes';
+  String username = 'example : Melsiora Fernandes';
   String password = '72170109';
 
   TextEditingController usernameController = new TextEditingController();
@@ -56,49 +55,49 @@ class _LoginState extends State<Login> {
             child: TextFormField(
               controller: usernameController,
               keyboardType: TextInputType.name,
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.purple),
               validator: (value){
                 return value.isEmpty ? "Username Tidak Boleh Kosong" : null;
               },
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.lightBlue, width: 10)
+                    borderSide: BorderSide(color: Colors.lightGreen, width: 10)
                 ),
                 icon: Icon(
                   Icons.people,
-                  color: Colors.black,
+                  color: Colors.purple,
                 ),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.lightBlue, width: 1.6)),
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.lightBlue, width: 1.6)),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.lightGreen, width: 1.6)),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.lightGreen, width: 1.6)),
                 labelText: 'Username',
                 labelStyle: TextStyle(
-                  color: Colors.lightBlue,
+                  color: Colors.lightGreen,
                 ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(21),
+            padding: const EdgeInsets.all(22),
             child: TextFormField(
               controller: passwordController,
               obscureText: true,
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.purple),
               validator: (value){
-                return value.isEmpty ? "Password Tidak Boleh Kosong" : null;
+                return value.isEmpty ? "Silaka Isi kode Password Disini" : null;
               },
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.lightBlue)
+                    borderSide: BorderSide(color: Colors.lightGreen)
                 ),
                 icon: Icon(
                   Icons.vpn_key,
-                  color: Colors.black,
+                  color: Colors.purple,
                 ),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.lightBlue, width: 1.5),),
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.lightBlue, width: 1.5)),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.lightGreen, width: 1.6),),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.lightGreen, width: 1.6)),
                 labelText: 'Password',
                 labelStyle: TextStyle(
-                  color: Colors.lightBlue,
+                  color: Colors.lightGreen,
                 ),
               ),
             ),
@@ -107,10 +106,10 @@ class _LoginState extends State<Login> {
             child: FlatButton(
               onPressed: () {},
               child: Text(
-                'Lupa Password ?',
+                'Forgot Password ?',
                 style: TextStyle(
-                    color: Colors.lightBlue,
-                    fontSize: 20,
+                    color: Colors.lightGreen,
+                    fontSize: 21,
                     fontWeight: FontWeight.w400),
               ),
             ),
@@ -120,16 +119,16 @@ class _LoginState extends State<Login> {
               SharedPreferences pref = await SharedPreferences.getInstance();
               await pref.setInt("is_login", 0);
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context)=>pertemuan1(title: 'Push')));
+                  MaterialPageRoute(builder: (context)=>uasprogmob(title: 'Push')));
             },
-            color: Colors.lightBlue,
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            color: Colors.lightGreen,
+            padding: EdgeInsets.symmetric(horizontal: 21),
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.height * 0.07,
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: MediaQuery.of(context).size.height * 0.08,
               child: Center(
                 child: Text('Login', style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 25,
                     color: Colors.white
                 ),),
               ),

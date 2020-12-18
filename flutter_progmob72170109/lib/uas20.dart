@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class pertemuan8 extends StatefulWidget {
-  pertemuan8({Key key, this.title}) : super(key: key);
+class uas20 extends StatefulWidget {
+  uas20({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _Pertemuan8State createState() => _Pertemuan8State();
+  _uas20State createState() => _uas20State();
 }
-class _Pertemuan8State extends State<pertemuan8> {
+class _uas20State extends State<uas20> {
   final _formKey = GlobalKey<FormState>();
   int _counter = 2;
 
@@ -33,7 +33,7 @@ class _Pertemuan8State extends State<pertemuan8> {
               //TextField(),
               TextFormField(
                 decoration: new InputDecoration(
-                  hintText: "Contoh: Melsiora Saniba Fernandes",
+                  hintText: "Melsiora Saniba Fernandes",
                   labelText: "Nama Lengkap ",
                   icon: Icon(Icons.people),
                   border: OutlineInputBorder(
@@ -43,17 +43,17 @@ class _Pertemuan8State extends State<pertemuan8> {
                 // The validator receives the text that the user has entered.
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'Nama Tidak Boleh Kosong';
+                    return 'Silakan isi Nama Disini';
                   }
                   return null;
                 },
               ),
               RaisedButton(
                 child: Text(
-                  "Submit",
+                  "Simpan",
                   style: TextStyle(color: Colors.white),
                 ),
-                color: Colors.blue,
+                color: Colors.purple,
                 onPressed: () {
                   if (_formKey.currentState.validate()) {}
                 },

@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_progmob72170109/main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-
-class DashboardDosen extends StatefulWidget {
-  DashboardDosen({Key key, this.title}) : super(key: key);
+class DashboardJadwal extends StatefulWidget {
+  DashboardJadwal({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _DashboardDosenState createState() => _DashboardDosenState();
+  _DashboardJadwalState createState() => _DashboardJadwalState();
 }
 
-class _DashboardDosenState extends State<DashboardDosen> {
+class _DashboardJadwalState extends State<DashboardJadwal> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -33,9 +30,9 @@ class _DashboardDosenState extends State<DashboardDosen> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget> [
                     ListTile(
-                      leading: Icon(Icons.person),
-                      title: Text("Eurico"),
-                      subtitle: Text("7689686 - Eurico@gmail.com"),
+                      leading: Icon(Icons.schedule),
+                      title: Text("Senin & Rabu"),
+                      subtitle: Text("07.30-10.30 & 10.30-12.30 - PEMROGRAMAN MOBILE"),
                       trailing: PopupMenuButton(
                         itemBuilder: (_) => <PopupMenuItem<String>>[
                           new PopupMenuItem<String>(

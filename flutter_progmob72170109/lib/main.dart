@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_progmob72170109/dashboard.dart';
-import 'package:flutter_progmob72170109/pertemuan1.dart';
-import 'package:flutter_progmob72170109/tugaspertemuan8.dart';
+import 'package:flutter_progmob72170109/uasprogmob.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -15,11 +14,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
 
-      home: MyHomePage(title: 'Flutter Progmob 72170109 TugasPertemuan8'),
+      home: MyHomePage(title: 'Uas Progmob 2020 72170109'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -50,7 +49,7 @@ void navigateLogin() async{
      if (isLogin == 1){
        Navigator.pushReplacement(
          context,
-         MaterialPageRoute(builder: (context) => Dashboard(title: "Hallo Push",)),
+         MaterialPageRoute(builder: (context) => Dashboard(title: "Heyy Push",)),
        );
 
      }
@@ -73,7 +72,7 @@ void navigateLogin() async{
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Hello World',
+              'Hello Uas_Progmob_2020',
             ),
             Text(
               '$_counter',
@@ -88,7 +87,7 @@ void navigateLogin() async{
                await pref.setInt("is_login", 1);
                 Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => pertemuan1(title: "Hallo Push",)),
+            MaterialPageRoute(builder: (context) => uasprogmob(title: "Hallo Push",)),
             );
 
               }

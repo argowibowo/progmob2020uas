@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progmob72170109/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class pertemuan1 extends StatefulWidget {
-  pertemuan1({Key key, this.title}) : super(key: key);
+class uasprogmob extends StatefulWidget {
+  uasprogmob({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _Pertemuan1State createState() => _Pertemuan1State();
+  _uasprogmobState createState() => _uasprogmobState();
 }
-class _Pertemuan1State extends State<pertemuan1> {
+class _uasprogmobState extends State<uasprogmob> {
   final _formKey = GlobalKey<FormState>();
   int _counter = 2;
 
@@ -37,7 +37,7 @@ class _Pertemuan1State extends State<pertemuan1> {
           //TextField(),
               TextFormField(
                 decoration: new InputDecoration(
-                  hintText: "Contoh: Melsiora Saniba Fernandes",
+                  hintText: "Melsiora Saniba Fernandes",
                   labelText: "Nama Lengkap ",
                   icon: Icon(Icons.people),
                   border: OutlineInputBorder(
@@ -47,7 +47,7 @@ class _Pertemuan1State extends State<pertemuan1> {
           // The validator receives the text that the user has entered.
           validator: (value) {
             if (value.isEmpty) {
-              return 'Nama Tidak Boleh Kosong';
+              return 'Silakan Isi Nama Disini';
             }
             return null;
           },
@@ -57,7 +57,7 @@ class _Pertemuan1State extends State<pertemuan1> {
                   "Submit",
                   style: TextStyle(color: Colors.white),
                 ),
-                color: Colors.blue,
+                color: Colors.cyan,
                 onPressed: () {
                   if (_formKey.currentState.validate()) {}
                 },
@@ -67,7 +67,7 @@ class _Pertemuan1State extends State<pertemuan1> {
                   "Logout",
                   style: TextStyle(color: Colors.white),
                 ),
-                color: Colors.blue,
+                color: Colors.cyan,
                 onPressed: ()  async {
                   SharedPreferences pref = await SharedPreferences.getInstance();
                   await pref.setInt("is_login", 0);

@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_progmob72170109/mahasiswa/DashboardMahasiswa.dart';
-import 'package:flutter_progmob72170109/main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class DashboardMahasiswa extends StatefulWidget {
-  DashboardMahasiswa({Key key, this.title}) : super(key: key);
-
+class DashboardMatakuliah extends StatefulWidget {
+  DashboardMatakuliah ({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _DashboardMahasiswaState createState() => _DashboardMahasiswaState();
+  _DashboardMatakuliahState createState() => _DashboardMatakuliahState();
 }
 
-class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
+class _DashboardMatakuliahState extends State<DashboardMatakuliah > {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -23,7 +19,6 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-
             onPressed: (){},
           )
         ],
@@ -35,9 +30,9 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget> [
                     ListTile(
-                      leading: Icon(Icons.person),
-                      title: Text("Melsiora Saniba Fernandes"),
-                      subtitle: Text("72170109 - melsiora.saniba@si.ukdw.ac.id"),
+                      leading: Icon(Icons.book),
+                      title: Text("PEMROGRAMAN MOBILE"),
+                      subtitle: Text("F8443"),
                       trailing: PopupMenuButton(
                         itemBuilder: (_) => <PopupMenuItem<String>>[
                           new PopupMenuItem<String>(

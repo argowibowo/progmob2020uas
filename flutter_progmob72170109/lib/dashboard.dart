@@ -1,11 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_progmob72170109/Login.dart';
-import 'package:flutter_progmob72170109/dosen/DashboardDosen.dart';
-import 'package:flutter_progmob72170109/jadwal/DashboardJadwal.dart';
-import 'package:flutter_progmob72170109/mahasiswa/DashboardMahasiswa.dart';
-import 'package:flutter_progmob72170109/main.dart';
-import 'package:flutter_progmob72170109/matakuliah/DashboardMatakuliah.dart';
+import 'package:flutter_progmob72170109/dosen/DashboardCRUDDosen.dart';
+import 'package:flutter_progmob72170109/jadwal/DashboardCRUDJadwal.dart';
+import 'package:flutter_progmob72170109/mahasiswa/DashboardCRUDMahasiswa.dart';
+import 'package:flutter_progmob72170109/matakuliah/DashboardCRUDMatakuliah.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
@@ -43,7 +42,7 @@ class _DashboardState extends State<Dashboard> {
                   backgroundColor: Colors.white,
                   child: Text(
                     "MF",
-                    style: TextStyle(fontSize: 40.0),
+                    style: TextStyle(fontSize: 44.0),
                   ),
                 ),
               ),
@@ -55,7 +54,7 @@ class _DashboardState extends State<Dashboard> {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DashboardDosen(title: "Dashboard Dosen",)),
+                    MaterialPageRoute(builder: (context) => DashboardDosen(title: "Dboard Dosen",)),
                   );
                 },
               ),
@@ -67,7 +66,7 @@ class _DashboardState extends State<Dashboard> {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Dashboard Mahasiswa",)),
+                    MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Dboard Mahasiswa",)),
                   );
 
                 },
@@ -80,7 +79,7 @@ class _DashboardState extends State<Dashboard> {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DashboardMatakuliah(title: "Dashboard Mata Kuliah",)),
+                    MaterialPageRoute(builder: (context) => DashboardMatakuliah(title: "Dboard Mata Kuliah",)),
                   );
                 },
 
@@ -93,25 +92,25 @@ class _DashboardState extends State<Dashboard> {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DashboardJadwal(title: "Dashboard Jadwal",)),
+                    MaterialPageRoute(builder: (context) => DashboardJadwal(title: "Dboard Jadwal",)),
                   );
                 },
               ),
               Divider(
-                color: Colors.black45,
-                height: 20,
-                indent: 10,
-                endIndent: 10,
+                color: Colors.pinkAccent,
+                height: 22,
+                indent: 12,
+                endIndent: 12,
               ),
               ListTile(
                 title: Text("Logout"),
                 trailing: Icon(Icons.exit_to_app),
                 onTap: () async{
                   SharedPreferences pref = await SharedPreferences.getInstance();
-                  await pref.setInt("is_login", 0);
+                  await pref.setInt("is_login", 1);
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => Login(title: "Hello Push",)),
+                    MaterialPageRoute(builder: (context) => Login(title: "heyy Push",)),
                   );
                 },
 
@@ -122,9 +121,9 @@ class _DashboardState extends State<Dashboard> {
           ),
         body: Container(
             child:Center(
-                child: Text("Dashboard",
+                child: Text("Selamat Datang Di Dashboard",
                     style: TextStyle(
-                        fontSize: 20
+                        fontSize: 22
                     )
                 )
             )
