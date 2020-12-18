@@ -110,52 +110,84 @@ class _LoginState extends State<Login> {
                   ),
                   child: Column(
                     children: <Widget>[
-                     Container(
-                      padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                        border: Border(bottom: BorderSide(
-                        color: Colors.grey
-                        ))
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                             border:InputBorder.none,
-                              hintText: "Username",
-                               hintStyle: TextStyle(color:Colors.grey)
-                            ),
+                      new TextFormField(
+                        validator: (value){
+                          if(value.isEmpty && value.length == 0) {
+                            return "Username tidak boleh kosong";
+                          }
+                          else if (!value.contains('72180226')){
+                            return "Username atau password";
+                          }
+                          else
+                            return null;
+                          },
+                        controller: myUsernameController,
+                        decoration: new InputDecoration(
+                          icon: const Icon(Icons.person),
+                          labelText: "Username",
+                          border: OutlineInputBorder(
+                            borderRadius: new BorderRadius.circular(5),
                           ),
+                        ),
+                      ),
+                          Padding(
+                          padding: EdgeInsets.all(5.0),
+                          ),
+                            new TextFormField(
+                              validator: (value){
+                                if(value.isEmpty && value.length == 0) {
+                                  return "Password tidak boleh kosong";
+                                } else if (!value.contains('72180226')){
+                                  return "Username atau password";
+                                } else
+                                  return null;
+                                },
+                               obscureText: !this.showPassword,
+                               controller: myPasswordController,
+                                decoration: new InputDecoration(
+                                icon: const Icon(Icons.lock),
+                                  labelText: "Password",
+                                   border: OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(5),
+                              ),
+                              suffixIcon: IconButton(
+                                 icon: Icon(
+                                showPassword ? Icons.visibility : Icons.visibility_off,
+                               ),
+                                onPressed: () {
+                                  setState(() {
+                                    this.showPassword = !this.showPassword;
+                                  });
+                                },
+                              ),
+                                ),
 
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              border: Border(bottom: BorderSide(
-                                  color: Colors.grey
-                              ))
-                          ),
-                          child: TextField(
-                            decoration: InputDecoration(
-                                border:InputBorder.none,
-                                hintText: "Password",
-                                hintStyle: TextStyle(color:Colors.grey)
                             ),
-                          ),
-                        ),
+
+
+
 
                      RaisedButton (
-                        child: Text(
-                        "Login",
-                        style: TextStyle(color: Colors.white),
-                        ),
-                        color: Colors.blue,
-                        onPressed: () async {
-                        SharedPreferences pref = await SharedPreferences.getInstance();
-                        await pref.setInt("is_login", 1);
-                        Navigator.pushReplacement(
-                        context,
-                            MaterialPageRoute(builder: (context) => Dashboardmain(title: "Dashboard",)));
+                      color: Colors.blue,
 
-},
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                              color: Colors.white
+                          ),
+                        ),
+                       onPressed: () async {
+                        if(_formKey.currentState.validate()){
+                          SharedPreferences pref = await SharedPreferences.getInstance();
+                          await pref.setInt("is_login", 1);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => Dashboardmain(title: "Dashboard",)),
+                          );
+
+                          _formKey.currentState.save();
+                        }
+                        },
                      ),],
                   ),
                 )

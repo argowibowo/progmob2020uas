@@ -1,4 +1,4 @@
-  import 'dart:convert';
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_app/model.dart';
 import 'package:http/http.dart' show Client;
@@ -7,14 +7,20 @@ import 'package:http/http.dart' as http;
 class ApiServices {
   final String baseUrl = "https://argouchiha.000webhostapp.com";
   Client client = Client();
+
+  //---------------------dashboard----------------------
+  //---------------------Mahasiswa----------------------
   Future<DashboardSI> getDashboard() async {
-    final response = await client.get("$baseUrl/api/progmob/dashboard/72180226");
+    final response = await client.get(
+        "$baseUrl/api/progmob/dashboard/72180226");
     if (response.statusCode == 200) {
       return DashboardSI.fromJson(json.decode(response.body));
     } else {
       return null;
     }
   }
+
+  //------------------Mahasiswa----------------------
   Future<List<Mahasiswa>> getMahasiswa() async {
     final response = await client.get("$baseUrl/api/progmob/mhs/72180226");
     if (response.statusCode == 200) {
@@ -23,28 +29,31 @@ class ApiServices {
       return null;
     }
   }
+
   Future<bool> createMhs(Mahasiswa data) async {
     final response = await client.post(
-        "$baseUrl/api/progmob/mhs/create",
-        headers: {"content-type": "application/json"},
-        body: mahasiswaToJson(data)
+      "$baseUrl/api/progmob/mhs/create",
+      headers: {"content-type": "application/json"},
+      body: mahasiswaToJson(data),
     );
-
-
     if (response.statusCode == 200) {
       return true;
     } else {
       return false;
     }
   }
-  Future<bool> createMhsWithFoto(Mahasiswa data, File file, String filename) async {
+
+  Future<bool> createMhsWithFoto(Mahasiswa data, File file,
+      String filename) async {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse("$baseUrl/api/progmob/mhs/createwithfoto")
     );
-    Map<String, String> headers={
-      "Content-type": "multipart/form-data"
+
+    Map<String, String> headers = {
+      "Content.type": "multipart/form-data"
     };
+
     request.headers.addAll(headers);
     request.files.add(
         http.MultipartFile(
@@ -54,7 +63,6 @@ class ApiServices {
             filename: filename
         )
     );
-
     request.fields.addAll({
       "nama": data.nama,
       "nim": data.nim,
@@ -71,14 +79,15 @@ class ApiServices {
     }
   }
 
-  Future<bool> updateMhsWithFoto(Mahasiswa data, File file, String nim_cari) async {
-    String isFotoUpdate = "0";
+  Future<bool> updateMhsWithFoto(Mahasiswa data, File file,
+      String nimcari) async {
+    String isfotoupdate = "0";
     var request = http.MultipartRequest(
         'POST',
         Uri.parse("$baseUrl/api/progmob/mhs/updatewithfoto")
     );
 
-    Map<String, String> headers={
+    Map<String, String> headers = {
       "Content-type": "multipart/form-data"
     };
 
@@ -93,7 +102,7 @@ class ApiServices {
               filename: file.path
           )
       );
-      isFotoUpdate = "1";
+      isfotoupdate = "1";
     }
 
     request.fields.addAll({
@@ -102,8 +111,8 @@ class ApiServices {
       "alamat": data.alamat,
       "email": data.email,
       "nim_progmob": data.nim_progmob,
-      "nim_cari": nim_cari,
-      "is_foto_update": isFotoUpdate
+      "nim_cari": nimcari,
+      "is_foto_update": isfotoupdate
     });
 
     var response = await request.send();
@@ -118,7 +127,7 @@ class ApiServices {
     final response = await client.post(
         "$baseUrl/api/progmob/mhs/delete",
         headers: {"content-type": "application/json"},
-        body: json.encode(<String, String>{
+        body: jsonEncode(<String, String>{
           "nim": nim,
           "nim_progmob": "72180226"
         })
@@ -131,7 +140,7 @@ class ApiServices {
     }
   }
 
-
+//-----------------------Dosen-----------------------------------------------
   Future<List<Dosen>> getDosen() async {
     final response = await client.get("$baseUrl/api/progmob/dosen/72180226");
     if (response.statusCode == 200) {
@@ -155,13 +164,14 @@ class ApiServices {
     }
   }
 
-  Future<bool> createDosenWithFoto(Dosen data, File file, String filename) async {
+  Future<bool> createDosenWithFoto(Dosen data, File file,
+      String filename) async {
     var request = http.MultipartRequest(
         'POST',
         Uri.parse("$baseUrl/api/progmob/dosen/createwithfoto")
     );
 
-    Map<String, String> headers={
+    Map<String, String> headers = {
       "Content-type": "multipart/form-data"
     };
 
@@ -193,7 +203,8 @@ class ApiServices {
     }
   }
 
-  Future<bool> updateDosenWithFoto(Dosen data, File file, String nidn_cari) async {
+  Future<bool> updateDosenWithFoto(Dosen data, File file,
+      String nidn_cari) async {
     String isFotoUpdate = "0";
 
     var request = http.MultipartRequest(
@@ -201,7 +212,7 @@ class ApiServices {
         Uri.parse("$baseUrl/api/progmob/dosen/updatewithfoto")
     );
 
-    Map<String, String> headers={
+    Map<String, String> headers = {
       "Content-type": "multipart/form-data"
     };
 
@@ -255,9 +266,10 @@ class ApiServices {
     }
   }
 
-  //matkul
+//----------------------------Matakuliah-------------------------------------
+
   Future<List<Matakuliah>> getMatkul() async {
-    final response = await client.get("$baseUrl/api/progmob/matkul/72180226");
+    final response = await client.get("$baseUrl/api/progmob/matkul/72180230");
     if (response.statusCode == 200) {
       return matkulFromJson(response.body);
     } else {
@@ -289,9 +301,9 @@ class ApiServices {
       "nama": data.nama,
       "nim_progmob": data.nim_progmob,
       "kode": data.kode,
-      "hari": data.hari,
-      "sesi": data.sesi,
-      "sks": data.sks,
+      "hari": data.hari.toString(),
+      "sesi": data.sesi.toString(),
+      "sks": data.sks.toString(),
       "kode_cari": kode_cari
     });
 
@@ -309,7 +321,7 @@ class ApiServices {
         headers: {"content-type": "application/json"},
         body: json.encode(<String, String>{
           "kode": kode,
-          "nim_progmob": "72180226"
+          "nim_progmob": "72180230"
         })
     );
 
@@ -319,6 +331,47 @@ class ApiServices {
       return false;
     }
   }
+  //----------------------------Jadwal-------------------------------------
+
+  Future<List<Jadwal>>getJadwal() async {
+    final response = await client.get("$baseUrl/api/progmob/jadwal/72180226");
+    if (response.statusCode == 200) {
+      return jadwalFromJson(response.body);
+    } else {
+      return null;
+    }
+  }
+  Future<bool> createJadwal(Jadwal data) async {
+    final response = await client.post(
+        "$baseUrl/api/progmob/jadwal/create",
+        headers: {"content-type": "application/json"},
+        body: jadwalToJson(data)
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  Future<bool> updateJadwal(Jadwal data, String kode) async {
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse("$baseUrl/api/progmob/jadwal/update")
+    );
+    request.fields.addAll({
+      "id_matkul": data.id_matkul,
+      "nim_progmob": data.nim_progmob,
+      "id_dosen": data.id_dosen,
+      "nidn": data.nidn,
+      "hari": data.hari,
+      "sesi": data.sesi,
+      "sks": data.sks,
+    });
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
-
-

@@ -1,28 +1,27 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/apiservices.dart';
 import 'package:flutter_app/model.dart';
+import 'package:image_picker/image_picker.dart';
 
-
-class UpdateMatkul extends StatefulWidget {
+class UpdateJadwal extends StatefulWidget {
   final String title;
   Matakuliah matkul;
   String kodecari;
-
-  UpdateMatkul({Key key, @required this.title, @required this.matkul, @required this.kodecari}) : super(key: key);
+  UpdateJadwal({Key key, @required this.title, @required this.matkul, @required this.kodecari}) : super(key: key);
 
   @override
-  _UpdateMatkulState createState() => _UpdateMatkulState(title, matkul, kodecari);
+  _UpdateJadwalState createState() => _UpdateJadwalState(title, matkul, kodecari);
 }
 
-class _UpdateMatkulState extends State<UpdateMatkul> {
+class _UpdateJadwalState extends State<UpdateJadwal> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
   final String kodecari;
   Matakuliah matkul;
   bool isLoading = false;
 
-  _UpdateMatkulState(this.title, this.matkul, this.kodecari);
+  _UpdateJadwalState(this.title, this.matkul, this.kodecari);
 
   @override
   void initState() {
@@ -49,7 +48,7 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Kode",
+                          labelText: "Kode Matakuliah",
                           hintText: "Kode Matakuliah",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
@@ -63,7 +62,7 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Nama",
+                          labelText: "Nama Matakuliah",
                           hintText: "Nama Matakuliah",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
@@ -82,17 +81,45 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
-                      initialValue: this.matkul.hari,
-                      // keyboardType: TextInputType.number,
+                      initialValue: this.matkul.hari.toString(),
+                      keyboardType: TextInputType.number,
                       onSaved: (String value) {
                         this.matkul.hari = value;
-                        // this.matkul.hari = int.parse(value);
                       },
                     ),
                     SizedBox(height: 15,
                     ),
-
-
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "Sesi",
+                          hintText: "Sesi Matakuliah",
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                      ),
+                      initialValue: this.matkul.sesi.toString(),
+                      keyboardType: TextInputType.number,
+                      onSaved: (String value) {
+                        this.matkul.sesi = value;
+                      },
+                    ),
+                    SizedBox(height: 15,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "SKS",
+                          hintText: "SKS Matakuliah",
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                      ),
+                      initialValue: this.matkul.sks.toString(),
+                      keyboardType: TextInputType.number,
+                      onSaved: (String value) {
+                        this.matkul.sks = value;
+                      },
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -109,7 +136,7 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                                     onPressed: () async {
                                       _formState.currentState.save();
                                       setState(() => isLoading = true);
-                                      this.matkul.nim_progmob = "72180230";
+                                      this.matkul.nim_progmob = "72180226";
                                       ApiServices().updateMatkul(this.matkul, kodecari).then((isSuccess) {
                                         setState(() => isLoading = false);
                                         if (isSuccess) {
@@ -155,7 +182,13 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
               isLoading
                   ? Stack(
                 children: <Widget>[
-
+                  // Opacity(
+                  //   opacity: 0.3,
+                  //   child: ModalBarrier(
+                  //     dismissible: false,
+                  //     color: Colors.grey,
+                  //   ),
+                  // ),
                   Center(
                     child: CircularProgressIndicator(),
                   )

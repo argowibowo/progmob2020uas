@@ -1,28 +1,25 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/apiservices.dart';
 import 'package:flutter_app/model.dart';
 
+final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
-class UpdateMatkul extends StatefulWidget {
+class TambahJadwal extends StatefulWidget {
+  TambahJadwal({Key key, @required this.title}) : super(key: key);
   final String title;
-  Matakuliah matkul;
-  String kodecari;
-
-  UpdateMatkul({Key key, @required this.title, @required this.matkul, @required this.kodecari}) : super(key: key);
 
   @override
-  _UpdateMatkulState createState() => _UpdateMatkulState(title, matkul, kodecari);
+  _TambahJadwalState createState() => _TambahJadwalState(title);
 }
 
-class _UpdateMatkulState extends State<UpdateMatkul> {
+class _TambahJadwalState extends State<TambahJadwal> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  final String kodecari;
-  Matakuliah matkul;
+  _TambahJadwalState(this.title);
   bool isLoading = false;
-
-  _UpdateMatkulState(this.title, this.matkul, this.kodecari);
+  Jadwal jadwal = new Jadwal();
 
   @override
   void initState() {
@@ -49,28 +46,40 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Kode",
-                          hintText: "Kode Matakuliah",
+                          labelText: "Nama Matakuliah",
+                          hintText: "Nama Matakuliah",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
-                      initialValue: this.matkul.kode,
                       onSaved: (String value) {
-                        this.matkul.kode = value;
+                        this.jadwal.id_matkul = value;
                       },
                     ),
                     SizedBox(height: 15,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Nama",
-                          hintText: "Nama Matakuliah",
+                          labelText: "Nama Dosen",
+                          hintText: "Nama Dosen",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
-                      initialValue: this.matkul.nama,
                       onSaved: (String value) {
-                        this.matkul.nama = value;
+                        this.jadwal.id_dosen = value;
+                      },
+                    ),
+                    SizedBox(height: 15,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "NIDN",
+                          hintText: "NIDN Dosen",
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                      ),
+                      keyboardType: TextInputType.number,
+                      onSaved: (String value) {
+                        this.jadwal.nidn = value;
                       },
                     ),
                     SizedBox(height: 15,
@@ -82,17 +91,42 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
-                      initialValue: this.matkul.hari,
-                      // keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.number,
                       onSaved: (String value) {
-                        this.matkul.hari = value;
-                        // this.matkul.hari = int.parse(value);
+                        this.jadwal.hari = value;
                       },
                     ),
                     SizedBox(height: 15,
                     ),
-
-
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "Sesi",
+                          hintText: "Sesi Matakuliah",
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                      ),
+                      keyboardType: TextInputType.number,
+                      onSaved: (String value) {
+                        this.jadwal.sesi = value;
+                      },
+                    ),
+                    SizedBox(height: 15,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "SKS",
+                          hintText: "SKS Matakuliah",
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                      ),
+                      keyboardType: TextInputType.number,
+                      onSaved: (String value) {
+                        this.jadwal.sks = value;
+                      },
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -102,15 +136,15 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: Text("Ubah Data"),
+                              title: Text("Simpan Data"),
                               content: Text("Apakah Anda akan menyimpan data ini?"),
                               actions: <Widget>[
                                 FlatButton(
                                     onPressed: () async {
                                       _formState.currentState.save();
                                       setState(() => isLoading = true);
-                                      this.matkul.nim_progmob = "72180230";
-                                      ApiServices().updateMatkul(this.matkul, kodecari).then((isSuccess) {
+                                      this.jadwal.nim_progmob = "72180226";
+                                      ApiServices().createJadwal(this.jadwal).then((isSuccess) {
                                         setState(() => isLoading = false);
                                         if (isSuccess) {
                                           Navigator.pop(context);
@@ -142,10 +176,7 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
                             fontWeight: FontWeight.bold
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -155,13 +186,15 @@ class _UpdateMatkulState extends State<UpdateMatkul> {
               isLoading
                   ? Stack(
                 children: <Widget>[
-
                   Center(
                     child: CircularProgressIndicator(),
                   )
                 ],
               )
                   : Container(),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Jadwal/dashboard_jadwal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_app/Login.dart';
 import 'package:flutter_app/dosen/dashboard_dosen.dart';
-import 'package:flutter_app/jadwal/dashboard_jadwal.dart';
 import 'package:flutter_app/mahasiswa/dashboard_mahasiswa.dart';
-//import 'package:flutter_app/Matakuliah/dashboard_matakuliah.dart';
+import 'package:flutter_app/Matakuliah/matakuliah.dart';
 
 
 class Dashboardmain extends StatefulWidget {
@@ -27,13 +27,14 @@ class _DashboardmainState extends State<Dashboardmain> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Sistem Informasi Akademik"),
-
       ),
+
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
@@ -125,32 +126,22 @@ class _DashboardmainState extends State<Dashboardmain> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Menu Matakuliah",)),
+                  MaterialPageRoute(builder: (context) => dashboardMatakuliah(title: "Menu Matakuliah",)),
                 );
               },
             ),
             ListTile(
-              title: Text(
-                "Data Jadwal",
-                style: TextStyle(
-                  color: Color(0xFF0D47A1),
-                ),
-              ),
+              title: Text("Jadwal"),
+              subtitle: Text("Menu Jadwal"),
               trailing: Icon(
                 Icons.schedule,
                 color: Color(0xFF0D47A1),
               ),
-              subtitle: Text(
-                "Menu CRUD Data Jadwal",
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Menu Jadwal",)),
+                    context,
+                    MaterialPageRoute(builder: (context) => DashboardJadwal(title: "Data Jadwal"))
                 );
               },
             ),
@@ -180,22 +171,156 @@ class _DashboardmainState extends State<Dashboardmain> {
                 );
               },
             ),
+            Positioned(
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('image/tree1.png'),
+                        fit: BoxFit.fill
+                    )
+                ),
+              ),
+            )
           ],
 
         ),
       ),
-      body: Container(
-          child: Center(
-            child: Text("Nael",
-              style: TextStyle(
-                fontSize: 20,
-
-              ),
-
-
+      body: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    alignment: Alignment.topCenter,
+                    image: AssetImage('image/tree.png')
+                )
             ),
           ),
+          Expanded(child:
+          GridView.count(
+            mainAxisSpacing: 10,
+            crossAxisCount: 2,
+            primary: false,
+            crossAxisSpacing: 10 ,
+            children: <Widget>[
+              Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(70)
+                  ),
+                  elevation: 4,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        width: 130.0,
+                        height: 130.0,
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: new DecorationImage(
+                              fit: BoxFit.fill,
+                              image: new AssetImage('image/mahasiswa.png')
+                          ),
+                        ),
+                      ),
+                      FlatButton(onPressed: ()async {
+                        Navigator.pushReplacement(
+                          context,
+                        MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Data Mahasiswa",)),
+                        );},
+                          child: Text("Data Mahasiswa")),
+                    ],
+                  )
+              ),
+              Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(70)
+                  ),
+                  elevation: 4,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        width: 130.0,
+                        height: 130.0,
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: new DecorationImage(
+                              fit: BoxFit.fill,
+                              image: new AssetImage('image/dosen.png')
+                          ),
+                        ),
+                      ),
+                      FlatButton(onPressed: ()async {
+                        Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => Dashboard_dosen(title: "Data Dosen",)),
+                        );},
+                          child: Text("Data Dosen")),
+
+                    ],
+                  )
+              ),
+              Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(70)
+                  ),
+                  elevation: 4,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        width: 130.0,
+                        height: 130.0,
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          image: new DecorationImage(
+                              fit: BoxFit.fill,
+                              image: new AssetImage('image/matkul.png')
+                          ),
+                        ),
+                      ),
+                      FlatButton(onPressed: ()async {
+                        Navigator.pushReplacement(
+                          context,
+                        MaterialPageRoute(builder: (context) => dashboardMatakuliah(title: "Data Matakuliah",)),
+                        );},
+                          child: Text("Data Matakuliah")),
+                    ],
+                  )
+              ),
+              Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(70)
+                  ),
+                  elevation: 4,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        width: 130.0,
+                        height: 130.0,
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          image: new DecorationImage(
+                              fit: BoxFit.fill,
+                              image: new AssetImage('image/jadwal.png')
+                          ),
+                        ),
+                      ),
+                      FlatButton(onPressed: ()async {
+                      //  SharedPreferences pref = await SharedPreferences.getInstance();
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) => DashboardJadwal(),));
+                      },
+                          child: Text("Data Jadwal")),
+                    ],
+                  )
+              ),
+            ],
+          ),
+          ),
+        ],
       ),
     );
+
   }
 }

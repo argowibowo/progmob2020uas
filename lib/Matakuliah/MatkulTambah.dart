@@ -17,96 +17,113 @@ class _AddMatkulState extends State<AddMatkul> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
   _AddMatkulState(this.title);
-  bool isLoading = false;
-  Matakuliah matkul = new Matakuliah();
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  bool _isLoading = false;
+  Matakuliah mk = new Matakuliah();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: new Text(this.title),
+        backgroundColor: Colors.blue,
       ),
-
       body: Container(
         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+
         child: SingleChildScrollView(
+
           child: Stack(
+
             children: <Widget>[
               Form(
                 key: _formState,
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 15,
+                    SizedBox(
+                      height: 15,
                     ),
+
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Kode",
-                          hintText: "Kode Matakuliah",
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                        labelText: "Kode",
+                        hintText: "Kode Matakuliah",
+                        border: OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(5),
+                        ),
+                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      onSaved: (String value) {
-                        this.matkul.kode = value;
+                      onSaved: (String value){
+                        this.mk.kode = value;
                       },
                     ),
-                    SizedBox(height: 15,
+                    SizedBox(
+                      height: 15,
                     ),
+                    //UNTUK TEXTFORMFIELD NAMA
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Nama",
-                          hintText: "Nama Matakuliah",
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                        labelText: "Nama",
+                        hintText: "Nama Matakuliah",
+                        border: OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(5),
+                        ),
+                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      onSaved: (String value) {
-                        this.matkul.nama = value;
+                      onSaved: (String value){
+                        this.mk.nama = value;
                       },
                     ),
-                    SizedBox(height: 15,
+                    SizedBox(
+                      height: 15,
                     ),
+
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Hari",
-                          hintText: "Hari Matakuliah",
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                        labelText: "Hari",
+                        hintText: "Hari Matakuliah",
+                        border: OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(5),
+                        ),
+                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      keyboardType: TextInputType.number,
-                      onSaved: (String value) {
-                        this.matkul.hari = value;
+                      //keyboardType: TextInputType.number,
+                      onSaved: (String value){
+                        this.mk.hari = value;
                       },
                     ),
-                    SizedBox(height: 15,
+                    SizedBox(
+                      height: 15,
                     ),
+
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Sesi",
-                          hintText: "Sesi Matakuliah",
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                        labelText: "Sesi",
+                        hintText: "Sesi Matakuliah",
+                        border: OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(5),
+                        ),
+                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      keyboardType: TextInputType.number,
-                      onSaved: (String value) {
-                        this.matkul.sks = value;
+                      //keyboardType: TextInputType.number,
+                      onSaved: (String value){
+                        this.mk.sesi = value;
                       },
                     ),
-                    SizedBox(height: 15,
+                    SizedBox(
+                      height: 15,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "SKS",
-                          hintText: "SKS Matakuliah",
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
+                        labelText: "SKS",
+                        hintText: "SKS Matakuliah",
+                        border: OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(5),
+                        ),
+                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      keyboardType: TextInputType.number,
-                      onSaved: (String value) {
-                        this.matkul.sks = value;
+                      //keyboardType: TextInputType.number,
+                      onSaved: (String value){
+                        this.mk.sks = value;
                       },
                     ),
                     SizedBox(
@@ -115,42 +132,66 @@ class _AddMatkulState extends State<AddMatkul> {
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
-                      onPressed: () {
+                      color: Colors.lightBlue,
+                      onPressed: (){
                         return showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text("Simpan Data"),
-                              content: Text("Apakah data ini akan anda simpan ?"),
-                              actions: <Widget>[
-                                FlatButton(
-                                    onPressed: () async {
+                            context: context,
+                            builder: (context){
+                              return AlertDialog(
+                                title: Text(
+                                  "Simpan Data",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+
+                                  ),
+                                ),
+                                content: Text(
+                                  "Apakah Anda akan menyimpan data ini?",
+                                  style: TextStyle(
+                                    color: Color(0xFF0D47A1),
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () async{
                                       _formState.currentState.save();
-                                      setState(() => isLoading = true);
-                                      this.matkul.nim_progmob = "72180204";
-                                      ApiServices().createMatkul(this.matkul).then((isSuccess) {
-                                        setState(() => isLoading = false);
-                                        if (isSuccess) {
+                                      setState(() =>_isLoading = true);
+                                      this.mk.nim_progmob = "72180230";
+                                      ApiServices().createMatkul(this.mk).then((isSuccess) {
+                                        setState(() => _isLoading = false);
+                                        if (isSuccess){
                                           Navigator.pop(context);
                                           Navigator.pop(context);
-                                        } else {
+                                        }else{
                                           Navigator.pop(context);
                                           Navigator.pop(context);
                                         }
                                       });
                                     },
-                                    child: Text("Ya")
-                                ),
-                                FlatButton(
-                                    onPressed: () {
+                                    child: Text(
+                                      "Ya",
+                                      style: TextStyle(
+                                        color: Colors.blue,
+
+                                      ),
+                                    ),
+                                  ),
+                                  FlatButton(
+                                    onPressed: (){
                                       Navigator.pop(context);
                                     },
-                                    child: Text("Tidak")
-                                )
-                              ],
-                            );
-                          },
+                                    child: Text(
+                                      "Tidak",
+                                      style: TextStyle(
+                                        color: Colors.blue,
+
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }
                         );
                       },
                       child: Text(
@@ -161,35 +202,32 @@ class _AddMatkulState extends State<AddMatkul> {
                             fontWeight: FontWeight.bold
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
-              // Center(
-              //   child: CircularProgressIndicator(),
-              // )
-              isLoading
+              _isLoading
                   ? Stack(
                 children: <Widget>[
-                  // Opacity(
-                  //   opacity: 0.3,
-                  //   child: ModalBarrier(
-                  //     dismissible: false,
-                  //     color: Colors.grey,
-                  //   ),
-                  // ),
+                  /*Opacity(
+                    opacity: 0.3,
+                    child: ModalBarrier(
+                      dismissible: false,
+                      color: Colors.grey,
+                    ),
+                  ),*/
                   Center(
-                    child: CircularProgressIndicator(),
-                  )
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0D47A1)),
+                      backgroundColor: Colors.grey,
+                      strokeWidth: 7,
+                    ),
+                  ),
                 ],
               )
                   : Container(),
-              SizedBox(
-                height: 20,
-              ),
             ],
           ),
-
         ),
       ),
     );

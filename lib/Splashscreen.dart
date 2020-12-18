@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Home.dart';
+
 import 'package:flutter_app/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_app/dashboardmain.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
       return Timer(duration, (){
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_){
-              return Home(title: "Flutter App");
+              return Dashboardmain(title: "Flutter App");
             })
         );
       });

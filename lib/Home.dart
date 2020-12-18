@@ -188,6 +188,7 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         child: Center(
+
           child: Text("Nael",
             style: TextStyle(
               fontSize: 20,
