@@ -51,10 +51,10 @@ class _DashboardState extends State<Dashboard> {
               subtitle: Text("Menu CRUD Data Dosen"),
               onTap: () {
                 Navigator.pop(context);
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => Dosen(title: "Dashboard Dosen")),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DashboardDsn(title: "Dashboard Dosen")),
+                );
               },
             ),
             ListTile(
@@ -77,7 +77,7 @@ class _DashboardState extends State<Dashboard> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Matakuliah(title: "Dashboard Mata Kuliah")),
+                  MaterialPageRoute(builder: (context) => Matakuliahdb(title: "Dashboard Mata Kuliah")),
                 );
               },
             ),
@@ -87,10 +87,10 @@ class _DashboardState extends State<Dashboard> {
               subtitle: Text("Menu CRUD Data Jadwal"),
               onTap: () {
                 Navigator.pop(context);
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => Jadwal(title: "Dashboard Jadwal")),
-                // );
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => dashboardjadwal(title: "Dashboard Jadwal")),
+                );
               },
             ),
             Divider(

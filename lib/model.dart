@@ -179,21 +179,29 @@ class Jadwal{
   String matkul;
   String dosen;
   String nidn;
-  String hari;
-  String sesi;
-  String sks;
+  int hari;
+  int sesi;
+  int sks;
   String nim_progmob;
-  Jadwal({this.id, this.matkul, this.nidn, this.dosen,  this.hari, this.sesi, this.sks,  this.nim_progmob});
+
+  Jadwal({this.id, this.matkul, this.dosen, this.nidn, this.hari,
+    this.sesi, this.sks, this.nim_progmob});
 
   factory Jadwal.fromJson(Map<String, dynamic> map){
     return Jadwal(
-        id: map["id"], matkul: map["matkul"], nidn: map["nidn"],
-        dosen: map["dosen"], hari: map["hari"], sesi: map["sesi"], sks: map["sks"], nim_progmob: map["nim_progmob"]
+        id: map["id"],
+        matkul: map["matkul"],
+        dosen: map["dosen"],
+        nidn: map["nidn"],
+        hari: int.parse(map["hari"]),
+        sesi: int.parse(map["sesi"]),
+        sks: int.parse(map["sks"]),
+        nim_progmob: map["nim_progmob"]
     );
   }
-
   Map<String, dynamic> toJson(){
-    return{"id": id, "matkul": matkul, "nidn": nidn, "dosen": dosen, "hari": hari, "sesi": sesi, "sks": sks, "nim_progmob": nim_progmob};
+    return{"id":id, "matkul": matkul, "dosen": dosen, "nidn": nidn, "hari": hari,
+      "sesi": sesi, "sks": sks, "nim_progmob": nim_progmob};
   }
 }
 List<Jadwal> jadwalFromJson(String jsonData){
@@ -204,6 +212,16 @@ List<Jadwal> jadwalFromJson(String jsonData){
 String jadwalToJson(Jadwal data){
   final jsonData = data.toJson();
   return json.encode(jsonData);
+}
+
+//---------------------------To Do---------------------------------
+class ToDo{
+  int userId;
+  int id;
+  String title;
+  bool completed;
+
+  ToDo({this.userId, this.id, this.title, this.completed});
 }
 /////////////USER///////////////
 class LoginResponseModel{
