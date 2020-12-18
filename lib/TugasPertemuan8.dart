@@ -73,7 +73,7 @@ class _TugasPertemuan8State extends State<TugasPertemuan8> {
                       await pref.setInt("is_login", 0);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => MyHomePage(title: 'Logout',)),
+                        MaterialPageRoute(builder: (context) => MyApp(title: 'Logout',)),
                       );
                     },
                     child: Text(

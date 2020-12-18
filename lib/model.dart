@@ -1,40 +1,40 @@
 import 'dart:convert';
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
-
-//chart
+// ------------------------------chart------------------------------------------
 class ClicksPerYear {
+  final String year;
   final int clicks;
   final charts.Color color;
-  final String year;
-
 
   ClicksPerYear(this.year, this.clicks, Color color)
-      : this.color = charts.Color(a: color.alpha, r: color.red, g: color.green, b: color.blue);
+      : this.color = charts.Color(
+      r: color.red, g: color.green, b: color.blue, a: color.alpha
+  );
 }
 
-// dashboard
-class DashboardAS{
-  String jadwal;
-  String matkul;
+// ------------------------------dashboard--------------------------------------
+class DashboardAS {
   String mahasiswa;
   String dosen;
+  String matakuliah;
+  String jadwal;
 
-  DashboardAS({this.dosen, this.jadwal, this.mahasiswa, this.matkul});
+  DashboardAS({this.mahasiswa, this.dosen, this.matakuliah, this.jadwal});
 
-  factory DashboardAS.fromJson(Map<String, dynamic> json){
+  factory DashboardAS.fromJson(Map<String, dynamic> json) {
     return DashboardAS(
-        jadwal: json["jadwal"],
-        dosen: json["dosen"],
         mahasiswa: json["mahasiswa"],
-        matkul: json["matkul"]
+        dosen: json["dosen"],
+        matakuliah: json["matakuliah"],
+        jadwal: json["jadwal"]
     );
   }
 }
 
-//daftar mahasiswa
-class Mahasiswa {
+// ------------------------------mahasiswa--------------------------------------
+class Mahasiswa{
   String id;
   String nama;
   String nim;
@@ -43,34 +43,26 @@ class Mahasiswa {
   String foto;
   String nim_progmob;
 
-  Mahasiswa({this.id, this.nama, this.nim, this.alamat, this.email,
-    this.foto, this.nim_progmob});
+  // Konstruktor
+  Mahasiswa({
+    this.id, this.nama, this.nim, this.alamat,
+    this.email, this.foto, this.nim_progmob
+  });
 
+  // Mapping dari Json ke object kita
+  // Map<String> -> fieldnya berupa string (tujuannya) dan dynamic karena tidak tahu isi dari JSON-nya apa
   factory Mahasiswa.fromJson(Map<String, dynamic> map) {
-    return Mahasiswa(id: map["id"],
-        nama: map["nama"],
-        nim: map["nim"],
-        alamat: map["alamat"],
-        email: map["email"],
-        foto: map["foto"],
-        nim_progmob: map["nim_progmob"]);
+    return Mahasiswa(id: map["id"], nama: map["nama"], nim: map["nim"], alamat: map["alamat"],
+        email: map["email"], foto: map["foto"], nim_progmob: map["nim_progmob"]);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      "id": id,
-      "nama": nama,
-      "nim": nim,
-      "alamat": alamat,
-      "email": email,
-      "foto": foto,
-      "nim_progmob": nim_progmob
-    };
+    return {"id": id, "nama": nama, "nim": nim, "alamat": alamat, "email": email, "foto": foto, "nim_progmob": nim_progmob};
   }
 
   @override
   String toString() {
-    return 'mhs{id: $id, nama: $nama, nim: $nim, alamat: $alamat, email:$email, foto:$foto, nim_progmob:$nim_progmob}';
+    return 'Mahasiswa{id: $id, nama: $nama, nim: $nim, alamat: $alamat, email: $email, foto: $foto, nim_progmob: $nim_progmob}';
   }
 }
 
@@ -80,6 +72,87 @@ List<Mahasiswa> mahasiswaFromJson(String jsonData) {
 }
 
 String mahasiswaToJson(Mahasiswa data) {
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+
+// ------------------------------dosen------------------------------------------
+class Dosen{
+  String id;
+  String nama;
+  String nidn;
+  String alamat;
+  String email;
+  String gelar;
+  String foto;
+  String nim_progmob;
+
+  Dosen({
+    this.id, this.nama, this.nidn, this.alamat,
+    this.email, this.gelar, this.foto, this.nim_progmob
+  });
+
+  factory Dosen.fromJson(Map<String, dynamic> map) {
+    return Dosen(id: map["id"], nama: map["nama"], nidn: map["nidn"], alamat: map["alamat"],
+        email: map["email"], gelar: map["gelar"], foto: map["foto"], nim_progmob: map["nim_progmob"]);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {"id": id, "nama": nama, "nidn": nidn, "alamat": alamat, "email": email, "foto": foto, "nim_progmob": nim_progmob};
+  }
+
+  @override
+  String toString() {
+    return 'Dosen{id: $id, nama: $nama, nidn: $nidn, alamat: $alamat, email: $email, foto: $foto, nim_progmob: $nim_progmob}';
+  }
+}
+
+List<Dosen> dosenFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<Dosen>.from(data.map((item) => Dosen.fromJson(item)));
+}
+
+String dosenToJson(Dosen data) {
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+
+// ------------------------------matakuliah-------------------------------------
+class Matakuliah{
+  String id;
+  String kode;
+  String nama;
+  String hari;
+  String sesi;
+  String sks;
+  String nim_progmob;
+
+  Matakuliah({
+    this.id, this.kode, this.nama, this.hari,
+    this.sesi, this.sks, this.nim_progmob
+  });
+
+  factory Matakuliah.fromJson(Map<String, dynamic> map) {
+    return Matakuliah(id: map["id"], kode: map["kode"], nama: map["nama"], hari: map["hari"],
+        sks: map["sks"], sesi: map["sesi"], nim_progmob: map["nim_progmob"]);
+  }
+
+  Map<String, dynamic> toJson() => <String, dynamic> {
+    "id": id, "kode": kode, "nama": nama, "hari": hari, "sesi": sesi, "sks": sks, "nim_progmob": nim_progmob
+  };
+
+  @override
+  String toString() {
+    return 'Matakuliah{id: $id, kode: $kode, nama: $nama, hari: $hari, sesi: $sesi, sks: $sks, nim_progmob: $nim_progmob}';
+  }
+}
+
+List<Matakuliah> matkulFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<Matakuliah>.from(data.map((item) => Matakuliah.fromJson(item)));
+}
+
+String matkulToJson(Matakuliah data) {
   final jsonData = data.toJson();
   return json.encode(jsonData);
 }

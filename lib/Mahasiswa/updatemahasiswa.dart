@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:andre_fapp/apiservice.dart';
-import 'dart:convert';
 import 'dart:io';
-import 'package:andre_fapp/model.dart';
-import 'package:image_picker/image_picker.dart';
 
-final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:andre_fapp/apiservice.dart';
+import 'package:andre_fapp/model.dart';
 
 class UpdateMhs extends StatefulWidget {
   final String title;
@@ -23,12 +22,12 @@ class _UpdateMhsState extends State<UpdateMhs> {
   final String title;
   final String nimcari;
   Mahasiswa mhs;
-  bool _isLoading = false;
+  bool isLoading = false;
   File _imageFile;
 
   _UpdateMhsState(this.title, this.mhs, this.nimcari);
 
-  // Select an image via gallery or camera
+  // Select image from galery or camera
   Future<void> _pickImage(ImageSource source) async {
     File selected = await ImagePicker.pickImage(source: source);
 
@@ -38,195 +37,215 @@ class _UpdateMhsState extends State<UpdateMhs> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(this.title),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.blue[700],
       ),
+      backgroundColor: Colors.white,
+
       body: Container(
-          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-          child: SingleChildScrollView(
-            child: Stack(
-              children: <Widget>[
-                Form(
-                  key: _formState,
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
+        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        child: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
+              Form(
+                key: _formState,
+                child: Column(
+                  children: <Widget>[
+
+                    SizedBox(height: 15,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "NIM",
+                          hintText: "NIM",
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            labelText: "NIM",
-                            hintText: "NIM",
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
-                        ),
-                        initialValue: this.mhs.nim,
-                        onSaved: (String value){
-                          this.mhs.nim = value;
-                        },
+                      initialValue: this.mhs.nim,
+                      onSaved: (String value) {
+                        this.mhs.nim = value;
+                      },
+                    ),
+                    SizedBox(height: 15,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "Nama",
+                          hintText: "Nama Mahasiswa",
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
-                      SizedBox(
-                        height: 15,
+                      initialValue: this.mhs.nama,
+                      onSaved: (String value) {
+                        this.mhs.nama = value;
+                      },
+                    ),
+                    SizedBox(height: 15,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: "Alamat",
+                          hintText: "Alamat Mahasiswa",
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            border: OutlineInputBorder(),
-                            labelText: "Nama",
-                            hintText: "Nama Mahasiswa"
-                        ),
-                        initialValue: this.mhs.nama,
-                        onSaved: (String value){
-                          this.mhs.nama = value;
-                        },
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            labelText: "Alamat",
-                            hintText: "Alamat Mahasiswa",
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
-                        ),
-                        initialValue: this.mhs.alamat,
-                        onSaved: (String value){
-                          this.mhs.alamat = value;
-                        },
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
+                      initialValue: this.mhs.alamat,
+                      onSaved: (String value) {
+                        this.mhs.alamat = value;
+                      },
+                    ),
+                    SizedBox(height: 15,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
                           labelText: "Email",
                           hintText: "Email Mahasiswa",
-                          // border: OutlineInputBorder(),
-                          // contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
-                        ),
-                        keyboardType: TextInputType.emailAddress,
-                        initialValue: this.mhs.email,
-                        onSaved: (String value){
-                          this.mhs.email = value;
-                        },
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0)
                       ),
-                      SizedBox(
-                        height: 15,
+                      keyboardType: TextInputType.emailAddress,
+                      initialValue: this.mhs.email,
+                      onSaved: (String value) {
+                        this.mhs.email = value;
+                      },
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    (_imageFile == null && this.mhs.foto == null)
+                        ?
+                    Text("Silahkan pilih gambar")
+                        :
+                    (_imageFile != null)
+                        ?
+                    Image.file(
+                      _imageFile,
+                      fit: BoxFit.cover,
+                      height: 300.0,
+                      alignment: Alignment.topCenter,
+                      width: MediaQuery.of(context).size.width,
+                    )
+                        :
+                    Image.network(
+                      this.mhs.foto,
+                      fit: BoxFit.cover,
+                      height: 300.0,
+                      alignment: Alignment.topCenter,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    MaterialButton(
+                      minWidth: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      color: Colors.blue,
+                      onPressed: () {
+                        _pickImage(ImageSource.gallery);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          new Icon(Icons.image, color: Colors.white,),
+                          Text(
+                            "Upload",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold
+                            ),
+                          )
+                        ],
                       ),
-                      // ternary operation ====== object? true : false atau else
-                      (_imageFile == null && this.mhs.foto == null)
-                          ?
-                      Text('Silahkan memilih gambar terlebih dahulu')
-                          :
-                      (_imageFile != null)
-                          ?
-                      Image.file(_imageFile,
-                        fit: BoxFit.cover,
-                        height: 300.0,
-                        alignment: Alignment.topCenter,
-                        width: MediaQuery.of(context).size.width,
-                      )
-                          :
-                      Image.network(
-                        this.mhs.foto,
-                        fit: BoxFit.cover,
-                        height: 300.0,
-                        alignment: Alignment.topCenter,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                      MaterialButton(
-                        minWidth: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                        color: Colors.blue,
-                        onPressed: () {
-                          _pickImage(ImageSource.gallery);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            new Icon(Icons.image,color: Colors.white70,),
-                            Text("Upload foto", textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold
-                              ),)
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      MaterialButton(
-                        minWidth: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                        color: Colors.blue,
-                        onPressed: () {
-                          return showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text("Simpan Data"),
-                                content: Text("Apakah data ini akan disimpan?"),
-                                actions: <Widget>[
-                                  FlatButton(
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    MaterialButton(
+                      minWidth: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      color: Colors.blue,
+                      onPressed: () {
+                        return showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text("Simpan Data"),
+                              content: Text("Apakah data ini akan anda simpan ?"),
+                              actions: <Widget>[
+                                FlatButton(
                                     onPressed: () async {
                                       _formState.currentState.save();
-                                      setState(() => _isLoading = true);
+                                      setState(() => isLoading = true);
                                       this.mhs.nim_progmob = "72180187";
+                                      // List<int> imageByte = _imageFile.readAsBytesSync();
+                                      // this.mhs.foto = base64Encode(imageByte);
                                       ApiServices().updateMhsWithFoto(this.mhs, _imageFile, nimcari).then((isSuccess) {
-                                        setState(() => _isLoading = false);
+                                        setState(() => isLoading = false);
                                         if (isSuccess) {
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                        } else {
                                           Navigator.pop(context);
                                           Navigator.pop(context);
                                         }
                                       });
                                     },
-                                    child: Text('Ya'),
-                                  ),
-                                  FlatButton(
+                                    child: Text("Ya")
+                                ),
+                                FlatButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Tidak'),
-                                  )
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        child: Text("Simpan",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold
-                          ),
+                                    child: Text("Tidak")
+                                )
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      child: Text(
+                        "Simpan",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                _isLoading
-                    ?Stack(
-                  children: <Widget>[
-                    Opacity(
-                      opacity: 0.3,
-                      child: ModalBarrier(
-                        dismissible: false,
-                        color: Colors.grey,
-                      ),
                     ),
-                    Center(
-                      child: CircularProgressIndicator(),
+                    SizedBox(
+                      height: 20,
                     ),
                   ],
-                )
-                    :Container(),
-              ],
-            ),
-          )
+                ),
+              ),
+              // Center(
+              //   child: CircularProgressIndicator(),
+              // )
+              isLoading
+                  ? Stack(
+                children: <Widget>[
+                  // Opacity(
+                  //   opacity: 0.3,
+                  //   child: ModalBarrier(
+                  //     dismissible: false,
+                  //     color: Colors.grey,
+                  //   ),
+                  // ),
+                  Center(
+                    child: CircularProgressIndicator(),
+                  )
+                ],
+              )
+                  : Container(),
+            ],
+          ),
+        ),
       ),
     );
   }
