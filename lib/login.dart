@@ -14,11 +14,18 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
-  final myUsernameController = TextEditingController();
-  final myPasswordController = TextEditingController();
+  final nimnikController = TextEditingController();
+  final passwordController = TextEditingController();
   String username, password;
   bool showPassword = false;
 
+  @override
+  void dispose(){
+    nimnikController.dispose();
+    passwordController.dispose();
+    super.dispose();
+
+  }
   void navigateLogin() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
@@ -68,7 +75,7 @@ class _LoginState extends State<Login> {
                     } else
                       return null;
                   },
-                  controller: myUsernameController,
+                  controller: nimnikController..text="72160000",
                   decoration: new InputDecoration(
                     icon: const Icon(Icons.person),
                     labelText: "Username",
@@ -81,6 +88,7 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.all(5.0),
                 ),
                 new TextFormField(
+
                   validator: (value){
                     if(value.isEmpty && value.length == 0) {
                       return "Password tidak boleh kosong";
@@ -90,7 +98,7 @@ class _LoginState extends State<Login> {
                       return null;
                   },
                   obscureText: !this.showPassword,
-                  controller: myPasswordController,
+                  controller: passwordController..text="progmob",
                   decoration: new InputDecoration(
                     icon: const Icon(Icons.lock),
                     labelText: "Password",
