@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(isLogin==1){
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Dasbrd(title:"Dashboard",)),
+        MaterialPageRoute(builder: (context) => Dasbrd(title:"TUGAS AKHIR SEMESTER ",)),
       );
     }
   }

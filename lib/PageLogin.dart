@@ -84,7 +84,7 @@ class _PageLoginState extends State<PageLogin> {
 
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => bottomnav(title: 'TUGAS 9',)),
+                  MaterialPageRoute(builder: (context) => bottomnav(title: 'TUGAS AKHIR SEMESTER',)),
                 );
               },
             )

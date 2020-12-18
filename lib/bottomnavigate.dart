@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2020/abt.dart';
+import 'package:flutter_2020/dashboard.dart';
 import 'package:flutter_2020/home.dart';
+import 'package:flutter_2020/main.dart';
 import 'package:flutter_2020/tugas8.dart';
 
 class bottomnav extends StatefulWidget {
@@ -33,6 +35,7 @@ class _bottomnavState extends State<bottomnav> {
         title: Text(widget.title),
       ),
       body: _children[_currentIndex],
+
       bottomNavigationBar: BottomNavigationBar(
         onTap:  onTappedBar,
         currentIndex: _currentIndex,
@@ -51,6 +54,11 @@ class _bottomnavState extends State<bottomnav> {
           )
         ],
       ),
+        body: getBodyWidget()
     );
   }
+  getBodyWidget(){
+    (_currentIndex==0)? Dasbrd(): abt();
+  }
+}
 }

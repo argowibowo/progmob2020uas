@@ -19,18 +19,26 @@ class Dasbrd extends StatefulWidget {
 }
 
 class _DasbrdState extends State<Dasbrd> {
-  int _counter = 2;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  void validate(){
+    if(formkey.currentState.validate()){
+      print("validated");
+    }else{
+      print("failed");
+    }
   }
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  var dashbrd = [
+    "Data Mahasiswa",
+    "Data Dosen",
+    "Pilihan Mata Kuliah",
+    "Jadwal Kuliah"
+  ];
+  var images = [
+    "assets/lmaha.png",
+    "assets/ldosen.png",
+    "assets/lbuku.png",
+    "assets/ljadwal.png"
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +49,7 @@ class _DasbrdState extends State<Dasbrd> {
           children: <Widget>[
             UserAccountsDrawerHeader(
              accountName: Text("Mikhael Effandito"),
-             accountEmail: Text("effandito@88rising.ac.id"),
+             accountEmail: Text("mikhael.effandito@si.ukdw.ac.id"),
              currentAccountPicture : CircleAvatar(
               backgroundColor: Colors.white,
               child: Text(
@@ -58,7 +66,7 @@ class _DasbrdState extends State<Dasbrd> {
               Navigator.pop(context);
               Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder:(context) => Dashboarddos(title: "Dashboard Dosen",)),
+              MaterialPageRoute(builder:(context) => DashBoardDosen(title: "Dashboard Dosen",)),
               );
             },
             ),
@@ -70,7 +78,7 @@ class _DasbrdState extends State<Dasbrd> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder:(context) => Dashboardmah(title:"Dashboard Mahasiswa",)),
+                  MaterialPageRoute(builder:(context) => dashboardmhs(title:"Dashboard Mahasiswa",)),
                 );
               },
             ),
@@ -82,7 +90,7 @@ class _DasbrdState extends State<Dasbrd> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder:(context) => DashboardMatkul(title:"Dashboard Matakuliah",)),
+                  MaterialPageRoute(builder:(context) => dashboardmatakuliah(title:"Dashboard Matakuliah",)),
                 );
               },
             ),
@@ -120,17 +128,39 @@ class _DasbrdState extends State<Dasbrd> {
         ),
        ),
       body: Container(
-       child: Center(
-      child: Text("Dashboard",
-      style: TextStyle(
-          fontSize: 20
-      )
+        child:  GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            if (index < 4) {
+              return Card(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Image.asset(images[index], height: 89, width: 89),
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text(dashbrd[index], style: TextStyle(
+                          fontSize: 13.5, height: 1.2, fontWeight: FontWeight
+                          .bold),
+                          textAlign: TextAlign.center),
+                    )
+                  ],
+                ),
+              );
+            } else {
+              return null;
+            }
+          },
+        ),
       ),
-      ),
-  )
-  );
+    );
   }
 }
+
 
 
 

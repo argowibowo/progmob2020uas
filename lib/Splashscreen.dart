@@ -15,7 +15,7 @@ class _splshscrnState extends State<splshscrn> {
       backgroundColor: Colors.yellowAccent,
       image: Image.asset('assets/kmpus.gif'),
       photoSize: 160.0,
-      navigateAfterSeconds: PageLogin(title: 'TUGAS 9',),
+      navigateAfterSeconds: PageLogin(title: 'TUGAS AKHIR SEMESTER',),
     );
   }
 }
