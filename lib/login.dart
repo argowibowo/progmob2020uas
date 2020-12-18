@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:progmob_flutter/dashboard.dart';
-import 'package:progmob_flutter/main.dart';
-import 'package:progmob_flutter/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -41,22 +39,19 @@ class _LoginState extends State<Login> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    shape: BoxShape.circle
-                ),
-                child: Center(
-                  child: Icon(Icons.people, size:40, color: Colors.white),
-                )
+              child: Image.asset(
+                "images/20201218_212950_0000.png",
+                width: 200.0,
+                height: 200.0,
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(10.0),
             ),
 
             RaisedButton(
-                child: Text(
+                child:
+                Text(
                     'Login'
                 ),
                 onPressed: () async {
@@ -71,7 +66,7 @@ class _LoginState extends State<Login> {
           ],
         ),
       ),
-       // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

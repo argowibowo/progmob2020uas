@@ -130,5 +130,186 @@ class ApiServices {
     }
   }
 
+  //-------------------- dosen----------------------------------
+  Future<List<Dosen>> getDosen() async{
+    final response = await client.get("$baseUrl/api/progmob/dosen/72180260");
+    if (response.statusCode == 200){
+      return dosenFromJson(response.body);
+    }else{
+      return null;
+    }
+  }
+
+  Future<bool> createDosen(Dosen data) async{
+    final response = await client.post("$baseUrl/api/progmob/dosen/create",
+        headers: {"content-type": "application/json"},
+        body: dosenToJson(data)
+    );
+    if(response.statusCode ==200){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  Future<bool> createDosenWithFoto(Dosen data, File file, String filename) async{
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse("$baseUrl/api/progmob/dosen/createwithfoto")
+    );
+
+    Map<String,String> headers={
+      "Content-type":"multipart/form-data"
+    };
+
+    request.headers.addAll(headers);
+    request.files.add(
+        http.MultipartFile(
+            "foto",
+            file.readAsBytes().asStream(),
+            file.lengthSync(),
+            filename: filename
+        )
+    );
+
+    request.fields.addAll({
+      "nama":data.nama,
+      "nidn":data.nidn,
+      "alamat":data.alamat,
+      "email":data.email,
+      "gelar":data.gelar,
+      "nim_progmob":data.nim_progmob,
+    });
+
+    var response = await request.send();
+    if(response.statusCode == 200){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  Future<bool> updateDosenWithFoto(Dosen data, File file, String nidncari) async{
+    String isfotoupdate = "0";
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse("$baseUrl/api/progmob/dosen/updatewithfoto")
+    );
+    Map<String,String> headers={
+      "Content-type":"multipart/form-data"
+    };
+    request.headers.addAll(headers);
+
+    if(file != null){
+      request.files.add(
+          http.MultipartFile(
+              "foto",
+              file.readAsBytes().asStream(),
+              file.lengthSync(),
+              filename: file.path
+          )
+      );
+      isfotoupdate = "1";
+    }
+
+    request.fields.addAll({
+      "nama":data.nama,
+      "nidn":data.nidn,
+      "alamat":data.alamat,
+      "email":data.email,
+      "gelar" :data.gelar,
+      "nim_progmob":data.nim_progmob,
+      "nidn_cari":nidncari,
+      "is_foto_update":isfotoupdate
+    }
+    );
+    var response = await request.send();
+    if(response.statusCode == 200){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  Future<bool> deleteDosen(String nidn) async{
+    final response = await client.post(
+        "$baseUrl/api/progmob/dosen/delete",
+        headers: {"content-type": "application/json"},
+        body: jsonEncode(<String, String>{
+          "nidn":nidn,
+          "nim_progmob":"72180260"
+        })
+    );
+    if(response.statusCode == 200){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  //-------------------- dosen----------------------------------
+  Future<List<MataKuliah>> getMataKuliah() async{
+    final response = await client.get("$baseUrl/api/progmob/matkul/72180260");
+    if (response.statusCode == 200){
+      return mataKuliahFromJson(response.body);
+    }else{
+      return null;
+    }
+  }
+
+  Future<bool> createMataKuliah(MataKuliah data) async{
+    final response = await client.post("$baseUrl/api/progmob/matkul/create",
+        headers: {"content-type": "application/json"},
+        body: mataKuliahToJson(data)
+    );
+    if(response.statusCode ==200){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  Future<bool> updateMatKul(MataKuliah data, String kodecari) async{
+    String isfotoupdate = "0";
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse("$baseUrl/api/progmob/matkul/update")
+    );
+    Map<String,String> headers={
+      "Content-type":"multipart/form-data"
+    };
+
+    request.fields.addAll({
+      "kodeMataKuliah":data.kodeMataKuliah,
+      "hari":data.hari,
+      "sesi":data.sesi,
+      "nama":data.nama,
+      "nim_progmob":data.nim_progmob,
+      "kode_cari":kodecari,
+    }
+    );
+    var response = await request.send();
+    if(response.statusCode == 200){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  Future<bool> deleteMatKul(String kodeMataKuliah) async{
+    final response = await client.post(
+        "$baseUrl/api/progmob/matkul/delete",
+        headers: {"content-type": "application/json"},
+        body: jsonEncode(<String, String>{
+          "kodeMataKuliah":kodeMataKuliah,
+          "nim_progmob":"72180260"
+        })
+    );
+    if(response.statusCode == 200){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 
 }

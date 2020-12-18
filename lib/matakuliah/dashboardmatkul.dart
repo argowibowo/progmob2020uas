@@ -1,24 +1,24 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:progmob_flutter/dosen/adddosen.dart';
-import 'package:progmob_flutter/dosen/updatedosen.dart';
+import 'package:progmob_flutter/matakuliah/addmatkul.dart';
+import 'package:progmob_flutter/matakuliah/updatematkul.dart';
 import 'package:progmob_flutter/model.dart';
 import 'package:progmob_flutter/apiservices.dart';
 
 
-class DashboardDosen extends StatefulWidget {
-  DashboardDosen({Key key, this.title}) : super(key: key);
+class DashboardMataKuliah extends StatefulWidget {
+  DashboardMataKuliah({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _DashboardDosenState createState() => _DashboardDosenState();
+  _DashboardMataKuliahState createState() => _DashboardMataKuliahState();
 }
 
-class _DashboardDosenState extends State<DashboardDosen> {
+class _DashboardMataKuliahState extends State<DashboardMataKuliah> {
   final _formKey = GlobalKey<FormState>();
 
-  List<Dosen> lDosen = new List();
+  List<MataKuliah> lMatKul = new List();
 
   FutureOr onGoBack(dynamic value){
     setState(() {});
@@ -36,15 +36,15 @@ class _DashboardDosenState extends State<DashboardDosen> {
             onPressed: (){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddDosen(title: "Tambah Data Dosen")),
+                MaterialPageRoute(builder: (context) => AddMatKul(title: "Tambah Data Mata Kuliah")),
               ).then(onGoBack);
             },
           )
         ],
       ),
       body: FutureBuilder(
-        future: ApiServices().getDosen(),
-        builder: (BuildContext context, AsyncSnapshot<List<Dosen>> snapshot){
+        future: ApiServices().getMataKuliah(),
+        builder: (BuildContext context, AsyncSnapshot<List<MataKuliah>> snapshot){
           if(snapshot.hasError){
             return Center(
               child: Text(
@@ -52,18 +52,15 @@ class _DashboardDosenState extends State<DashboardDosen> {
               ),
             );
           } else if (snapshot.connectionState == ConnectionState.done){
-            lDosen = snapshot.data;
+            lMatKul = snapshot.data;
             return ListView.builder(
               itemBuilder: (context, position){
                 return Card(
                   margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
                   child: Container(
                     child: ListTile(
-                      title: Text(lDosen[position].nama + " - " + lDosen[position].nidn),
-                      subtitle: Text(lDosen[position].gelar),
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(lDosen[position].foto),
-                      ),
+                      title: Text(lMatKul[position].sesi + " - " + lMatKul[position].kodeMataKuliah),
+                      subtitle: Text(lMatKul[position].dosen),
                       onLongPress: (){
                         showDialog(
                             context: context,
@@ -77,8 +74,8 @@ class _DashboardDosenState extends State<DashboardDosen> {
                                       Navigator.pop(context);
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => UpdateDosen(title: "Update Dosen",
-                                            dosen:lDosen[position], nidncari: lDosen[position].nidn)),
+                                        MaterialPageRoute(builder: (context) => UpdateMatKul(title: "Update Mata Kuliah",
+                                            matkul:lMatKul[position], kodecari: lMatKul[position].kodeMataKuliah)),
                                       ).then(onGoBack);
                                     },
                                   ),
@@ -89,7 +86,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
                                   FlatButton(
                                       child: Text("Delete"),
                                       onPressed: () async{
-                                        ApiServices().deleteDosen(lDosen[position].nidn);
+                                        ApiServices().deleteMatKul(lMatKul[position].kodeMataKuliah);
                                         Navigator.pop(context);
                                         setState(() {});
                                       })
@@ -102,7 +99,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
                   ),
                 );
               },
-              itemCount: lDosen.length,
+              itemCount: lMatKul.length,
             );
           } else{
             return Center(
