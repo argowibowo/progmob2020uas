@@ -1,26 +1,32 @@
-import 'dart:ffi';
 import 'package:flutter/material.dart';
-
-import 'package:flutter_progmob2020/login.dart';
-import 'package:flutter_progmob2020/tugas8.dart';
+import 'package:progmob_flutter/dashbord.dart';
+import 'package:progmob_flutter/pertemuan2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class login extends StatefulWidget {
-  login({Key key, this.title}) : super(key: key);
+SharedPreferences isLogin;
 
+class Login extends StatefulWidget {
+  Login({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
   _LoginState createState() => _LoginState();
 }
-class _LoginState extends State<login> {
-  void navigateLogin() async{
+
+class _LoginState extends State<Login> {
+  final _formKey = GlobalKey<FormState>();
+  final myUsernameController = TextEditingController();
+  final myPasswordController = TextEditingController();
+  String username, password;
+  bool showPassword = false;
+
+  void navigateLogin() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
     if(isLogin == 1){
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => tugas8(title: "PROGMOB2020",))
+        context,
+        MaterialPageRoute(builder: (context) => Pertemuan2(title: "Halaman Utama",)),
       );
     }
   }
@@ -34,60 +40,114 @@ class _LoginState extends State<login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("PROGMOB 2020"),
+        title: Text(widget.title),
       ),
-      body: Padding(
-        padding:EdgeInsets.all(15.0),
-        child : Center(
-            child : Form(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  TextFormField(
-                    decoration: new InputDecoration(
-                      labelText: 'Username',
-                      hintText: 'contoh: Aji Wibowo',
-                      border: OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(5),
-                      ),
-                    ),
+      body: Form(
+        key: _formKey,
+        // using SingleChildScrollView biar tidak ada garis markanya :)
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                  // seberapa besar device, akan diukur tingginya
+                  height: MediaQuery.of(context).size.height / 5,
+                child: new Image.asset(
+                  "images/Salvador.png",
+                  // width: 200,
+                  // height: 200,
+                ),
+              ),
+              new TextFormField(
+                validator: (value){
+                  if(value.isEmpty && value.length == 0) {
+                    return "Username tidak boleh kosong";
+                  } else if (!value.contains('72170108')){
+                    return "Username Anda salah";
+                  } else
+                  return null;
+                },
+                controller: myUsernameController,
+                decoration: new InputDecoration(
+                  icon: const Icon(Icons.person),
+                  labelText: "Username",
+                  border: OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(5),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(3.0),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(5.0),
+              ),
+              new TextFormField(
+                validator: (value){
+                  if(value.isEmpty && value.length == 0) {
+                    return "Password tidak boleh kosong";
+                  } else if (!value.contains('12345')){
+                    return "Password Anda salah";
+                  } else
+                  return null;
+                },
+                obscureText: !this.showPassword,
+                controller: myPasswordController,
+                decoration: new InputDecoration(
+                  icon: const Icon(Icons.lock),
+                  labelText: "Password",
+                  border: OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(5),
                   ),
-                  TextFormField(
-                    decoration: new InputDecoration(
-                      labelText: 'Input Password',
-                      hintText: '**',
-                      border: OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(5),
-                      ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      // Icons.visibility_off,
+                      // color: this.showPassword ? Colors.blue : Colors.grey,
+                      showPassword ? Icons.visibility : Icons.visibility_off,
                     ),
+                    onPressed: () {
+                      setState(() {
+                        this.showPassword = !this.showPassword;
+                      });
+                    },
                   ),
-                  RaisedButton(
-                    color: Colors.blue,
-                    child: Text(
-                      "LOGIN",
-                      style: TextStyle(
-                          color: Colors.white
-                      ),
-                    ),
-                    onPressed:() async{
+                ),
+
+              ),
+              RaisedButton (
+                color: Colors.blue,
+                // disabledColor: Colors.blue,
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                      color: Colors.white
+                  ),
+                ),
+                onPressed: () async {
+                  if(_formKey.currentState.validate()){
+                    // // get value from textbox
+                    // username = myUsernameController.text;
+                    // password = myPasswordController.text;
+                    // if(username != '72170108'){
+                    //   return "Username anda salah";
+                    // } else if(password != '12345'){
+                    //   return "Password anda salah";
+                    // } else {
                       SharedPreferences pref = await SharedPreferences.getInstance();
-                      await pref.setInt("Is_login", 1);
+                      await pref.setInt("is_login", 1);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => tugas8(title: "PROGMOB 2020",)),
+                        MaterialPageRoute(builder: (context) => Dashboard(title: "Dashboard",)),
                       );
-                    },
-                  )
-                ],
-              ),
-            )
-        ),
+                    // }
+                    _formKey.currentState.save();
+                  }
+                },
+              )
+            ],
+          ),
+        )
+
       ),
     );
   }
-
-
 }
