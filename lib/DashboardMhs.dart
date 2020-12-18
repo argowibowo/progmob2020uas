@@ -6,8 +6,7 @@ import 'package:flutter_app/mahasiswa/addmhs.dart';
 import 'package:flutter_app/mahasiswa/updatemhs.dart';
 import 'package:flutter_app/model.dart';
 
-//import add
-//import update
+
 
 class DashboardMhs extends StatefulWidget {
   DashboardMhs({Key key, this.title}) : super(key: key);

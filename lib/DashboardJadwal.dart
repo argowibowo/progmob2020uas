@@ -1,13 +1,28 @@
+import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_app/apiservices.dart';
+import 'package:flutter_app/jadwal/addjadwal.dart';
+import 'package:flutter_app/jadwal/updatejadwal.dart';
+import 'package:flutter_app/model.dart';
 class DashboardJadwal extends StatefulWidget {
   DashboardJadwal({Key key, this.title}) : super(key: key);
+
   final String title;
+
   @override
   _DashboardJadwalState createState() => _DashboardJadwalState();
 }
+
 class _DashboardJadwalState extends State<DashboardJadwal> {
   final _formKey = GlobalKey<FormState>();
+
+  List<Jadwal> lJadwal = new List();
+
+  FutureOr onGoBack(dynamic value){
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,39 +30,82 @@ class _DashboardJadwalState extends State<DashboardJadwal> {
         title: Text(widget.title),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add),
-            onPressed: (){},
-          ),
+            icon: Icon(Icons.playlist_add),
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddJadwal(title: "Tambah Data Jadwal")),
+              ).then(onGoBack);
+            },
+          )
         ],
       ),
-      body: Container(
-        child: GestureDetector(
-          child: Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ListTile(
-                  leading: Icon(Icons.schedule_outlined),
-                  title: Text("[SI3333] PEMOGRAMAN MOBILE GRUP D( 3 SKS )"),
-                  subtitle: Text("JUMAT, 09:30 - 11:20 WIB "),
-                  trailing: PopupMenuButton(
-                    itemBuilder: (_) => <PopupMenuItem<String>>[
-                      new PopupMenuItem<String>(
-                        child: const Text('Update'), value: 'Update',
-                      ),
-                      new PopupMenuItem<String>(
-                        child: const Text('Delete'), value: 'Delete',
-                      ),
-                      new PopupMenuItem<String>(
-                        child: const Text('Edit'), value: 'Edit',
-                      ),
-                    ],
+      body: FutureBuilder(
+        future: ApiServices().getJadwal(),
+        builder: (BuildContext context, AsyncSnapshot<List<Jadwal>> snapshot){
+          if(snapshot.hasError){
+            return Center(
+              child: Text(
+                  "Something Wrong with message: ${snapshot.error.toString()}"
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done){
+            lJadwal = snapshot.data;
+            return ListView.builder(
+              itemBuilder: (context, position){
+                return Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
+                  child: Container(
+                    child: ListTile(
+                      leading: Icon(Icons.menu_book_outlined),
+                      title: Text(lJadwal[position].id_matkul +" - "+ lJadwal[position].id_dosen),
+                      subtitle: Text(lJadwal[position].hari +" || "+ lJadwal[position].sesi),
+                      onLongPress: (){
+                        showDialog(
+                            context: context,
+                            builder: (_) => new AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  FlatButton(
+                                    child: Text("Update"),
+                                    onPressed: (){
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => UpdateJadwal(title: "Update Jadwal",
+                                            jadwal: lJadwal[position],kodecari: lJadwal[position].id_matkul)),
+                                      ).then(onGoBack);
+                                    },
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    height: 20,
+                                  ),
+                                  FlatButton(
+                                      child: Text("Delete"),
+                                      onPressed: () async{
+                                        ApiServices().deleteJadwal(lJadwal[position].id_matkul);
+                                        Navigator.pop(context);
+                                        setState(() {});
+                                      })
+                                ],
+                              ),
+                            )
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ),
+                );
+              },
+              itemCount: lJadwal.length,
+            );
+          } else{
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }
