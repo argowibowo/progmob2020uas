@@ -22,6 +22,7 @@ class _JadwalState extends State<Jadwal> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.red[700],
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
@@ -29,6 +30,7 @@ class _JadwalState extends State<Jadwal> {
           )
         ],
       ),
+      backgroundColor: Colors.red[100],
 
       body: Container(
         child: Card(

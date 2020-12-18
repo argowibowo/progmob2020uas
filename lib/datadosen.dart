@@ -35,6 +35,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.red[700],
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
@@ -47,6 +48,8 @@ class _DashboardDosenState extends State<DashboardDosen> {
           )
         ],
       ),
+      backgroundColor: Colors.red[100],
+
 
       body: FutureBuilder(
         future: ApiServices().getDosen(),

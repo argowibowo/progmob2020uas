@@ -30,7 +30,9 @@ class _AddMatkulState extends State<AddMatkul> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.red[700],
       ),
+      backgroundColor: Colors.red[100],
 
       body: Container(
         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),

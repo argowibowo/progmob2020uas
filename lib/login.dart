@@ -40,7 +40,9 @@ class _LoginState extends State<Login> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.red[700],
       ),
+      backgroundColor: Colors.red[100],
       body: Form(
           key: _formKey,
           // using SingleChildScrollView biar tidak ada garis markanya :)

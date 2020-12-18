@@ -37,6 +37,7 @@ class _DashboardMhsState extends State<DashboardMhs> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.red[700],
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
@@ -49,6 +50,7 @@ class _DashboardMhsState extends State<DashboardMhs> {
           )
         ],
       ),
+      backgroundColor: Colors.red[100],
 
       body: FutureBuilder(
         future: ApiServices().getMahasiswa(),

@@ -36,6 +36,7 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.red[700],
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
@@ -48,7 +49,7 @@ class _DashboardMatkulState extends State<DashboardMatkul> {
           )
         ],
       ),
-
+      backgroundColor: Colors.red[100],
       body: FutureBuilder(
         future: ApiServices().getMatkul(),
         builder: (BuildContext context, AsyncSnapshot<List<Matakuliah>> snapshot) {
