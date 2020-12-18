@@ -6,17 +6,21 @@ import 'package:flutter_app_72180256/Mahasiswa/addmhs.dart';
 import 'package:flutter_app_72180256/Mahasiswa/updatemhs.dart';
 import 'package:flutter_app_72180256/main.dart';
 import 'package:flutter_app_72180256/model.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DashboardMahasiswa extends StatefulWidget {
-  DashboardMahasiswa({Key key, this.title}) : super(key: key);
+final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
+
+class Mhs extends StatefulWidget {   //<~~~
+  Mhs({Key key, this.title}) : super(key: key);  //<~~~~
+
   final String title;
 
   @override
-  _DashboardMahasiswaState createState() => _DashboardMahasiswaState();
+  _MhsState createState() => _MhsState();   //<~~~
 }
 
-class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
+class _MhsState extends State<Mhs> {//<~~~~
   final _formKey = GlobalKey<FormState>();
 
   List<Mahasiswa> lMhs = new List();
@@ -31,6 +35,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          backgroundColor: Colors.green,
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),
@@ -43,6 +48,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
             )
           ],
         ),
+        backgroundColor: Colors.blue,
         body: FutureBuilder(
           future: ApiServices().getMahasiswas(),
           builder: (BuildContext context, AsyncSnapshot<List<Mahasiswa>> snapshot){
