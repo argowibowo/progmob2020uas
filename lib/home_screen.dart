@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
             //       begin: Alignment.topCenter, end: Alignment.bottomCenter),
               image: DecorationImage(
                   alignment: Alignment.topCenter,
-                  image: NetworkImage('https://www.jagoanhosting.com/wp-content/uploads/2017/10/bg-top-header.png')),
+                  image: NetworkImage('https://s19386.pcdn.co/wp-content/uploads/2017/01/background-header-technology.jpg')),
             ),
           ),
           SafeArea(
