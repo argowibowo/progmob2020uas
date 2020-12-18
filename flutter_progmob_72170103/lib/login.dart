@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterprogmob72170103/dashboard.dart';
 import 'package:flutterprogmob72170103/pertemuan2.dart';
@@ -51,7 +52,7 @@ class _LoginState extends State<Login> {
               children: <Widget>[
                 new Container(
                   margin: EdgeInsets.only(left: 20, right: 20),
-                  // seberapa besar device, akan diukur tingginya
+
                   height: MediaQuery.of(context).size.height / 5,
                   child: new Image.asset(
                     "images/person.png",

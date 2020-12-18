@@ -4,7 +4,8 @@ import 'package:flutterprogmob72170103/dashboard.dart';
 import 'package:flutterprogmob72170103/login.dart';
 import 'package:flutterprogmob72170103/pertemuan2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'main.dart';
+import 'package:flutter/widgets.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
@@ -33,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
   // }
 
   startSplashScreen() async {
-    var duration = const Duration(seconds: 2);
+    var duration = const Duration(seconds: 3);
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
     if(isLogin == 1){

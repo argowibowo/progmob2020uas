@@ -2,23 +2,25 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterprogmob72170103/apiservices.dart';
-import 'package:flutterprogmob72170103/dosen/updatedosen.dart';
+import 'package:flutterprogmob72170103/mahasiswa/addmhs.dart';
+import 'package:flutterprogmob72170103/mahasiswa/updatemhs.dart';
 import 'package:flutterprogmob72170103/model.dart';
-import 'adddosen.dart';
 
-class DashboardDosen extends StatefulWidget {
-  DashboardDosen({Key key, this.title}) : super(key: key);
+class DashboardMhs extends StatefulWidget {
+  DashboardMhs({Key key, this.title}) : super(key: key);
+
   final String title;
 
   @override
-  _DashboardDosenState createState() => _DashboardDosenState();
+  _DashboardMhsState createState() => _DashboardMhsState();
 }
 
-class _DashboardDosenState extends State<DashboardDosen> {
+class _DashboardMhsState extends State<DashboardMhs> {
   final _formKey = GlobalKey<FormState>();
 
-  List<Dosen> listDosen;
+  List<Mahasiswa> listMhs;
 
+  // Refresh
   FutureOr onGoBack(dynamic value) {
     setState(() {});
   }
@@ -39,7 +41,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
               onPressed: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddDosen(title: "Masukkan Data Dosen"))
+                    MaterialPageRoute(builder: (context) => AddMhs(title: "Masukkan Data Mahasiswa"))
                 ).then(onGoBack);
               }
           )
@@ -47,8 +49,8 @@ class _DashboardDosenState extends State<DashboardDosen> {
       ),
 
       body: FutureBuilder(
-        future: ApiServices().getDosen(),
-        builder: (BuildContext context, AsyncSnapshot<List<Dosen>> snapshot) {
+        future: ApiServices().getMahasiswa(),
+        builder: (BuildContext context, AsyncSnapshot<List<Mahasiswa>> snapshot) {
           if (snapshot.hasError){
             return Center(
               child: Text(
@@ -56,7 +58,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
               ),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
-            listDosen = snapshot.data;
+            listMhs = snapshot.data;
 
             return ListView.builder(
               itemBuilder: (context, position) {
@@ -64,10 +66,10 @@ class _DashboardDosenState extends State<DashboardDosen> {
                   margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
                   child: Container(
                     child: ListTile(
-                      title: Text(listDosen[position].nama),
-                      subtitle: Text(listDosen[position].nidn + " - " + listDosen[position].email),
+                      title: Text(listMhs[position].nama + " - " + listMhs[position].nim),
+                      subtitle: Text(listMhs[position].email),
                       leading: CircleAvatar(
-                        backgroundImage: NetworkImage(listDosen[position].foto),
+                        backgroundImage: NetworkImage(listMhs[position].foto),
                       ),
                       onLongPress: () {
                         showDialog(
@@ -81,22 +83,24 @@ class _DashboardDosenState extends State<DashboardDosen> {
                                         Navigator.pop(context);
                                         Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) => UpdateDosen(title: "Update Data Dosen",
-                                                dosen: listDosen[position],
-                                                nidn_cari: listDosen[position].nidn))
+                                            MaterialPageRoute(builder: (context) => UpdateMhs(title: "Update Data Mahasiswa",
+                                                mhs: listMhs[position],
+                                                nim_cari: listMhs[position].nim))
                                         ).then(onGoBack);
                                       },
                                       child: Text("Update")
                                   ),
                                   Divider(
-                                    color: Colors.brown,
+                                    color: Colors.black,
                                     height: 20,
                                   ),
                                   FlatButton(
                                       onPressed: () async {
-                                        ApiServices().deleteDosen(listDosen[position].nidn);
+                                        ApiServices().deleteMhs(listMhs[position].nim);
                                         Navigator.pop(context);
-                                        setState(() {});
+                                        setState(() {
+
+                                        });
                                       },
                                       child: Text("Delete")
                                   ),
@@ -109,7 +113,7 @@ class _DashboardDosenState extends State<DashboardDosen> {
                   ),
                 );
               },
-              itemCount: listDosen.length,
+              itemCount: listMhs.length,
             );
           } else {
             return Center(

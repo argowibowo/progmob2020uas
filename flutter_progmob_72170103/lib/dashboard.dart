@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'file:///C:/Users/CHLARA/Android/flutter_progmob_72170103/lib/dosen/dashboarddosen.dart';
 import 'file:///C:/Users/CHLARA/Android/flutter_progmob_72170103/lib/jadwal/dashboardjadwal.dart';
-import 'file:///C:/Users/CHLARA/Android/flutter_progmob_72170103/lib/matakuliah/dashbordmatkul.dart';
-import 'file:///C:/Users/CHLARA/Android/flutter_progmob_72170103/lib/mahasiswa/dashbordmhs.dart';
+import 'file:///C:/Users/CHLARA/Android/flutter_progmob_72170103/lib/matakuliah/dashboardmatkul.dart';
+import 'file:///C:/Users/CHLARA/Android/flutter_progmob_72170103/lib/mahasiswa/dashboardmhs.dart';
 import 'package:flutterprogmob72170103/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,7 +38,7 @@ class _DashboardState extends State<Dashboard> {
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text(
-                  "BCA",
+                  "BC",
                   style: TextStyle(fontSize: 40.0),
                 ),
               ),
