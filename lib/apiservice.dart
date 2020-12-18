@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:simpelproject/model.dart';
 import 'package:http/http.dart' show Client;
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiServices {
   final String baseUrl = "https://argouchiha.000webhostapp.com";
@@ -323,6 +324,89 @@ Future<List<Matkul>> getMatkul() async {
       return false;
     }
   }
+
+  Future<List<Jadwal>> getJadwal() async {
+    final response = await client.get("$baseUrl/api/progmob/jadwal/72180268");
+    if (response.statusCode == 200) {
+      return jadwalFromJson(response.body);
+    } else {
+      return null;
+    }
+  }
+
+  Future<bool> createJadwal(Jadwal data) async {
+    final response = await client.post(
+        "$baseUrl/api/progmob/jadwal/create",
+        headers: {"content-type": "application/json"},
+        body: jadwalToJson(data)
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> updateJadwal(Jadwal data, String kode_cari) async {
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse("$baseUrl/api/progmob/jadwal/update")
+    );
+
+    request.fields.addAll({
+      "nim_progmob": data.nim_progmob,
+      "hari": data.hari.toString(),
+      "sesi": data.sesi.toString(),
+      "ruangan": data.ruangan.toString(),
+      "kode_cari": kode_cari
+    });
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> deleteJadwal(String kode) async {
+    final response = await client.post(
+        "$baseUrl/api/progmob/jadwal/delete",
+        headers: {"content-type": "application/json"},
+        body: json.encode(<String, String>{
+          "kode": kode,
+          "nim_progmob": "72180268"
+        })
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+   Future<bool> login(String nimnik, String pass) async {
+    final response = await client.post(
+        "$baseUrl/api/progmob/login",
+        headers: {"content-type": "application/json"},
+        body: jsonEncode(<String, String>{
+          "nimnik": nimnik,
+          "password": pass
+        })
+    );
+    if (response.body.length >= 2) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setInt("is_logged", 1);
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
+
+
+
 
 

@@ -166,3 +166,39 @@ String dosenToJson(Dosen data) {
   final jsonData = data.toJson();
   return json.encode(jsonData);
 }
+
+class Jadwal{
+  String id;
+  String sesi;
+  String hari;
+  String ruangan;
+  String jam;
+  String nim_progmob;
+
+  Jadwal({
+    this.id, this.sesi, this.hari, this.ruangan ,this.jam,  this.nim_progmob
+  });
+
+  factory Jadwal.fromJson(Map<String, dynamic> map) {
+    return Jadwal(id: map["id"],sesi: map["sesi"],hari: map["hari"],ruangan: map["ruangan"],jam: map['jam'], nim_progmob: map["nim_progmob"]);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {"id": id, "sesi": sesi,"hari": hari, "ruangan": ruangan,"jam": jam, "nim_progmob": nim_progmob};
+  }
+
+  @override
+  String toString() {
+    return 'Jadwal{id: $id, sesi: $sesi, hari: $hari,ruangan: $ruangan, jam: $jam, nim_progmob: $nim_progmob}';
+  }
+}
+
+List<Jadwal> jadwalFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<Jadwal>.from(data.map((item) => Jadwal.fromJson(item)));
+}
+
+String jadwalToJson(Jadwal data) {
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}

@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simpelproject/apiservice.dart';
 import 'package:simpelproject/bottomnavgtn.dart';
-import 'package:simpelproject/main.dart'; 
+import 'package:simpelproject/dashboard.dart';
+import 'package:simpelproject/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simpelproject/tugaspertemuan8.dart';
+import 'package:toast/toast.dart';
+
 
 
 class PageLogin extends StatefulWidget {
   PageLogin({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -24,27 +19,14 @@ class PageLogin extends StatefulWidget {
 }
 
 class _PageLoginState extends State<PageLogin> {
-  int _counter = 0;
+  String nimnik;
+  String pass;
+  final GlobalKey<FormState> _formState = GlobalKey<FormState>();
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -52,41 +34,67 @@ class _PageLoginState extends State<PageLogin> {
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Hello World',
+            Form(
+              key: _formState,
+              child: Column(
+                children: <Widget>[
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: "NIK",
+                hintText: "NIMNIK",
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              ),
+              onSaved: (String value){
+                this.nimnik = value;
+              },
             ),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: "Password",
+                hintText: "Password",
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              ),
+              onSaved: (String value){
+                this.pass = value;
+              },
+            ),
+
             RaisedButton(
               child: Text(
                   'Login'
               ),
               onPressed: () async {
+                _formState.currentState.save();
+                ApiServices()
+                .login(this.nimnik,this.pass)
+                .then((isSuccess) {
+                  if (isSuccess) {
+                    Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) =>
+                          Dashboard(title: 'Navigation',)),
+                    );
+                  } else {
+                    Toast.show("username/password salah", context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+                  }
+                });
                 SharedPreferences pref = await SharedPreferences.getInstance();
                 await pref.setInt("is_logged", 1);
 
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => bottomnavgtn(title: 'Tugas 9',)),
+                  MaterialPageRoute(builder: (context) => Dashboard(title: 'Tugas Akhir Semester',)
+                  ),
                 );
               },
+            )
+                ],
+              ),
             )
           ],
         ),

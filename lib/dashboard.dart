@@ -1,133 +1,154 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simpelproject/dosen.dart';
 import 'package:simpelproject/jadwal.dart';
 import 'package:simpelproject/mahasiswa.dart';
+import 'package:simpelproject/main.dart';
 import 'package:simpelproject/matkul.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'main.dart';
 
-void main() {
-  runApp(MyApp());
-}
 class Dashboard extends StatefulWidget {
   Dashboard({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
-  _DasboardState createState() => _DasboardState();
+  _DashboardState createState() => _DashboardState();
 }
 
-class _DasboardState extends State<Dashboard> {
-  int _counter = 2;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+class _DashboardState extends State<Dashboard>{
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  void validate(){
+    if(formkey.currentState.validate()){
+      print("validated");
+    }else{
+      print("failed");
+    }
   }
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  var dashbrd = [
+    "Data Mahasiswa",
+    "Data Dosen",
+    "Pilihan Mata Kuliah",
+    "Jadwal Kuliah"
+  ];
+  var images = [
+    "assets/mahasiswa.png",
+    "assets/dosen.png",
+    "assets/matkul.png",
+    "assets/jadwal.png"
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      ),
-        drawer: Drawer(
-         child: ListView(
+      appBar: AppBar(),
+    drawer: Drawer(
+      child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-             accountName: Text("I Putu Sugosa A"),
-             accountEmail: Text("putu.sugosa@ukdw.ac.id"),
-             currentAccountPicture : CircleAvatar(
-              backgroundColor: Colors.blueAccent,
-              child: Text(
-              "ME",
-              style :TextStyle(fontSize: 40.0),
+              accountName: Text("I Putu Sugosa Anggaramukti"),
+              accountEmail: Text("putu.sugosa@si.ukdw.ac.id"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.lightBlueAccent,
+                child: Text(
+                  "IA",
+                  style: TextStyle(fontSize: 20.0),
+                ),
               ),
             ),
-          ),
-          ListTile(
-            title: Text("Data Dosen"),
-            trailing: Icon(Icons.people),
-            subtitle: Text("CRUD Data Dosen"),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder:(context) => Dashboarddosen(title: "Dosen",)),
-              );
-            },
+            ListTile(
+              title: Text("Data Dosen"),
+              trailing: Icon(Icons.people_alt_outlined),
+              subtitle: Text("CRUD Data Dosen"),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Dashboarddosen(title: "Dashboard Dosen",)
+                  ),
+                );
+              },
             ),
             ListTile(
               title: Text("Data Mahasiswa"),
-              trailing: Icon(Icons.people_outline),
+              trailing: Icon(Icons.people),
               subtitle: Text("CRUD Data Mahasiswa"),
-              onTap: () {
+              onTap: (){
                 Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder:(context) => Dashboardmhs(title:"Mahasiswa",)),
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Dashboardmhs(title: "Dashboard Mahasiswa",)
+                  ),
                 );
               },
             ),
             ListTile(
               title: Text("Data Matakuliah"),
-              trailing: Icon(Icons.library_books),
+              trailing: Icon(Icons.book_outlined),
               subtitle: Text("CRUD Data Matakuliah"),
-              onTap: () {
+              onTap: (){
                 Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder:(context) => DashboardMatkul(title:"Matakuliah",)),
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Dashboard Mata Kuliah",)
+                  ),
                 );
               },
             ),
             ListTile(
-              title: Text("Data Jadwal"),
-              trailing: Icon(Icons.schedule),
-              subtitle: Text("CRUD Data Jadwal"),
-              onTap: () {
+              title: Text("Data Jadwal Kuliah"),
+              trailing: Icon(Icons.schedule_rounded),
+              subtitle: Text("CRUD Data Jadwal Kuliah"),
+              onTap: (){
                 Navigator.pop(context);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder:(context) => Dashboardjadwal(title:"Jadwal,")),
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Dashboardjadwal(title: "Dashboard Jadwal Kuliah"
+                      "",)
+                  ),
                 );
               },
-            ),
-            Divider(
-              color: Colors.black,
-              height: 20,
-              indent: 10,
-              endIndent: 10,
             ),
             ListTile(
               title: Text("Logout"),
               trailing: Icon(Icons.exit_to_app_outlined),
-              onTap: () async {
-                SharedPreferences pref = await SharedPreferences.getInstance();
-                await pref.setInt("is login", 1);
+              onTap: () async{
+                SharedPreferences pref = await  SharedPreferences.getInstance();
+                await pref.setInt("is_login", 0);
                 Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyHomePage(title: "Halo Push",)),
+                  context,
+                  MaterialPageRoute(builder: (context)=> MyHomePage(title: "Tugas 10",)
+                  ),
                 );
               },
             ),
-          ],
-        ),
+          ]
+      ),
+    ),
+   body: Container(
+     child:  GridView.builder(
+       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+           crossAxisCount: 2
        ),
-      body: Container(
-       child: Center(
-      child: Text("Dashboard",
-      style: TextStyle(
-          fontSize: 20
-      )
-      ),
-      ),
-  )
-  );
+       itemBuilder: (BuildContext context, int index) {
+         if (index < 4) {
+           return Card(
+             child: Column(
+               children: <Widget>[
+                 SizedBox(
+                   height: 10,
+                 ),
+                 Image.asset(images[index], height: 89, width: 89),
+                 Padding(
+                   padding: EdgeInsets.all(20),
+                   child: Text(dashbrd[index], style: TextStyle(
+                       fontSize: 13.5, height: 1.2, fontWeight: FontWeight
+                       .bold),
+                       textAlign: TextAlign.center),
+                 )
+               ],
+             ),
+           );
+         } else {
+           return null;
+         }
+       },
+     ),
+    ),
+    );
   }
 }
