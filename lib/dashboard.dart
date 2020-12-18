@@ -20,6 +20,7 @@ class DashBoard extends StatefulWidget {  //<~~~
 }
 
 class _DashBoardState extends State<DashBoard> {    //<~~
+  
 
 
   @override
@@ -66,7 +67,7 @@ class _DashBoardState extends State<DashBoard> {    //<~~
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Mhs(title: "Dashboard Mahasiswa")),  //<~~~
+                  MaterialPageRoute(builder: (context) => DashboardMahasiswa(title: "Dashboard Mahasiswa")),  //<~~~
                 );
               },
             ),
