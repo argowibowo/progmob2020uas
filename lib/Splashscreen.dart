@@ -28,7 +28,7 @@ class _Splashscreen extends State<Splashscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amberAccent,
+      backgroundColor: Colors.brown,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +43,7 @@ class _Splashscreen extends State<Splashscreen> {
 
             SizedBox(height: 24.0,),
 
-            Text("FINA DISINI!",
+            Text("TAS PROGMOB 2020!",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
