@@ -9,12 +9,15 @@ import 'package:baru1/Login.dart';
 import 'package:baru1/Mahasiswa/dashboard_mahasiswa.dart';
 import 'package:baru1/Matakuliah/dashboard_matakuliah.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:baru1/model.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key key,title}) : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
+
+  static Future<List<Dashboard>> fromJson(body) {}
 }
 
 class _DashboardState extends State<Dashboard> {
