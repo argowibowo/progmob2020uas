@@ -113,7 +113,7 @@ class _AddMhsState extends State<AddMhs> {
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
+                      color: Colors.deepOrange,
                       onPressed: (){
                         _pickImage(ImageSource.gallery);
                       },
@@ -137,14 +137,14 @@ class _AddMhsState extends State<AddMhs> {
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
+                      color: Colors.deepOrange,
                       onPressed: (){
                         return showDialog(
                             context:context,
                             builder: (context){
                               return AlertDialog(
                                 title: Text("Simpan Data"),
-                                content: Text("Apakah Anda yakin menyimpan data ini?"),
+                                content: Text("Apakah Anda yakin menambahkan data ini?"),
                                 actions: <Widget>[
                                   FlatButton(
                                     onPressed: () async {

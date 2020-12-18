@@ -4,7 +4,9 @@ import 'package:progmob_flutter/jadwal/dashboardJadwal.dart';
 import 'package:progmob_flutter/login.dart';
 import 'package:progmob_flutter/mahasiswa/dashboardMhs.dart';
 import 'package:progmob_flutter/matakuliah/dashboardMatkul.dart';
+import 'package:progmob_flutter/nav.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:progmob_flutter/logout.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key key, this.title}) : super(key: key);
@@ -16,6 +18,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,38 +42,6 @@ class _DashboardState extends State<Dashboard> {
                   )
               ),
 
-              ListTile(
-                title: Text("Data Mahasiswa"),
-                trailing: Icon(Icons.people_outlined),
-                subtitle: Text("Menu CRUD Mahasiswa"),
-                onTap: (){
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => DashboardMhs(title:"Dashboard Mahasiswa")));
-                },
-              ),
-
-              ListTile(
-                title: Text("Data Dosen"),
-                trailing: Icon(Icons.people),
-                subtitle: Text("Menu CRUD Dosen"),
-                onTap: (){
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => DashboardDsn(title:"Dashboard Dosen")));
-                },
-              ),
-
-              ListTile(
-                title: Text("Data Matakuliah"),
-                trailing: Icon(Icons.book),
-                subtitle: Text("Menu CRUD Matakuliah"),
-                onTap: (){
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => DashboardMatkul(title:"Dashboard Matakuliah")));
-                },
-              ),
 
               ListTile(
                 title: Text("Data Jadwal"),
@@ -83,22 +54,6 @@ class _DashboardState extends State<Dashboard> {
                 },
               ),
 
-              Divider(
-                color: Colors.black,
-                height: 20,
-                indent: 10,
-                endIndent: 10,
-              ),
-
-              ListTile(
-                title: Text("Logout"),
-                trailing: Icon(Icons.logout),
-                onTap: () async{
-                  SharedPreferences pref = await SharedPreferences.getInstance();
-                  await pref.setInt("is_login", 0);
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage(title: "Halaman Login",)));
-                },
-              ),
             ]
         ),
       ),

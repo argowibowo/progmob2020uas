@@ -1,29 +1,29 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:progmob_flutter/apiservices.dart';
 import 'package:progmob_flutter/model.dart';
+import 'package:image_picker/image_picker.dart';
 
-class UpdateMhs extends StatefulWidget {
-  UpdateMhs({Key key, @required this.title, @required this.mhs, @required this.nimcari}) : super(key: key);
+class UpdateDsn extends StatefulWidget {
+  UpdateDsn({Key key, @required this.title, @required this.dsn, @required this.nidncari}) : super(key: key);
 
   final String title;
-  Mahasiswa mhs;
-  String nimcari;
+  Dosen dsn;
+  String nidncari;
 
   @override
-  _UpdateMhsState createState() => _UpdateMhsState(title, mhs, nimcari);
+  _UpdateDsnState createState() => _UpdateDsnState(title, dsn, nidncari);
 }
 
-class _UpdateMhsState extends State<UpdateMhs> {
+class _UpdateDsnState extends State<UpdateDsn> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  final String nimcari;
+  final String nidncari;
   bool _isLoading =false;
-  Mahasiswa mhs = new Mahasiswa();
+  Dosen dsn = new Dosen();
   File _imageFile;
 
-  _UpdateMhsState(this.title, this.mhs, this.nimcari);
+  _UpdateDsnState(this.title, this.dsn, this.nidncari);
 
   Future<void> _pickImage(ImageSource source) async{
     File selected = await ImagePicker.pickImage(source: source);
@@ -53,14 +53,14 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "NIM",
-                        hintText: "NIM",
+                        labelText: "NIDN",
+                        hintText: "NIDN",
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      initialValue: this.mhs.nim,
+                      initialValue: this.dsn.nidn,
                       onSaved: (String value){
-                        this.mhs.nim = value;
+                        this.dsn.nidn = value;
                       },
                     ),
                     SizedBox(
@@ -69,13 +69,13 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Nama",
-                        hintText: "Nama Mahasiswa",
+                        hintText: "Nama Dosen",
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      initialValue: this.mhs.nama,
+                      initialValue: this.dsn.nama,
                       onSaved: (String value){
-                        this.mhs.nama = value;
+                        this.dsn.nama = value;
                       },
                     ),
                     SizedBox(
@@ -84,13 +84,13 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Alamat",
-                        hintText: "Alamat Mahasiswa",
+                        hintText: "Alamat Dosen",
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      initialValue: this.mhs.alamat,
+                      initialValue: this.dsn.alamat,
                       onSaved: (String value){
-                        this.mhs.alamat = value;
+                        this.dsn.alamat = value;
                       },
                     ),
                     SizedBox(
@@ -99,20 +99,35 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Email",
-                        hintText: "Email Mahasiswa",
+                        hintText: "Email Dosen",
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      initialValue: this.mhs.email,
+                      initialValue: this.dsn.email,
                       keyboardType: TextInputType.emailAddress,
                       onSaved: (String value){
-                        this.mhs.email = value;
+                        this.dsn.email = value;
                       },
                     ),
                     SizedBox(
                       height: 15,
                     ),
-                    (_imageFile == null && this.mhs.foto == null)
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "Gelar",
+                        hintText: "Gelar Dosen",
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      ),
+                      initialValue: this.dsn.gelar,
+                      onSaved: (String value){
+                        this.dsn.gelar = value;
+                      },
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    (_imageFile == null && this.dsn.foto == null)
                         ?
                     Text("Silahkan pilih foto Anda")
                         :
@@ -127,7 +142,7 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     )
                         :
                     Image.network(
-                      this.mhs.foto,
+                      this.dsn.foto,
                       fit: BoxFit.cover,
                       height: 300.0,
                       alignment: Alignment.topCenter,
@@ -173,10 +188,10 @@ class _UpdateMhsState extends State<UpdateMhs> {
                                     onPressed: () async {
                                       _formState.currentState.save();
                                       setState(() => _isLoading = true);
-                                      this.mhs.nim_progmob = "72180203";
+                                      this.dsn.nim_progmob = "72180203";
                                       // List<int> imageBytes = _imageFile.readAsBytesSync();
                                       // this.mhs.foto = base64Decode(imageBytes);
-                                      ApiServices().updateMhsWithFoto(this.mhs, _imageFile, nimcari).then((isSuccess) {
+                                      ApiServices().updateDsnWithFoto(this.dsn, _imageFile, nidncari).then((isSuccess) {
                                         setState(() => _isLoading = false);
                                         if (isSuccess) {
                                           Navigator.pop(context);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:progmob_flutter/dashboard.dart';
 import 'dart:async';
 import 'package:progmob_flutter/login.dart';
+import 'package:progmob_flutter/nav.dart';
 import 'package:progmob_flutter/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,7 +29,7 @@ class _SplashScreen extends State<SplashScreen>{
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
     if(isLogin == 1){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Dashboard(title: "DASHBOARD")));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Nav(title: "Dashboard")));
     }
   }
 
@@ -43,7 +44,7 @@ class _SplashScreen extends State<SplashScreen>{
   Widget build(BuildContext context){
 
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.deepOrange,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
