@@ -5,9 +5,11 @@ import 'package:flutter_progmob/TugasPertemuan1.dart';
 import 'package:flutter_progmob/bottomnav.dart';
 import 'package:flutter_progmob/dashboard.dart';
 import 'package:flutter_progmob/pertemuan1.dart';
-import 'package:flutter_progmob/LoginPage.dart';
+import 'package:flutter_progmob/UAS/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splashscreen/splashscreen.dart';
+
+import 'UAS/Mahasiswa/dshbrdmhs.dart';
 
 
 
