@@ -29,7 +29,7 @@ class _dashboardState extends State<dashboard> {
 
               UserAccountsDrawerHeader(
                   accountName: Text("Kurniadi"),
-                  accountEmail: Text("Kurniadi@si.ukdw.ac.id"),
+                  accountEmail: Text("kurniadi@si.ukdw.ac.id"),
                   currentAccountPicture: CircleAvatar(
                     backgroundColor: Colors.white,
                     child: Text(
@@ -46,7 +46,7 @@ class _dashboardState extends State<dashboard> {
                 onTap: (){
                   Navigator.pop(context);
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => dashboardmhs(title:"Dashboard Mahasiswa")));
+                      MaterialPageRoute(builder: (context) => DashboardMahasiswa(title:"Dashboard Mahasiswa")));
                 },
               ),
 

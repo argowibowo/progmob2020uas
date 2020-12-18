@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class dashboarddosen extends StatefulWidget {
-  dashboarddosen({Key key, this.title}) : super(key: key);
+class dashboardjadwal extends StatefulWidget {
+  dashboardjadwal({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _dashboarddosenState createState() => _dashboarddosenState();
+  _dashboardjadwalState createState() => _dashboardjadwalState();
 }
 
-class _dashboarddosenState extends State<dashboarddosen> {
+class _dashboardjadwalState extends State<dashboardjadwal> {
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,9 @@ class _dashboarddosenState extends State<dashboarddosen> {
               mainAxisSize: MainAxisSize.min,
               children:<Widget>[
                 ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text("Erick Setiawan"),
-                  subtitle: Text("079792 - ericksetiawan@staff.ukdw.ac.id"),
+                  leading: Icon(Icons.book),
+                  title: Text("PROGMOB 2020"),
+                  subtitle: Text("Grup B - Jumat, 09:30-17:20 WIB"),
                   onLongPress: (){
                     showDialog(
                         context: context,
