@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => dashboardosen(title: "Dashboard Dosen")),
+                  MaterialPageRoute(builder: (context) => dashboarddosen(title: "Dashboard Dosen")),
                 );
               },
             ),
@@ -90,7 +90,7 @@ class _HomeState extends State<Home> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => dashboardmatkul(title: "Dashboard Matakuliah")),
+                  MaterialPageRoute(builder: (context) => dashboardmatakuliah(title: "Dashboard Matakuliah")),
                 );
               },
             ),

@@ -1,41 +1,29 @@
-import 'dart:convert';
-import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model.dart';
 import 'package:flutter_app/apiservices.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter_app/model.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
 
-class UpdateMhs extends StatefulWidget{
+class UpdateJadwal extends StatefulWidget{
   final String title;
-  Mahasiswa mhs;
-  String nimcari;
+  Jadwal jadwal;
+  String kodecari;
 
-  UpdateMhs({Key key, @required this.title, @required this.mhs, @required this.nimcari}) : super(key: key);
+  UpdateJadwal({Key key, @required this.title, @required this.jadwal, @required this.kodecari}) : super(key: key);
 
   @override
-  _UpdateMhsState createState() => _UpdateMhsState(title, mhs, nimcari);
+  _UpdateJadwalState createState() => _UpdateJadwalState(title, jadwal, kodecari);
 }
 
-class _UpdateMhsState extends State<UpdateMhs>{
+class _UpdateJadwalState extends State<UpdateJadwal> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  final String nimcari;
-  Mahasiswa mhs;
+  final String kodecari;
+  Jadwal jadwal;
   bool _isLoading = false;
-  File _imageFile;
 
-  _UpdateMhsState(this.title, this.mhs, this.nimcari);
-
-  //// memeilih dari galeri
-  Future<void> _pickImage(ImageSource source) async{
-    File selected = await ImagePicker.pickImage(source: source);
-
-    setState(() {
-      _imageFile = selected;
-    });
-  }
+  _UpdateJadwalState(this.title, this.jadwal, this.kodecari);
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +46,14 @@ class _UpdateMhsState extends State<UpdateMhs>{
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: "NIM",
-                            hintText: "NIM",
+                            labelText: "Kode",
+                            hintText: "Nama Matakuliah",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
-                          initialValue: this.mhs.nim,
+                          initialValue: this.jadwal.id_matkul,
                           onSaved: (String value){
-                            this.mhs.nim = value;
+                            this.jadwal.id_matkul = value;
                           },
                         ),
                         SizedBox(
@@ -76,11 +64,11 @@ class _UpdateMhsState extends State<UpdateMhs>{
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
                             labelText: "Nama",
-                            hintText: " Nama Mahasiswa",
+                            hintText: " Nama Dosen",
                           ),
-                          initialValue: this.mhs.nama,
+                          initialValue: this.jadwal.id_dosen,
                           onSaved: (String value){
-                            this.mhs.nama=value;
+                            this.jadwal.id_dosen = value;
                           },
                         ),
                         SizedBox(
@@ -90,12 +78,12 @@ class _UpdateMhsState extends State<UpdateMhs>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Alamat",
-                            hintText: " Alamat Mahasiswa",
+                            labelText: "NIDN",
+                            hintText: "NIDN",
                           ),
-                          initialValue: this.mhs.alamat,
+                          initialValue: this.jadwal.nidn,
                           onSaved: (String value){
-                            this.mhs.alamat=value;
+                            this.jadwal.nidn = value;
                           },
                         ),
                         SizedBox(
@@ -105,58 +93,40 @@ class _UpdateMhsState extends State<UpdateMhs>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Email",
-                            hintText: " Email Mahasiswa",
+                            labelText: "Hari",
+                            hintText: "Hari Jadwal",
                           ),
-                          initialValue: this.mhs.email,
-                          keyboardType: TextInputType.emailAddress,
+                          initialValue: this.jadwal.hari,
                           onSaved: (String value){
-                            this.mhs.email = value;
+                            this.jadwal.hari = value;
                           },
                         ),
                         SizedBox(
                           height: 15,
                         ),
-                        (_imageFile == null && this.mhs.foto == null)
-                            ? Text('Silahkan memilih gambar terlebih dahulu')
-                            :
-                        (_imageFile != null)
-                            ?
-                        Image.file(
-                          _imageFile,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        )
-                            :
-                        Image.network(
-                          this.mhs.foto,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            border: OutlineInputBorder(),
+                            labelText: "Sesi",
+                            hintText: "Sesi Jadwal",
+                          ),
+                          initialValue: this.jadwal.sesi,
+                          onSaved: (String value){
+                            this.jadwal.sesi = value;
+                          },
                         ),
-                        MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            color:  Colors.blue,
-                            onPressed: () {
-                              _pickImage(ImageSource.gallery);
-                            },
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                new Icon(Icons.image,color: Colors.white,),
-                                Text ("Upload Foto",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ],
-                            )
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            border: OutlineInputBorder(),
+                            labelText: "Sesi",
+                            hintText: "Sesi Jadwal",
+                          ),
+                          initialValue: this.jadwal.sesi,
+                          onSaved: (String value){
+                            this.jadwal.sesi = value;
+                          },
                         ),
                         SizedBox(
                           height: 15,
@@ -164,21 +134,21 @@ class _UpdateMhsState extends State<UpdateMhs>{
                         MaterialButton(
                           minWidth: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          color: Colors.blue,
+                          color: Colors.pinkAccent,
                           onPressed: () {
                             return showDialog(
                               context: context,
                               builder: (context){
                                 return AlertDialog(
                                   title: Text("Simpan Data"),
-                                  content: Text(" Apakah anda akan menyimpan data ini"),
+                                  content: Text("Yakin Simpan?"),
                                   actions: <Widget>[
                                     FlatButton(
                                       onPressed: () async{
                                         _formState.currentState.save();
+                                        this.jadwal.nim_progmob = "721600012";
                                         setState(() => _isLoading = true);
-                                        this.mhs.nim_progmob = "721600012";
-                                        ApiServices().updateMhsWithFoto(this.mhs, _imageFile, nimcari).then((isSuccess){
+                                       ApiServices().updateJadwal(this.jadwal, kodecari).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
                                             Navigator.pop(context);

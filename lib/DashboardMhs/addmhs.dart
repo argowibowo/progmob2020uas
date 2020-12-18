@@ -157,10 +157,9 @@ class _AddMhsState extends State<AddMhs>{
                                     FlatButton(
                                       onPressed: () async{
                                         _formState.currentState.save();
-                                        this.mhs.nim_progmob = "72180246";
+                                        this.mhs.nim_progmob = "721600012";
                                         setState(() => _isLoading = true);
                                         List<int> imagesBytes = _imageFile.readAsBytesSync();
-                                        this.mhs.foto = base64Encode(imagesBytes);
                                         ApiServices().createMhsWithFoto(this.mhs, _imageFile, _imageFile.path).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
