@@ -37,7 +37,7 @@ class _Pertemuan2State extends State<Pertemuan2> {
                   decoration: new InputDecoration(
                     icon: const Icon(Icons.people),
                     labelText: "Nama Lengkap",
-                    hintText: "contoh: Zefanya Anke",
+                    hintText: "contoh: Zefanya Anke Andini",
                     border: OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(5),
                     ),
