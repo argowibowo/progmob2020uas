@@ -1,16 +1,30 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_progmob_2020/apiservices.dart';
+import 'package:flutter_progmob_2020/model.dart';
+import 'package:flutter_progmob_2020/tambahmatkul.dart';
+import 'package:flutter_progmob_2020/updatematkul.dart';
 
-class Matakuliah extends StatefulWidget {
-  Matakuliah({Key key, this.title}) : super(key: key);
+class DashboardMatkul extends StatefulWidget {
+  DashboardMatkul({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _MatakuliahState createState() => _MatakuliahState();
+  _DashboardMatkulState createState() => _DashboardMatkulState();
 }
 
-class _MatakuliahState extends State<Matakuliah> {
+class _DashboardMatkulState extends State<DashboardMatkul> {
   final _formKey = GlobalKey<FormState>();
+
+  List<Matakuliah> listMatkul;
+
+  FutureOr onGoBack(dynamic value) {
+    setState(() {
+
+    });
+  }
 
   @override
   void initState() {
@@ -22,67 +36,90 @@ class _MatakuliahState extends State<Matakuliah> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
-              onPressed: () {}
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddMatkul(title: "Input Data Matakuliah"))
+                ).then(onGoBack);
+              }
           )
         ],
       ),
+      body: FutureBuilder(
+        future: ApiServices().getMatkul(),
+        builder: (BuildContext context, AsyncSnapshot<List<Matakuliah>> snapshot) {
+          if (snapshot.hasError){
+            return Center(
+              child: Text(
+                  "Something wrong with message: ${snapshot.error.toString()}"
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            listMatkul = snapshot.data;
 
-      body: Container(
-        child: Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                leading: Icon(Icons.person),
-                title: Text("Pemograman Mobile"),
-                subtitle: Text("SI3333"),
-                trailing: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuItem<String>>[
-                    new PopupMenuItem<String>(
-                      child: const Text('Update'), value: 'Update',
+            return ListView.builder(
+              itemBuilder: (context, position) {
+                return Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(listMatkul[position].kode + " - " + listMatkul[position].nama),
+                      subtitle: Text("Hari " + listMatkul[position].hari + " - Sesi " + listMatkul[position].sesi
+                          + " - " + listMatkul[position].sks),
+                      onLongPress: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  FlatButton(
+                                      onPressed: (){
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => UpdateMatkul(title: "Update Data Matakuliah",
+                                                matkul: listMatkul[position],
+                                                kodecari: listMatkul[position].kode))
+                                        ).then(onGoBack);
+                                      },
+                                      child: Text("Update")
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    height: 20,
+                                  ),
+                                  FlatButton(
+                                      onPressed: () async {
+                                        ApiServices().deleteMatkul(listMatkul[position].kode);
+                                        Navigator.pop(context);
+                                        setState(() {
+
+                                        });
+                                      },
+                                      child: Text("Delete")
+                                  ),
+                                ],
+                              ),
+                            )
+                        );
+                      },
                     ),
-                    new PopupMenuItem<String>(
-                      child: const Text('Delete'), value: 'Delete',
-                    )
-                  ],
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.person),
-                title: Text("E-COMMERCE"),
-                subtitle: Text("SE3313"),
-                trailing: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuItem<String>>[
-                    new PopupMenuItem<String>(
-                      child: const Text('Update'), value: 'Update',
-                    ),
-                    new PopupMenuItem<String>(
-                      child: const Text('Delete'), value: 'Delete',
-                    )
-                  ],
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.person),
-                title: Text("APLIKASI BERBASIS DESKTOP"),
-                subtitle: Text("SI2363"),
-                trailing: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuItem<String>>[
-                    new PopupMenuItem<String>(
-                      child: const Text('Update'), value: 'Update',
-                    ),
-                    new PopupMenuItem<String>(
-                      child: const Text('Delete'), value: 'Delete',
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+                  ),
+                );
+              },
+              itemCount: listMatkul.length,
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }
