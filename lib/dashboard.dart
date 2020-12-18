@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_72180264progmob/dosen.dart';
-import 'package:flutter_72180264progmob/jadwal.dart';
+import 'file:///C:/Users/HP/AndroidStudioProjects/flutter_72180264progmob/progmob2020uas/lib/dosen/dosen.dart';
+import 'file:///C:/Users/HP/AndroidStudioProjects/flutter_72180264progmob/progmob2020uas/lib/jadwal/jadwal.dart';
+import 'file:///C:/Users/HP/AndroidStudioProjects/flutter_72180264progmob/progmob2020uas/lib/matakuliah/dashboardmhs.dart';
 import 'package:flutter_72180264progmob/login.dart';
-import 'package:flutter_72180264progmob/mahasiswa.dart';
 import 'package:flutter_72180264progmob/main.dart';
-import 'package:flutter_72180264progmob/matakuliah.dart';
+import 'file:///C:/Users/HP/AndroidStudioProjects/flutter_72180264progmob/progmob2020uas/lib/matakuliah/matakuliah.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
@@ -33,6 +33,7 @@ class _DashboardState extends State<Dashboard> {
                 child: Text("EGS", style: TextStyle(fontSize: 30.0)),
               ),
               ),
+
                 ListTile(
                   title: Text("Data Dosen"),
                   trailing: Icon(Icons.person),
