@@ -7,6 +7,7 @@ import 'package:flutter_app_1/dashboardmatkul.dart';
 import 'package:flutter_app_1/dashboardmhs.dart';
 import 'package:flutter_app_1/halamanlogin.dart';
 import 'package:flutter_app_1/main.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
@@ -17,7 +18,44 @@ class Dashboard extends StatefulWidget {
 }
 class _DashboardState extends State<Dashboard> {
   final _formKey = GlobalKey<FormState>();
+  Material MyItems (IconData icon,String heading, int color){
+    return Material(
+      color: Colors.white,
+      elevation: 14.0,
+      shadowColor: Color(0x802196f3),
+      borderRadius: BorderRadius.circular(24.0),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
 
+                  //text
+                  Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Text(heading,
+                      style: TextStyle(
+                        color: new Color(color),
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ),
+                  //icon
+                  Material(
+                    color: new Color(color),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
   @override
   void initState() {
     super.initState();
@@ -26,6 +64,32 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('Dashboard',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+      body: StaggeredGridView.count(
+        crossAxisCount: 2,
+        crossAxisSpacing: 12.0,
+        mainAxisSpacing: 12.0,
+        padding:  EdgeInsets.symmetric(horizontal: 16.0,vertical: 8.0),
+        children: <Widget>[
+          MyItems(Icons.list_rounded, "Daftar Nilai", 0xffed622b),
+          MyItems(Icons.book, "KRS", 0xff26cb3c),
+          MyItems(Icons.library_books, "KHS", 0xffff3266),
+          MyItems(Icons.person_rounded, "Biodata", 0xff3399fe),
+          MyItems(Icons.ad_units, "Layanan", 0xfff4c83f),
+          MyItems(Icons.settings, "Layanan", 0xff622f74),
+        ],
+        staggeredTiles: [
+          StaggeredTile.extent(2, 130.0),
+          StaggeredTile.extent(1, 150.0),
+          StaggeredTile.extent(2, 130.0),
+          StaggeredTile.extent(2, 130.0),
+          StaggeredTile.extent(2, 130.0),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -109,16 +173,7 @@ class _DashboardState extends State<Dashboard> {
              ),
           ],
         ),
-      ),
-      body: Container(
-        child: Center(
-          child: Text("Dashboard",
-            style: TextStyle(
-              fontSize: 20
-            ),
-          ),
-        ),
-      ),
+    ),
     );
   }
 }
