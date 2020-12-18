@@ -60,20 +60,19 @@ String mahasiswaToJson(Mahasiswa data){
 //---------------------------------------matakuliah----------------------------
 class Matakuliah {
 
+  String id;
   String kodeMatakuliah;
+  String nama;
   String hari;
   String sesi;
-  String dosen;
-  String nama;
-  int jmlMhs;
+  String sks;
   String nim_progmob;
-  Matakuliah({this.kodeMatakuliah, this.hari, this.sesi, this.dosen, this.nama, this.jmlMhs, this.nim_progmob});
+  Matakuliah({this.id,this.kodeMatakuliah, this.nama, this.hari, this.sesi, this.sks, this.nim_progmob});
   factory Matakuliah.fromJson(Map<String, dynamic> map){
-    return Matakuliah(kodeMatakuliah: map["kodeMatakuliah"], hari: map["hari"], sesi: map["sesi"], dosen: map["dosen"],
-        nama: map["nama"], jmlMhs: map["jmlMhs"], nim_progmob: map["nim_progmob"]);
+    return Matakuliah(id:map["id"],kodeMatakuliah: map["kodeMatakuliah"], nama: map["kodeMatakuliah"], hari: map["hari"], sesi: map["sesi"], sks: map["sks"], nim_progmob: map["nim_progmob"]);
   }
   Map<String, dynamic> toJson(){
-    return{"kodeMatakuliah": kodeMatakuliah, "hari": hari, "sesi": sesi, "dosen": dosen, "nama": nama, "jmlMhs": jmlMhs, "nim_progmob": nim_progmob};
+    return{"id":id,"kodeMatakuliah": kodeMatakuliah, "hari": hari, "sesi": sesi,"nim_progmob": nim_progmob};
   }
 }
 List<Matakuliah> matakulihaFromJson(String jsonData){
@@ -85,7 +84,7 @@ String matakuliahToJson(Matakuliah data){
   return json.encode(jsonData);
 }
 //-----------------------------------------dosen---------------------------------
-class Dosen {
+class Dosen{
   String id;
   String nama;
   String nidn;
@@ -94,43 +93,60 @@ class Dosen {
   String gelar;
   String foto;
   String nim_progmob;
-  Dosen({this.id, this.nama, this.nidn, this.alamat,
-    this.email, this.gelar, this.foto, this.nim_progmob});
-  factory Dosen.fromJson(Map<String, dynamic> map) {
-    return Dosen(id: map["id"],
-        nama: map["nama"],
-        nidn: map["nidn"],
-        alamat: map["alamat"],
-        email: map["email"],
-        gelar: map["gelar"],
-        foto: map["foto"],
-        nim_progmob: map["nim_progmob"]);
+
+  Dosen({this.id, this.nama, this.nidn, this.alamat, this.email, this.gelar,
+    this.foto, this.nim_progmob});
+
+  factory Dosen.fromJson(Map<String,dynamic>map){
+    return Dosen(id: map["id"],nama: map["nama"],nidn: map["nidn"],alamat: map["alamat"],email: map["email"],gelar: map["gelar"],foto: map["foto"],nim_progmob: map["nim_progmob"]);
   }
+
   Map<String, dynamic> toJson() {
-    return {
-      "id": id,
-      "nama": nama,
-      "nidn": nidn,
-      "alamat": alamat,
-      "email": email,
-      "gelar": gelar,
-      "foto": foto,
-      "nim_progmob": nim_progmob
-    };
-  }
-  @override
-  String toString() {
-    return 'Dosen{id: $id, "nama": $nama, "nidn": $nidn, "alamat": $alamat, "email": $email, "gelar": $gelar, "foto": $foto, "nim_progmob": $nim_progmob}';
-  }
-  List<Dosen> dosenFromJson(String jsonData) {
-    final data = json.decode(jsonData);
-    return List<Dosen>.from(data.map((item) => Dosen.fromJson(item)));
-  }
-  String dosenToJson(Dosen data) {
-    final jsonData = data.toJson();
-    return json.encode(jsonData);
+    return {"id": id, "nama": nama, "nidn": nidn, "alamat": alamat, "email": email,"gelar": gelar, "foto": foto, "nim_progmob": nim_progmob};
   }
 }
+
+List<Dosen> dosenFromJson(String jsonData){
+  final data = json.decode(jsonData);
+  return List<Dosen>.from(data.map((item) => Dosen.fromJson(item)));
+}
+String DosenToJson(Dosen data){
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+//--------------------------Jadwal-------------------------------------------
+class Jadwal{
+  String id;
+  String matkul;
+  String dosen;
+  String nidn;
+  String hari;
+  String sesi;
+  String sks;
+  String nim_progmob;
+  Jadwal({this.id, this.matkul, this.nidn, this.dosen,  this.hari, this.sesi, this.sks,  this.nim_progmob});
+
+  factory Jadwal.fromJson(Map<String, dynamic> map){
+    return Jadwal(
+        id: map["id"], matkul: map["matkul"], nidn: map["nidn"],
+        dosen: map["dosen"], hari: map["hari"], sesi: map["sesi"], sks: map["sks"], nim_progmob: map["nim_progmob"]
+    );
+  }
+
+  Map<String, dynamic> toJson(){
+    return{"id": id, "matkul": matkul, "nidn": nidn, "dosen": dosen, "hari": hari, "sesi": sesi, "sks": sks, "nim_progmob": nim_progmob};
+  }
+}
+List<Jadwal> jadwalFromJson(String jsonData){
+  final data = json.decode(jsonData);
+  return List<Jadwal>.from(data.map((item) => Jadwal.fromJson(item)));
+}
+
+String jadwalToJson(Jadwal data){
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+
 //--------------------------ToDo-------------------------------------------
 /*class ToDo {
   int userId;

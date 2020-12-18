@@ -134,10 +134,6 @@ class _DashboardState extends State<Dashboard> {
               title: Text('Awal')
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.save),
-              title: Text('Simpan')
-          ),
-          BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),
               title: Text('Profile')
           ),
