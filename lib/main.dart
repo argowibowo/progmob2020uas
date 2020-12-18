@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:progmob_setelah_uts_72180190/pertemuan1.dart';
 import 'package:progmob_setelah_uts_72180190/tugaspertemuan8.dart';
 import 'package:progmob_setelah_uts_72180190/loginpage.dart';
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -60,6 +64,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   void initState() {
     super.initState();

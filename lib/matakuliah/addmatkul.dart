@@ -3,36 +3,26 @@ import 'package:progmob_setelah_uts_72180190/apiservices.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:progmob_setelah_uts_72180190/model.dart';
-import 'package:image_picker/image_picker.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
-class AddMhs extends StatefulWidget {
+class AddMatkul extends StatefulWidget {
   final String title;
 
-  AddMhs({Key key, @required this.title}) : super(key: key);
+  AddMatkul({Key key, @required this.title}) : super(key: key);
 
   @override
-  _AddMhsState createState() => new _AddMhsState(title);
+  _AddMatkulState createState() => new _AddMatkulState(title);
 }
 
-class _AddMhsState extends State<AddMhs> {
+class _AddMatkulState extends State<AddMatkul> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
 
-  _AddMhsState(this.title);
+  _AddMatkulState(this.title);
 
   bool _isLoading = false;
-  Mahasiswa mhs = new Mahasiswa();
-  File _imageFile;
-
-  Future<void> _pickImage(ImageSource source) async {
-    File selected = await ImagePicker.pickImage(source: source);
-
-    setState(() {
-      _imageFile = selected;
-    });
-  }
+  Matakuliah matkul = new Matakuliah();
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +45,28 @@ class _AddMhsState extends State<AddMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "NIM",
-                        hintText: "NIM",
+                        labelText: "NAMA",
+                        hintText: "NAMA MATAKULIAH",
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                      ),
+                      onSaved: (String value) {
+                        this.matkul.nama = value;
+                      },
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "KODE",
+                        hintText: "KODE MATAKULIAH",
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                       ),
                       keyboardType: TextInputType.number,
                       onSaved: (String value) {
-                        this.mhs.nim = value;
+                        this.matkul.kode = value;
                       },
                     ),
                     SizedBox(
@@ -70,13 +74,31 @@ class _AddMhsState extends State<AddMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Nama",
-                        hintText: "Nama Mahasiswa",
+                        labelText: "Hari",
+                        hintText: "Hari",
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                       ),
+                      keyboardType: TextInputType.number,
                       onSaved: (String value) {
-                        this.mhs.nama = value;
+                        this.matkul.hari = value;
+                      },
+                    ),
+                    Text(
+                        "Senin= 1 | Selasa= 2 | Rabu= 3 | Kamis= 4 | Jumat= 5"),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "SESI",
+                        hintText: "SESI",
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                      ),
+                      keyboardType: TextInputType.number,
+                      onSaved: (String value) {
+                        this.matkul.sesi = value;
                       },
                     ),
                     SizedBox(
@@ -84,65 +106,15 @@ class _AddMhsState extends State<AddMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Alamat",
-                        hintText: "Alamat Mahasiswa",
+                        labelText: "SKS",
+                        hintText: "SKS",
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                       ),
+                      keyboardType: TextInputType.number,
                       onSaved: (String value) {
-                        this.mhs.alamat = value;
+                        this.matkul.sks = value;
                       },
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "Email",
-                        hintText: "Email Mahasiswa",
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      onSaved: (String value) {
-                        this.mhs.email = value;
-                      },
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    _imageFile == null
-                        ? Text("Silahkan Memilih Gambar !")
-                        : Image.file(
-                            _imageFile,
-                            fit: BoxFit.cover,
-                            height: 300.0,
-                            alignment: Alignment.topCenter,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                    MaterialButton(
-                      minWidth: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                      color: Colors.cyan,
-                      onPressed: () {
-                        _pickImage(ImageSource.gallery);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          new Icon(
-                            Icons.image,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            "Upload Foto",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
                     ),
                     SizedBox(
                       height: 15,
@@ -170,13 +142,9 @@ class _AddMhsState extends State<AddMhs> {
                                   onPressed: () async {
                                     _formState.currentState.save();
                                     setState(() => _isLoading = true);
-                                    this.mhs.nim_progmob = "72180190";
-                                    List<int> imageBytes =
-                                        _imageFile.readAsBytesSync();
-                                    this.mhs.foto = base64Encode(imageBytes);
+                                    this.matkul.nim_progmob = "72180190";
                                     ApiServices()
-                                        .createMhsWithFoto(this.mhs, _imageFile,
-                                            _imageFile.path)
+                                        .createMatkul(this.matkul)
                                         .then((isSuccess) {
                                       setState(() => _isLoading = false);
                                       if (isSuccess) {

@@ -180,6 +180,12 @@ class _UpdateMhsState extends State<UpdateMhs> {
                                   Text("Apakah Anda Yakin Dengan Data Anda?"),
                               actions: <Widget>[
                                 FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Tidak"),
+                                ),
+                                FlatButton(
                                   onPressed: () async {
                                     _formState.currentState.save();
                                     setState(() => _isLoading = true);
@@ -200,12 +206,6 @@ class _UpdateMhsState extends State<UpdateMhs> {
                                   },
                                   child: Text("Ya"),
                                 ),
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Tidak"),
-                                )
                               ],
                             );
                           },
@@ -224,12 +224,7 @@ class _UpdateMhsState extends State<UpdateMhs> {
               _isLoading
                   ? Stack(
                       children: <Widget>[
-                        // Opacity(opacity: 0.3,
-                        // child: ModalBarrier(
-                        //   dismissible: false,
-                        //     color: Colors.grey,
-                        // ),
-                        // ),
+
                         Center(
                           child: CircularProgressIndicator(),
                         ),

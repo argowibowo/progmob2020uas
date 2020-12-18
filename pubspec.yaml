@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^0.19.0
   flutter_spinkit: "^4.1.2"
   animated_splash_screen: ^1.0.1+2
 
@@ -53,7 +54,15 @@ flutter:
   uses-material-design: true
   assets:
   - assets/logo.png
+  - assets/images/top_header.png
 
+  fonts:
+  - family: Montserrat Regular
+    fonts:
+       - asset: assets/fonts/mo_re.ttf
+  - family: Montserrat Medium
+    fonts:
+        - asset: assets/fonts/mo_me.ttf
   # To add assets to your application, add an assets section, like this:
 #   assets:
 #     - assets/logo.png
@@ -75,7 +84,7 @@ flutter:
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  #       - asset: fon ts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
