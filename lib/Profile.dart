@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/dashboard.dart';
 import 'package:flutter_app/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'login.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -9,6 +12,20 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+
+  checkLoginStatus() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    if(sharedPreferences.getString("token") == null) {
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => Dashboard()), (Route<dynamic> route) => false);
+    }
+  }
   GlobalKey<FormState> key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -51,7 +68,7 @@ class _ProfileState extends State<Profile> {
                   await prefs.setInt('is_login', 0);
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => MyHomePage(title: "tugas 9",)),
+                    MaterialPageRoute(builder: (context) => MyHomePage(title: "UAS PROGMOB",)),
                   );
                 }
             )

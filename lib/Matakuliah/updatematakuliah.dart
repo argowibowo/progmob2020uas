@@ -5,26 +5,26 @@ import 'package:image_picker/image_picker.dart';
 
 import '../apiservices.dart';
 
-class UpdateMhs extends StatefulWidget {
-  UpdateMhs({Key key, @required this.title, @required this.mhs, @required this.nimcari}) : super(key: key);
+class UpdateMtkl extends StatefulWidget {
+  UpdateMtkl({Key key, @required this.title, @required this.mtkl, @required this.kodecari}) : super(key: key);
 
   final String title;
-  Mahasiswa mhs;
-  String nimcari;
+  Matkul mtkl;
+  String kodecari;
 
   @override
-  _UpdateMhsState createState() => _UpdateMhsState(title, mhs, nimcari);
+  _UpdateMtklState createState() => _UpdateMtklState(title,mtkl,kodecari);
 }
 
-class _UpdateMhsState extends State<UpdateMhs> {
+class _UpdateMtklState extends State<UpdateMtkl> {
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  final String nimcari;
+  final String kodecari;
   bool _isLoading =false;
-  Mahasiswa mhs = new Mahasiswa();
+  Matkul mtkl = new Matkul();
   File _imageFile;
 
-  _UpdateMhsState(this.title, this.mhs, this.nimcari);
+  _UpdateMtklState(this.title, this.mtkl, this.kodecari);
 
   Future<void> _pickImage(ImageSource source) async{
     File selected = await ImagePicker.pickImage(source: source);
@@ -54,14 +54,14 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "NIM",
-                        hintText: "NIM",
+                        labelText: "Kode",
+                        hintText: "Kode",
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      initialValue: this.mhs.nim,
+                      initialValue: this.mtkl.kode,
                       onSaved: (String value){
-                        this.mhs.nim = value;
+                        this.mtkl.kode = value;
                       },
                     ),
                     SizedBox(
@@ -70,13 +70,13 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Nama",
-                        hintText: "Nama Mahasiswa",
+                        hintText: "Nama",
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      initialValue: this.mhs.nama,
+                      initialValue: this.mtkl.nama,
                       onSaved: (String value){
-                        this.mhs.nama = value;
+                        this.mtkl.nama = value;
                       },
                     ),
                     SizedBox(
@@ -84,14 +84,14 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Alamat",
-                        hintText: "Alamat Mahasiswa",
+                        labelText: "Hari",
+                        hintText: "Hari",
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      initialValue: this.mhs.alamat,
+                      initialValue: this.mtkl.hari,
                       onSaved: (String value){
-                        this.mhs.alamat = value;
+                        this.mtkl.hari = value;
                       },
                     ),
                     SizedBox(
@@ -99,62 +99,76 @@ class _UpdateMhsState extends State<UpdateMhs> {
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Email",
-                        hintText: "Email Mahasiswa",
+                        labelText: "Sesi",
+                        hintText: "Sesi",
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
-                      initialValue: this.mhs.email,
-                      keyboardType: TextInputType.emailAddress,
+                      initialValue: this.mtkl.sesi,
                       onSaved: (String value){
-                        this.mhs.email = value;
+                        this.mtkl.sesi = value;
                       },
                     ),
                     SizedBox(
                       height: 15,
                     ),
-                    (_imageFile == null && this.mhs.foto == null)
-                        ?
-                    Text("Silahkan Memilih Gambar Terlebih Dahulu")
-                        :
-                    (_imageFile != null)
-                        ?
-                    Image.file(
-                      _imageFile,
-                      fit: BoxFit.cover,
-                      height: 300.0,
-                      alignment: Alignment.topCenter,
-                      width: MediaQuery.of(context).size.width,
-                    )
-                        :
-                    Image.network(
-                      this.mhs.foto,
-                      fit: BoxFit.cover,
-                      height: 300.0,
-                      alignment: Alignment.topCenter,
-                      width: MediaQuery.of(context).size.width,
-                    ),
-                    MaterialButton(
-                      minWidth: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
-                      onPressed: (){
-                        _pickImage(ImageSource.gallery);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          new Icon(Icons.image,color: Colors.white,),
-                          Text("Upload Foto",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold
-                            ),
-                          ),
-                        ],
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "Sks",
+                        hintText: "Sks",
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                       ),
+                      initialValue: this.mtkl.sks,
+                      onSaved: (String value){
+                        this.mtkl.sks = value;
+                      },
                     ),
+                    // SizedBox(
+                    //   height: 15,
+                    // ),
+                    // (_imageFile == null && this.dsn.foto == null)
+                    //     ?
+                    // Text("Silahkan Memilih Gambar Terlebih Dahulu")
+                    //     :
+                    // (_imageFile != null)
+                    //     ?
+                    // Image.file(
+                    //   _imageFile,
+                    //   fit: BoxFit.cover,
+                    //   height: 300.0,
+                    //   alignment: Alignment.topCenter,
+                    //   width: MediaQuery.of(context).size.width,
+                    // )
+                    //     :
+                    // Image.network(
+                    //   this.dsn.foto,
+                    //   fit: BoxFit.cover,
+                    //   height: 300.0,
+                    //   alignment: Alignment.topCenter,
+                    //   width: MediaQuery.of(context).size.width,
+                    // ),
+                    // MaterialButton(
+                    //   minWidth: MediaQuery.of(context).size.width,
+                    //   padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                    //   color: Colors.blue,
+                    //   onPressed: (){
+                    //     _pickImage(ImageSource.gallery);
+                    //   },
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: <Widget>[
+                    //       new Icon(Icons.image,color: Colors.white,),
+                    //       Text("Upload Foto",
+                    //         textAlign: TextAlign.center,
+                    //         style: TextStyle(
+                    //             color: Colors.white,
+                    //             fontWeight: FontWeight.bold
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 15,
                     ),
@@ -174,10 +188,10 @@ class _UpdateMhsState extends State<UpdateMhs> {
                                     onPressed: () async {
                                       _formState.currentState.save();
                                       setState(() => _isLoading = true);
-                                      this.mhs.nim_progmob = "72180225";
+                                      this.mtkl.nim_progmob = "72180225";
                                       // List<int> imageBytes = _imageFile.readAsBytesSync();
                                       // this.mhs.foto = base64Decode(imageBytes);
-                                      ApiServices().updateMhsWithFoto(this.mhs, _imageFile, nimcari).then((isSuccess) {
+                                      ApiServices().updateMatkul(this.mtkl, kodecari).then((isSuccess) {
                                         setState(() => _isLoading = false);
                                         if (isSuccess) {
                                           Navigator.pop(context);

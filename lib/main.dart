@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/dashboard.dart';
+import 'package:flutter_app/home_screen.dart';
 import 'package:flutter_app/tugaspertemuan9.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,21 +17,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: Colors.purple,
+        canvasColor: Colors.deepPurple
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        accentColor: Colors.blue,
       ),
       home: MyHomePage(title: "Progmob 2020",),
     );
@@ -48,7 +42,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   GlobalKey<FormState> key = GlobalKey<FormState>();
+  final nimnikController = TextEditingController();
+  final passwordController = TextEditingController();
+  String username, password;
   // int _counter = 0;
+
+  @override
+  void dispose(){
+    nimnikController.dispose();
+    passwordController.dispose();
+    super.dispose();
+
+  }
 
   Void Validate(){
     if (key.currentState.validate()){
@@ -61,12 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      // _counter++;
     });
   }
 
@@ -75,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     int isLogin = prefs.getInt("is_login");
     if(isLogin == 1){
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => Dashboard()),
+        MaterialPageRoute(builder: (context) => HomeScreen()),
       );
     }
   }
@@ -88,98 +87,100 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-      child: Form(
-      key: key,
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(16.0),
-            ),
-            TextFormField(
-              validator: (value){
-                if(value.isEmpty){
-                  return "Nama Tidak Boleh Kosong";
-                }
-              },
-              decoration: new InputDecoration(
-                  icon: Icon(Icons.person),
-                  labelText: "Username",
-                  hintText: "Masukkan Username",
-                  border: OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(10)
-                  )
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.deepPurpleAccent, Colors.purpleAccent],
+            begin: Alignment.topCenter, end: Alignment.bottomCenter)
+          ),
+        child: Form(
+          key: key,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(16.0),
               ),
-            ),
-            TextFormField(
-              validator: (value){
-                if(value.isEmpty){
-                  return "Password Tidak Boleh Kosong";
-                }
-              },
-              decoration: new InputDecoration(
-                  icon: Icon(Icons.lock),
-                  labelText: "Password",
-                  hintText: "Masukkan Password",
-                  border: OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(10)
-                  )
-              ),
-            ),
-            RaisedButton(
-                color: Colors.blue,
-                child: Text(
-                    'LOGIN',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
+              TextFormField(
+                controller: nimnikController..text="72160000",
+                validator: (value){
+                  if(value.isEmpty && value.length == 0) {
+                    return "Username tidak boleh kosong";
+                  } else if (!value.contains('72160000')){
+                    return "Username atau password";
+                  } else
+                    return null;
+                },
+                decoration: new InputDecoration(
+                    icon: Icon(Icons.person),
+                    labelText: "Username",
+                    hintText: "Masukkan Username",
+                    border: OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(10)
                     )
                 ),
-                onLongPress: Validate,
-                onPressed: ()  async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                await prefs.setInt('is_login', 1);
-                Navigator.pushReplacement(
-                    context,
-                  MaterialPageRoute(builder: (context) => Dashboard()),
-                );
-            }
-            )
+              ),
+              Divider(
+                color: Colors.transparent,
+                height: 20,
+              ),
+              TextFormField(
+                controller: passwordController..text="progmob",
+                obscureText: true,
+                validator: (value){
+                  if(value.isEmpty && value.length == 0) {
+                    return "Password tidak boleh kosong";
+                  } else if (!value.contains('progmob')){
+                    return "Username atau password";
+                  } else
+                    return null;
+                },
+                decoration: new InputDecoration(
+                    icon: Icon(Icons.lock),
 
-          ],
+                    labelText: "Password",
+                    hintText: "Masukkan Password",
+                    border: OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(10)
+                    )
+                ),
+              ),
+              Divider(
+                color: Colors.transparent,
+                height: 20,
+              ),
+              RaisedButton(
+                  color: Colors.black,
+                  child: Text(
+                      'LOGIN',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      )
+                  ),
+
+                  onPressed: ()  async {
+                    if(key.currentState.validate()){
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      await prefs.setInt('is_login', 1);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
+                    }
+                    }
+
+              )
+
+            ],
+          ),
         ),
       ),
-      ),
-    );
+      );
+
   }
 }

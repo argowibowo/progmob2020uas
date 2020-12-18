@@ -89,7 +89,7 @@ class _DosendbState extends State<Dosendb> {
                                       child: Text("Delete"),
                                       onPressed: () async {
                                         ApiServices()
-                                            .deleteMhs(lDsn[position].nidn);
+                                            .deleteDsn(lDsn[position].nidn);
                                         Navigator.pop(context);
                                         setState(() {});
                                       },

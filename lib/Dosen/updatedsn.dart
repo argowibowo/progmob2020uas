@@ -176,7 +176,7 @@ class _UpdateDsnState extends State<UpdateDsn> {
                     MaterialButton(
                       minWidth: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      color: Colors.blue,
+                      color: Colors.purpleAccent,
                       onPressed: (){
                         return showDialog(
                             context:context,

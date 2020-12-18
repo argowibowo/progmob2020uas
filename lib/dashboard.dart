@@ -23,6 +23,12 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Tugas 11"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.login_outlined,size: 35.0,),
+            onPressed: (){},
+          )
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -48,7 +54,7 @@ class _DashboardState extends State<Dashboard> {
               onTap: (){
                 Navigator.pop(context);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Dosendb()),
+                  MaterialPageRoute(builder: (context) => Dosendb()),
                 );
               },
             ),
@@ -70,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
               onTap: (){
                 Navigator.pop(context);
                 Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Matakuliah()),
+                  MaterialPageRoute(builder: (context) => Matakuliahdb()),
                 );
               },
             ),
@@ -81,7 +87,7 @@ class _DashboardState extends State<Dashboard> {
               onTap: (){
                 Navigator.pop(context);
                 Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Jadwal()),
+                  MaterialPageRoute(builder: (context) => Jadwaldb()),
                 );
               },
             ),
@@ -108,12 +114,16 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
       body: Container(
-       child: Center(
-         child: Text(
-           "Dashboard Utama",style: TextStyle(fontSize: 30),
-         ),
-       ),
+        child: Center(
+          child: Text(
+            "Dashboard Utama",style: TextStyle(fontSize: 30),
+          ),
+        ),
       ),
     );
+
+  }
+  void choiceAction(String choice){
+    print('working');
   }
 }

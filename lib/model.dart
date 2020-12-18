@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 //----------------------------Chart--------------------------------
 class CliksPerYaer{
@@ -70,7 +72,7 @@ String mahasiswaToJson(Mahasiswa data){
 /////////////////////////DOSEN//////////////////////////////////////
 
 class Dosen{
-  int id;
+  String id;
   String nama;
   String nidn;
   String alamat;
@@ -100,18 +102,252 @@ String DosenToJson(Dosen data){
   return json.encode(jsonData);
 }
 
-// class Matakuliah{
-//   String kodeMataKuliah;
-//   String hari;
-//   String sesi;
-//   String dosen;
-//   String nama;
-//   int jmlMhs;
-//
-//   Matakuliah({this.kodeMataKuliah, this.hari, this.sesi, this.dosen, this.nama, this.jmlMhs});
-//
-//   factory Matakuliah.fromJson(Map<String,dynamic>map){
-//     return (kodeMataKuliah: map["kodeMataKuliah"],hari: map["hari"],sesi: map["sesi"],dosen: map["dosen"],nama: map["nama"],jmlMhs: map["jmlMhs"]);
-//   }
-// }
+///////////////MATAKULIAH/////////////////
+class Matkul{
+  String id;
+  String kode;
+  String nama;
+  String hari;
+  String sesi;
+  String sks;
+  String nim_progmob;
+
+  Matkul({this.id, this.kode, this.nama, this.hari, this.sesi, this.sks, this.nim_progmob});
+
+  factory Matkul.fromJson(Map<String, dynamic> map){
+    return Matkul(
+        id: map["id"], kode: map["kode"], nama: map["nama"], hari: map["hari"], sesi: map["sesi"], sks: map["sks"], nim_progmob: map["nim_progmob"]
+    );
+  }
+
+  Map<String, dynamic> toJson(){
+    return{"id": id, "kode": kode, "nama": nama, "hari": hari, "sesi": sesi, "sks": sks, "nim_progmob": nim_progmob};
+  }
+
+}
+
+List<Matkul> matkulFromJson(String jsonData){
+  final data = json.decode(jsonData);
+  return List<Matkul>.from(data.map((item) => Matkul.fromJson(item)));
+}
+
+String matkulToJson(Matkul data){
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+
+///////////////KRS////////////////
+class Krs{
+  String id;
+  String kode;
+  String nama_matkul;
+  String nidn;
+  String dosen;
+  String gelar;
+  String hari;
+  String sesi;
+  String sks;
+  String mhs;
+  String nim;
+  String nim_progmob;
+
+  Krs({this.id, this.kode, this.nama_matkul, this.nidn, this.dosen, this.gelar, this.hari, this.sesi, this.sks, this.mhs, this.nim, this.nim_progmob});
+
+  factory Krs.fromJson(Map<String, dynamic> map){
+    return Krs(
+        id: map["id"], kode: map["kode"], nama_matkul: map["nama_matkul"], nidn: map["nidn"],
+        dosen: map["dosen"], gelar: map["gelar"], hari: map["hari"], sesi: map["sesi"], sks: map["sks"], mhs: map["mhs"], nim: map["nim"], nim_progmob: map["nim_progmob"]
+    );
+  }
+
+  Map<String, dynamic> toJson(){
+    return{"id": id, "kode": kode, "nama_matkul": nama_matkul, "nidn": nidn, "dosen": dosen, "gelar": gelar, "hari": hari, "sesi": sesi, "sks": sks, "mhs": mhs, "nim": nim, "nim_progmob": nim_progmob};
+  }
+}
+List<Krs> krsFromJson(String jsonData){
+  final data = json.decode(jsonData);
+  return List<Krs>.from(data.map((item) => Krs.fromJson(item)));
+}
+
+String krsToJson(Krs data){
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+
+///////////////JADWAL////////////////
+class Jadwal{
+  String id;
+  String matkul;
+  String dosen;
+  String nidn;
+  int hari;
+  int sesi;
+  int sks;
+  String nim_progmob;
+
+  Jadwal({this.id, this.matkul, this.dosen, this.nidn, this.hari,
+    this.sesi, this.sks, this.nim_progmob});
+
+  factory Jadwal.fromJson(Map<String, dynamic> map){
+    return Jadwal(
+        id: map["id"],
+        matkul: map["matkul"],
+        dosen: map["dosen"],
+        nidn: map["nidn"],
+        hari: int.parse(map["hari"]),
+        sesi: int.parse(map["sesi"]),
+        sks: int.parse(map["sks"]),
+        nim_progmob: map["nim_progmob"]
+    );
+  }
+  Map<String, dynamic> toJson(){
+    return{"id":id, "matkul": matkul, "dosen": dosen, "nidn": nidn, "hari": hari,
+      "sesi": sesi, "sks": sks, "nim_progmob": nim_progmob};
+  }
+}
+List<Jadwal> jadwalFromJson(String jsonData){
+  final data = json.decode(jsonData);
+  return List<Jadwal>.from(data.map((item) => Jadwal.fromJson(item)));
+}
+
+String jadwalToJson(Jadwal data){
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+/////////////USER///////////////
+class LoginResponseModel{
+  final String token;
+  final String error;
+
+  LoginResponseModel({this.token,this.error});
+
+  factory LoginResponseModel.fromJson(Map<String, dynamic>json){
+    return LoginResponseModel(token: json["token"] != null ? json["token"]:"",error: json["error"] != null ? json["error"]:"");
+  }
+}
+
+class User {
+  String id;
+  String nimnik;
+  String password;
+
+
+  User({this.id, this.nimnik, this.password, });
+
+  factory User.fromJson(Map<String, dynamic> map){
+    return User(
+        id: map["id"], nimnik: map["nimnik"], password: map["password"]
+    );
+  }
+
+  static Future<User> reqAPI(String nim, String pass) async {
+    final String baseUrl = "https://argouchiha.000webhostapp.com/";
+    Client client = Client();
+    final response = await client.get("$baseUrl/api/progmob/mhs/72180198");
+
+    var result = await http.post(
+        response, body: {"nimnik": nim, "password": pass});
+    var jsonObj = json.decode(result.body);
+
+    return User.fromJson(jsonObj);
+  }
+
+  Map<String, dynamic> toJson(){
+    return{"id": id, "nimnik": nimnik,  "password": password};
+  }
+}
+List<User> userFromJson(String jsonData){
+  final data = json.decode(jsonData);
+  return List<User>.from(data.map((item) => User.fromJson(item)));
+}
+
+String userToJson(User data){
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Future<LoginResponse> createLoginState(String nimnik, String password) async {
+  final http.Response response = await http.post(
+      'https://argouchiha.000webhostapp.com/api/progmob/login',
+      headers: <String, String>{
+        'Accept': 'application/json',
+      },
+      body: {
+        'nimnik': nimnik,
+        'password': password,
+      });
+
+  if (response.statusCode == 200) {
+    print(response.body);
+    return LoginResponse.fromJson(json.decode(response.body));
+  } else {
+    throw Exception('Failed to create album.');
+  }
+}
+
+class LoginResponse {
+  String id;
+  String nama;
+  String nimnik;
+  String email;
+  String password;
+  String is_admin;
+
+  LoginResponse(
+      {this.id, this.nama, this.nimnik, this.email, this.password, this.is_admin});
+
+  LoginResponse.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    nama = json['nama'];
+    nimnik = json['nimnik'];
+    email = json['email'];
+    password = json['password'];
+    is_admin = json['is_admin'];
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+class LoginDashboard {
+  String nimnik;
+  String password;
+  String gagallogin;
+
+  LoginDashboard({this.nimnik, this.password});
+
+  factory LoginDashboard.fromJson(Map<String, dynamic> map){
+    return LoginDashboard(
+        nimnik: map['nimnik'],
+        password: map['password']
+    );
+  }
+
+  static Future<LoginDashboard> reqAPI(String nim, String pass) async {
+    String baseUrl = "https://argouchiha.000webhostapp.com/api/progmob/login";
+    var result = await http.post(baseUrl, body: {"nimnik": nim, "password": pass});
+    var jsonObj = json.decode(result.body);
+
+
+    return LoginDashboard.fromJson(jsonObj[0]);
+  }
+}
 

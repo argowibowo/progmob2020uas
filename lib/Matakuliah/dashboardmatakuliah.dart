@@ -1,13 +1,30 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class Matakuliah extends StatefulWidget {
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/Dosen/adddosen.dart';
+import 'package:flutter_app/Dosen/updatedsn.dart';
+import 'package:flutter_app/Mahasiswa/updatemhs.dart';
+import 'package:flutter_app/Matakuliah/addmatakuliah.dart';
+import 'package:flutter_app/Matakuliah/updatematakuliah.dart';
+import 'package:flutter_app/apiservices.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_app/model.dart';
+
+class Matakuliahdb extends StatefulWidget {
+  Matakuliahdb({Key key, this.title}) :super(key:key);
+  final String title;
   @override
-  _MatakuliahState createState() => _MatakuliahState();
+  _MatakuliahdbState createState() => _MatakuliahdbState();
 }
 
-class _MatakuliahState extends State<Matakuliah> {
-  GlobalKey<FormState> key = GlobalKey<FormState>();
+class _MatakuliahdbState extends State<Matakuliahdb> {
+  final _formkey = GlobalKey<FormState>();
+
+  List<Matkul> lMtkl = new List();
+
+  FutureOr onGoBack(dynamic value) {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,39 +34,87 @@ class _MatakuliahState extends State<Matakuliah> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: (){},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddMtkl(title: "Tambah Matakuliah",)),
+              ).then(onGoBack);
+            },
           ),
         ],
       ),
 
-      body: Container(
-        child: GestureDetector(
-          child: Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ListTile(
-                  leading: Icon(Icons.book),
-                  title: Text("Pemrograman Mobile"),
-                  subtitle: Text("SI01273 - Argo Wibowo"),
-                  trailing: PopupMenuButton(
-                    itemBuilder: (BuildContext context) {
-                      return List<PopupMenuEntry<String>>()
-                        ..add(PopupMenuItem<String>(
-                          value: 'edit',
-                          child: Text('Edit'),
-                        ))
-                        ..add(PopupMenuItem<String>(
-                          value: 'delete',
-                          child: Text('Delete'),
-                        ));
-                    },
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
+      body: FutureBuilder(
+        future: ApiServices().getMatkul(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Matkul>> snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text("ada yang salah: ${snapshot.error.toString()}"),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            lMtkl = snapshot.data;
+            return ListView.builder(
+              itemBuilder: (context, position) {
+
+                return Card(
+                    margin: new EdgeInsets.symmetric(
+                        horizontal: 5.0, vertical: 1.0),
+                    child: Container(
+                      child: ListTile(
+                        title: Text(
+                            lMtkl[position].nama + " - " + lMtkl[position].kode),
+                        subtitle: Text("Hari "+lMtkl[position].hari + " Sesi " + lMtkl[position].sesi ),
+                        // leading: CircleAvatar(
+                        //   backgroundImage: NetworkImage(lDsn[position].foto),
+                        // ),
+                        onLongPress: () {
+                          showDialog(
+                              context: context,
+                              builder: (_) => new AlertDialog(
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    FlatButton(
+                                      child: Text("UPDATE"),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => UpdateMtkl(title:"Ubah data",mtkl: lMtkl[position],kodecari: lMtkl[position].kode)),
+                                        ).then(onGoBack);
+                                      },
+                                    ),
+                                    Divider(
+                                      color: Colors.black,
+                                      height: 20,
+                                    ),
+                                    FlatButton(
+                                      child: Text("Delete"),
+                                      onPressed: () async {
+                                        ApiServices()
+                                            .deleteMatkul(lMtkl[position].kode);
+                                        Navigator.pop(context);
+                                        setState(() {});
+                                      },
+                                    )
+                                  ],
+                                ),
+                              )
+                          );
+                        },
+                      ),
+                    )
+                );
+              },
+              itemCount: lMtkl.length,
+            );
+          }else{
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }
