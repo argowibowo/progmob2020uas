@@ -101,7 +101,7 @@ class _DashBoardState extends State<DashBoard> {
                 await pref.setInt("is_login", 0);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => login(title: "Login")),
+                  MaterialPageRoute(builder: (context) => Login(title: "Login")),
                 );
               },
             )

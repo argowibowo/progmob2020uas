@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
       return Timer(duration, (){
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_){
-              return home (title: "Home");
+              return HomePage (title: "Home");
             })
         );
       });
@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       return Timer(duration, (){
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (_){
-              return login(title: "Login");
+              return Login(title: "Login");
             })
         );
       });
