@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/apiservices.dart';
+import 'package:flutter_app/dashboard.dart';
 import 'package:flutter_app/mahasiswa/addMhs.dart';
 import 'package:flutter_app/mahasiswa/updateMhs.dart';
 import 'package:flutter_app/main.dart';
@@ -18,7 +19,6 @@ class DashboardMhs extends StatefulWidget {
 
 class _DashboardMhsState extends State<DashboardMhs> {
   final _formKey = GlobalKey<FormState>();
-
   List<Mahasiswa> lMhs = new List();
 
   FutureOr onGoBack(dynamic value){
@@ -45,6 +45,15 @@ class _DashboardMhsState extends State<DashboardMhs> {
                   context,
                   MaterialPageRoute(builder: (context) => AddMhs(title: "Input Data Mahasiswa")),
                 ).then(onGoBack);
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Dashboard())
+                );
               },
             )
           ],
