@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_progmob2020/Dosen/dashboardDosen.dart';
+import 'package:flutter_progmob2020/Dosen/Dsn.dart';
 import 'package:flutter_progmob2020/Jadwal/dashboardJadwal.dart';
 import 'package:flutter_progmob2020/Mahasiswa/dashboardMhs.dart';
-import 'package:flutter_progmob2020/Matakuliah/dashboardMk.dart';
+import 'package:flutter_progmob2020/Matakuliah/Matkul.dart';
 import 'package:flutter_progmob2020/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
