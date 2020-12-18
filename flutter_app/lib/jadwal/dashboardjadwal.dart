@@ -37,8 +37,8 @@ class _DashboardJadwalState extends State<DashboardJadwal> {
             children: <Widget>[
               ListTile(
                 leading: Icon(Icons.event_note_outlined),
-                title: Text("Data Mining"),
-                subtitle: Text("Senin Sesi 3 (13.30.30-15.00)"),
+                title: Text("Pemograman Mobile"),
+                subtitle: Text("Jumat Sesi 2 (09.30-11.30)"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(
@@ -52,8 +52,8 @@ class _DashboardJadwalState extends State<DashboardJadwal> {
               ),
               ListTile(
                 leading: Icon(Icons.event_note_outlined),
-                title: Text("Aplikasi Berbasis Dekstop"),
-                subtitle: Text("Rabu Sesi 2 (11.30-13.00)"),
+                title: Text("Bahasa Indonesia"),
+                subtitle: Text("Kamis sesi 1 (09.30-11.30)"),
                 trailing: PopupMenuButton(
                   itemBuilder: (_) => <PopupMenuItem<String>>[
                     new PopupMenuItem<String>(

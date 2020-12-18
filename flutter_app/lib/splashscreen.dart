@@ -1,14 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/dashboard.dart';
-import 'package:flutter_app/dashboardlogin.dart';
-import 'package:flutter_app/pertemuan2.dart';
+
+import 'package:progmob_flutter/dashbord.dart';
+import 'package:progmob_flutter/login.dart';
+import 'package:progmob_flutter/pertemuan2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-
-
-
-
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
@@ -90,25 +86,25 @@ class _SplashScreenState extends State<SplashScreen> {
       home: Scaffold(
         backgroundColor: Colors.cyan,
         body: Container(
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AnimatedContainer(
-                  duration: Duration(seconds: 2),
-                  curve: Curves.bounceOut,
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedContainer(
+                duration: Duration(seconds: 2),
+                curve: Curves.bounceOut,
+                width: _width,
+                height: _height,
+                child: Image.asset(
+                  "images/logo.png",
                   width: _width,
                   height: _height,
-                  child: Image.asset(
-                    "images/logo.png",
-                    width: _width,
-                    height: _height,
-                  ),
                 ),
-                Align(
-                  alignment: Alignment.center,
-                ),
-              ],
-            )
+              ),
+              Align(
+                alignment: Alignment.center,
+              ),
+            ],
+          )
         ),
       ),
     );
