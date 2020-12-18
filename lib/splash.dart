@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hello_world_flutter/dashboard.dart';
+import 'package:hello_world_flutter/dashboardbaru.dart';
 import 'package:hello_world_flutter/main.dart';
 import 'package:hello_world_flutter/preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,7 +41,7 @@ class _splash extends State<splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.teal,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +49,7 @@ class _splash extends State<splash> {
           children: <Widget>[
 
             Icon(
-              Icons.school,
+              Icons.apartment_outlined,
               size: 100.0,
               color: Colors.white,
             ),

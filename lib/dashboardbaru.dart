@@ -3,19 +3,21 @@ import 'package:hello_world_flutter/dosen/dashboarddosen.dart';
 import 'package:hello_world_flutter/jadwal/dashboardjadwal.dart';
 import 'package:hello_world_flutter/mahasiswa/dashboardmhs.dart';
 import 'package:hello_world_flutter/matakuliah/dashboardmatkul.dart';
+import 'package:hello_world_flutter/dashboardbaru.dart';
+import 'package:hello_world_flutter/preferences.dart';
 import 'package:hello_world_flutter/preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class dashboardd extends StatefulWidget {
-  dashboardd({Key key, this.title}) : super(key: key);
+class dashboard extends StatefulWidget {
+  dashboard({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _dashboarddState createState() => _dashboarddState();
+  _dashboardState createState() => _dashboardState();
 }
 
-class _dashboarddState extends State<dashboardd> {
+class _dashboardState extends State<dashboard> {
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +25,62 @@ class _dashboarddState extends State<dashboardd> {
       appBar: AppBar(
         title: Text("Dashboard"),
       ),
+      body: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 110,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Johny s Family",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      "Home",
+                      style: TextStyle(
+                          color: Color(0xffa29aac),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                IconButton(
+                  alignment: Alignment.topCenter,
+                  icon: Image.asset(
+                    "assets/notification.png",
+                    width: 24,
+                  ),
+                  onPressed: () {},
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          dashboard()
+        ],
+      ),
       drawer:Drawer(
         child: ListView(
             children:<Widget>[
 
               UserAccountsDrawerHeader(
                   accountName: Text("Vinanda Kristianti"),
-                  accountEmail: Text("vinanda.kristianti@si.ukdw.ac.id"),
+                  accountEmail: Text("vinandakristianti@si.ukdw.ac.id"),
                   currentAccountPicture: CircleAvatar(
                     backgroundColor: Colors.white,
                     child: Text(

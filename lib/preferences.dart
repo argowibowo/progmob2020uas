@@ -1,6 +1,7 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:hello_world_flutter/dashboard.dart';
+import 'package:hello_world_flutter/dashboardbaru.dart';
 import 'package:hello_world_flutter/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
