@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'dosen/dashboarddosen.dart';
-import 'jadwal/dashboardjadwal.dart';
-import 'login.dart';
-import 'mahasiswa/dashboardmhs.dart';
-import 'matakuliah/dashboardmatkul.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_app/dosen/dashboarddosen.dart';
+import 'package:flutter_app/jadwal/dashboardjadwal.dart';
+import 'package:flutter_app/login.dart';
+import 'package:flutter_app/mahasiswa/dashboardmhs.dart';
+import 'package:flutter_app/matakuliah/dashboardmatkul.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key key, this.title}) : super(key: key);

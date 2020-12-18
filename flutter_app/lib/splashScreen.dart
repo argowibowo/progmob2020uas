@@ -23,14 +23,14 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("is_login");
     if (isLogin == 1) {
-    return Timer(duration, () {
-      Navigator.of(context) .pushReplacement(
-        MaterialPageRoute(builder: (_) {
-          return MyHomePage(title:'Login');
-        }),
-      );
-    });
-  }
+      return Timer(duration, () {
+        Navigator.of(context) .pushReplacement(
+          MaterialPageRoute(builder: (_) {
+            return MyHomePage(title:'Login');
+          }),
+        );
+      });
+    }
     else {
       return Timer(duration, () {
         Navigator.of(context).pushReplacement(
@@ -73,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   curve: Curves.bounceOut,
                   width: _width,
                   height: _height,
-                  child: Image.asset("images/Thalia.png",
+                  child: Image.asset("images/miya.jpg",
                     width: _width,
                     height: _height,
                   ),
