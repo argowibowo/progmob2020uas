@@ -1,25 +1,89 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'dosen/dashboardDosen.dart';
-import 'jadwal/dashboardJadwal.dart';
+import 'gridDashboard.dart';
 import 'login.dart';
-import 'mahasiswa/dashboardMahasiswa.dart';
-import 'matakuliah/dashboardMatakuliah.dart';
 
 class Dashboard extends StatefulWidget {
-  Dashboard({Key key, this.title}) : super(key: key);
-
   final String title;
+  String nimnik;
+  Dashboard({Key key, @required this.title, @required this.nimnik}) : super(key: key);
 
   @override
-  _DashboardState createState() => _DashboardState();
+  _DashboardState createState() => _DashboardState(title, nimnik);
 }
 
 class _DashboardState extends State<Dashboard> {
+  final String title;
+  String nimnik;
+
+  _DashboardState(this.title, this.nimnik);
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Main Dashboard"),
+      ),
+      backgroundColor: Color(0xff392850),
+      body: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Welcome,",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text(nimnik,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    RaisedButton(
+                        color: Colors.redAccent,
+                        child: Text("Logout",
+                            style: TextStyle(
+                                color:Colors.white)),
+                        onPressed:() async {
+                          SharedPreferences pref = await SharedPreferences.getInstance();
+                          await pref.setInt("is_login", 0);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => login(title: "Login"))
+                          );
+                        }),
+                    SizedBox(
+                      height: 4,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          GridDashboard()
+        ],
+      ),
+    );
+  }
+
+  /*Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Main Dashboard"),
@@ -105,5 +169,5 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
     );
-  }
+  }*/
 }

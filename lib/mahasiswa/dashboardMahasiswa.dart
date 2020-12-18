@@ -73,7 +73,7 @@ class _DashboardMhsState extends State<DashboardMhs> {
                                       Navigator.pop(context);
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => UpdateMhs(title: "Input Data Mahasiswa", mhs : lMhs[position], nimcari: lMhs[position].nim)),
+                                        MaterialPageRoute(builder: (context) => UpdateMhs(title: "Update Data Mahasiswa", mhs : lMhs[position], nimcari: lMhs[position].nim)),
                                       ).then(onGoBack);
                                     },
                                   ),

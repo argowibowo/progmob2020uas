@@ -14,11 +14,23 @@ class MySplash extends StatefulWidget {
 }
 
 class _MySplashState extends State<MySplash> {
+  @override
+  void initState() {
+    navigateLogin();
+  }
+
+  void navigateLogin() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("isLogin");
+    if(isLogin == 1){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Dashboard(title: "Main Dashboard")));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-        seconds: 3,
+        seconds: 2,
         backgroundColor: Colors.white,
         loaderColor: Colors.black,
         photoSize: 50,
@@ -37,7 +49,7 @@ class MainScreen extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: login(title: "LOGIN")
+      home: login(title: "Login")
     );
   }
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model.dart';
 import 'package:flutter_app/tugaspertemuan8.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'apiservices.dart';
 import 'dashboardMain.dart';
 
 class login extends StatefulWidget {
   login({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -14,13 +15,15 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  final GlobalKey<FormState> _formState = GlobalKey<FormState>();
 
-  final _formKey = GlobalKey<FormState>();
+  LoginDashboard masukDashboard = new LoginDashboard();
+  TextEditingController inputnim = TextEditingController();
+  TextEditingController inputpass = TextEditingController();
 
 
   @override
   void initState() {
-    super.initState();
     navigateLogin();
   }
 
@@ -28,7 +31,7 @@ class _loginState extends State<login> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     int isLogin = pref.getInt("isLogin");
     if(isLogin == 1){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Dashboard(title: "Login")));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Dashboard(title: "Main Dashboard", nimnik: inputnim.text,)));
     }
   }
 
@@ -41,7 +44,7 @@ class _loginState extends State<login> {
       body: Container(
         margin: EdgeInsets.only(left: 15, right: 15),
         child: Form(
-          key: _formKey,
+          key: _formState,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -50,6 +53,7 @@ class _loginState extends State<login> {
               ),
               SizedBox(height: 10),
               TextFormField(
+                controller: inputnim,
                 validator: (String val) {
                   if (val.isEmpty) {
                     return " Username tidak boleh kosong ! ";
@@ -64,11 +68,15 @@ class _loginState extends State<login> {
                       Icons.supervisor_account_rounded
                   ),
                 ),
+                onSaved: (String value){
+                  this.masukDashboard.nimnik = value;
+                },
               ),
               Padding(
                   padding: EdgeInsets.all(5.0)
               ),
               TextFormField(
+                controller: inputpass,
                 validator: (String val) {
                   if (val.isEmpty) {
                     return " Password tidak boleh kosong ! ";
@@ -83,7 +91,10 @@ class _loginState extends State<login> {
                       Icons.lock_outline_rounded
                   ),
                 ),
-                obscureText: true,
+                onSaved: (String value){
+                  this.masukDashboard.password = value;
+                },
+                obscureText: true
               ),
               RaisedButton(
                 color: Colors.indigoAccent,
@@ -93,12 +104,22 @@ class _loginState extends State<login> {
                     )
                 ),
                 onPressed:() async {
-                  //if(!_formKey.currentState.validate()){
-                    SharedPreferences pref = await SharedPreferences.getInstance();
-                    await pref.setInt("is_login", 1);
-                    Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (context) => Dashboard(title: "Main Dashboard")));
-                  //}
+                  if(_formState.currentState.validate()){
+                    if(inputnim.text != "72160000" || inputpass.text !="progmob"){
+                      return showDialog(
+                          context: context,
+                          builder: (context){
+                            return AlertDialog(
+                                content: Text("NIM atau Password Salah"));
+                          });
+                    } else {
+                      LoginDashboard.reqAPI(inputnim.text,inputpass.text).then((value) async {
+                        SharedPreferences pref = await SharedPreferences.getInstance();
+                        await pref.setInt("is_login", 1);
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard(title: "Main Dashboard", nimnik: inputnim.text)));
+                      });
+                    }
+                  }
                 },
               )
             ],

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/splashscreeen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'dashboardMain.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,14 +25,24 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
     MyHomePage({Key key, this.title}) : super(key: key);
-
     final String title;
-
     @override
     _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    navigateLogin();
+  }
+
+  void navigateLogin() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    int isLogin = pref.getInt("isLogin");
+    if(isLogin == 1){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => Dashboard(title: "Main Dashboard")));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
