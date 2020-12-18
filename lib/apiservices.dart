@@ -269,7 +269,7 @@ class ApiServices {
 //----------------------------Matakuliah-------------------------------------
 
   Future<List<Matakuliah>> getMatkul() async {
-    final response = await client.get("$baseUrl/api/progmob/matkul/72180230");
+    final response = await client.get("$baseUrl/api/progmob/matkul/72180226");
     if (response.statusCode == 200) {
       return matkulFromJson(response.body);
     } else {
@@ -321,7 +321,7 @@ class ApiServices {
         headers: {"content-type": "application/json"},
         body: json.encode(<String, String>{
           "kode": kode,
-          "nim_progmob": "72180230"
+          "nim_progmob": "72180226"
         })
     );
 
