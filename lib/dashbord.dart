@@ -7,7 +7,7 @@ import 'package:flutter_project_2020/mahasiswa/dashboardmhs.dart';
 import 'package:flutter_project_2020/matkul/dashboardmatkul.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class dashboard extends StatefulWidget {
+class Dashboard extends StatefulWidget {
   Dashboard({Key key, this.title}) : super(key: key);
   final String title;
 
@@ -51,7 +51,7 @@ class _dashboardState extends State<dashboard> {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DashboardDosen(title: "Dashboard Dosen"))
+                    MaterialPageRoute(builder: (context) => dashboardosen(title: "Dashboard Dosen"))
                 );
               },
             ),
@@ -63,7 +63,7 @@ class _dashboardState extends State<dashboard> {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DashboardMhs(title: "Dashboard Mahasiswa"))
+                    MaterialPageRoute(builder: (context) => dashboardmhs(title: "Dashboard Mahasiswa"))
                 );
               },
             ),
@@ -75,7 +75,7 @@ class _dashboardState extends State<dashboard> {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DashboardMatkul(title: "Dashboard Matakuliah"))
+                    MaterialPageRoute(builder: (context) => dashboardmatkul(title: "Dashboard Matakuliah"))
                 );
               },
             ),
@@ -87,7 +87,7 @@ class _dashboardState extends State<dashboard> {
                 Navigator.pop(context);
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DashboardJadwal(title: "Dashboard Jadwal"))
+                    MaterialPageRoute(builder: (context) => dashboardjadwal(title: "Dashboard Jadwal"))
                 );
               },
             ),
