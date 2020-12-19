@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_progmob2020/Mahasiswa/addmahasiswa.dart';
 import 'package:flutter_progmob2020/Mahasiswa/updatemahasiswa.dart';
-import 'flutter_progmob2020/model.dart';
-import 'flutter_progmob2020/apiservices.dart';
+import 'package:flutter_progmob2020/model.dart';
+import 'package:flutter_progmob2020/apiservices.dart';
 
 
 class DashboardMahasiswa extends StatefulWidget {
@@ -26,6 +26,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
 
   @override
   Widget build(BuildContext context) {
+    ApiServices().getJadwal();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -47,7 +48,7 @@ class _DashboardMahasiswaState extends State<DashboardMahasiswa> {
           if(snapshot.hasError){
             return Center(
               child: Text(
-                  "Kesalahan Pada: ${snapshot.error.toString()}"
+                  "Kesalahan Terjadi Pada : ${snapshot.error.toString()}"
               ),
             );
           } else if (snapshot.connectionState == ConnectionState.done){

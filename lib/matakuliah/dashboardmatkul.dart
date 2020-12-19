@@ -1,5 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_progmob2020/Matakuliah/addmatakuliah.dart';
+import 'package:flutter_progmob2020/Matakuliah/updatematakuliah.dart';
+import 'package:flutter_progmob2020/model.dart';
+import 'package:flutter_progmob2020/apiservices.dart';
 
 class dashboardmatkul extends StatefulWidget {
   dashboardmatkul({Key key, this.title}) : super(key: key);
@@ -12,6 +16,42 @@ class dashboardmatkul extends StatefulWidget {
 
 class _dashboardmatkulState extends State<dashboardmatkul> {
 
+  List<MataKuliah> lMtk = new List();
+
+  FutureOr onGoBack(dynamic value){
+    setState(() {});
+  }
+
+  String hariIndo(int hari) {
+    switch(hari) {
+      case 1:
+        return "Senin";
+        break;
+      case 2:
+        return "Selasa";
+        break;
+      case 3:
+        return "Rabu";
+        break;
+      case 4:
+        return "Kamis";
+        break;
+      case 5:
+        return "Jumat";
+        break;
+      case 6:
+        return "Sabtu";
+        break;
+      case 7:
+        return "Minggu";
+        break;
+      default:
+        return "Hari";
+        break;
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,48 +60,84 @@ class _dashboardmatkulState extends State<dashboardmatkul> {
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.add),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddMtk(title: "Tambah Data Matakuliah")),
+                ).then(onGoBack);
+              },
             )
           ]
       ),
-
-      body: Container(
-        child: Card(
-          child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children:<Widget>[
-                ListTile(
-                  leading: Icon(Icons.book),
-                  title: Text("Pemrograman Mobile"),
-                  subtitle: Text("Argo Wibowo, S.Kom."),
-                  onLongPress: (){
-                    showDialog(
-                        context: context,
-                        builder: (_) => new AlertDialog(
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              FlatButton(
-                                child: Text("Update"),
-                                onPressed: (){
-                                  Navigator.pop(context);
-                                },
+      body: FutureBuilder(
+        future: ApiServices().getMatakuliah(),
+        builder: (BuildContext context, AsyncSnapshot<List<MataKuliah>> snapshot){
+          if(snapshot.hasError){
+            return Center(
+              child: Text(
+                  "Terjadi kesalahan pada: ${snapshot.error.toString()}"
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done){
+            lMtk = snapshot.data;
+            return ListView.builder(
+              itemBuilder: (context, position){
+                return Card(
+                  margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 1.0),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(lMtk[position].nama + " - " + lMtk[position].kode),
+                      subtitle: Text(
+                          "Hari : " + hariIndo(lMtk[position].hari)
+                              + "\nSesi : " + lMtk[position].sesi.toString()
+                              + "\nSKS : " + lMtk[position].sks.toString()
+                      ),
+                      onLongPress: (){
+                        showDialog(
+                            context: context,
+                            builder: (_) => new AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  FlatButton(
+                                    child: Text("Update"),
+                                    onPressed: (){
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => UpdateMtk(title: "Update Matakuliah",
+                                            mtk:lMtk[position], kodecari: lMtk[position].kode)),
+                                      ).then(onGoBack);
+                                    },
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    height: 20,
+                                  ),
+                                  FlatButton(
+                                      child: Text("Delete"),
+                                      onPressed: () async{
+                                        ApiServices().deleteMtk(lMtk[position].kode);
+                                        Navigator.pop(context);
+                                        setState(() {});
+                                      })
+                                ],
                               ),
-                              FlatButton(
-                                child: Text("Delete"),
-                                onPressed: (){
-                                  Navigator.pop(context);
-                                },
-                              )
-                            ],
-                          ),
-                        )
-                    );
-                  },
-                ),
-              ]
-          ),
-        ),
+                            )
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+              itemCount: lMtk.length,
+            );
+          } else{
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

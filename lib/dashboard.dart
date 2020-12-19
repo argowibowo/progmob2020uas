@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_progmob2020/Dosen/dashboarddosen.dart';
+import 'package:flutter_progmob2020/dosen/dashboarddosen.dart';
 import 'package:flutter_progmob2020/Jadwal/dashboardjadwal.dart';
 import 'package:flutter_progmob2020/Mahasiswa/dashboardmahasiswa.dart';
 import 'package:flutter_progmob2020/Matakuliah/dashboardmatkul.dart';
+import 'package:flutter_progmob2020/home.dart';
 import 'package:flutter_progmob2020/login.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_progmob2020/griddashboard.dart';
+import 'package:flutter_progmob2020/shared_preferences.dart';
 
 class dashboard extends StatefulWidget {
   dashboard({Key key, this.title}) : super(key: key);
@@ -23,12 +25,61 @@ class _dashboardState extends State<dashboard> {
       appBar: AppBar(
         title: Text("Dashboard"),
       ),
+      body: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 110,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Kevin s Fam",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      "Home",
+                      style: TextStyle(
+                          color: Color(0xffa29aac),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                IconButton(
+                  alignment: Alignment.topCenter,
+                  icon: Image.asset(
+                    "assets/notification.png",
+                    width: 24,
+                  ),
+                  onPressed: () {},
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          HomeScreen()
+        ],
+      ),
       drawer:Drawer(
         child: ListView(
             children:<Widget>[
 
               UserAccountsDrawerHeader(
-                  accountName: Text("Kurniadi"),
+                  accountName: Text("kurniadi"),
                   accountEmail: Text("kurniadi@si.ukdw.ac.id"),
                   currentAccountPicture: CircleAvatar(
                     backgroundColor: Colors.white,
@@ -57,7 +108,7 @@ class _dashboardState extends State<dashboard> {
                 onTap: (){
                   Navigator.pop(context);
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => dashboarddosen(title:"Dashboard Dosen")));
+                      MaterialPageRoute(builder: (context) => DashboardDosen(title:"Dashboard Dosen")));
                 },
               ),
 
@@ -96,7 +147,7 @@ class _dashboardState extends State<dashboard> {
                 onTap: () async{
                   SharedPreferences pref = await SharedPreferences.getInstance();
                   await pref.setInt("is_login", 0);
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => login(title: "Login",)));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login(title: "Login",)));
                 },
               ),
             ]

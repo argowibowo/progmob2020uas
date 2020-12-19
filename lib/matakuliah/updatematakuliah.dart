@@ -2,44 +2,96 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_progmob2020/apiservices.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_progmob2020/model.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey <ScaffoldState>();
 
-class UpdateMhs extends StatefulWidget{
+class UpdateMtk extends StatefulWidget{
   final String title;
-  Mahasiswa mhs;
-  String nimcari;
+  MataKuliah mtk;
+  String kodecari;
 
-  UpdateMhs({Key key, @required this.title, @required this.mhs, @required this.nimcari}) : super(key: key);
+  UpdateMtk({Key key, @required this.title, @required this.mtk, @required this.kodecari}) : super(key: key);
 
   @override
-  _UpdateMhsState createState() => _UpdateMhsState(title, mhs, nimcari);
+  _UpdateMtkState createState() => _UpdateMtkState(title, mtk, kodecari);
 }
 
-class _UpdateMhsState extends State<UpdateMhs>{
+class _UpdateMtkState extends State<UpdateMtk>{
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
   final String title;
-  final String nimcari;
-  Mahasiswa mhs;
+  final String kodecari;
+  String hariState;
+  MataKuliah mtk;
   bool _isLoading = false;
-  File _imageFile;
 
-  _UpdateMhsState(this.title, this.mhs, this.nimcari);
+  _UpdateMtkState(this.title, this.mtk, this.kodecari);
 
-  //// memeilih dari galeri
-  Future<void> _pickImage(ImageSource source) async{
-    File selected = await ImagePicker.pickImage(source: source);
+  String hariIndoToString(int hari) {
+    switch(hari) {
+      case 1:
+        return "Senin";
+        break;
+      case 2:
+        return "Selasa";
+        break;
+      case 3:
+        return "Rabu";
+        break;
+      case 4:
+        return "Kamis";
+        break;
+      case 5:
+        return "Jumat";
+        break;
+      case 6:
+        return "Sabtu";
+        break;
+      case 7:
+        return "Minggu";
+        break;
+      default:
+        return "Hari";
+        break;
 
-    setState(() {
-      _imageFile = selected;
-    });
+    }
+  }
+
+  void hariIndo(String hari) {
+    switch(hari) {
+      case "Senin":
+        this.mtk.hari = 1;
+        break;
+      case "Selasa":
+        this.mtk.hari = 2;
+        break;
+      case "Rabu":
+        this.mtk.hari = 3;
+        break;
+      case "Kamis":
+        this.mtk.hari = 4;
+        break;
+      case "Jumat":
+        this.mtk.hari = 5;
+        break;
+      case "Sabtu":
+        this.mtk.hari = 6;
+        break;
+      case "Minggu":
+        this.mtk.hari = 7;
+        break;
+      default:
+        this.mtk.hari = 99;
+        break;
+
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    setState(() {
+      hariState = hariIndoToString(this.mtk.hari);
+    });
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(this.title),
@@ -58,14 +110,14 @@ class _UpdateMhsState extends State<UpdateMhs>{
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: "NIM",
-                            hintText: "NIM",
+                            labelText: "Kode",
+                            hintText: "Kode Matakuliah",
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           ),
-                          initialValue: this.mhs.nim,
+                          initialValue: this.mtk.kode,
                           onSaved: (String value){
-                            this.mhs.nim = value;
+                            this.mtk.kode = value;
                           },
                         ),
                         SizedBox(
@@ -76,11 +128,66 @@ class _UpdateMhsState extends State<UpdateMhs>{
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
                             labelText: "Nama",
-                            hintText: " Nama Mahasiswa",
+                            hintText: "Nama Matakuliah",
                           ),
-                          initialValue: this.mhs.nama,
+                          initialValue: this.mtk.nama,
                           onSaved: (String value){
-                            this.mhs.nama=value;
+                            this.mtk.nama=value;
+                          },
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey)
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: ButtonTheme(
+                              alignedDropdown: true,
+                              child: DropdownButton<String>(
+                                value: hariState,
+                                hint: new Text("Hari"),
+                                icon: Icon(Icons.arrow_downward),
+                                iconSize: 24,
+                                elevation: 16,
+                                style: TextStyle(color: Colors.grey),
+                                underline: Container(
+                                  height: 1,
+                                  color: Colors.pinkAccent,
+                                ),
+                                onChanged: (String newValue) {
+                                  hariIndo(newValue);
+                                  setState(() {
+                                    hariState = newValue;
+                                  });
+                                },
+                                items: <String>["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]
+                                    .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            border: OutlineInputBorder(),
+                            labelText: "Sesi",
+                            hintText: "Sesi Matakuliah",
+                          ),
+                          initialValue: this.mtk.sesi.toString(),
+                          onSaved: (String value){
+                            this.mtk.sesi=int.parse(value);
                           },
                         ),
                         SizedBox(
@@ -90,73 +197,14 @@ class _UpdateMhsState extends State<UpdateMhs>{
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             border: OutlineInputBorder(),
-                            labelText: "Alamat",
-                            hintText: " Alamat Mahasiswa",
+                            labelText: "SKS",
+                            hintText: "SKS Matakuliah",
                           ),
-                          initialValue: this.mhs.alamat,
-                          onSaved: (String value){
-                            this.mhs.alamat=value;
-                          },
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            border: OutlineInputBorder(),
-                            labelText: "Email",
-                            hintText: " Email Mahasiswa",
-                          ),
-                          initialValue: this.mhs.email,
+                          initialValue: this.mtk.sks.toString(),
                           keyboardType: TextInputType.emailAddress,
                           onSaved: (String value){
-                            this.mhs.email = value;
+                            this.mtk.sks = int.parse(value);
                           },
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        (_imageFile == null && this.mhs.foto == null)
-                            ? Text('Pilih Gambar')
-                            :
-                        (_imageFile != null)
-                            ?
-                        Image.file(
-                          _imageFile,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        )
-                            :
-                        Image.network(
-                          this.mhs.foto,
-                          fit: BoxFit.cover,
-                          height: 300.0,
-                          alignment: Alignment.topCenter,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                        MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            color:  Colors.pinkAccent,
-                            onPressed: () {
-                              _pickImage(ImageSource.gallery);
-                            },
-                            child:  Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                new Icon(Icons.image,color: Colors.white,),
-                                Text ("Upload Foto",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                              ],
-                            )
                         ),
                         SizedBox(
                           height: 15,
@@ -171,16 +219,14 @@ class _UpdateMhsState extends State<UpdateMhs>{
                               builder: (context){
                                 return AlertDialog(
                                   title: Text("Simpan Data"),
-                                  content: Text(" Yakin melakukan Penyimpanan?"),
+                                  content: Text("Yakin Melakukan Penyimpanan ?"),
                                   actions: <Widget>[
                                     FlatButton(
                                       onPressed: () async{
                                         _formState.currentState.save();
-                                        this.mhs.nim_progmob = "72170163";
+                                        this.mtk.nim_progmob = "72170163";
                                         setState(() => _isLoading = true);
-                                        List<int> imagesBytes = _imageFile.readAsBytesSync();
-                                        this.mhs.foto = base64Encode(imagesBytes);
-                                        ApiServices().updateMhsWithFoto(this.mhs, _imageFile, nimcari).then((isSuccess){
+                                        ApiServices().updateMtk(this.mtk, kodecari).then((isSuccess){
                                           setState(() => _isLoading = false);
                                           if (isSuccess){
                                             Navigator.pop(context);

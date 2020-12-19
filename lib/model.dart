@@ -33,6 +33,7 @@ class DashboardSI{
   }
 }
 
+//-------------------------------daftar mahasiswa------------------
 class Mahasiswa {
   String id;
   String nama;
@@ -72,7 +73,7 @@ String mahasiswaToJson(Mahasiswa data){
   return json.encode(jsonData);
 }
 
-
+//-------------------------daftar mata kuliah----------------------
 class MataKuliah{
   String id;
   String nama;
@@ -89,9 +90,9 @@ class MataKuliah{
         id: map["id"],
         nama: map["nama"],
         kode: map["kode"],
-        hari: map["hari"],
-        sesi: map["sesi"],
-        sks: map["sks"],
+        hari: int.parse(map["hari"]),
+        sesi: int.parse(map["sesi"]),
+        sks: int.parse(map["sks"]),
         nim_progmob: map["nim_progmob"]);
   }
 
@@ -111,7 +112,7 @@ String matakuliahToJson(MataKuliah data){
   return json.encode(jsonData);
 }
 
-
+//-------------------------daftar dosen----------------------------
 class Dosen{
   String id;
   String nama;
@@ -148,6 +149,47 @@ List<Dosen> dosenFromJson(String jsonData){
 }
 
 String dosenToJson(Dosen data){
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+
+//-------------------------daftar jadwal----------------------------
+class Jadwal{
+  String id;
+  String matkul;
+  String dosen;
+  String nidn;
+  int hari;
+  int sesi;
+  int sks;
+  String nim_progmob;
+
+  Jadwal({this.id, this.matkul, this.dosen, this.nidn, this.hari,
+    this.sesi, this.sks, this.nim_progmob});
+
+  factory Jadwal.fromJson(Map<String, dynamic> map){
+    return Jadwal(
+        id: map["id"],
+        matkul: map["matkul"],
+        dosen: map["dosen"],
+        nidn: map["nidn"],
+        hari: int.parse(map["hari"]),
+        sesi: int.parse(map["sesi"]),
+        sks: int.parse(map["sks"]),
+        nim_progmob: map["nim_progmob"]
+    );
+  }
+  Map<String, dynamic> toJson(){
+    return{"id":id, "matkul": matkul, "dosen": dosen, "nidn": nidn, "hari": hari,
+      "sesi": sesi, "sks": sks, "nim_progmob": nim_progmob};
+  }
+}
+List<Jadwal> jadwalFromJson(String jsonData){
+  final data = json.decode(jsonData);
+  return List<Jadwal>.from(data.map((item) => Jadwal.fromJson(item)));
+}
+
+String jadwalToJson(Jadwal data){
   final jsonData = data.toJson();
   return json.encode(jsonData);
 }
